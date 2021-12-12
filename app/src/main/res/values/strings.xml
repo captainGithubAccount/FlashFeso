@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">flashfeso_lwj</string>
+    <string name="str_sharedpreference_key">App_SharedPreference_Key</string>
+
+    <!--PermissionDescriptionDialog-->
+    <string name="description_title" translatable="false">Para evaluar el riesgo de crédito del préstamo, necesitamos los siguientes permisos.</string>
+    <string name="description_camera_title" translatable="false">La cámera：</string>
+    <string name="description_camera_contenido" translatable="false">Las cámaras son necesarias para capturar sus archivos de identidad y escanear su cara para identificar al usuario en línea con el fin de mejorar nuestro servicio y la experiencia del usuario.</string>
+    <string name="description_almacenamiento_title" translatable="false">Almacenamiento：</string>
+    <string name="description_almacenamiento_contenido" translatable="false">El almacenamiento es necesario para que el usuario pueda subir archivos de identificación desde su teléfono.</string>
+    <string name="description_telefono_title" translatable="false">Teléfono:</string>
+    <string name="description_telefono_contenido" translatable="false">Los contactos son necesarios para evaluar su riesgo crediticio en línea.</string>
+    <string name="description_contactos_title" translatable="false">Contactos:</string>
+    <string name="description_contactos_contenido" translatable="false">El estado del teléfono es necesario para detectar y prevenir cualquier acceso no autorizado al dispositivo para evitar transacciones fraudulentas.</string>
+    <string name="description_localizacion_title" translatable="false">Localización:</string>
+    <string name="description_localizacion_contenido" translatable="false">La ubicación del usuario ayuda a encontrar y verificar las direcciones, lo que ayuda a tomar mejores decisiones de riesgo crediticio.</string>
+    <string name="description_sms_title" translatable="false">SMS:</string>
+    <string name="description_sms_contenido" translatable="false">Recoge y controla únicamente los SMS de las transacciones financieras que incluyen el nombre de la parte que realiza la transacción, una descripción de la misma y el importe de la transacción con el fin de realizar una evaluación del riesgo crediticio. Esta evaluación del riesgo crediticio permite un desembolso más rápido de los préstamos. No se accede, lee o recoge ningún SMS personal.</string>
+    <string name="description_estado_del_telefono_title" translatable="false">Estado del teléfono:</string>
+    <string name="description_estado_del_telefono_contenido" translatable="false">Recoger y controlar información específica sobre el teléfono móvil, como el identificador único del dispositivo del teléfono móvil, la información del perfil del usuario, ya que esta información nos ayuda a identificar de forma única a los usuarios para que podamos detectar y evitar que cualquier dispositivo no autorizado actúe en su nombre.</string>
+
+    <string name="permita_el_acceso_a_sms" translatable="false">Permita el acceso a SMS</string>
+    <string name="por_favor_abra_la_ubicacion" translatable="false">Por favor abra la ubicación</string>
+
+
+
+</resources>
