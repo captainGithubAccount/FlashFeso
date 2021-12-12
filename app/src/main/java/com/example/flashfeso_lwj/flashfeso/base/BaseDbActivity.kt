@@ -1,15 +1,11 @@
 package com.example.flashfeso_lwj.flashfeso.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 
 
 import androidx.viewbinding.ViewBinding
 import com.example.flashfeso_lwj.GetBinding
-import java.lang.reflect.ParameterizedType
-import java.lang.reflect.Type
 
 
 abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T> {
@@ -24,7 +20,7 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         beforeInitView()
-        _binding = getClass(layoutInflater)
+        _binding = getBindingByReflex(layoutInflater)
         setContentView(binding?.root)
         binding?.initView()
     }

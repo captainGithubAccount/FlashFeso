@@ -6,7 +6,7 @@ import java.lang.reflect.Type
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNCHECKED_CAST")
 interface GetBinding<T> {
-    fun getClass(layoutInflater: LayoutInflater): T? {
+    fun getBindingByReflex(layoutInflater: LayoutInflater): T? {
         val genericSuperclass: Type = javaClass.genericSuperclass
         if (genericSuperclass is ParameterizedType) {
             val type = genericSuperclass .actualTypeArguments[0] as Class<T>
