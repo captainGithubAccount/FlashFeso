@@ -1,31 +1,27 @@
-
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-
+    //hilt配置
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
-
 android {
     compileSdk 31
-
     defaultConfig {
         applicationId "com.example.flashfeso_lwj"
         minSdk 21
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        //hilt 配置: 加上下面的javaCompileOptions
+        //否则报错: Expected @HiltAndroidApp to have a value. Did you forget to apply the Gradle Plugin?
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += ["foo" : "bar"]
             }
         }
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -39,27 +35,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-
     viewBinding{
         enabled = true
     }
-
 }
 
 dependencies {
-    //hilt
+    //hilt配置
+    //使用2.28.3-alpha版本, 若低于版本可能无法使用ApplicationComponent::class,只能使用SingletonComponent::class
     implementation 'com.google.dagger:hilt-android:2.28.3-alpha'
     kapt 'com.google.dagger:hilt-android-compiler:2.28.3-alpha'
-
-
-    //implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
-    //kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
-
-
-    //implementation 'androidx.databinding:library:3.2.0-alpha11'
-
-    //
 
 
     implementation 'androidx.core:core-ktx:1.7.0'
