@@ -18,8 +18,8 @@ class SplashActivity : AppCompatActivity(){
                              //第二次启动直接启动MainActivity
             finish()
         }
-
     }
+
     override fun onStart() {
         super.onStart()
         afterInit()

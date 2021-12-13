@@ -6,7 +6,7 @@
     android:paddingTop="@dimen/dp_12"
     android:paddingRight="@dimen/dp_15"
     android:paddingBottom="@dimen/dp_12"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <include layout="@layout/incl_splash_dialog_permission_content" />
 
@@ -16,8 +16,9 @@
         android:layout_marginTop="@dimen/dm_splash_view_margin_top"
         android:background="@color/color_main_background" />
 
-    <androidx.core.widget.NestedScrollView
+    <com.example.flashfeso_lwj.flashfeso.ui.controll.custom_view.HaveMaxHeightNestedScrollView
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -40,7 +41,15 @@
             <include layout="@layout/incl_splash_dialog_permission_content" />
 
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </com.example.flashfeso_lwj.flashfeso.ui.controll.custom_view.HaveMaxHeightNestedScrollView>
+
+    <TextView
+        android:layout_width="@dimen/dp_190"
+        android:layout_height="@dimen/dp_33"
+        android:text="Got it!"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:gravity="center"/>
 
 
 </LinearLayout>

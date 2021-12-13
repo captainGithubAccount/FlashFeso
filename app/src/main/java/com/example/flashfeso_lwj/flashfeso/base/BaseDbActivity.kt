@@ -30,8 +30,4 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
     protected open fun afterInitView() {}
 
     protected open fun beforeInitView() {}
-
-
-
-
 }
