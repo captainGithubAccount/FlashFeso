@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/dm_splash_dialog_width"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/dp_15"
-    android:paddingTop="@dimen/dp_12"
-    android:paddingRight="@dimen/dp_15"
-    android:paddingBottom="@dimen/dp_12"
-    android:layout_height="wrap_content">
 
-    <include layout="@layout/incl_splash_dialog_permission_content" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="@dimen/dp_280"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/dp_15"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingEnd="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_12"
+        android:layout_height="wrap_content">
+
+    <include
+        android:id="@+id/incl_splash_content1"
+
+        layout="@layout/incl_splash_dialog_permission_content" />
 
     <View
         android:layout_width="match_parent"
@@ -26,30 +34,51 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/incl_splash_dialog_permission_content" />
+            <include
+                android:id="@+id/incl_splash_content2"
+                layout="@layout/incl_splash_dialog_permission_content" />
 
-            <include layout="@layout/incl_splash_dialog_permission_content" />
+            <include
+                android:id="@+id/incl_splash_content3"
+                layout="@layout/incl_splash_dialog_permission_content" />
 
-            <include layout="@layout/incl_splash_dialog_permission_content" />
+            <include
+                android:id="@+id/incl_splash_content4"
+                layout="@layout/incl_splash_dialog_permission_content" />
 
-            <include layout="@layout/incl_splash_dialog_permission_content" />
+            <include
+                android:id="@+id/incl_splash_content5"
+                layout="@layout/incl_splash_dialog_permission_content" />
 
-            <include layout="@layout/incl_splash_dialog_permission_content" />
+            <include
+                android:id="@+id/incl_splash_content6"
+                layout="@layout/incl_splash_dialog_permission_content" />
 
-            <include layout="@layout/incl_splash_dialog_permission_content" />
+            <include
+                android:id="@+id/incl_splash_content7"
+                layout="@layout/incl_splash_dialog_permission_content" />
 
-            <include layout="@layout/incl_splash_dialog_permission_content" />
+            <include
+                android:id="@+id/incl_splash_content8"
+                layout="@layout/incl_splash_dialog_permission_content" />
 
         </LinearLayout>
+
     </com.example.flashfeso_lwj.flashfeso.ui.controll.custom_view.HaveMaxHeightNestedScrollView>
 
     <TextView
+        android:id="@+id/tv_permission_dialog_confirm"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_confirm"
         android:layout_width="@dimen/dp_190"
         android:layout_height="@dimen/dp_33"
         android:text="Got it!"
         android:textSize="16sp"
         android:layout_gravity="center"
         android:gravity="center"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>

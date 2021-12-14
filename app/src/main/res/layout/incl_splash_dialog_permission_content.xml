@@ -2,33 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
+    android:layout_marginTop="@dimen/dp_10"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:showIn="@layout/dialog_splash">
 
     <ImageView
+        android:id="@+id/iv_dialog_permission_logo"
         android:layout_width="@dimen/dm_splash_dialog_img_width"
         android:layout_height="@dimen/dp_30"
         android:src="@drawable/ic_app_launcher" />
 
     <LinearLayout
+        android:layout_marginLeft="@dimen/dp_40"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginLeft="@dimen/dm_splash_content_margin_left"
+            android:id="@+id/tv_dialog_permission_info"
             android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/dm_common_font" />
 
         <TextView
-            android:layout_marginLeft="@dimen/dm_splash_content_margin_left"
+            android:layout_marginTop="@dimen/dp_4"
+            android:id="@+id/tv_dialog_permission_content"
+
             android:text="@string/description_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="@dimen/dm_common_font" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_10" />
     </LinearLayout>
 
 </LinearLayout>
