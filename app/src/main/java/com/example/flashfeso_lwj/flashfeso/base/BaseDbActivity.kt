@@ -19,15 +19,18 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        beforeInitView()
+        beforeCreateView()
+        whenObserve()
         _binding = getBindingByReflex(layoutInflater)
         setContentView(binding?.root)
         binding?.initView()
     }
 
+    abstract fun whenObserve()
+
     abstract fun T.initView()
 
     protected open fun afterInitView() {}
 
-    protected open fun beforeInitView() {}
+    protected open fun beforeCreateView() {}
 }

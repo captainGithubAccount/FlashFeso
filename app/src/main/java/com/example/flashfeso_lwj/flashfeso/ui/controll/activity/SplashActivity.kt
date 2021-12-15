@@ -1,21 +1,23 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract.Directory.PACKAGE_NAME
 import android.provider.Settings
-import android.provider.SyncStateContract
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Observer
 import com.example.flashfeso_lwj.flashfeso.event.SplashPermissionDialogEvent
 import com.example.flashfeso_lwj.flashfeso.ui.controll.dialog.SplashPermissionDialog
 import com.example.flashfeso_lwj.flashfeso.utils.APP_PERMISSIONS
 import com.example.flashfeso_lwj.flashfeso.utils.PERMISSION_REQUEST_CODE
 import com.example.flashfeso_lwj.flashfeso.utils.SharedPreferenceUtils
+import com.example.flashfeso_lwj.flashfeso.viewmodel.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
 import javax.inject.Inject
@@ -26,13 +28,22 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
     @Inject lateinit var mSharedPreferenceUtils: SharedPreferenceUtils
     @Inject lateinit var mSplashPermissionDialog: SplashPermissionDialog
 
+    val splashViewModel: SplashViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //判断是否是任务栈中的根Activity, 如果是就不做任何处理, 如果不是即this.isTaskRoot为false, 直接finish掉
         //第二次启动直接启动MainActivity
         if(!this.isTaskRoot)
             finish()
+        whenObserve()
         initEvent()
+    }
+
+    private fun whenObserve() {
+        splashViewModel.versionLiveData.observe(this, Observer{
+            Log.d("SplashActivity",it.data.toString())
+        })
     }
 
     private fun initEvent() {
@@ -147,7 +158,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
     }
 
     private fun getVersionLatestAndLogin() {
-
+        splashViewModel.query()
     }
 
 
