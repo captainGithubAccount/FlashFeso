@@ -2,7 +2,7 @@ package com.example.flashfeso_lwj.flashfeso.entity
 
 data class VersionResponse(
     val code: Int,
-    val data: VersionEntity,
+    val data: VersionEntity?,
     val msg: String
 )
 

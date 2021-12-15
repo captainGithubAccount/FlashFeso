@@ -13,7 +13,7 @@ class MainActivity : BaseDbActivity<ActivityMainBinding>(){
 
     }
 
-    override fun whenObserve() {
+    override fun observe() {
 
     }
 

@@ -11,7 +11,7 @@ android {
         applicationId "com.example.flashfeso_lwj"
         minSdk 21
         targetSdk 31
-        versionCode 1
+        versionCode 16
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         //hilt 配置: 加上下面的javaCompileOptions

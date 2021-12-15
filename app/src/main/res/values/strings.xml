@@ -2,6 +2,15 @@
     <string name="app_name">flashfeso_lwj</string>
     <string name="str_sharedpreference_key">App_SharedPreference_Key</string>
 
+
+    <!--请选择浏览器-->
+    <string name="choose_browser" translatable="false">Seleccione un navegador</string>
+    <!--请下载浏览器-->
+    <string name="download_browser" translatable="false">Descargue el navegador</string>
+    <!--发现新版本，是否更新？-->
+    <string name="new_version_found" translatable="false">Versión nueva encontrada. ¿Se actualiza ahora?</string>
+
+
     <!--PermissionDescriptionDialog-->
     <string name="description_title" translatable="false">Para evaluar el riesgo de crédito del préstamo, necesitamos los siguientes permisos.</string>
     <string name="description_camera_title" translatable="false">La cámera：</string>
@@ -21,7 +30,6 @@
 
     <string name="permita_el_acceso_a_sms" translatable="false">Permita el acceso a SMS</string>
     <string name="por_favor_abra_la_ubicacion" translatable="false">Por favor abra la ubicación</string>
-
 
 
 </resources>

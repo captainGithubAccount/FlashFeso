@@ -2,10 +2,8 @@ package com.example.flashfeso_lwj.flashfeso.utils
 
 import java.util.regex.Pattern
 
-/**
- * @author frank
- */
 
+object StringUrils{
     /**
      * 验证手机号码是否正确
      */
@@ -96,3 +94,5 @@ import java.util.regex.Pattern
         }
         return re
     }
+
+}

@@ -2,12 +2,8 @@ package com.example.flashfeso_lwj.flashfeso.ui.controll.dialog
 
 import android.app.Dialog
 import android.content.DialogInterface
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.databinding.DialogSplashBinding
@@ -24,24 +20,10 @@ class SplashPermissionDialog @Inject constructor() : DialogFragment() {
         //若点击dialog覆盖不到的activity的空白或者按返回键，则调用cancel方法
         isCancelable = true
         //setStyle(STYLE_NO_TITLE, R.style.StyleCommonMultiDialog) //todo(不知道这行啥作用)
+        beforeInitView()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        _binding = DialogSplashBinding.inflate(layoutInflater, container, false)
-        initDialog()
-        return binding.root
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        //val style = R.style.StyleCommonMultiDialog //todo(自定义样式)
-        return Dialog(requireContext(), 0)
-    }
-
-    private fun initDialog() {
+    private fun beforeInitView() {
         dialog?.let {
             it.window?.run {
                 //setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -64,6 +46,30 @@ class SplashPermissionDialog @Inject constructor() : DialogFragment() {
 
             it.requestWindowFeature(Window.FEATURE_NO_TITLE)
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        _binding = DialogSplashBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        afterInitView()
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        //val style = R.style.StyleCommonMultiDialog //todo(自定义样式)
+        //@param: themeResild = 0默认提供的dialog样式
+        return Dialog(requireContext(), 0)
+    }
+
+    private fun afterInitView() {
+
         binding.run {
             tvPermissionDialogConfirm.setOnClickListener { v->
                 mSplashPermissionDialogEvent.confirmListener()

@@ -12,11 +12,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
+import com.example.flashfeso_lwj.BuildConfig
+import com.example.flashfeso_lwj.MainActivity
+import com.example.flashfeso_lwj.R
+import com.example.flashfeso_lwj.common.event.CommonDialogEvent
+import com.example.flashfeso_lwj.common.ui.controll.dialog.CommonDialog
 import com.example.flashfeso_lwj.flashfeso.event.SplashPermissionDialogEvent
 import com.example.flashfeso_lwj.flashfeso.ui.controll.dialog.SplashPermissionDialog
-import com.example.flashfeso_lwj.flashfeso.utils.APP_PERMISSIONS
-import com.example.flashfeso_lwj.flashfeso.utils.PERMISSION_REQUEST_CODE
-import com.example.flashfeso_lwj.flashfeso.utils.SharedPreferenceUtils
+import com.example.flashfeso_lwj.flashfeso.utils.*
 import com.example.flashfeso_lwj.flashfeso.viewmodel.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
@@ -25,6 +28,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
+    var firstClick: Long = 0
+    var secondClick: Long = 0
     @Inject lateinit var mSharedPreferenceUtils: SharedPreferenceUtils
     @Inject lateinit var mSplashPermissionDialog: SplashPermissionDialog
 
@@ -41,9 +46,91 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
     }
 
     private fun whenObserve() {
-        splashViewModel.versionLiveData.observe(this, Observer{
-            Log.d("SplashActivity",it.data.toString())
+        splashViewModel.versionLiveData.observe(this, Observer{ versionResponse ->
+            Log.d("SplashActivity",versionResponse.data.toString())
+
+            if(versionResponse.code == 200 && versionResponse.data != null && !StringUrils.isEmpty(versionResponse.data.VId)){
+                versionResponse.data.let{ data ->
+                    if(data.VId.toLong() > BuildConfig.VERSION_CODE){
+                        if(data.isUpdate){
+                            CommonDialog(resources.getString(R.string.new_version_found))
+                                .apply {
+                                    mCommonDialogEvent = object : CommonDialogEvent{
+                                        override fun cancelListener() {
+                                            dismiss()
+                                            finish()
+                                        }
+
+                                        override fun confirmListener() {
+                                            openBrowser(requireActivity(), data.downloadURl)
+                                        }
+
+                                    }
+                                }.show(supportFragmentManager, "CommonDialogFragment")
+                             //commonDialog.show(supportFragmentManager, "CommonDialogFragment")
+                        }else{
+                            CommonDialog(resources.getString(R.string.new_version_found))
+                                .apply {
+                                    mCommonDialogEvent = object : CommonDialogEvent{
+                                        override fun cancelListener() {
+                                            jumpToMainActivity()
+                                        }
+
+                                        override fun confirmListener() {
+                                            openBrowser(requireActivity(), data.downloadURl)
+                                        }
+
+                                    }
+                                }
+                                .show(supportFragmentManager, "CommonDialogFragment2")
+
+                        }
+                    }else{
+                        jumpToMainActivity()
+                    }
+                }
+            }else{
+                jumpToMainActivity()
+            }
         })
+    }
+
+    /**
+     * 调用第三方浏览器打开
+     *
+     * @param context
+     * @param url     要浏览的资源地址
+     */
+    private fun openBrowser(context: Context,browserUrl: String) {
+        val intent = Intent()
+        intent.setAction(Intent.ACTION_VIEW)
+        intent.setData(Uri.parse(browserUrl))
+        //启动下载当前应用的app链接
+        startActivity(Intent.createChooser(intent, context.getResources().getString(R.string.choose_browser)))
+
+        // 注意此处的判断intent.resolveActivity()可以返回显示该Intent的Activity对应的组件名
+        // 官方解释 : Name of the component implementing an activity that can display the intent
+        /*if (intent.resolveActivity(context.packageManager) != null) {
+            val componentName = intent.resolveActivity(context.packageManager)
+            context.startActivity(Intent.createChooser(intent,
+                context.resources.getString(R.string.choose_browser)))
+        } else {
+            Toast.makeText(context.applicationContext,
+                context.resources.getString(R.string.download_browser),
+                Toast.LENGTH_SHORT).show()
+        }*/
+    }
+
+    //todo 待实现Main
+    private fun jumpToMainActivity() {
+
+        Log.d("---", "test")
+        firstClick = secondClick
+        secondClick = System.currentTimeMillis()
+        if(secondClick - firstClick > Constants.DOUBLE_CLICK_TIME){
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+        }
+
     }
 
     private fun initEvent() {
@@ -150,15 +237,17 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
                 //适配小米手机, 但是小米出现情况很少可忽略
                 //checkXiaoMiSms()
 
-                getVersionLatestAndLogin()
+                getVersionLatestData()
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    private fun getVersionLatestAndLogin() {
+    private fun getVersionLatestData() {
         splashViewModel.query()
+
+
     }
 
 
