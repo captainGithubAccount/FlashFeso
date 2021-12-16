@@ -10,7 +10,7 @@ import com.example.flashfeso_lwj.GetBinding
 
 abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T> {
     private  var _binding: T? = null
-    protected val binding get() = _binding
+    protected val binding get() = _binding!!
 
     override fun onStart() {
         super.onStart()
@@ -22,8 +22,8 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
         beforeCreateView()
         observe()
         _binding = getBindingByReflex(layoutInflater)
-        setContentView(binding?.root)
-        binding?.initView()
+        setContentView(binding.root)
+        binding.initView()
     }
 
     abstract fun observe()
