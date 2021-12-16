@@ -27,11 +27,13 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
+class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     var firstClick: Long = 0
     var secondClick: Long = 0
-    @Inject lateinit var mSharedPreferenceUtils: SharedPreferenceUtils
-    @Inject lateinit var mSplashPermissionDialog: SplashPermissionDialog
+    @Inject
+    lateinit var mSharedPreferenceUtils: SharedPreferenceUtils
+    @Inject
+    lateinit var mSplashPermissionDialog: SplashPermissionDialog
 
     val splashViewModel: SplashViewModel by viewModels()
 
@@ -39,14 +41,63 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
         super.onCreate(savedInstanceState)
         //判断是否是任务栈中的根Activity, 如果是就不做任何处理, 如果不是即this.isTaskRoot为false, 直接finish掉
         //第二次启动直接启动MainActivity
-        if(!this.isTaskRoot)
+        if (!this.isTaskRoot)
             finish()
         whenObserve()
         initEvent()
     }
 
     private fun whenObserve() {
-        splashViewModel.versionLiveData.observe(this, Observer{ versionResponse ->
+
+        //数据带状态的实现
+        splashViewModel.dataLiveData.observe(this, Observer { res ->
+            res.data?.let { versionData ->
+                if (!StringUtils.isEmpty(versionData.VId)) {
+                    if (versionData.VId.toLong() > BuildConfig.VERSION_CODE) {
+                        if (versionData.isUpdate) {
+                            CommonDialog(resources.getString(R.string.new_version_found))
+                                .apply {
+                                    mCommonDialogEvent = object : CommonDialogEvent {
+                                        override fun cancelListener() {
+                                            dismiss()
+                                            finish()
+                                        }
+
+                                        override fun confirmListener() {
+                                            openBrowser(requireActivity(), versionData.downloadURl)
+                                        }
+
+                                    }
+                                }.show(supportFragmentManager, "CommonDialogFragment")
+                            //commonDialog.show(supportFragmentManager, "CommonDialogFragment")
+                        } else {
+                            CommonDialog(resources.getString(R.string.new_version_found))
+                                .apply {
+                                    mCommonDialogEvent = object : CommonDialogEvent {
+                                        override fun cancelListener() {
+                                            jumpToMainActivity()
+                                        }
+
+                                        override fun confirmListener() {
+                                            openBrowser(requireActivity(), versionData.downloadURl)
+                                        }
+
+                                    }
+                                }
+                                .show(supportFragmentManager, "CommonDialogFragment2")
+                        }
+                    } else {
+                        jumpToMainActivity()
+                    }
+
+                } else {
+                    jumpToMainActivity()
+                }
+            }
+        })
+
+        //数据不带状态的实现
+        /*splashViewModel.versionLiveData.observe(this, Observer{ versionResponse ->
             Log.d("SplashActivity",versionResponse.data.toString())
 
             if(versionResponse.code == 200 && versionResponse.data != null && !StringUtils.isEmpty(versionResponse.data.VId)){
@@ -92,7 +143,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
             }else{
                 jumpToMainActivity()
             }
-        })
+        })*/
     }
 
     /**
@@ -101,12 +152,13 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
      * @param context
      * @param url     要浏览的资源地址
      */
-    private fun openBrowser(context: Context,browserUrl: String) {
+    private fun openBrowser(context: Context, browserUrl: String) {
         val intent = Intent()
         intent.setAction(Intent.ACTION_VIEW)
         intent.setData(Uri.parse(browserUrl))
         //启动下载当前应用的app链接
-        startActivity(Intent.createChooser(intent, context.getResources().getString(R.string.choose_browser)))
+        startActivity(Intent.createChooser(intent,
+            context.getResources().getString(R.string.choose_browser)))
 
         // 注意此处的判断intent.resolveActivity()可以返回显示该Intent的Activity对应的组件名
         // 官方解释 : Name of the component implementing an activity that can display the intent
@@ -127,7 +179,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
         Log.d("---", "test")
         firstClick = secondClick
         secondClick = System.currentTimeMillis()
-        if(secondClick - firstClick > Constants.DOUBLE_CLICK_TIME){
+        if (secondClick - firstClick > Constants.DOUBLE_CLICK_TIME) {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         }
 
@@ -144,17 +196,16 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
 
     private fun afterInit() {
         //todo(为了测试用的, 每次初始化将sp值改为true, 这样每次都是第一次登录)
-        mSharedPreferenceUtils.mSharedPreferences.edit().putBoolean("isFirstLuanch",true).apply()
+        mSharedPreferenceUtils.mSharedPreferences.edit().putBoolean("isFirstLuanch", true).apply()
 
-        if(mSharedPreferenceUtils.isFirstLuanch()){
+        if (mSharedPreferenceUtils.isFirstLuanch()) {
             //弹出对话框
             mSplashPermissionDialog.show(supportFragmentManager, "SplashPermissionDialog")
-        }else{
+        } else {
             //检查权限
             checkAppPermission(this@SplashActivity)
         }
     }
-
 
 
     //处理权限结果回掉方法(该方法在Activity/Fragment中应该被重写，当用户处理完授权操作时，系统会自动回调该方法)
@@ -164,18 +215,18 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
         permissions: Array<out String>,
         grantResults: IntArray,
     ) {
-        when(requestCode){
+        when (requestCode) {
             PERMISSION_REQUEST_CODE -> {
                 var isAllPermissionGranted = true
-                if(grantResults.size > 0 ) {
+                if (grantResults.size > 0) {
                     //对所有的权限进行遍历, 判断是否所有的权限都授权了
-                    grantResults.forEachIndexed  { index, ele ->
-                        if (grantResults[index] !=  PackageManager.PERMISSION_GRANTED) {
+                    grantResults.forEachIndexed { index, ele ->
+                        if (grantResults[index] != PackageManager.PERMISSION_GRANTED) {
                             isAllPermissionGranted = false
                         }
                     }
                 }
-                if(!isAllPermissionGranted){
+                if (!isAllPermissionGranted) {
                     //若有权限未授权, 打开系统信息应用界面
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     startActivity(intent.apply {
@@ -202,22 +253,33 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
     }
 
 
-
     private fun checkAppPermission(activity: Activity) {
         try {
             //拿到对应的权限名
-            val permission = ActivityCompat.checkSelfPermission(activity, "android.permission.INTERNET")
-            val permission2 = ActivityCompat.checkSelfPermission(activity, "android.permission.WRITE_EXTERNAL_STORAGE")
-            val permission3 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_EXTERNAL_STORAGE")
-            val permission4 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_CONTACTS")
-            val permission5 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_PHONE_STATE")
-            val permission7 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_NETWORK_STATE")
-            val permission8 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_WIFI_STATE")
-            val permission9 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_FINE_LOCATION")
-            val permission10 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_COARSE_LOCATION")
-            val permission12 = ActivityCompat.checkSelfPermission(activity, "android.permission.CAMERA")
-            val permission13 = ActivityCompat.checkSelfPermission(activity, "android.permission.WRITE_CONTACTS")
-            val permission14 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_SMS")
+            val permission =
+                ActivityCompat.checkSelfPermission(activity, "android.permission.INTERNET")
+            val permission2 = ActivityCompat.checkSelfPermission(activity,
+                "android.permission.WRITE_EXTERNAL_STORAGE")
+            val permission3 = ActivityCompat.checkSelfPermission(activity,
+                "android.permission.READ_EXTERNAL_STORAGE")
+            val permission4 =
+                ActivityCompat.checkSelfPermission(activity, "android.permission.READ_CONTACTS")
+            val permission5 =
+                ActivityCompat.checkSelfPermission(activity, "android.permission.READ_PHONE_STATE")
+            val permission7 = ActivityCompat.checkSelfPermission(activity,
+                "android.permission.ACCESS_NETWORK_STATE")
+            val permission8 =
+                ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_WIFI_STATE")
+            val permission9 = ActivityCompat.checkSelfPermission(activity,
+                "android.permission.ACCESS_FINE_LOCATION")
+            val permission10 = ActivityCompat.checkSelfPermission(activity,
+                "android.permission.ACCESS_COARSE_LOCATION")
+            val permission12 =
+                ActivityCompat.checkSelfPermission(activity, "android.permission.CAMERA")
+            val permission13 =
+                ActivityCompat.checkSelfPermission(activity, "android.permission.WRITE_CONTACTS")
+            val permission14 =
+                ActivityCompat.checkSelfPermission(activity, "android.permission.READ_SMS")
             //检测上面权限是否全部被授予
             if (permission != PackageManager.PERMISSION_GRANTED
                 || permission2 != PackageManager.PERMISSION_GRANTED
@@ -230,9 +292,12 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
                 || permission10 != PackageManager.PERMISSION_GRANTED
                 || permission12 != PackageManager.PERMISSION_GRANTED
                 || permission13 != PackageManager.PERMISSION_GRANTED
-                || permission14 != PackageManager.PERMISSION_GRANTED) {
+                || permission14 != PackageManager.PERMISSION_GRANTED
+            ) {
                 //若有权限未授予, 会弹出系统自带的申请权限对话框
-                ActivityCompat.requestPermissions(activity, APP_PERMISSIONS, PERMISSION_REQUEST_CODE)
+                ActivityCompat.requestPermissions(activity,
+                    APP_PERMISSIONS,
+                    PERMISSION_REQUEST_CODE)
             } else {
                 //适配小米手机, 但是小米出现情况很少可忽略
                 //checkXiaoMiSms()
@@ -245,9 +310,11 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
     }
 
     private fun getVersionLatestData() {
-        splashViewModel.query()
+        //没有状态的livedata数据通数据
+        //splashViewModel.query()
 
-
+        //有状态的livedata数据通数据
+        splashViewModel.query2()
     }
 
 

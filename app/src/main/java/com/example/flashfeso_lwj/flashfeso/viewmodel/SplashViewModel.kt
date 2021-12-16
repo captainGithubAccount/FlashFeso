@@ -10,6 +10,7 @@ class SplashViewModel @ViewModelInject constructor(
     private val splashRepository: SplashRepository
 ) : ViewModel() {
 
+    //不带状态的数据实现方式
     val versionLiveData = splashRepository.getVersionLiveData()
 
     fun query(){
@@ -17,5 +18,14 @@ class SplashViewModel @ViewModelInject constructor(
     }
 
     val versionErrorLiveData = splashRepository.getVersionErrorLiveData()
+
+
+
+    //带有状态的数据实现方式
+    val dataLiveData = splashRepository.getDataLiveData()
+
+    fun query2(){
+        splashRepository.query2()
+    }
 
 }
