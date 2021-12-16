@@ -30,8 +30,10 @@ import javax.inject.Inject
 class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     private var firstClick: Long = 0
     private var secondClick: Long = 0
+
     @Inject
     lateinit var mSharedPreferenceUtils: SharedPreferenceUtils
+
     @Inject
     lateinit var mSplashPermissionDialog: SplashPermissionDialog
 
@@ -49,57 +51,57 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
 
     private fun whenObserve() {
         splashViewModel.dataLiveData.observe(this, Observer { statedata ->
-            statedata.whenError {
-                Log.d("ddd", it.errorMessage.toString())
-            }
-        })
-
-        //数据带状态的实现
-        splashViewModel.dataLiveData.observe(this, Observer { res ->
-            res.data?.let { versionData ->
-                if (!StringUtils.isEmpty(versionData.VId)) {
-                    if (versionData.VId.toLong() > BuildConfig.VERSION_CODE) {
-                        if (versionData.isUpdate) {
-                            CommonDialog(resources.getString(R.string.new_version_found))
-                                .apply {
-                                    mCommonDialogEvent = object : CommonDialogEvent {
-                                        override fun cancelListener() {
-                                            dismiss()
-                                            finish()
+            statedata.whenSuccessAndDefaultErrorDeal { versionData ->
+                versionData?.let {
+                    if (!StringUtils.isEmpty(versionData.VId)) {
+                        if (versionData.VId.toLong() > BuildConfig.VERSION_CODE) {
+                            if (versionData.isUpdate) {
+                                CommonDialog(resources.getString(R.string.new_version_found))
+                                    .apply {
+                                        mCommonDialogEvent = object : CommonDialogEvent {
+                                            override fun cancelListener() {
+                                                dismiss()
+                                                finish()
+                                            }
+                                            override fun confirmListener() {
+                                                openBrowser(requireActivity(),
+                                                    versionData.downloadURl)
+                                            }
                                         }
-
-                                        override fun confirmListener() {
-                                            openBrowser(requireActivity(), versionData.downloadURl)
+                                    }.show(supportFragmentManager, "CommonDialogFragment")
+                                //commonDialog.show(supportFragmentManager, "CommonDialogFragment")
+                            } else {
+                                CommonDialog(resources.getString(R.string.new_version_found))
+                                    .apply {
+                                        mCommonDialogEvent = object : CommonDialogEvent {
+                                            override fun cancelListener() {
+                                                jumpToMainActivity()
+                                            }
+                                            override fun confirmListener() {
+                                                openBrowser(requireActivity(),
+                                                    versionData.downloadURl)
+                                            }
                                         }
-
                                     }
-                                }.show(supportFragmentManager, "CommonDialogFragment")
-                            //commonDialog.show(supportFragmentManager, "CommonDialogFragment")
+                                    .show(supportFragmentManager, "CommonDialogFragment2")
+                            }
                         } else {
-                            CommonDialog(resources.getString(R.string.new_version_found))
-                                .apply {
-                                    mCommonDialogEvent = object : CommonDialogEvent {
-                                        override fun cancelListener() {
-                                            jumpToMainActivity()
-                                        }
-
-                                        override fun confirmListener() {
-                                            openBrowser(requireActivity(), versionData.downloadURl)
-                                        }
-
-                                    }
-                                }
-                                .show(supportFragmentManager, "CommonDialogFragment2")
+                            jumpToMainActivity()
                         }
                     } else {
                         jumpToMainActivity()
                     }
-
-                } else {
-                    jumpToMainActivity()
                 }
             }
+
         })
+
+        //数据带状态的实现
+        /*splashViewModel.dataLiveData.observe(this, Observer { res ->
+            res.data?.let { versionData ->
+
+            }
+        })*/
 
         //数据不带状态的实现
         /*splashViewModel.versionLiveData.observe(this, Observer{ versionResponse ->
