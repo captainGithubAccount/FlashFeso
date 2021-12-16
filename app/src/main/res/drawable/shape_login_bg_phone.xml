@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!--
+        android:shape="rectangle"
+        定义形状为矩形
+    -->
+
+
+    <!--
+        定义该形状的填充颜色
+    -->
+    <solid
+        android:color="@color/color_F2F2F2"/>
+
+    <!--
+        定义矩形的圆角
+    -->
+    <corners
+        android:radius="@dimen/dp_20"/>
+
+    <!--
+        定义矩形的线条样式
+        android:width="@dimen/dp_1"
+        线条宽度为1
+        android:color="@color/color_F2F2F2"
+        线条颜色为color_F2F2F2
+    -->
+    <stroke
+        android:width="@dimen/dp_1"
+        android:color="@color/color_F2F2F2"/>
+</shape>

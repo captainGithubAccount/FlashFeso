@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+
+    <!--
+        我们必须牢记以避免出现问题，<layer-list>应该是不透明的，
+        android:opacity=”opaque”。
+        并且在layout中该activity的父activity背景色也应该被一种颜色填充
+        ，如果没有的话，<layer-list> 在启动时所展示的将被保留在你的activity中。
+    -->
+
+    <!--
+        类似于Fragme布局最底层item为@color/cl_splash_bg（白色）
+    -->
+    <item android:drawable="@color/cl_splash_bg"/>
+
+
+    <!--
+        类似于Fragme布局中间层item为bitmap（图片）
+        android:left="2dp"
+        android:right="2dp"
+        该item左边和右边均偏移2dp
+    -->
+    <item android:bottom="@dimen/dm_splash_bg_margin_bottom"
+
+        android:left="2dp"
+        android:right="2dp">
+        <bitmap android:src="@drawable/bg_splash_bottom"
+
+
+            android:gravity="bottom|right">
+
+        </bitmap>
+    </item>
+
+    <!--
+        类似于Fragme布局顶层item为bitmap（图片）
+    -->
+    <item android:top="@dimen/dm_splash_logo_margin_top">
+        <bitmap android:src="@drawable/logo_splash"
+            android:gravity="top|center"/>
+    </item>
+</layer-list>

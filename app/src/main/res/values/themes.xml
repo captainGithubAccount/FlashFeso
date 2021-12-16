@@ -23,7 +23,7 @@
 
     <style name="SplashTheme" parent="BaseTheme">
         <item name="android:windowFullscreen">true</item>
-        <item name = "android:windowBackground">@drawable/bg_splash</item>
+        <item name = "android:windowBackground">@drawable/layer_list_bg_splash</item>
     </style>
 
 

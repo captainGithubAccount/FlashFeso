@@ -3,7 +3,7 @@ package com.example.flashfeso_lwj.flashfeso.utils
 import java.util.regex.Pattern
 
 
-object StringUrils{
+object StringUtils{
     /**
      * 验证手机号码是否正确
      */

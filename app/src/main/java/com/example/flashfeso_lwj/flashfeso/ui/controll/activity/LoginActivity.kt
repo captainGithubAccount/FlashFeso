@@ -12,6 +12,7 @@ class LoginActivity : BaseDbActivity<ActivityLoginBinding>(){
 
     override fun ActivityLoginBinding.initView() {
 
+
     }
 
 }

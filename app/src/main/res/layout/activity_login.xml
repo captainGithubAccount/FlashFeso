@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".flashfeso.ui.controll.activity.LoginActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_login_img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_230"/>
+
+    <include
+        android:id="@+id/incl_login_enter_telephone"
+        layout="@layout/incl_login_enter_telephone"
+        android:visibility="visible" />
+
+    <include
+        android:id="@+id/incl_login_verification_code"
+        layout="@layout/incl_login_verification_code"
+        tools:visibility="gone" />
+
+</LinearLayout>

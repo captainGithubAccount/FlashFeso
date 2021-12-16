@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="line">
+    <!--
+        android:shape="line"
+        形状为直线
+    -->
+
+    <!--
+        android:color="@color/color_333333"
+        android:width="@dimen/dp_2"
+        线条粗细
+        android:dashWidth="30dp"
+        虚线宽度
+        android:dashGap="@dimen/dp_18"
+        虚线间隔
+    -->
+    <stroke
+        android:color="@color/color_333333"
+        android:width="@dimen/dp_2"
+        android:dashWidth="30dp"
+        android:dashGap="@dimen/dp_18"/>
+
+    <!--
+        定义该形状的宽高, 通常可以不定义, 布局中也可以定义
+    -->
+    <size
+        android:width="@dimen/dp_290"
+        android:height="@dimen/dp_4"/>
+
+</shape>
