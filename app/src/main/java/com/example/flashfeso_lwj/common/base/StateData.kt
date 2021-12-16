@@ -1,6 +1,8 @@
 package com.example.flashfeso_lwj.common.base
 
 import android.util.Log
+import android.widget.Toast
+import com.example.flashfeso_lwj.App
 
 /*
 * create time: 12.16
@@ -31,6 +33,7 @@ sealed class StateData<T>(
             is Success -> blockSuccess(data)
             is Error -> {
                 Log.e("StateData.Error message", this.errorMessage!!)
+                Toast.makeText(App.context, "error: ${this.errorMessage!!}", Toast.LENGTH_LONG).show()
             }
         }
 
