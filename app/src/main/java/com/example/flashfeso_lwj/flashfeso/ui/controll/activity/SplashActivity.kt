@@ -49,7 +49,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent{
         splashViewModel.versionLiveData.observe(this, Observer{ versionResponse ->
             Log.d("SplashActivity",versionResponse.data.toString())
 
-            if(versionResponse.code == 200 && versionResponse.data != null && !StringUrils.isEmpty(versionResponse.data.VId)){
+            if(versionResponse.code == 200 && versionResponse.data != null && !StringUtils.isEmpty(versionResponse.data.VId)){
                 versionResponse.data.let{ data ->
                     if(data.VId.toLong() > BuildConfig.VERSION_CODE){
                         if(data.isUpdate){
