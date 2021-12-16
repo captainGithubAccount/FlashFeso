@@ -1,16 +1,16 @@
 package com.example.flashfeso_lwj.flashfeso.entity
 
-import com.example.flashfeso_lwj.common.base.Data
+import com.example.flashfeso_lwj.common.base.StateData
 
 data class VersionResponse(
     val code: Int,
     val data: VersionEntity?,
     val msg: String
 ){
-    fun getWithStatusVersionResponse(): Data<VersionEntity>{
+    fun getStateData(): StateData<VersionEntity>{
         return when(this.code){
-            200 -> Data.Success(data)
-            else -> Data.Error(errorMessage = "返回码为${code}")
+            200 -> StateData.Success(data)
+            else -> StateData.Error(errorMessage = "返回码为${code}")
         }
 
     }

@@ -28,8 +28,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
-    var firstClick: Long = 0
-    var secondClick: Long = 0
+    private var firstClick: Long = 0
+    private var secondClick: Long = 0
     @Inject
     lateinit var mSharedPreferenceUtils: SharedPreferenceUtils
     @Inject
@@ -48,6 +48,12 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     }
 
     private fun whenObserve() {
+        splashViewModel.dataLiveData.observe(this, Observer { statedata ->
+            statedata.whenError {
+                Log.d("ddd", it.errorMessage.toString())
+            }
+        })
+
         //数据带状态的实现
         splashViewModel.dataLiveData.observe(this, Observer { res ->
             res.data?.let { versionData ->
