@@ -48,7 +48,6 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     }
 
     private fun whenObserve() {
-
         //数据带状态的实现
         splashViewModel.dataLiveData.observe(this, Observer { res ->
             res.data?.let { versionData ->
@@ -99,7 +98,6 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
         //数据不带状态的实现
         /*splashViewModel.versionLiveData.observe(this, Observer{ versionResponse ->
             Log.d("SplashActivity",versionResponse.data.toString())
-
             if(versionResponse.code == 200 && versionResponse.data != null && !StringUtils.isEmpty(versionResponse.data.VId)){
                 versionResponse.data.let{ data ->
                     if(data.VId.toLong() > BuildConfig.VERSION_CODE){
@@ -111,11 +109,9 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                                             dismiss()
                                             finish()
                                         }
-
                                         override fun confirmListener() {
                                             openBrowser(requireActivity(), data.downloadURl)
                                         }
-
                                     }
                                 }.show(supportFragmentManager, "CommonDialogFragment")
                              //commonDialog.show(supportFragmentManager, "CommonDialogFragment")
@@ -126,15 +122,12 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                                         override fun cancelListener() {
                                             jumpToMainActivity()
                                         }
-
                                         override fun confirmListener() {
                                             openBrowser(requireActivity(), data.downloadURl)
                                         }
-
                                     }
                                 }
                                 .show(supportFragmentManager, "CommonDialogFragment2")
-
                         }
                     }else{
                         jumpToMainActivity()
