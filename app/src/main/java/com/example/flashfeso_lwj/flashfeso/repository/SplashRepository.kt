@@ -7,7 +7,6 @@ import com.example.flashfeso_lwj.common.base.StateData
 import com.example.flashfeso_lwj.flashfeso.api.data.service.SplashService
 import com.example.flashfeso_lwj.flashfeso.entity.VersionEntity
 import com.example.flashfeso_lwj.flashfeso.entity.VersionResponse
-import com.example.flashfeso_lwj.flashfeso.entity.VersionResponse2
 import com.example.flashfeso_lwj.flashfeso.utils.Constants.TAG_ERROR
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,16 +18,11 @@ import javax.inject.Inject
 class SplashRepository @Inject constructor(
     private val splashService: SplashService,
 ): CoroutineScope by CoroutineScope(Dispatchers.IO) {
-
     //todo 不带状态的数据实现方式
     private val versionErrorLiveData = MutableLiveData<String>()
-
-    fun getVersionLiveData(): LiveData<VersionResponse2> = versionLiveData
-
+    fun getVersionLiveData(): LiveData<VersionResponse> = versionLiveData
     fun getVersionErrorLiveData(): LiveData<String> = versionErrorLiveData
-
-    private val versionLiveData = MutableLiveData<VersionResponse2>()
-
+    private val versionLiveData = MutableLiveData<VersionResponse>()
     fun query() = launch {
         try {
             val versionResponse = splashService.getVersionLatest()
@@ -44,10 +38,8 @@ class SplashRepository @Inject constructor(
 
 
     //todo 带有状态的数据实现方式(处理网络接口需要对错误信息捕获)
-    private val dataLiveData = MutableLiveData<StateData<VersionEntity?>>()
-
-    fun getDataLiveData(): LiveData<StateData<VersionEntity?>> = dataLiveData
-
+    private val dataLiveData = MutableLiveData<StateData<VersionEntity>>()
+    fun getDataLiveData(): LiveData<StateData<VersionEntity>> = dataLiveData
     fun query2() = launch {
         try{
             // 数据类不抽取接口出来
@@ -70,9 +62,4 @@ class SplashRepository @Inject constructor(
             e.printStackTrace()
         }
     }
-
-
-
-
-
 }
