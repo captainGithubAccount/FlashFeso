@@ -1,5 +1,7 @@
 package com.example.flashfeso_lwj.flashfeso.utils
 
+
+
 val APP_PERMISSIONS: Array<String> = arrayOf("android.permission.INTERNET",
     "android.permission.WRITE_EXTERNAL_STORAGE",  //读写权限
     "android.permission.READ_EXTERNAL_STORAGE",  //读写权限

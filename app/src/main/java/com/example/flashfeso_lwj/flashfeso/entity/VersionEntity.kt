@@ -2,6 +2,16 @@ package com.example.flashfeso_lwj.flashfeso.entity
 
 import com.example.flashfeso_lwj.common.base.StateData
 
+data class VersionResponse2(
+    override val code: Int,
+    override val data: VersionEntity?,
+    val msg: String
+): GetStateData<VersionEntity>
+
+
+/*
+* 不抽取通用方法实现
+* */
 data class VersionResponse(
     val code: Int,
     val data: VersionEntity?,
@@ -22,6 +32,8 @@ data class VersionResponse(
         }*/
     }
 }
+
+
 
 data class VersionEntity(
     val VId: String,

@@ -8,12 +8,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import com.example.flashfeso_lwj.BuildConfig
-import com.example.flashfeso_lwj.MainActivity
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.common.event.CommonDialogEvent
 import com.example.flashfeso_lwj.common.ui.controll.dialog.CommonDialog
@@ -28,8 +28,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
-    private var firstClick: Long = 0
-    private var secondClick: Long = 0
+    private var mFirstClick: Long = 0
+    private var mSecondClick: Long = 0
 
     @Inject
     lateinit var mSharedPreferenceUtils: SharedPreferenceUtils
@@ -178,9 +178,9 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     private fun jumpToMainActivity() {
 
         Log.d("---", "test")
-        firstClick = secondClick
-        secondClick = System.currentTimeMillis()
-        if (secondClick - firstClick > Constants.DOUBLE_CLICK_TIME) {
+        mFirstClick = mSecondClick
+        mSecondClick = System.currentTimeMillis()
+        if (mSecondClick - mFirstClick > Constants.DOUBLE_CLICK_TIME) {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         }
 
@@ -190,14 +190,21 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
         mSplashPermissionDialog.mSplashPermissionDialogEvent = this
     }
 
+
     override fun onStart() {
         super.onStart()
+        //注意这里不能在onStart中执行afterInit方法, 否则可能不能获取到数据, 导致检查完权限后无法进入下一个界面
+        //afterInit()
+    }
+
+    override fun onResume() {
+        super.onResume()
         afterInit()
     }
 
     private fun afterInit() {
         //todo(为了测试用的, 每次初始化将sp值改为true, 这样每次都是第一次登录)
-        mSharedPreferenceUtils.mSharedPreferences.edit().putBoolean("isFirstLuanch", true).apply()
+        //mSharedPreferenceUtils.mSharedPreferences.edit().putBoolean("isFirstLuanch", true).apply()
 
         if (mSharedPreferenceUtils.isFirstLuanch()) {
             //弹出对话框

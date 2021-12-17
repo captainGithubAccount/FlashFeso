@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/shape_simple_progress_dialog_bg.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/drawable/bg_confirm.xml" value="0.26944444444444443" />
         <entry key="app/src/main/res/drawable/bg_login_phone.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/bg_splash.xml" value="0.2611111111111111" />
@@ -12,6 +13,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_common.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/dialog_simpleprogressdialog.xml" value="0.165625" />
         <entry key="app/src/main/res/layout/dialog_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/incl_login_enter_telephone.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/incl_login_verification_code.xml" value="0.28229166666666666" />

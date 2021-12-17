@@ -7,7 +7,7 @@ import com.example.flashfeso_lwj.common.base.StateData
 import com.example.flashfeso_lwj.flashfeso.api.data.service.SplashService
 import com.example.flashfeso_lwj.flashfeso.entity.VersionEntity
 import com.example.flashfeso_lwj.flashfeso.entity.VersionResponse
-import com.example.flashfeso_lwj.flashfeso.utils.TAG_ERROR
+import com.example.flashfeso_lwj.flashfeso.utils.Constants.TAG_ERROR
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,6 +49,11 @@ class SplashRepository @Inject constructor(
 
     fun query2() = launch {
         try{
+            // 数据类不抽取接口出来
+             //val stateData = splashService.getVersionLatest().getStateData()
+
+            //数据类抽取接口出来
+            //val stateData = splashService.getVersionLatest().getStateData(data = splashService.getVersionLatest().data)
             val stateData = splashService.getVersionLatest().getStateData()
             stateData.whenSuccess {
                 it?.run{dataLiveData.postValue(StateData.Success(it))}

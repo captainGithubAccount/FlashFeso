@@ -36,4 +36,14 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowSoftInputMode">stateAlwaysHidden</item>
     </style>
+
+
+    <!--  进度对话框(SimpleProgresssDialog)w样式(转圈圈) -->
+    <style name="sp_simple_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
 </resources>

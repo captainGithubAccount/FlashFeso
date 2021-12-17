@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNCHECKED_CAST")
 interface GetBinding<T> {
     fun getBindingByReflex(layoutInflater: LayoutInflater): T? {
         val genericSuperclass: Type = javaClass.genericSuperclass

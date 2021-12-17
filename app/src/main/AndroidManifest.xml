@@ -43,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".flashfeso.ui.controll.activity.MainActivity"
             android:exported="true"></activity>
     </application>
 
