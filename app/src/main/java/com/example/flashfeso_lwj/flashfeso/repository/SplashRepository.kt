@@ -7,6 +7,7 @@ import com.example.flashfeso_lwj.common.base.StateData
 import com.example.flashfeso_lwj.flashfeso.api.data.service.SplashService
 import com.example.flashfeso_lwj.flashfeso.entity.VersionEntity
 import com.example.flashfeso_lwj.flashfeso.entity.VersionResponse
+import com.example.flashfeso_lwj.flashfeso.entity.VersionResponse2
 import com.example.flashfeso_lwj.flashfeso.utils.Constants.TAG_ERROR
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,11 +23,11 @@ class SplashRepository @Inject constructor(
     //todo 不带状态的数据实现方式
     private val versionErrorLiveData = MutableLiveData<String>()
 
-    fun getVersionLiveData(): LiveData<VersionResponse> = versionLiveData
+    fun getVersionLiveData(): LiveData<VersionResponse2> = versionLiveData
 
     fun getVersionErrorLiveData(): LiveData<String> = versionErrorLiveData
 
-    private val versionLiveData = MutableLiveData<VersionResponse>()
+    private val versionLiveData = MutableLiveData<VersionResponse2>()
 
     fun query() = launch {
         try {
@@ -43,9 +44,9 @@ class SplashRepository @Inject constructor(
 
 
     //todo 带有状态的数据实现方式(处理网络接口需要对错误信息捕获)
-    private val dataLiveData = MutableLiveData<StateData<VersionEntity>>()
+    private val dataLiveData = MutableLiveData<StateData<VersionEntity?>>()
 
-    fun getDataLiveData(): LiveData<StateData<VersionEntity>> = dataLiveData
+    fun getDataLiveData(): LiveData<StateData<VersionEntity?>> = dataLiveData
 
     fun query2() = launch {
         try{
@@ -60,7 +61,8 @@ class SplashRepository @Inject constructor(
             }
 
             stateData.whenError {
-                dataLiveData.postValue(it)
+                 dataLiveData.postValue(it)
+
             }
         }catch (e: Exception){
             Log.e(TAG_ERROR,Log.getStackTraceString(e))

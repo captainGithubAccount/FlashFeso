@@ -3,9 +3,10 @@ package com.example.flashfeso_lwj.flashfeso.entity
 import com.example.flashfeso_lwj.common.base.StateData
 
 data class VersionResponse2(
-    override val code: Int,
-    override val data: VersionEntity?,
-    val msg: String
+
+    val msg: String, override
+    val data: VersionEntity?,
+    override val code: Int
 ): GetStateData<VersionEntity>
 
 

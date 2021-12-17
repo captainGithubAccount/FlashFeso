@@ -50,8 +50,16 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     }
 
     private fun whenObserve() {
+        //数据带状态的实现
         splashViewModel.dataLiveData.observe(this, Observer { statedata ->
             statedata.whenSuccessAndDefaultErrorDeal { versionData ->
+                if(versionData != null){
+
+                    Log.d("first data", versionData.toString())
+                }else{
+                    Log.d("first data", "null")
+
+                }
                 versionData?.let {
                     if (!StringUtils.isEmpty(versionData.VId)) {
                         if (versionData.VId.toLong() > BuildConfig.VERSION_CODE) {
@@ -96,12 +104,8 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
 
         })
 
-        //数据带状态的实现
-        /*splashViewModel.dataLiveData.observe(this, Observer { res ->
-            res.data?.let { versionData ->
 
-            }
-        })*/
+
 
         //数据不带状态的实现
         /*splashViewModel.versionLiveData.observe(this, Observer{ versionResponse ->
@@ -194,6 +198,10 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     override fun onStart() {
         super.onStart()
         //注意这里不能在onStart中执行afterInit方法, 否则可能不能获取到数据, 导致检查完权限后无法进入下一个界面
+        //onStart到onResume。这个阶段，Activity被创建，布局已加载，但是界面还没绘制，可以说界面都不存在(也就是布局有了还没开始绘制)
+        //
+        //个人感觉原因: 当网络获取数据较快时候, 如在绘制之前已经拿到了数据, 这个时候进入观察中, 但是无法绘制(具体绘制要在执行onResume方法时)
+        //所以第一次无法弹出观察中的方法里面的dialog, 但是这个时候再次运行就可以看到dialog了
         //afterInit()
     }
 
@@ -239,7 +247,6 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     startActivity(intent.apply {
                         intent.setData(Uri.parse("package:${packageName}"))
-                        Log.d("---", packageName.toString())
                     })
                 }
             }

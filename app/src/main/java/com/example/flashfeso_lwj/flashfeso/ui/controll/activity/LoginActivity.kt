@@ -14,6 +14,7 @@ import com.example.flashfeso_lwj.flashfeso.utils.Constants
 import com.example.flashfeso_lwj.flashfeso.utils.StringUtils
 
 class LoginActivity : BaseDbActivity<ActivityLoginBinding>(){
+
     private var mIsYzmVisible = false
 
     private var mFirstClick = 0L

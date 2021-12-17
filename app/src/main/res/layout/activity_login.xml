@@ -16,11 +16,12 @@
     <include
         android:id="@+id/incl_login_enter_telephone"
         layout="@layout/incl_login_enter_telephone"
-        android:visibility="visible" />
+        android:visibility="visible"
+         />
 
     <include
         android:id="@+id/incl_login_verification_code"
         layout="@layout/incl_login_verification_code"
-        tools:visibility="gone" />
+        android:visibility="gone" />
 
 </LinearLayout>
