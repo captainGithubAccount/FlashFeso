@@ -15,10 +15,6 @@ data class VersionResponse(
         }else{
             DataResult.Error(errorMessage = "返回的数据为null")
         }
-        /*when(this.code){
-            200 -> StateData.Success(data)
-            else -> StateData.Error(errorMessage = "返回码为${code}")
-        }*/
     }
 }
 

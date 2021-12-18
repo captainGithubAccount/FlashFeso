@@ -38,28 +38,26 @@ class SplashRepository @Inject constructor(
 
 
     //todo 带有状态的数据实现方式(处理网络接口需要对错误信息捕获)
-    private val dataLiveData = MutableLiveData<DataResult<VersionEntity>>()
+    val dataLiveData = MutableLiveData<DataResult<VersionEntity>>()
     fun getDataLiveData(): LiveData<DataResult<VersionEntity>> = dataLiveData
     fun query2() = launch {
         try{
-            // 数据类不抽取接口出来
-             //val stateData = splashService.getVersionLatest().getStateData()
-
-            //数据类抽取接口出来
-            //val stateData = splashService.getVersionLatest().getStateData(data = splashService.getVersionLatest().data)
-            val stateData = splashService.getVersionLatest().getDataResult()
-            stateData.whenSuccess {
-                it?.run{dataLiveData.postValue(DataResult.Success(it))}
-            }
-
-            stateData.whenError {
-                 dataLiveData.postValue(it)
-
-            }
+            getDataFromService()
         }catch (e: Exception){
             Log.e(TAG_ERROR,Log.getStackTraceString(e))
             dataLiveData.postValue(DataResult.Error(errorMessage = e.message))
             e.printStackTrace()
+        }
+    }
+
+    suspend fun getDataFromService(){
+        val stateData = splashService.getVersionLatest().getDataResult()
+        stateData.whenSuccess {
+            it?.run{dataLiveData.postValue(DataResult.Success(it))}
+        }
+
+        stateData.whenError {
+            dataLiveData.postValue(it)
         }
     }
 }
