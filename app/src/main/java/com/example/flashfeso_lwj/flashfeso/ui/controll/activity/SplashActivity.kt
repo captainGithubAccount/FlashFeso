@@ -34,6 +34,8 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     @Inject
     lateinit var mSharedPreferenceUtils: SharedPreferenceUtils
 
+
+
     @Inject
     lateinit var mSplashPermissionDialog: SplashPermissionDialog
 

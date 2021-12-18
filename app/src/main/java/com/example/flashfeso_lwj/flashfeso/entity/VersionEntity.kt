@@ -23,6 +23,24 @@ data class VersionResponse(
     }
 }
 
+data class Response<T>(
+    val code: Int,
+    val data: T?
+)
+
+
+
+interface GetStateData<T>{
+    fun getStateData(data: Response<T>): StateData<T>{
+        return if(data.code == 200 && data.data != null){
+            StateData.Success(data.data)
+        }else if(data.code != 200){
+            StateData.Error(errorMessage = "返回码为${data.code}")
+        }else{
+            StateData.Error(errorMessage = "返回的数据为null")
+        }
+    }
+}
 
 
 data class VersionEntity(

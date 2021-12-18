@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 /**
  *
- * 进度对话框工具类
+ * 进度对话框工具类, x需要手动在活动销毁时给application中对应变量置空, 防止内存泄漏
  */
 class SimpleProgressDialogUtil @Inject constructor() {
     private var mDialog: SimpleProgressDialog? = null

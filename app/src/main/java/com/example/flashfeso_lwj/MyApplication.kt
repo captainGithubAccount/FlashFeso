@@ -96,17 +96,15 @@ class MyApplication : Application() {
     companion object {
         val mEventBus: EventBus = EventBus.getDefault()
 
-        */
-/**
+*
          * 获取Application实例
          *
          * @return Application的实例
-         *//*
+
 
         var instance: MyApplication? = null
             private set
-        */
-/*public static int getLoac() {
+public static int getLoac() {
 
         LocationUtils locationUtils = new LocationUtils();
 
@@ -136,7 +134,8 @@ class MyApplication : Application() {
 
 //        Log.i("66666", "location: true"+location);
         return location;
-    }*//*
+    }
 
     }
-}*/
+}
+*/

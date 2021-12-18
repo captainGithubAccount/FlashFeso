@@ -1,7 +1,5 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -10,17 +8,11 @@ import com.example.flashfeso_lwj.App
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.databinding.ActivityLoginBinding
 import com.example.flashfeso_lwj.flashfeso.base.BaseDbActivity
-import com.example.flashfeso_lwj.flashfeso.utils.Constants
 import com.example.flashfeso_lwj.flashfeso.utils.StringUtils
 
 class LoginActivity : BaseDbActivity<ActivityLoginBinding>(){
 
     private var mIsYzmVisible = false
-
-    private var mFirstClick = 0L
-    private var mSecoundClick = 0L
-
-
 
     override fun observe() {
 
@@ -60,10 +52,13 @@ class LoginActivity : BaseDbActivity<ActivityLoginBinding>(){
 
         binding.inclLoginVerificationCode.let{ ll ->
             ll.yzmSend.setOnClickListener {
-                mFirstClick = mSecoundClick
+                /*mFirstClick = mSecoundClick
                 mSecoundClick = System.currentTimeMillis()
 
                 if(mSecoundClick - mFirstClick > Constants.DOUBLE_CLICK_TIME){
+                    sendMs()
+                }*/
+                if(isClickUseful()){
                     sendMs()
                 }
             }
