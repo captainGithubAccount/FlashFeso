@@ -3,7 +3,7 @@ package com.example.flashfeso_lwj.flashfeso.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.flashfeso_lwj.common.base.StateData
+import com.example.flashfeso_lwj.common.base.DataResult
 import com.example.flashfeso_lwj.flashfeso.api.data.service.SplashService
 import com.example.flashfeso_lwj.flashfeso.entity.VersionEntity
 import com.example.flashfeso_lwj.flashfeso.entity.VersionResponse
@@ -38,8 +38,8 @@ class SplashRepository @Inject constructor(
 
 
     //todo 带有状态的数据实现方式(处理网络接口需要对错误信息捕获)
-    private val dataLiveData = MutableLiveData<StateData<VersionEntity>>()
-    fun getDataLiveData(): LiveData<StateData<VersionEntity>> = dataLiveData
+    private val dataLiveData = MutableLiveData<DataResult<VersionEntity>>()
+    fun getDataLiveData(): LiveData<DataResult<VersionEntity>> = dataLiveData
     fun query2() = launch {
         try{
             // 数据类不抽取接口出来
@@ -47,9 +47,9 @@ class SplashRepository @Inject constructor(
 
             //数据类抽取接口出来
             //val stateData = splashService.getVersionLatest().getStateData(data = splashService.getVersionLatest().data)
-            val stateData = splashService.getVersionLatest().getStateData()
+            val stateData = splashService.getVersionLatest().getDataResult()
             stateData.whenSuccess {
-                it?.run{dataLiveData.postValue(StateData.Success(it))}
+                it?.run{dataLiveData.postValue(DataResult.Success(it))}
             }
 
             stateData.whenError {
@@ -58,7 +58,7 @@ class SplashRepository @Inject constructor(
             }
         }catch (e: Exception){
             Log.e(TAG_ERROR,Log.getStackTraceString(e))
-            dataLiveData.postValue(StateData.Error(errorMessage = e.message))
+            dataLiveData.postValue(DataResult.Error(errorMessage = e.message))
             e.printStackTrace()
         }
     }

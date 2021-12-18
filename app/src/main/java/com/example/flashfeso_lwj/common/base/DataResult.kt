@@ -8,16 +8,13 @@ import com.example.flashfeso_lwj.App
 * create time: 12.16
 * autor: lwj
 * create reason: 每次网络数据都存在错误和成功状态, 每次都需要建多个livedata去返回错误信息, 而且当再添加其他状态又要多创建livedata
+* alter time: 12.18将原有构造方法和参数删除, 使的看起来更像枚举类, 便于观察
 * */
-sealed class StateData<T>(
-    val data: T? = null,
-    val errorMessage: String? = null
-
-) {
-    class Success<T>(data: T): StateData<T>(data)
-    class Error<T>(data: T? = null, errorMessage: String?): StateData<T>(data,errorMessage)
-    class Loading<T>(data: T? = null, errorMessage: String? = null): StateData<T>(data, errorMessage)
-    inline fun whenSuccessOrError(blockSuccess: (T?) -> Unit, blockError: (StateData<T>) -> Unit){
+sealed class DataResult<T>{
+    data class Success<T>(val data: T): DataResult<T>()
+    data class Error<T>(val data: T? = null, val errorMessage: String?): DataResult<T>()
+    data class Loading<T>(val data: T? = null, val errorMessage: String? = null): DataResult<T>()
+    inline fun whenSuccessOrError(blockSuccess: (T?) -> Unit, blockError: (DataResult<T>) -> Unit){
         when(this){
             is Success -> blockSuccess(data)
             is Error -> {
@@ -25,7 +22,6 @@ sealed class StateData<T>(
                 Log.e("StateData.Error message", this.errorMessage!!)
             }
         }
-
     }
 
     inline fun whenSuccessAndDefaultErrorDeal(blockSuccess: (T?) -> Unit){
@@ -33,7 +29,7 @@ sealed class StateData<T>(
             is Success -> blockSuccess(data)
             is Error -> {
                 Log.e("StateData.Error message", this.errorMessage!!)
-                Toast.makeText(App.context, "error: ${this.errorMessage!!}", Toast.LENGTH_LONG).show()
+                Toast.makeText(App.context, "error: ${this.errorMessage}", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -46,7 +42,7 @@ sealed class StateData<T>(
         }
     }
 
-    inline fun whenError(block: (StateData<T>) -> Unit){
+    inline fun whenError(block: (DataResult<T>) -> Unit){
         if(this is Error){
             block(this)
         }
@@ -59,3 +55,4 @@ sealed class StateData<T>(
     }
 
 }
+

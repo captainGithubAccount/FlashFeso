@@ -1,47 +1,26 @@
 package com.example.flashfeso_lwj.flashfeso.entity
 
-import com.example.flashfeso_lwj.common.base.StateData
+import com.example.flashfeso_lwj.common.base.DataResult
 
 data class VersionResponse(
     val code: Int,
     val data: VersionEntity?,
     val msg: String
 ){
-    fun getStateData(): StateData<VersionEntity>{
+    fun getDataResult(): DataResult<VersionEntity> {
         return if(this.code == 200 && this.data != null){
-            StateData.Success(data)
+            DataResult.Success(data)
         }else if(this.code != 200){
-            StateData.Error(errorMessage = "返回码为${code}")
+            DataResult.Error(errorMessage = "返回码为${code}")
         }else{
-            StateData.Error(errorMessage = "返回的数据为null")
+            DataResult.Error(errorMessage = "返回的数据为null")
         }
-
         /*when(this.code){
             200 -> StateData.Success(data)
             else -> StateData.Error(errorMessage = "返回码为${code}")
         }*/
     }
 }
-
-data class Response<T>(
-    val code: Int,
-    val data: T?
-)
-
-
-
-interface GetStateData<T>{
-    fun getStateData(data: Response<T>): StateData<T>{
-        return if(data.code == 200 && data.data != null){
-            StateData.Success(data.data)
-        }else if(data.code != 200){
-            StateData.Error(errorMessage = "返回码为${data.code}")
-        }else{
-            StateData.Error(errorMessage = "返回的数据为null")
-        }
-    }
-}
-
 
 data class VersionEntity(
     val VId: String,
