@@ -9,6 +9,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseDbActivity<ActivityMainBinding>(){
+
+
     override fun ActivityMainBinding.initView() {
 
         binding.tvTest.setOnClickListener {
@@ -17,6 +19,7 @@ class MainActivity : BaseDbActivity<ActivityMainBinding>(){
         }
 
     }
+
 
     override fun observe() {
 

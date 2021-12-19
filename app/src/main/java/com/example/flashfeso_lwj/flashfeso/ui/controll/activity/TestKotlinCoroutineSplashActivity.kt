@@ -1,5 +1,7 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
 
+
+
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -30,20 +32,57 @@ import kotlin.coroutines.coroutineContext
 
 
 @AndroidEntryPoint
-class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
+class TestKotlinCoroutineSplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     private var mFirstClick: Long = 0
     private var mSecondClick: Long = 0
+
+    //测试job是否取消
+    lateinit var job: Job
+
     @Inject
     lateinit var mSharedPreferenceUtils: SharedPreferenceUtils
     @Inject
     lateinit var mSplashPermissionDialog: SplashPermissionDialog
 
     val splashViewModel: SplashViewModel by viewModels()
-//    方式二: 绑定生命周期
+    //    方式二: 绑定生命周期
     init{
         lifecycleScope.launchWhenCreated {
+
+            /*supervisorScope {
+                *//*launch {
+                    repeat(5){
+                        //delay(100)
+
+                        Log.d("test", "${test++}")
+                    }
+
+                }*//*
+                *//*launch {
+
+
+                    whenObserve()
+                }*//*
+                whenObserve()
+            }*/
+
+
             whenObserve()
+            /*Log.d("---before delay", "job.isCancelled: ${job.isCancelled.toString()} -- job.isActive: ${job.isActive.toString()} -- job.isCompleted:${job.isCompleted} ")
+            delay(3000)
+            Log.d("---after delay", "job.isCancelled: ${job.isCancelled.toString()} -- job.isActive: ${job.isActive.toString()} -- job.isCompleted:${job.isCompleted} ")*/
+
         }
+
+    }
+
+    //todo test
+    override fun onDestroy() {
+        super.onDestroy()
+        //todo 测试job是否取消
+        //job.cancel()
+
+        Log.d("---job is canceld", "job.isCancelled: ${job.isCancelled.toString()} -- job.isActive: ${job.isActive.toString()} -- job.isCompleted:${job.isCompleted} ")
 
     }
 
@@ -53,18 +92,33 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
         //第二次启动直接启动MainActivity
         if (!this.isTaskRoot)
             finish()
+//        方式一: 绑定生命周期
+        /*observeWhenCreated {
+            whenObserve()
+        }*/
+
         //whenObserve()
         initEvent()
     }
 
-    suspend fun observeWhenCreated(block: () -> Unit) = lifecycleScope.launchWhenCreated {
+    //todo 该方法测试中, 意图给协程与生命周期关联
+    fun observeWhenCreated(block: () -> Unit) = lifecycleScope.launchWhenCreated {
         block.invoke()
     }
 
+    //todo test
+    var test = 0
     private suspend fun whenObserve() {
         //数据带状态的实现
         splashViewModel.dataLiveData.observe(this, Observer { statedata ->
             statedata.whenSuccessAndDefaultErrorDeal { versionData ->
+                if(versionData != null){
+
+                    Log.d("first data", versionData.toString())
+                }else{
+                    Log.d("first data", "null")
+
+                }
                 versionData?.let {
                     if (!StringUtils.isEmpty(versionData.VId)) {
                         if (versionData.VId.toLong() > BuildConfig.VERSION_CODE) {
@@ -100,14 +154,59 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                             }
                         } else {
                             jumpToMainActivity()
-                            //finish()
+                            //todo 测试job是否取消
+                            finish()
                         }
                     } else {
                         jumpToMainActivity()
                     }
                 }
             }
+
         })
+
+        //数据不带状态的实现
+        /*splashViewModel.versionLiveData.observe(this, Observer{ versionResponse ->
+            Log.d("SplashActivity",versionResponse.data.toString())
+            if(versionResponse.code == 200 && versionResponse.data != null && !StringUtils.isEmpty(versionResponse.data.VId)){
+                versionResponse.data.let{ data ->
+                    if(data.VId.toLong() > BuildConfig.VERSION_CODE){
+                        if(data.isUpdate){
+                            CommonDialog(resources.getString(R.string.new_version_found))
+                                .apply {
+                                    mCommonDialogEvent = object : CommonDialogEvent{
+                                        override fun cancelListener() {
+                                            dismiss()
+                                            finish()
+                                        }
+                                        override fun confirmListener() {
+                                            openBrowser(requireActivity(), data.downloadURl)
+                                        }
+                                    }
+                                }.show(supportFragmentManager, "CommonDialogFragment")
+                             //commonDialog.show(supportFragmentManager, "CommonDialogFragment")
+                        }else{
+                            CommonDialog(resources.getString(R.string.new_version_found))
+                                .apply {
+                                    mCommonDialogEvent = object : CommonDialogEvent{
+                                        override fun cancelListener() {
+                                            jumpToMainActivity()
+                                        }
+                                        override fun confirmListener() {
+                                            openBrowser(requireActivity(), data.downloadURl)
+                                        }
+                                    }
+                                }
+                                .show(supportFragmentManager, "CommonDialogFragment2")
+                        }
+                    }else{
+                        jumpToMainActivity()
+                    }
+                }
+            }else{
+                jumpToMainActivity()
+            }
+        })*/
     }
 
     /**
@@ -137,11 +236,14 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
         }*/
     }
 
+    //todo 待实现Main
     private fun jumpToMainActivity() {
+
+        Log.d("---", "test")
         mFirstClick = mSecondClick
         mSecondClick = System.currentTimeMillis()
         if (mSecondClick - mFirstClick > Constants.DOUBLE_CLICK_TIME) {
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@TestKotlinCoroutineSplashActivity, MainActivity::class.java))
         }
 
     }
@@ -150,18 +252,32 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
         mSplashPermissionDialog.mSplashPermissionDialogEvent = this
     }
 
+
+    override fun onStart() {
+        super.onStart()
+        //注意这里不能在onStart中执行afterInit方法, 否则可能不能获取到数据, 导致检查完权限后无法进入下一个界面
+        //onStart到onResume。这个阶段，Activity被创建，布局已加载，但是界面还没绘制，可以说界面都不存在(也就是布局有了还没开始绘制)
+        //
+        //个人感觉原因: 当网络获取数据较快时候, 如在绘制之前已经拿到了数据, 这个时候进入观察中, 但是无法绘制(具体绘制要在执行onResume方法时)
+        //所以第一次无法弹出观察中的方法里面的dialog, 但是这个时候再次运行就可以看到dialog了
+        //afterInit()
+    }
+
     override fun onResume() {
         super.onResume()
         afterInit()
     }
 
     private fun afterInit() {
+        //todo(为了测试用的, 每次初始化将sp值改为true, 这样每次都是第一次登录)
+        //mSharedPreferenceUtils.mSharedPreferences.edit().putBoolean("isFirstLuanch", true).apply()
+
         if (mSharedPreferenceUtils.isFirstLuanch()) {
             //弹出对话框
             mSplashPermissionDialog.show(supportFragmentManager, "SplashPermissionDialog")
         } else {
             //检查权限
-            checkAppPermission(this@SplashActivity)
+            checkAppPermission(this@TestKotlinCoroutineSplashActivity)
         }
     }
 
@@ -206,7 +322,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
         //点击对话框确定按钮, 打开系统请求权限对话框
         mSharedPreferenceUtils.setNotFirstLuanch()
         mSplashPermissionDialog.dismiss()
-        checkAppPermission(this@SplashActivity)
+        checkAppPermission(this@TestKotlinCoroutineSplashActivity)
     }
 
 
@@ -258,6 +374,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
             } else {
                 //适配小米手机, 但是小米出现情况很少可忽略
                 //checkXiaoMiSms()
+
                 getVersionLatestData()
             }
         } catch (e: Exception) {
@@ -266,6 +383,10 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     }
 
     private fun getVersionLatestData() {
+        //没有状态的livedata数据通数据
+        //splashViewModel.query()
+
+        //有状态的livedata数据通数据
         splashViewModel.query2()
     }
 

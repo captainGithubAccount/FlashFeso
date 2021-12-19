@@ -2,11 +2,13 @@ package com.example.flashfeso_lwj.flashfeso.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 
 
 import androidx.viewbinding.ViewBinding
 import com.example.flashfeso_lwj.GetBinding
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
+import kotlinx.coroutines.supervisorScope
 
 
 abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T> {
@@ -21,6 +23,35 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
         afterInitView()
     }
 
+    protected open suspend fun observeWhenCreatedWithLifecycle(){}
+
+    protected open suspend fun observeWhenStartedWithLifecycle(){}
+
+    protected open suspend fun observeWhenResumedWithLifecycle(){}
+
+    init{
+        lifecycleScope.launchWhenCreated {
+            observeWhenCreatedWithLifecycle()
+        }
+
+        lifecycleScope.launchWhenStarted {
+            observeWhenStartedWithLifecycle()
+        }
+
+        lifecycleScope.launchWhenResumed {
+            observeWhenResumedWithLifecycle()
+        }
+
+        /*lifecycleScope.launchWhenCreated {
+            supervisorScope {
+            //出现异常不关闭其他子协程, 注意在作用域里面抛异常, 子协程也会停止运行, 所以要在作用域里面开辟一个
+            //新的协程, 如lanch启动的协程, 这样当该子协程出异常不会关闭其他子协程
+                observeWhenCreatedWithLifecycle()
+            }
+        }*/
+    }
+
+
     //两次点击的时间
     protected fun isClickUseful(): Boolean{
         mFirstClickTime = mSecondClickTime
@@ -32,12 +63,13 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
         super.onCreate(savedInstanceState)
         beforeCreateView()
         observe()
+
         _binding = getBindingByReflex(layoutInflater)
         setContentView(binding.root)
         binding.initView()
     }
 
-    abstract fun observe()
+    protected abstract fun observe()
 
     abstract fun T.initView()
 

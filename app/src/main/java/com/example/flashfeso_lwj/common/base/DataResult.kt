@@ -8,7 +8,8 @@ import com.example.flashfeso_lwj.App
 * create time: 12.16
 * autor: lwj
 * create reason: 每次网络数据都存在错误和成功状态, 每次都需要建多个livedata去返回错误信息, 而且当再添加其他状态又要多创建livedata
-* alter time: 12.18将原有构造方法和参数删除, 使的看起来更像枚举类, 便于观察
+* alter time: 12.18
+* alter content: 将原有构造方法和参数删除, 使的看起来更像枚举类, 便于观察
 * */
 sealed class DataResult<T>{
     data class Success<T>(val data: T): DataResult<T>()
