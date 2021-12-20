@@ -1,6 +1,6 @@
 package com.example.flashfeso_lwj.flashfeso.entity
 
-import com.example.flashfeso_lwj.common.base.DataResult
+import com.example.flashfeso_lwj.common.entity.DataResult
 
 data class VersionResponse(
     val code: Int,

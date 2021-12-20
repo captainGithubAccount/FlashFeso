@@ -1,13 +1,11 @@
 package com.example.flashfeso_lwj.flashfeso.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.flashfeso_lwj.flashfeso.entity.VersionEntity
-import com.example.flashfeso_lwj.flashfeso.repository.SplashRepository
+import com.example.flashfeso_lwj.flashfeso.repository.SplashVersionRepository
 
 class SplashViewModel @ViewModelInject constructor(
-    private val splashRepository: SplashRepository
+    private val splashRepository: SplashVersionRepository
 ) : ViewModel() {
 
     //不带状态的数据实现方式

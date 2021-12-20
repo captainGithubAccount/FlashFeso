@@ -3,8 +3,8 @@ package com.example.flashfeso_lwj.flashfeso.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.flashfeso_lwj.common.base.DataResult
-import com.example.flashfeso_lwj.flashfeso.api.data.service.SplashService
+import com.example.flashfeso_lwj.common.entity.DataResult
+import com.example.flashfeso_lwj.flashfeso.api.data.service.SplashVersionService
 import com.example.flashfeso_lwj.flashfeso.entity.VersionEntity
 import com.example.flashfeso_lwj.flashfeso.entity.VersionResponse
 import com.example.flashfeso_lwj.flashfeso.utils.Constants.TAG_ERROR
@@ -15,8 +15,8 @@ import java.lang.Exception
 import javax.inject.Inject
 
 
-class SplashRepository @Inject constructor(
-    private val splashService: SplashService,
+class SplashVersionRepository @Inject constructor(
+    private val splashService: SplashVersionService,
 ): CoroutineScope by CoroutineScope(Dispatchers.IO) {
     //todo 不带状态的数据实现方式
     private val versionErrorLiveData = MutableLiveData<String>()
@@ -38,8 +38,8 @@ class SplashRepository @Inject constructor(
 
 
     //todo 带有状态的数据实现方式(处理网络接口需要对错误信息捕获)
-    val dataLiveData = MutableLiveData<DataResult<VersionEntity>>()
-    fun getDataLiveData(): LiveData<DataResult<VersionEntity>> = dataLiveData
+    private val dataLiveData = MutableLiveData<DataResult<VersionEntity>>()
+     fun getDataLiveData(): LiveData<DataResult<VersionEntity>> = dataLiveData
     fun query2() = launch {
         try{
             getDataFromService()
@@ -51,12 +51,12 @@ class SplashRepository @Inject constructor(
     }
 
     suspend fun getDataFromService(){
-        val stateData = splashService.getVersionLatest().getDataResult()
-        stateData.whenSuccess {
+        val dataResult = splashService.getVersionLatest().getDataResult()
+        dataResult.whenSuccess {
             it?.run{dataLiveData.postValue(DataResult.Success(it))}
         }
 
-        stateData.whenError {
+        dataResult.whenError {
             dataLiveData.postValue(it)
         }
     }

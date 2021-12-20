@@ -1,4 +1,4 @@
-package com.example.flashfeso_lwj.common.base
+package com.example.flashfeso_lwj.common.entity
 
 import android.util.Log
 import android.widget.Toast
@@ -34,6 +34,13 @@ sealed class DataResult<T>{
             }
         }
 
+    }
+
+    suspend fun whenSuccessAndSuspend(block: suspend (T?) -> Unit){
+        //注意这里的block里代码应该是不耗时的
+        if(this is Success){
+            block(data)
+        }
     }
 
     inline fun whenSuccess(block: (T?) -> Unit){

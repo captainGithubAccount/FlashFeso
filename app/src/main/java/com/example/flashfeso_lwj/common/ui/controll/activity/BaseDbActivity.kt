@@ -1,4 +1,4 @@
-package com.example.flashfeso_lwj.flashfeso.base
+package com.example.flashfeso_lwj.common.ui.controll.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.example.flashfeso_lwj.GetBinding
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
-import kotlinx.coroutines.supervisorScope
 
 
 abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T> {

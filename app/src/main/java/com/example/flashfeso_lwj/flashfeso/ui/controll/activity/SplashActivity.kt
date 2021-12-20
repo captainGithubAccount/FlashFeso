@@ -7,8 +7,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -26,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import java.lang.Exception
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 
 @AndroidEntryPoint
@@ -38,7 +35,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     @Inject
     lateinit var mSplashPermissionDialog: SplashPermissionDialog
 
-    val splashViewModel: SplashViewModel by viewModels()
+    val mSplashViewModel: SplashViewModel by viewModels()
 //    方式二: 绑定生命周期
     init{
         lifecycleScope.launchWhenCreated {
@@ -63,7 +60,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
 
     private suspend fun whenObserve() {
         //数据带状态的实现
-        splashViewModel.dataLiveData.observe(this, Observer { statedata ->
+        mSplashViewModel.dataLiveData.observe(this, Observer { statedata ->
             statedata.whenSuccessAndDefaultErrorDeal { versionData ->
                 versionData?.let {
                     if (!StringUtils.isEmpty(versionData.VId)) {
@@ -266,7 +263,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     }
 
     private fun getVersionLatestData() {
-        splashViewModel.query2()
+        mSplashViewModel.query2()
     }
 
 
