@@ -8,6 +8,7 @@ import dagger.hilt.android.HiltAndroidApp
 class App: Application() {
 
     companion object{
+        val ISDEBUG = true
         var instance: App? = null
 
         lateinit var context: Context

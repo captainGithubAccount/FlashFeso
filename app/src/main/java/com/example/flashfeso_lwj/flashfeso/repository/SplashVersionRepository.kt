@@ -3,6 +3,7 @@ package com.example.flashfeso_lwj.flashfeso.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.flashfeso_lwj.App
 import com.example.flashfeso_lwj.common.entity.DataResult
 import com.example.flashfeso_lwj.flashfeso.api.data.service.SplashVersionService
 import com.example.flashfeso_lwj.flashfeso.entity.VersionEntity
@@ -28,7 +29,7 @@ class SplashVersionRepository @Inject constructor(
             val versionResponse = splashService.getVersionLatest()
             versionLiveData.postValue(versionResponse)
         }catch (e: Exception){
-            Log.e(TAG_ERROR,Log.getStackTraceString(e))
+            if(App.ISDEBUG)Log.e(TAG_ERROR,Log.getStackTraceString(e))
             versionErrorLiveData.postValue(e.message)
             e.printStackTrace()
         }
@@ -44,7 +45,7 @@ class SplashVersionRepository @Inject constructor(
         try{
             getDataFromService()
         }catch (e: Exception){
-            Log.e(TAG_ERROR,Log.getStackTraceString(e))
+            if(App.ISDEBUG)Log.e(TAG_ERROR,Log.getStackTraceString(e))
             dataLiveData.postValue(DataResult.Error(errorMessage = e.message))
             e.printStackTrace()
         }

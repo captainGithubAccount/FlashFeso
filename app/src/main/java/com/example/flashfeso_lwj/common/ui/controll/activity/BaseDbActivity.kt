@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.example.flashfeso_lwj.GetBinding
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
+import kotlinx.coroutines.launch
 
 
 abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T> {
@@ -28,7 +29,14 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
 
     protected open suspend fun observeWhenResumedWithLifecycle(){}
 
+
     init{
+        /*lifecycleScope.launchWhenCreated {
+            fun observeWhenCreatedWithOpenScope(block: () -> Unit) = launch {
+                block.invoke()
+            }
+        }*/
+
         lifecycleScope.launchWhenCreated {
             observeWhenCreatedWithLifecycle()
         }

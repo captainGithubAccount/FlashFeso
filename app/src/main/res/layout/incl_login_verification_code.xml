@@ -100,7 +100,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/yzm_privacy_img"
+            android:id="@+id/iv_login_privacy_img"
             android:layout_width="@dimen/dp_32"
             android:layout_height="@dimen/dp_22"
             android:paddingLeft="@dimen/dp_4"
@@ -118,7 +118,7 @@
             android:textSize="@dimen/sp_13" />
 
         <TextView
-            android:id="@+id/yzm_privacy"
+            android:id="@+id/tv_login_privacy_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"

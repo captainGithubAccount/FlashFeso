@@ -8,8 +8,10 @@ import androidx.fragment.app.DialogFragment
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.databinding.DialogSplashBinding
 import com.example.flashfeso_lwj.flashfeso.event.SplashPermissionDialogEvent
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SplashPermissionDialog @Inject constructor() : DialogFragment() {
     private lateinit var _binding: DialogSplashBinding
     val binding get() = _binding

@@ -15,20 +15,28 @@
 
     </style>
 
-    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- base: App 色调颜色主题 -->
+    <style name="AppBaseColorTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/teal_200</item>
         <item name="colorPrimaryDark">@color/teal_200</item>
         <item name="colorAccent">@color/teal_200</item>
     </style>
 
-    <style name="SplashTheme" parent="BaseTheme">
+    <!-- base: App 无状态栏主题 -->
+    <style name="AppBaseNoBarTheme" parent="AppBaseColorTheme">
+    </style>
+
+    <!-- splash theme-->
+    <style name="SplashTheme" parent="AppBaseColorTheme">
+        <item name="android:windowIsTranslucent">false</item><!--窗体是否半透明-->
+        <item name="android:windowDisablePreview">true</item><!--详情见我的博客, 大概就是去掉启动后的白屏-->
         <item name="android:windowFullscreen">true</item>
-        <item name = "android:windowBackground">@drawable/layer_list_bg_splash</item>
+        <item name = "android:windowBackground">@drawable/layer_list_bg_splash</item><!--Splash背景图片-->
     </style>
 
 
     <!--Theme_AppCompat_Light_Dialog_Alert-->
-    <style name="StyleCommonMultiDialog" parent="BaseTheme">
+    <style name="StyleCommonMultiDialog" parent="AppBaseColorTheme">
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFrame">@null</item>
@@ -38,7 +46,7 @@
     </style>
 
 
-    <!--  进度对话框(SimpleProgresssDialog)w样式(转圈圈) -->
+    <!--  进度对话框(SimpleProgresssDialog)样式(转圈圈) -->
     <style name="sp_simple_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>

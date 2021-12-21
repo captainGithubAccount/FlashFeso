@@ -3,6 +3,8 @@ package com.example.flashfeso_lwj.common.entity
 import android.util.Log
 import android.widget.Toast
 import com.example.flashfeso_lwj.App
+import com.example.flashfeso_lwj.flashfeso.utils.Constants
+import com.example.flashfeso_lwj.flashfeso.utils.Constants.TAG_ERROR
 
 /*
 * create time: 12.16
@@ -20,7 +22,7 @@ sealed class DataResult<T>{
             is Success -> blockSuccess(data)
             is Error -> {
                 blockError(this)
-                Log.e("StateData.Error message", this.errorMessage!!)
+                if(App.ISDEBUG)Log.e(TAG_ERROR, this.errorMessage!!)
             }
         }
     }
@@ -29,14 +31,14 @@ sealed class DataResult<T>{
         when(this){
             is Success -> blockSuccess(data)
             is Error -> {
-                Log.e("StateData.Error message", this.errorMessage!!)
+                if(App.ISDEBUG)Log.e(TAG_ERROR, this.errorMessage!!)
                 Toast.makeText(App.context, "error: ${this.errorMessage}", Toast.LENGTH_LONG).show()
             }
         }
 
     }
 
-    suspend fun whenSuccessAndSuspend(block: suspend (T?) -> Unit){
+    suspend inline fun whenSuccessAndSuspend(block: suspend (T?) -> Unit){
         //注意这里的block里代码应该是不耗时的
         if(this is Success){
             block(data)

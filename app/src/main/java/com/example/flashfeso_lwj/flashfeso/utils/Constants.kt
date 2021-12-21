@@ -5,7 +5,7 @@ package com.example.flashfeso_lwj.flashfeso.utils
  * Create by 19/04/08
  */
 object Constants {
-    const val TAG_ERROR = "NET_EXCEPTION"
+    const val TAG_ERROR = "TAG:NET_EXCEPTION"
 
     //debug开关
     const val debug = false

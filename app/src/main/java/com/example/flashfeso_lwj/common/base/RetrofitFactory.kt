@@ -1,4 +1,4 @@
-package com.example.flashfeso_lwj.flashfeso.base
+package com.example.flashfeso_lwj.common.base
 
 import com.example.flashfeso_lwj.flashfeso.utils.BASE_URL
 import okhttp3.OkHttpClient

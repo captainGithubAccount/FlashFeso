@@ -24,7 +24,6 @@ class HaveMaxHeightNestedScrollView @JvmOverloads constructor(
 
         //设置最大高度400dp
         val height = MeasureSpec.makeMeasureSpec(dip2px(400), MeasureSpec.AT_MOST)
-        Log.d("----", height.toString())
         super.onMeasure(widthMeasureSpec, height)
     }
 

@@ -15,6 +15,7 @@
     <string name="login_phone_string8" translatable="false">《Avisos de Privacidad》</string>
     <string name="enter_phone_number" translatable="false">Introduzca el número de teléfono correcto</string>
     <string name="read_privacidad" translatable="false">Por favor, compruebe el Acuerdo de privacidad</string>
+    <string name="login_verification_code_time" translatable="false">%1$ds</string>
 
 
     <!--请选择浏览器-->

@@ -6,6 +6,9 @@ import retrofit2.http.POST
 
 interface LoginYzmService {
 
+    /**
+     * 发送验证码
+     */
     @POST("mexico/sendSms")
     suspend fun getVerificationCode(
         @Body map: HashMap<String, Any>
