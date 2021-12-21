@@ -35,7 +35,7 @@ class LoginUserInfoRepository @Inject constructor(
             it?.let{_dataLiveData.postValue(DataResult.Success(it))}
         }
         dataResult.whenError {
-            _dataLiveData.postValue(DataResult.Error(errorMessage = (it as DataResult.Error).errorMessage))
+            _dataLiveData.postValue(it)
         }
     }
 
