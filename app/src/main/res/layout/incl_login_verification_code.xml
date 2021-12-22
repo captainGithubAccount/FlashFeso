@@ -49,6 +49,7 @@
         android:textColor="@color/color_333333"
         android:textSize="@dimen/sp_30"
         tools:text="989895"
+        android:inputType="number"
         android:layout_width="@dimen/dp_290"
         android:layout_height="@dimen/dp_50" />
 
