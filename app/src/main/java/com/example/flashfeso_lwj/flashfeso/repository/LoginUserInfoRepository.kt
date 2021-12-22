@@ -18,7 +18,7 @@ class LoginUserInfoRepository @Inject constructor(
     private var _dataLiveData = MutableLiveData<DataResult<UserInfoEntity>>()
      fun getDataLiveData(): LiveData<DataResult<UserInfoEntity>> = _dataLiveData
 
-    fun query(map: HashMap<String, Any>){
+    fun query(map: HashMap<String, Any?>){
 
         launch {
             try {
@@ -29,10 +29,10 @@ class LoginUserInfoRepository @Inject constructor(
             }
         }
     }
-    private suspend fun getDataFromService(map: HashMap<String, Any>){
+    private suspend fun getDataFromService(map: HashMap<String, Any?>){
         val dataResult = service.getUserInfoDetail(map).getDataResult()
-        dataResult.whenSuccess {
-            it?.let{_dataLiveData.postValue(DataResult.Success(it))}
+        dataResult.whenSuccessResponse {
+            it?.let{_dataLiveData.postValue(it)}
         }
         dataResult.whenError {
             _dataLiveData.postValue(it)

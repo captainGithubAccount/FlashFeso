@@ -17,7 +17,7 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     val loginUserLiveData = loginUserInfoRepository.getDataLiveData()
-    fun queryLoginUserInfo(map: HashMap<String, Any>){
+    fun queryLoginUserInfo(map: HashMap<String, Any?>){
         loginUserInfoRepository.query(map)
     }
 

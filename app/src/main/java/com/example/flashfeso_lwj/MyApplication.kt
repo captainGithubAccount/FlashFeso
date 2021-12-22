@@ -4,6 +4,7 @@ package com.example.flashfeso_lwj
 import android.app.Application
 import android.util.Log
 import com.adjust.sdk.Adjust
+import com.example.flashfeso_lwj.flashfeso.utils.Constants
 
 class MyApplication : Application() {
     override fun onCreate() {

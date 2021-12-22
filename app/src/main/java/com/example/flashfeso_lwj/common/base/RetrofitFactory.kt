@@ -1,6 +1,6 @@
 package com.example.flashfeso_lwj.common.base
 
-import com.example.flashfeso_lwj.flashfeso.utils.BASE_URL
+import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

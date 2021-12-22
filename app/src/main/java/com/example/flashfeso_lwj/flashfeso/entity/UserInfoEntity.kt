@@ -9,7 +9,7 @@ data class UserInfoResponse(
 ){
     fun getDataResult(): DataResult<UserInfoEntity>{
         return if(code == 200 && data != null){
-            DataResult.Success(data)
+            DataResult.Success(data, msg)
         }else if(code != 200){
             DataResult.Error(errorMessage = "返回码为${code}")
         }else{

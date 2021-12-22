@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@android:id/background">
+        <!--进度条背景颜色-->
+        <shape>
+            <corners android:radius="@dimen/dp_2"/>
+            <gradient
+                android:angle="0"
+                android:startColor="@color/color_EFEFEF"
+                android:endColor="@color/color_EFEFEF"/>
+        </shape>
+    </item>
+
+    <!--进度条缓冲条背景颜色, 如视频实时进度前会有个淡的颜色表示缓冲进度-->
+    <!--当没有缓冲条的时候, 缓冲条的颜色和实际颜色一样-->
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+        <shape>
+            <corners android:radius="@dimen/dp_2"/>
+            <gradient
+                android:angle="0"
+                android:startColor="@color/color_FEBC20"
+                android:endColor="@color/color_FEBC20"/>
+        </shape>
+        </clip>
+    </item>
+
+    <item android:id="@android:id/progress">
+        <clip>
+        <shape>
+            <corners android:radius="@dimen/dp_2"/>
+            <gradient
+                android:angle="0"
+                android:startColor="@color/color_FEBC20"
+                android:endColor = "@color/color_FEBC20"/>
+        </shape>
+        </clip>
+
+    </item>
+
+</layer-list>

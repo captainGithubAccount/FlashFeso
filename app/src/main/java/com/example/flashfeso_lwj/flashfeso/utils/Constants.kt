@@ -7,8 +7,11 @@ package com.example.flashfeso_lwj.flashfeso.utils
 object Constants {
     const val TAG_ERROR = "TAG:NET_EXCEPTION"
 
+    //
+    const val ISLOG = true
+
     //debug开关
-    const val debug = false
+    const val debug = true
 
     //鉴权失败
     const val AUTHORITY_FALSE = "{\"code\":\"999\",\"msg\":\"鉴权失败\"}"

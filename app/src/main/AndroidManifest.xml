@@ -10,11 +10,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    <!--adjust-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /><!-- adjust配置 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /><!-- adjust配置 -->
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -32,6 +32,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppBaseColorTheme">
         <activity
+            android:name=".flashfeso.ui.controll.activity.LoginPrivacyDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".flashfeso.ui.controll.activity.LoginActivity"
             android:exported="false" />
         <activity
@@ -47,7 +50,17 @@
         </activity>
         <activity
             android:name=".flashfeso.ui.controll.activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
+
+        <!-- adjust配置 -->
+        <receiver
+            android:name="com.adjust.sdk.AdjustReferrerReceiver"
+            android:permission="android.permission.INSTALL_PACKAGES"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

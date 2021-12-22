@@ -31,7 +31,7 @@
         <item name="android:windowIsTranslucent">false</item><!--窗体是否半透明-->
         <item name="android:windowDisablePreview">true</item><!--详情见我的博客, 大概就是去掉启动后的白屏-->
         <item name="android:windowFullscreen">true</item>
-        <item name = "android:windowBackground">@drawable/layer_list_bg_splash</item><!--Splash背景图片-->
+        <item name = "android:windowBackground">@drawable/layer_splash_bg</item><!--Splash背景图片-->
     </style>
 
 

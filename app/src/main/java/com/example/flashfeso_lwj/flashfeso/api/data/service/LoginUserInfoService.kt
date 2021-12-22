@@ -13,6 +13,6 @@ interface LoginUserInfoService {
      */
     @POST("mexico/login")
     suspend fun getUserInfoDetail(
-        @Body map: HashMap<String, Any>
+        @Body map: HashMap<String, Any?>
     ): UserInfoResponse
 }

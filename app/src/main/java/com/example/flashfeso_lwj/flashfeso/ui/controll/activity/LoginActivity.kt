@@ -1,5 +1,6 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
 
+import android.content.Intent
 import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,12 +10,16 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.adjust.sdk.Adjust
+import com.adjust.sdk.AdjustAttribution
 import com.example.flashfeso_lwj.App
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.common.entity.DataResult
 import com.example.flashfeso_lwj.common.ui.controll.activity.BasePageStyleActivity
+import com.example.flashfeso_lwj.common.utils.InfoUtil
 import com.example.flashfeso_lwj.common.utils.SimpleProgressDialogUtil
 import com.example.flashfeso_lwj.databinding.ActivityLoginBinding
+import com.example.flashfeso_lwj.flashfeso.utils.Constants
 import com.example.flashfeso_lwj.flashfeso.utils.StringUtils
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +29,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
     val mLoginViewModel: LoginViewModel by viewModels()
+    private lateinit var trackerName: String
+    private lateinit var adid: String
+    @Inject lateinit var mInfoUtil: InfoUtil
+
 
     @Inject
     @JvmField
@@ -33,6 +42,39 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
     private lateinit var mEnterPhoneNumber: String
 
     override fun observe() {
+        mLoginViewModel.loginUserLiveData.observe(this, Observer {
+            it.whenSuccessResponse {  dr ->
+                val dataResult = dr as DataResult.Success
+                mSimpleProgressDialogUtil?.closeHUD()
+                if (!StringUtils.isEmpty(dataResult.data?.phone)) {
+                    mInfoUtil.setAccount(dataResult.data?.phone)
+                } else {
+                    mInfoUtil.setAccount("")
+                }
+
+                if (!StringUtils.isEmpty(dataResult.data?.token)) {
+                    mInfoUtil.setToken(dataResult.data?.token)
+                } else {
+                    mInfoUtil.setToken("")
+                }
+
+                if (!StringUtils.isEmpty(dataResult.data?.userId.toString())) {
+                    mInfoUtil.setUserId(dataResult.data?.userId.toString())
+                } else {
+                    mInfoUtil.setUserId("")
+                }
+
+                finish()
+                Toast.makeText(this@LoginActivity, dataResult.successMessagle, Toast.LENGTH_SHORT).show()
+            }
+
+            it.whenError {
+                binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.GONE
+                binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.VISIBLE
+                mSimpleProgressDialogUtil?.closeHUD()
+            }
+        })
+
         mLoginViewModel.loginYzmLiveData.observe(this@LoginActivity, Observer {
             it.whenSuccess {
                 mSimpleProgressDialogUtil?.closeHUD()
@@ -55,13 +97,11 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                     }
                 }.start()
                 binding.inclLoginVerificationCode.etLoginVerificationCode.requestFocus()
-
-
             }
             it.whenError {
                 binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.GONE
                 binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.VISIBLE
-                if(App.ISDEBUG)Log.d("TAG:yzm error mes", "ERROR: ${(it as DataResult.Error).errorMessage}")
+                if(Constants.ISLOG)Log.d("TAG:yzm error mes", "ERROR: ${(it as DataResult.Error).errorMessage}")
                 Toast.makeText(App.context, "ERROR: ${(it as DataResult.Error).errorMessage}", Toast.LENGTH_LONG).show()
                 mSimpleProgressDialogUtil?.closeHUD()
             }
@@ -74,6 +114,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
         super.onDestroy()
         //原项目工具类有内存泄漏风险, 但是目前这种方式通过installIn(application)中实现单例, 仍然会有内存泄漏, 需要置null解决内存泄漏
         mSimpleProgressDialogUtil = null
+
     }
 
     override fun onBackPressed() {
@@ -87,7 +128,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
     }
 
     override fun ActivityLoginBinding.initView() {
-        binding.inclLoginEnterTelephone.let { ll ->
+        inclLoginEnterTelephone.let { ll ->
             ll.etLoginPhoneNumber.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -102,9 +143,9 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                     mEnterPhoneNumber = p0.toString()
                     if (!StringUtils.isEmpty(mEnterPhoneNumber) && mEnterPhoneNumber.length == 10) {
                         if (StringUtils.isPhone(mEnterPhoneNumber)) {
-                            binding.inclLoginEnterTelephone.llLoginEnterTelephone.visibility =
+                            inclLoginEnterTelephone.llLoginEnterTelephone.visibility =
                                 View.GONE
-                            binding.inclLoginVerificationCode.llLoginVerificationCode.visibility =
+                            inclLoginVerificationCode.llLoginVerificationCode.visibility =
                                 View.VISIBLE
                             mIsYzmLayoutVisible = true
                             sendMs()
@@ -121,7 +162,8 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
         }
 
 
-        binding.inclLoginVerificationCode.let { ll ->
+
+        inclLoginVerificationCode.let { ll ->
             ll.tvLoginYzmSend.setOnClickListener {
                 /*mFirstClick = mSecoundClick
                 mSecoundClick = System.currentTimeMillis()
@@ -144,10 +186,10 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
 
                 override fun afterTextChanged(p0: Editable?) {
                     val verificationCode = p0.toString().trim()
-                    if(StringUtils.isEmpty(verificationCode) && verificationCode.length == 6){
+                    if(!StringUtils.isEmpty(verificationCode) && verificationCode.length == 6){
                         if(mIsAgreePrivacy){
                             //todo ---
-                            //userLogin()
+                            userLogin(verificationCode)
                         }else{
                             Toast.makeText(this@LoginActivity, resources.getString(R.string.read_privacidad), Toast.LENGTH_LONG).show()
                         }
@@ -161,10 +203,8 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
             ll.tvLoginPrivacyDetail.setOnClickListener {
                 if(isClickUseful()){
                     //跳转协议详情Atv界面
-                    //val intent = Intent(this, LoginPrivacyDetailActivity::class.java)
-                    /*startActivity(intent.apply{
-
-                    })*/
+                    val intent = Intent(this@LoginActivity, LoginPrivacyDetailActivity::class.java)
+                    startActivity(intent)
                 }
             }
 
@@ -174,19 +214,39 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                     (it as ImageView).setImageResource(R.drawable.icon_disagree)
                 }else{
                     mIsAgreePrivacy = true
-                    (it as ImageView).setImageResource(R.drawable.icon_disagree)
-                    val verificationCode = binding.inclLoginVerificationCode.etLoginVerificationCode.text.toString().trim()
-                    if(StringUtils.isEmpty(verificationCode) && verificationCode.length == 6){
+                    (it as ImageView).setImageResource(R.drawable.icon_agree)
+                    val verificationCode = inclLoginVerificationCode.etLoginVerificationCode.text.toString().trim()
+                    if(!StringUtils.isEmpty(verificationCode) && verificationCode.length == 6){
 
-                    //todo ---
-                    //userLogin()
+                    userLogin(ll.etLoginVerificationCode.text.toString().trim())
                     }
                 }
             }
-
-
-
         }
+    }
+
+    private fun userLogin(verificationCode: String){
+
+        mSimpleProgressDialogUtil?.showHUD(this, false)
+
+
+        //获取请求参数, 从Adjust获取
+        val attribution = Adjust.getAttribution()
+        if (attribution != null && !StringUtils.isEmpty(attribution.trackerName)) {
+            trackerName = attribution.trackerName
+        }
+        if (attribution != null && !StringUtils.isEmpty(attribution.adid)) {
+            adid = attribution.adid
+        }
+        val map = HashMap<String, Any?>()
+        map["me_phoneNumber"] = mEnterPhoneNumber
+        map["me_smsCode"] = verificationCode
+        map["me_regisChannel"] = trackerName
+        map["adid"] = adid
+        map["gps_adid"] = mInfoUtil.gpsAdid
+
+        if(Constants.ISLOG)Log.d("---------------", map.toString())
+        mLoginViewModel.queryLoginUserInfo(map)
 
 
 
@@ -209,6 +269,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
         mLoginViewModel.queryLoginYzm(map)
 
     }
+
 
 
 }
