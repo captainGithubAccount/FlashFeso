@@ -1,19 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".flashfeso.ui.controll.activity.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="跳转注册界面"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <RadioGroup
+        android:paddingTop="@dimen/dp_4"
+        android:paddingBottom="@dimen/dp_4"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="@color/color_FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50">
+
+
+        <RadioButton
+            android:id="@+id/rb_main_bottom_info"
+            android:gravity="center_horizontal"
+            android:textColor="@drawable/selector_main_bottom_navigation_text"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_main_bottom_navigation_img_info"
+            android:layout_weight="1"
+            android:text="@string/inicio"
+            android:layout_width="0dp"
+            android:textSize="@dimen/sp_12"
+            android:layout_height="match_parent"/>
+        <RadioButton
+            android:id="@+id/rb_main_bottom_me"
+            android:textSize="@dimen/sp_12"
+            android:drawableTop="@drawable/selector_main_bottom_navigation_img_me"
+            android:gravity="center_horizontal"
+            android:text="@string/mi_cuenta"
+            android:textColor="@drawable/selector_main_bottom_navigation_text"
+            android:button="@null"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
+    </RadioGroup>
+
+</LinearLayout>

@@ -14,13 +14,16 @@ import javax.inject.Inject
 
 @HiltAndroidApp
 class App: Application() {
+
+
     @Inject
     lateinit var mInfoUtil: InfoUtil
 
     companion object{
+        lateinit var context: Context
+
         var instance: App? = null
 
-        lateinit var context: Context
 
     }
 

@@ -2,6 +2,10 @@
     <string name="app_name">flashfeso_lwj</string>
     <string name="str_sharedpreference_key">App_SharedPreference_Key</string>
 
+    <!--MainActivity bottom navigation text-->
+    <string name="inicio" translatable="false">Inicio</string>
+    <string name="mi_cuenta" translatable="false">Mi Cuenta</string>
+
 
     <!--login-->
     <string name="login_phone_string1" translatable="false">Regístrate / Inicia sesión</string>

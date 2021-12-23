@@ -29,8 +29,8 @@ class LoginPrivacyDetailActivity : BasePageStyleActivity<ActivityLoginPrivacyDet
         }
     }
 
-    override fun afterInitView() {
-        super.afterInitView()
+    override fun afterBindView() {
+        super.afterBindView()
         binding.wvLoginPrivacyDetailContent.apply {
             binding.wvLoginPrivacyDetailContent.setInitialScale(50)//适应全屏  39适应竖屏    57适应横屏
         }.apply {

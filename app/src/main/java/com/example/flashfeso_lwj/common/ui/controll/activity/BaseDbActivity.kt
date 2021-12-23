@@ -8,7 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.example.flashfeso_lwj.GetBinding
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
-import kotlinx.coroutines.launch
 
 
 abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T> {
@@ -20,7 +19,7 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
 
     override fun onStart() {
         super.onStart()
-        afterInitView()
+
     }
 
     protected open suspend fun observeWhenCreatedWithLifecycle(){}
@@ -71,16 +70,26 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
         beforeCreateView()
         observe()
 
-        _binding = getBindingByReflex(layoutInflater)
+        _binding = getAtvOrFrgmBindingByReflex(layoutInflater)
+        afterBindView()
         setContentView(binding.root)
         binding.initView()
+        afterInitView(savedInstanceState)
     }
+
+
+    private fun afterInitView(savedInstanceState: Bundle?) {}
 
     protected abstract fun observe()
 
     abstract fun T.initView()
 
-    protected open fun afterInitView() {}
+    protected open fun afterBindView() {}
 
     protected open fun beforeCreateView() {}
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

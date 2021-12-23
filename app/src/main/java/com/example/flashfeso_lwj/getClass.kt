@@ -5,7 +5,7 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 interface GetBinding<T> {
-    fun getBindingByReflex(layoutInflater: LayoutInflater): T? {
+    fun getAtvOrFrgmBindingByReflex(layoutInflater: LayoutInflater): T? {
         val genericSuperclass: Type = javaClass.genericSuperclass
         if (genericSuperclass is ParameterizedType) {
             val type = genericSuperclass .actualTypeArguments[0] as Class<T>
