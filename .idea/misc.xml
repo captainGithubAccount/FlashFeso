@@ -30,6 +30,7 @@
         <entry key="app/src/main/res/layout/incl_login_enter_telephone.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/incl_login_verification_code.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/incl_main_inicio_features.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/incl_main_inicio_progress.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/incl_splash_dialog_permission_content.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/view_easyrcl_error.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/view_easyrcl_progress.xml" value="0.28229166666666666" />
