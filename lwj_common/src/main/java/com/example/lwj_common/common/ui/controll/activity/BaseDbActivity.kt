@@ -92,6 +92,6 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        //_binding = null
     }
 }

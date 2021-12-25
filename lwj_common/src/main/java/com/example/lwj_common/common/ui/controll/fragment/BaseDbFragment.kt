@@ -81,6 +81,7 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        //注意由于使用的是viewBinding, 千万不能回收binding对象, 否则会报空指针异常
+        //_binding = null
     }
 }

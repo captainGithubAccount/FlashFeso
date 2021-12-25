@@ -71,6 +71,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                 binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.GONE
                 binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.VISIBLE
                 mSimpleProgressDialogUtil?.closeHUD()
+                Toast.makeText(App.context, "Error: ${it}", Toast.LENGTH_LONG).show()
             }
         })
 
