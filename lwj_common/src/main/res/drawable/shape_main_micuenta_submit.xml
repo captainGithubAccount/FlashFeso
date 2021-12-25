@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!--边线的颜色和粗细-->
+    <stroke
+        android:width="@dimen/dp_1"
+        android:color="@color/color_main_background" />
+
+    <!--背景的颜色-->
+    <solid android:color="@color/color_main_background" />
+
+
+    <!--圆角-->
+    <corners
+        android:radius="@dimen/dp_10" />
+
+
+</shape>

@@ -1,0 +1,57 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Flashfeso_lwj" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+
+    </style>
+
+    <!-- base: App 色调颜色主题 -->
+    <style name="AppBaseColorTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/teal_200</item>
+        <item name="colorPrimaryDark">@color/teal_200</item>
+        <item name="colorAccent">@color/teal_200</item>
+    </style>
+
+    <!-- base: App 无状态栏主题 -->
+    <style name="AppBaseNoBarTheme" parent="AppBaseColorTheme">
+    </style>
+
+    <!-- splash theme-->
+    <style name="SplashTheme" parent="AppBaseColorTheme">
+        <item name="android:windowIsTranslucent">false</item><!--窗体是否半透明-->
+        <item name="android:windowDisablePreview">true</item><!--详情见我的博客, 大概就是去掉启动后的白屏-->
+        <item name="android:windowFullscreen">true</item>
+        <item name = "android:windowBackground">@drawable/layer_splash_bg</item><!--Splash背景图片-->
+    </style>
+
+
+    <!--Theme_AppCompat_Light_Dialog_Alert-->
+    <style name="StyleCommonMultiDialog" parent="AppBaseColorTheme">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowSoftInputMode">stateAlwaysHidden</item>
+    </style>
+
+
+    <!--  进度对话框(SimpleProgresssDialog)样式(转圈圈) -->
+    <style name="sp_simple_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+</resources>

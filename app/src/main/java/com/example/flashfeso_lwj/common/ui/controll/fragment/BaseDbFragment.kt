@@ -1,3 +1,4 @@
+/*
 package com.example.flashfeso_lwj.common.ui.controll.fragment
 
 import android.app.Activity
@@ -46,6 +47,7 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        afterInitView()
         afterInitView(savedInstanceState)
     }
 
@@ -75,8 +77,11 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
     //拿到view之后创建适配器等
     protected fun afterInitView( savedInstanceState: Bundle?){}
 
+    //拿到view之后创建适配器等
+    protected fun afterInitView(){}
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
-}
+}*/

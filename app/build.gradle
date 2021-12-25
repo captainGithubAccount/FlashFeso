@@ -42,9 +42,15 @@ android {
 }
 
 dependencies {
+    //implementation project(path: ':lwj_base')
+    //implementation project(path: ':lwj_base')
+
+    implementation project(path: ':lwj_common')
     //hilt配置
     //使用2.28.3-alpha版本, 若低于版本可能无法使用ApplicationComponent::class,只能使用SingletonComponent::class
     implementation 'com.google.dagger:hilt-android:2.28.3-alpha'
+    /*implementation 'androidx.legacy:legacy-support-v4:1.0.0'*/
+
     kapt 'com.google.dagger:hilt-android-compiler:2.28.3-alpha'
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
     //注意下面这个一定要加, 否则会出现viewModel无法实例化, 参数为null

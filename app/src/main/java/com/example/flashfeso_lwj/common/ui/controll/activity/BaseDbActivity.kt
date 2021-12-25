@@ -1,3 +1,4 @@
+/*
 package com.example.flashfeso_lwj.common.ui.controll.activity
 
 import android.os.Bundle
@@ -30,11 +31,13 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
 
 
     init{
-        /*lifecycleScope.launchWhenCreated {
+        */
+/*lifecycleScope.launchWhenCreated {
             fun observeWhenCreatedWithOpenScope(block: () -> Unit) = launch {
                 block.invoke()
             }
-        }*/
+        }*//*
+
 
         lifecycleScope.launchWhenCreated {
             observeWhenCreatedWithLifecycle()
@@ -48,13 +51,15 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
             observeWhenResumedWithLifecycle()
         }
 
-        /*lifecycleScope.launchWhenCreated {
+        */
+/*lifecycleScope.launchWhenCreated {
             supervisorScope {
             //出现异常不关闭其他子协程, 注意在作用域里面抛异常, 子协程也会停止运行, 所以要在作用域里面开辟一个
             //新的协程, 如lanch启动的协程, 这样当该子协程出异常不会关闭其他子协程
                 observeWhenCreatedWithLifecycle()
             }
-        }*/
+        }*//*
+
     }
 
 
@@ -74,11 +79,13 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
         afterBindView()
         setContentView(binding.root)
         binding.initView()
+        afterInitView()
         afterInitView(savedInstanceState)
     }
 
 
-    private fun afterInitView(savedInstanceState: Bundle?) {}
+    protected open fun afterInitView(savedInstanceState: Bundle?) {}
+    protected open fun afterInitView() {}
 
     protected abstract fun observe()
 
@@ -93,3 +100,4 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
         _binding = null
     }
 }
+*/

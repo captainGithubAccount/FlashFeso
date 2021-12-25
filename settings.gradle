@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "flashfeso_lwj"
 include ':app'
+//include ':lwj_base'
+include ':lwj_common'

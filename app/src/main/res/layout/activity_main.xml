@@ -8,10 +8,12 @@
     tools:context=".flashfeso.ui.controll.activity.MainActivity">
 
     <FrameLayout
+        android:id="@+id/fl_main_frgm_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
     <RadioGroup
+        android:id="@+id/rg_main_bottom"
         android:paddingTop="@dimen/dp_4"
         android:paddingBottom="@dimen/dp_4"
 
@@ -22,6 +24,7 @@
 
 
         <RadioButton
+
             android:id="@+id/rb_main_bottom_info"
             android:gravity="center_horizontal"
             android:textColor="@drawable/selector_main_bottom_navigation_text"

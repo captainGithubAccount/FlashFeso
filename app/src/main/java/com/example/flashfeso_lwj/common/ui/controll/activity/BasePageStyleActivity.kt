@@ -1,3 +1,4 @@
+/*
 package com.example.flashfeso_lwj.common.ui.controll.activity
 
 import android.graphics.Rect
@@ -28,16 +29,4 @@ abstract class BasePageStyleActivity<T: ViewBinding>: BaseDbActivity<T>() {
         super.onDestroy()
     }
 
-    //设置RadioButton的drawableTop大小, 防止底部导航图片位置错乱, 但是只要切图好的话是不会有这种情况的
-    protected open fun setSize(rb: RadioButton) {
-        val rect = Rect()
-        //距离父窗体的距离，可以理解为左上和右下的坐标
-        rect[0, 0, DensityUtil.dip2px(this, 20F)] =
-            DensityUtil.dip2px(this, 20F)
-        val drawables = rb.compoundDrawables
-        //取出上边的图片设置大小
-        drawables[1].bounds = rect
-        //把这张图片放在上边，这四个参表示图片放在左、上、有、下
-        rb.setCompoundDrawables(null, drawables[1], null, null)
-    }
-}
+}*/
