@@ -1,6 +1,5 @@
-package com.example.flashfeso_lwj.common.ui.controll.view
+package com.example.lwj_common.common.ui.controll.view
 
-import com.example.flashfeso_lwj.R
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.Editable
@@ -13,7 +12,8 @@ import android.view.View
 import android.view.View.OnFocusChangeListener
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
-import com.example.flashfeso_lwj.flashfeso.utils.DensityUtil
+import com.example.lwj_common.R
+import com.example.lwj_common.common.utils.DensityUtil
 
 /**
  * Created by Cheng Bao on 2015/6/17.
