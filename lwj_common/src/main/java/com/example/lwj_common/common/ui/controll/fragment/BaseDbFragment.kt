@@ -1,4 +1,4 @@
-package com.example.flashfeso_lwj.common.ui.controll.fragment
+package com.example.flashfeso_lwj.base.ui.controll.fragment
 
 import android.app.Activity
 import android.content.Context

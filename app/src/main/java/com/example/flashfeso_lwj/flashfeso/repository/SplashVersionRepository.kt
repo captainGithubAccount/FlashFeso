@@ -3,8 +3,7 @@ package com.example.flashfeso_lwj.flashfeso.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.flashfeso_lwj.App
-import com.example.flashfeso_lwj.common.entity.DataResult
+import com.example.flashfeso_lwj.base.entity.DataResult
 import com.example.flashfeso_lwj.flashfeso.api.data.service.SplashVersionService
 import com.example.flashfeso_lwj.flashfeso.entity.VersionEntity
 import com.example.flashfeso_lwj.flashfeso.entity.VersionResponse

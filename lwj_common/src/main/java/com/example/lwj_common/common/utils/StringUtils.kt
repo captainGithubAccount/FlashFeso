@@ -1,4 +1,4 @@
-package com.example.flashfeso_lwj.flashfeso.utils
+package com.example.lwj_common.common.utils
 
 import java.util.regex.Pattern
 

@@ -1,7 +1,7 @@
-package com.example.flashfeso_lwj.common.utils
+package com.example.flashfeso_lwj.base.utils
 
 import com.example.flashfeso_lwj.flashfeso.utils.SharedPreferenceUtils
-import com.example.flashfeso_lwj.flashfeso.utils.StringUtils
+import com.example.lwj_common.common.utils.StringUtils
 import javax.inject.Inject
 
 class InfoUtil @Inject constructor(

@@ -2,12 +2,11 @@ package com.example.flashfeso_lwj
 
 import android.app.Activity
 import android.app.Application
-import android.app.Application.ActivityLifecycleCallbacks
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import com.adjust.sdk.*
-import com.example.flashfeso_lwj.common.utils.InfoUtil
+import com.example.flashfeso_lwj.base.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject

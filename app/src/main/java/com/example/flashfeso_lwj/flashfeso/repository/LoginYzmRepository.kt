@@ -2,15 +2,13 @@ package com.example.flashfeso_lwj.flashfeso.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.flashfeso_lwj.common.entity.DataResult
+import com.example.flashfeso_lwj.base.entity.DataResult
 import com.example.flashfeso_lwj.flashfeso.api.data.service.LoginYzmService
-import com.example.flashfeso_lwj.flashfeso.entity.YzmEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 class LoginYzmRepository @Inject constructor(
     private val service: LoginYzmService

@@ -1,7 +1,6 @@
-package com.example.flashfeso_lwj.common.entity
+package com.example.flashfeso_lwj.base.entity
 
 import android.util.Log
-import android.widget.Toast
 import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_base.common.base.BaseConstants.TAG_ERROR
 

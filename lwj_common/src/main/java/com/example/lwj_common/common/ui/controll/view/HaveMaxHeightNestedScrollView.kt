@@ -1,5 +1,5 @@
 
-package com.example.flashfeso_lwj.flashfeso.ui.controll.custom_view
+package com.example.lwj_common.common.ui.controll.view
 
 import android.content.AttributionSource
 import android.content.Context

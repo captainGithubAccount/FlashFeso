@@ -7,7 +7,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.example.flashfeso_lwj.R
-import com.example.flashfeso_lwj.common.ui.controll.activity.BasePageStyleActivity
+import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
 import com.example.flashfeso_lwj.databinding.ActivityLoginPrivacyDetailBinding
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import com.example.flashfeso_lwj.flashfeso.utils.back

@@ -14,12 +14,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.flashfeso_lwj.BuildConfig
 import com.example.flashfeso_lwj.R
-import com.example.flashfeso_lwj.common.event.CommonDialogEvent
+import com.example.flashfeso_lwj.base.event.CommonDialogEvent
 import com.example.flashfeso_lwj.common.ui.controll.dialog.CommonDialog
 import com.example.flashfeso_lwj.flashfeso.event.SplashPermissionDialogEvent
 import com.example.flashfeso_lwj.flashfeso.ui.controll.dialog.SplashPermissionDialog
 import com.example.flashfeso_lwj.flashfeso.utils.*
 import com.example.flashfeso_lwj.flashfeso.viewmodel.SplashViewModel
+import com.example.lwj_common.common.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import java.lang.Exception

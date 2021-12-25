@@ -1,4 +1,4 @@
-package com.example.flashfeso_lwj.common.base
+package com.example.flashfeso_lwj.base.base
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-class RetrofitFactory(baseUrl: String) {
+class RetrofitFactory() {
     private var retrofit: Retrofit? = null
 
     //获取retrofit客户端

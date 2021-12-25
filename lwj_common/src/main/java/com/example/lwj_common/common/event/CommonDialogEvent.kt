@@ -1,4 +1,4 @@
-package com.example.flashfeso_lwj.common.event
+package com.example.flashfeso_lwj.base.event
 
 
 interface CommonDialogEvent {

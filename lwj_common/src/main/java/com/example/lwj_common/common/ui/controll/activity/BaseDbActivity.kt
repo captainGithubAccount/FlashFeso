@@ -1,4 +1,4 @@
-package com.example.flashfeso_lwj.common.ui.controll.activity
+package com.example.flashfeso_lwj.base.ui.controll.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -4,8 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.flashfeso_lwj.flashfeso.api.data.service.LoginYzmService
 import com.example.flashfeso_lwj.flashfeso.api.data.service.SplashVersionService
-import com.example.flashfeso_lwj.common.base.RetrofitFactory
+import com.example.flashfeso_lwj.base.base.RetrofitFactory
 import com.example.flashfeso_lwj.flashfeso.api.data.service.LoginUserInfoService
+import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +26,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitClient(retrofitFactory: RetrofitFactory): Retrofit = retrofitFactory.getRetrofit()
+    fun provideRetrofitClient(retrofitFactory: RetrofitFactory): Retrofit = retrofitFactory.getRetrofit(UrlConstants.BASE_URL)
 
     @Singleton
     @Provides

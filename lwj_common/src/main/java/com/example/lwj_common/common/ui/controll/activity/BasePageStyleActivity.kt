@@ -1,13 +1,9 @@
-package com.example.flashfeso_lwj.common.ui.controll.activity
+package com.example.flashfeso_lwj.base.ui.controll.activity
 
-import android.graphics.Rect
 import android.os.Bundle
-import android.widget.RadioButton
 import androidx.viewbinding.ViewBinding
 import com.example.lwj_common.R
 
-import com.gyf.immersionbar.ImmersionBar
-import com.gyf.immersionbar.ktx.destroyImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 
 abstract class BasePageStyleActivity<T: ViewBinding>: BaseDbActivity<T>() {

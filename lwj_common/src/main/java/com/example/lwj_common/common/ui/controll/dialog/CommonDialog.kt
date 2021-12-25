@@ -1,4 +1,3 @@
-/*
 
 package com.example.flashfeso_lwj.common.ui.controll.dialog
 
@@ -8,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.flashfeso_lwj.common.event.CommonDialogEvent
+import com.example.flashfeso_lwj.base.event.CommonDialogEvent
 import com.example.lwj_common.databinding.DialogCommonBinding
 import javax.inject.Inject
 
@@ -66,4 +65,3 @@ class CommonDialog constructor(
         return Dialog(requireContext(), 0)
     }
 }
-*/
