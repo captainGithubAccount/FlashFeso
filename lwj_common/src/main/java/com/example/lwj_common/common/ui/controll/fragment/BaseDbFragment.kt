@@ -23,6 +23,7 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
         super.onAttach(context)
         _activity = getActivity()
     }
+    fun getFrgmActivity() = _activity
 
     //protected fun getAtvContext(): Context = _activity?: App.instance!!
 

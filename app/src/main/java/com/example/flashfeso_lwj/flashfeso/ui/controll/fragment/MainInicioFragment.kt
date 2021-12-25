@@ -1,7 +1,9 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.fragment
 
+import android.content.Intent
 import com.example.flashfeso_lwj.base.ui.controll.fragment.BaseDbFragment
 import com.example.flashfeso_lwj.databinding.FragmentMainInicioBinding
+import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,6 +19,10 @@ class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
     }
 
     override fun FragmentMainInicioBinding.initView() {
+        binding.inclLoginInicioProgress.tvTest.setOnClickListener {
+            val intent = Intent(getFrgmActivity(), LoginActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
