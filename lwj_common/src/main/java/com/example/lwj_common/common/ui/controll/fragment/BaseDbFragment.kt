@@ -2,6 +2,7 @@ package com.example.flashfeso_lwj.base.ui.controll.fragment
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +24,7 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
         super.onAttach(context)
         _activity = getActivity()
     }
-    fun getFrgmActivity() = _activity
+    fun getFrgmActivity() = _activity as Context
 
     //protected fun getAtvContext(): Context = _activity?: App.instance!!
 
@@ -38,7 +39,7 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding.initView()
         return binding.root
@@ -83,5 +84,30 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
         super.onDestroy()
         //注意由于使用的是viewBinding, 千万不能回收binding对象, 否则会报空指针异常
         //_binding = null
+    }
+
+    /**
+     * Activity间跳转（不传值）
+     *
+     * @param cls 跳转的 Activity
+     */
+    protected open fun startActivity(cls: Class<*>?) {
+        val intent = Intent(this.activity, cls)
+        this.startActivity(intent)
+    }
+
+
+    /**
+     * Activity间的跳转（传值）
+     *
+     * @param cls    跳转的 Activity
+     * @param bundle 传递参数
+     */
+    protected open fun startActivity(cls: Class<*>?, bundle: Bundle?) {
+        val intent = Intent(this.activity, cls)
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
+        this.startActivity(intent)
     }
 }

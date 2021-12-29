@@ -2,6 +2,12 @@
     <string name="app_name">flashfeso_lwj</string>
     <string name="str_sharedpreference_key">App_SharedPreference_Key</string>
 
+    <!--ExamenDeLosPrestamosDialog-->
+    <string name="examen_de_los_prestamos" translatable="false">Exámen de los préstamos</string>
+    <string name="importe_del_prestamo" translatable="false">Importe del préstamo</string>
+    <string name="puede_tardar_unos_minutos" translatable="false">Puede tardar unos minutos.</string>
+    <string name="ya_veo" translatable="false">Ya veo</string>
+
     <!--MainActivity bottom navigation text-->
     <string name="inicio" translatable="false">Inicio</string>
     <string name="mi_cuenta" translatable="false">Mi Cuenta</string>
@@ -64,6 +70,67 @@
     <string name="enter_phone_number" translatable="false">Introduzca el número de teléfono correcto</string>
     <string name="read_privacidad" translatable="false">Por favor, compruebe el Acuerdo de privacidad</string>
     <string name="login_verification_code_time" translatable="false">%1$ds</string>
+
+    <!--InformacionBasicaActivity-->
+    <string name="primer_paso" translatable="false">Primer paso</string>
+    <string name="Informacion_basica" translatable="false">Información básica</string>
+    <string name="one" translatable="false">01</string>
+    <string name="six" translatable="false">/06</string>
+    <string name="informacion_de_domicilio" translatable="false">Información de Domicilio</string>
+    <string name="ingresa_la_informacion_de_tu_domicilio_actual" translatable="false">Ingresa la Información de tu domicilio actual</string>
+    <string name="codigo_postal" translatable="false">Código Postal</string>
+    <string name="ingresa_por_favor" translatable="false">ingresa por favor</string>
+    <string name="estado" translatable="false">Estado</string>
+    <string name="ciudad" translatable="false">Ciudad</string>
+    <string name="colonia" translatable="false">Colonia</string>
+    <string name="por_favor_seleccione" translatable="false">Por favor seleccione</string>
+    <string name="calle" translatable="false">Calle</string>
+    <string name="numero_exterior" translatable="false">Número exterior</string>
+    <string name="numero_interior" translatable="false">Número interior</string>
+    <string name="opcional" translatable="false">Opcional</string>
+    <!--请输入邮政编码-->
+    <string name="introduzca_el_codigo_postal" translatable="false">Por favor, introduzca el código postal</string>
+    <!--请输入州-->
+    <string name="introduzca_el_estado" translatable="false">Por favor, introduzca el Estado</string>
+    <!--请输入城市-->
+    <string name="introduzca_la_ciudad" translatable="false">Por favor, introduzca la ciudad</string>
+    <!--请输入生活区-->
+    <string name="introduzca_la_colonia" translatable="false">Por favor, introduzca la colonia</string>
+    <!--请输入街道-->
+    <string name="introduzca_la_calle" translatable="false">Por favor, introduzca la calle</string>
+    <!--请输入外部编号-->
+    <string name="introduzca_un_numero_externo" translatable="false">Por favor, introduzca un número externo</string>
+    <!--请输入内部编号-->
+    <string name="introduzca_un_numero_interno" translatable="false">Por favor, introduzca un número interno</string>
+
+    <!--MiPrestamoActivity-->
+    <string name="mi_prestamo" translatable="false">Mi préstamo</string>
+    <string name="numero_de_folio" translatable="false">Numero de folio:</string>
+    <string name="plazo_del_prestamos" translatable="false">Plazo del préstamos</string>
+    <string name="plazo_del_prestamo" translatable="false">Plazo del préstamo</string>
+    <string name="fecha_limite_de_pago_t" translatable="false">Fecha limite de pago:</string>
+    <string name="el_prestamo_fallo" translatable="false">El préstamo falló</string>
+    <string name="reembolso_exitoso" translatable="false">Reembolso exitoso</string>
+    <string name="reembolso_atrasado" translatable="false">Reembolso atrasado</string>
+    <string name="sin_resolver" translatable="false">Sin resolver</string>
+
+    <!--DetallesDeLosPrestamosActivity-->
+    <string name="detalles_de_los_prestamos" translatable="false">Detalles de los préstamos</string>
+    <string name="monto_del_prestamos" translatable="false">Monto del Préstamos</string>
+    <string name="monto_a_recibir" translatable="false">Monto a recibir</string>
+    <string name="piazo_del_prestamo" translatable="false">Piazo del préstamo</string>
+    <string name="depositaremos_a_tu_cuenta" translatable="false">Depositaremos a tu cuenta:</string>
+    <string name="cambiar" translatable="false">cambiar</string>
+    <string name="bbva_banvomer" translatable="false">BBVA BANVOMER</string>
+    <string name="plan_de_pago" translatable="false">Plan de pago</string>
+    <string name="monto_a_pagar" translatable="false">Monto a pagar</string>
+    <string name="fecha_limite_de_pago" translatable="false">Fecha límite de pago</string>
+    <string name="detalle_de_tarifa" translatable="false">Detalle de tarifa</string>
+    <string name="comision_por_gestion_de_cuenta" translatable="false">Comisión por Gestión de Cuenta</string>
+    <string name="interes" translatable="false">Interés</string>
+    <string name="acetpa_terminos_de_contrato_de_pretamo_y_pagare" translatable="false">Acetpa Términos de Contrato del Prétamo y Pagaré</string>
+    <string name="confirmar_prestamo" translatable="false">Confirmar préstamo</string>
+    <string name="compruebe_el_contrato_de_prestamo" translatable="false">Por favor, compruebe el contrato de préstamo</string>
 
 
     <!--隐私协议-->

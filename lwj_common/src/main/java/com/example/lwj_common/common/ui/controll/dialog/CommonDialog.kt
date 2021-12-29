@@ -12,7 +12,7 @@ import com.example.lwj_common.databinding.DialogCommonBinding
 import javax.inject.Inject
 
 class CommonDialog constructor(
-    private val title: String
+    private val title: String,
 ): DialogFragment() {
     private lateinit var _binding: DialogCommonBinding
     val binding get() = _binding
@@ -33,6 +33,7 @@ class CommonDialog constructor(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isCancelable = true
+        setStyle(STYLE_NO_TITLE, 0)
         beforeInitView()
 
     }
@@ -48,7 +49,7 @@ class CommonDialog constructor(
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = DialogCommonBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -61,7 +62,7 @@ class CommonDialog constructor(
 
 
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    /*override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return Dialog(requireContext(), 0)
-    }
+    }*/
 }

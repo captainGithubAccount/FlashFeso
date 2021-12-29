@@ -12,6 +12,7 @@ import com.example.lwj_base.common.base.BaseConstants.TAG_ERROR
 * alter content: 将原有构造方法和参数删除, 使的看起来更像枚举类, 便于观察
 * */
 sealed class DataResult<T>{
+    data class Clear<T>(val data: T? = null, val clearMessage: String? = null): DataResult<T>()
     data class Success<T>(val data: T, val successMessagle: String? = null): DataResult<T>()
     data class Error<T>(val data: T? = null, val errorMessage: String?): DataResult<T>()
     data class Loading<T>(val data: T? = null, val errorMessage: String? = null): DataResult<T>()
@@ -22,6 +23,13 @@ sealed class DataResult<T>{
                 blockError(this)
                 if(BaseConstants.ISLOG)Log.e(TAG_ERROR, this.errorMessage!!)
             }
+        }
+    }
+
+    //清空用户信息(全修改为"")用的
+    inline fun whenClear(block: (DataResult<T>)->Unit){
+        if(this is Clear){
+            block.invoke(this)
         }
     }
 

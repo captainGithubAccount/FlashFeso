@@ -49,8 +49,10 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
         super.onCreate(savedInstanceState)
         //判断是否是任务栈中的根Activity, 如果是就不做任何处理, 如果不是即this.isTaskRoot为false, 直接finish掉
         //第二次启动直接启动MainActivity
-        if (!this.isTaskRoot)
+        if (!this.isTaskRoot){
             finish()
+            return
+        }
         //whenObserve()
         initEvent()
     }
@@ -140,6 +142,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
         mSecondClick = System.currentTimeMillis()
         if (mSecondClick - mFirstClick > Constants.DOUBLE_CLICK_TIME) {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            finish()
         }
 
     }

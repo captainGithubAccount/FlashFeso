@@ -2,10 +2,8 @@ package com.example.flashfeso_lwj
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.flashfeso_lwj.flashfeso.api.data.service.LoginYzmService
-import com.example.flashfeso_lwj.flashfeso.api.data.service.SplashVersionService
 import com.example.flashfeso_lwj.base.base.RetrofitFactory
-import com.example.flashfeso_lwj.flashfeso.api.data.service.LoginUserInfoService
+import com.example.flashfeso_lwj.flashfeso.api.data.service.*
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import dagger.Module
 import dagger.Provides
@@ -44,9 +42,13 @@ object AppModule {
     @Provides
     fun provideLoginUserInfoService(retrofit: Retrofit): LoginUserInfoService = retrofit.create(LoginUserInfoService::class.java)
 
+    @Singleton
+    @Provides
+    fun provideInicioCurrDetailService(retrofit: Retrofit): InicioCurrDetailService = retrofit.create(InicioCurrDetailService::class.java)
 
-
-
+    @Singleton
+    @Provides
+    fun provideInicioAuthUserInfoService(retrofit: Retrofit): InicioAuthUserInfoService = retrofit.create(InicioAuthUserInfoService::class.java)
 
 
 

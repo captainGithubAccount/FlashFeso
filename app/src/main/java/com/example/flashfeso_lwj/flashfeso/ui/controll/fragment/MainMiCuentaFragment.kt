@@ -10,6 +10,8 @@ class MainMiCuentaFragment : BaseDbFragment<FragmentMainMicuentaBinding>(){
     companion object{
         //注意该方法获取的不是单例, 该项目中只调用一次该方法, 所以效果也是只有一个对象创建
         fun getInstance(): MainMiCuentaFragment = MainMiCuentaFragment()
+
+
     }
 
     override fun observe() {

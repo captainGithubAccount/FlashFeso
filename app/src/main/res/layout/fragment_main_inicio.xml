@@ -8,7 +8,7 @@
     tools:context=".flashfeso.ui.controll.fragment.MainInicioFragment">
 
     <include
-        android:id="@+id/incl_login_inicio_progress"
+        android:id="@+id/incl_main_inicio_progress"
         layout="@layout/incl_main_inicio_progress" />
 
     <include
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/tv_main_inicio_money"
+                    android:id="@+id/tv_main_inicio_quota"
                     app:layout_constraintEnd_toEndOf="@id/id_title"
                     app:layout_constraintBottom_toBottomOf="@id/id_money"
                     app:layout_constraintTop_toTopOf="@id/id_money"
@@ -62,9 +62,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/id_is_olicita"
+                    android:id="@+id/tv_inicio_olicita"
                     app:layout_constraintBottom_toBottomOf="@id/tv_main_inicio_days"
-                    app:layout_constraintTop_toTopOf="@id/id_days"
+                    app:layout_constraintTop_toTopOf="@id/tv_inicio_days_title"
                     app:layout_constraintEnd_toEndOf="@id/id_title"
                     android:background="@drawable/shape_common_item"
                     android:gravity="center"
@@ -73,13 +73,13 @@
                     android:layout_height="@dimen/dp_52" />
 
                 <TextView
-                    android:id="@+id/id_days"
+                    android:id="@+id/tv_inicio_days_title"
                     android:text="@string/plazo_de_préstamo"
                     android:textColor="@color/color_FFFFFF"
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintTop_toBottomOf="@id/id_money"
                     app:layout_constraintStart_toStartOf="@id/id_money"
-                    app:layout_constraintEnd_toStartOf="@id/id_is_olicita"
+                    app:layout_constraintEnd_toStartOf="@id/tv_inicio_olicita"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -88,18 +88,19 @@
                     android:textColor="@color/color_FFFFFF"
                     android:textSize="@dimen/sp_30"
                     tools:text="@string/ninety"
-                    app:layout_constraintStart_toStartOf="@id/id_days"
-                    app:layout_constraintTop_toBottomOf="@id/id_days"
+                    app:layout_constraintStart_toStartOf="@id/tv_inicio_days_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_inicio_days_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/tv_inicio_days_unit"
                     android:text="@string/días"
                     android:textColor="@color/color_FFFFFF"
                     android:textSize="@dimen/sp_30"
                     android:layout_marginStart="@dimen/dp_50"
                     app:layout_constraintBottom_toBottomOf="@id/tv_main_inicio_days"
                     app:layout_constraintTop_toTopOf="@id/tv_main_inicio_days"
-                    app:layout_constraintStart_toStartOf="@id/id_days"
+                    app:layout_constraintStart_toStartOf="@id/tv_inicio_days_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -153,7 +154,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-            <include layout="@layout/incl_main_inicio_features" />
+            <include
+                android:id="@+id/incl_main_inicio_first"
+                layout="@layout/incl_main_inicio_features" />
 
             <include
                 android:id="@+id/incl_main_incio_second"

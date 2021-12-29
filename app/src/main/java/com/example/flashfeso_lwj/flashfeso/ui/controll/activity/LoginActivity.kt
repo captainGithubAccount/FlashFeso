@@ -19,6 +19,7 @@ import com.example.flashfeso_lwj.base.utils.InfoUtil
 import com.example.flashfeso_lwj.base.utils.SimpleProgressDialogUtil
 import com.example.flashfeso_lwj.databinding.ActivityLoginBinding
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
+import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.lwj_common.common.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -204,6 +205,10 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                 if(isClickUseful()){
                     //跳转协议详情Atv界面
                     val intent = Intent(this@LoginActivity, LoginPrivacyDetailActivity::class.java)
+                    intent.putExtra(LoginPrivacyDetailActivity.HEADER_TITLE_TEXT,
+                        resources.getString(R.string.seguridad_de_los_datos))
+                    intent.putExtra(LoginPrivacyDetailActivity.WEBSITE_URL,
+                        UrlConstants.SEGURIDAD_DE_LOS_DATOS_URL)
                     startActivity(intent)
                 }
             }

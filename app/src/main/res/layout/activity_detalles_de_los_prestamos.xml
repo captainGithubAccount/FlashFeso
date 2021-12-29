@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F2F2F2"
+    android:orientation="vertical"
+    tools:context=".flashfeso.ui.controll.activity.DetallesDeLosPrestamosActivity">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/incl_common_bar" />
+
+    <include
+        android:id="@+id/progress"
+        layout="@layout/incl_main_inicio_progress"
+        android:visibility="gone" />
+
+
+    <include
+        android:id="@+id/empty"
+        layout="@layout/view_easyrcl_empty"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/error"
+        layout="@layout/incl_main_inicio_error"
+        android:visibility="gone" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_200"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_18"
+                android:layout_marginRight="@dimen/dp_15"
+                android:background="@drawable/bg_inicio_head_img"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_60"
+                    android:gravity="center_horizontal"
+                    android:text="@string/importe_del_prestamo"
+                    android:textColor="@color/color_FFFFFF"
+                    android:textSize="@dimen/sp_20" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/min_amount_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FFFFFF"
+                        android:textSize="@dimen/sp_36" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="~"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:textColor="@color/color_FFFFFF"
+                        android:textSize="@dimen/sp_36" />
+
+                    <TextView
+                        android:id="@+id/loan_amount_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FFFFFF"
+                        android:textSize="@dimen/sp_36" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_115"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_15"
+                android:background="@drawable/shape_common_item"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_15"
+                android:paddingRight="@dimen/dp_15">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/depositaremos_a_tu_cuenta"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_15" />
+
+                    <TextView
+                        android:id="@+id/btn_cambiar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:text="@string/cambiar"
+                        android:textColor="@color/color_main_background"
+                        android:textSize="@dimen/sp_15" />
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="@dimen/dp_240"
+                    android:layout_height="@dimen/dp_54"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:background="@drawable/shape_banvomer"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_18"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="@string/bbva_banvomer"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_15" />
+
+                    <TextView
+                        android:id="@+id/bbva_banvomer_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_18"
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:textColor="@color/color_999999"
+                        android:textSize="@dimen/sp_14" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginRight="@dimen/dp_15"
+                android:background="@drawable/shape_common_item"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_15">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plan_de_pago"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_15" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:gravity="center_vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/monto_del_prestamos"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/sp_15" />
+
+                    <View
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+
+                    <ImageView
+                        android:id="@+id/sub_img"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"
+                        android:padding="@dimen/dp_8"
+                        android:src="@drawable/icon_sub_black" />
+
+                    <TextView
+                        android:id="@+id/monto_del_prestamos_tv"
+                        android:layout_width="@dimen/dp_90"
+                        android:layout_height="@dimen/dp_22"
+                        android:background="@drawable/shape_e5_10"
+                        android:gravity="center"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_15"
+                        tools:text="98555" />
+
+
+                    <ImageView
+                        android:id="@+id/add_img"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/dp_8"
+                        android:src="@drawable/icon_add_black" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/monto_a_recibir"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/sp_15" />
+
+
+                    <TextView
+                        android:id="@+id/disbural_amount"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_15" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/plazo_del_prestamo"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/sp_15" />
+
+                    <TextView
+                        android:id="@+id/tenure"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_15" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/monto_a_pagar"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/sp_15" />
+
+                    <TextView
+                        android:id="@+id/monto_tv"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_15" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fecha_limite_de_pago"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/sp_15" />
+
+                    <TextView
+                        android:id="@+id/fecha_tv"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_15" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginRight="@dimen/dp_15"
+                android:background="@drawable/shape_common_item"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_15">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detalle_de_tarifa"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_15" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/comision_por_gestion_de_cuenta"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/sp_15" />
+
+                    <TextView
+                        android:id="@+id/comision_tv"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_15" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/interes"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/sp_15" />
+
+                    <TextView
+                        android:id="@+id/interes_tv"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp_15" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_15">
+
+
+                <ImageView
+                    android:id="@+id/agree_img"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_34"
+                    android:paddingLeft="@dimen/dp_4"
+                    android:paddingTop="@dimen/dp_4"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_14"
+                    android:src="@drawable/icon_agree" />
+
+                <TextView
+                    android:id="@+id/acetpa_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="@string/acetpa_terminos_de_contrato_de_pretamo_y_pagare"
+                    android:textColor="@color/color_main_background"
+                    android:textSize="@dimen/sp_15" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/confirm"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginLeft="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_50"
+                android:layout_marginBottom="@dimen/dp_30"
+                android:background="@drawable/shape_default_10"
+                android:gravity="center"
+                android:text="@string/confirmar_prestamo"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="@dimen/sp_18" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

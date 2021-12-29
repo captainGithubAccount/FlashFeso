@@ -11,9 +11,10 @@
     android:orientation="horizontal"
     android:paddingLeft="@dimen/dp_10"
     android:paddingRight="@dimen/dp_10"
-    tools:showIn="@layout/fragment_main_inicio">
+    >
 
     <ImageView
+        android:id="@+id/iv_inicio_item"
         android:layout_width="@dimen/dp_33"
         android:layout_height="@dimen/dp_33"
         android:layout_gravity="center_vertical"
@@ -21,6 +22,7 @@
         android:src="@drawable/icon_home_safe" />
 
     <TextView
+        android:id="@+id/tv_inicio_item_center"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -31,6 +33,7 @@
         android:textSize="@dimen/sp_13" />
 
     <TextView
+        android:id="@+id/tv_inicio_item_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

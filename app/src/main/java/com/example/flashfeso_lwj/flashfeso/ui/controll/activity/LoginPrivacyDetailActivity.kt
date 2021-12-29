@@ -11,15 +11,32 @@ import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
 import com.example.flashfeso_lwj.databinding.ActivityLoginPrivacyDetailBinding
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import com.example.flashfeso_lwj.flashfeso.utils.back
+import com.example.lwj_common.common.utils.StringUtils
 
 class LoginPrivacyDetailActivity : BasePageStyleActivity<ActivityLoginPrivacyDetailBinding>(){
+    var mUrl: String? = null
+    companion object{
+        val WEBSITE_URL = "website_url"
+        val HEADER_TITLE_TEXT = "header_title_text"
+    }
+
+
     override fun observe() {
 
     }
 
     override fun ActivityLoginPrivacyDetailBinding.initView() {
+        mUrl = intent.getStringExtra(WEBSITE_URL)
+        val headerTitleText =
+            intent.getStringExtra(HEADER_TITLE_TEXT)
+
+
         inclLoginPrivacyDetailBar.run {
-            tvCommonBarTitle.setText(resources.getString(R.string.seguridad_de_los_datos))
+
+            if (!StringUtils.isEmpty(headerTitleText)) {
+                tvCommonBarTitle.setText(headerTitleText)
+            }
+            //tvCommonBarTitle.setText(resources.getString(R.string.seguridad_de_los_datos))
 
             ivCommonBarBack.back(this@LoginPrivacyDetailActivity)
         }
