@@ -9,8 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.base.entity.DataResult
-import com.example.flashfeso_lwj.base.ui.controll.fragment.BaseDbFragment
-import com.example.flashfeso_lwj.base.utils.InfoUtil
+import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.base.utils.SimpleProgressDialogUtil
 import com.example.flashfeso_lwj.databinding.FragmentMainInicioBinding
 import com.example.flashfeso_lwj.flashfeso.entity.AuthUserInfoEntity
@@ -20,49 +19,68 @@ import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.LoginActivity
 import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.LoginPrivacyDetailActivity
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
+import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.flashfeso_lwj.flashfeso.viewmodel.MainInicioViewModel
-import com.example.lwj_common.common.utils.DateUtil
+import com.example.lwj_common.common.ui.controll.fragment.BaseRecyclerFragment
 import com.example.lwj_common.common.utils.DoubleUtils
 import com.example.lwj_common.common.utils.NumberUtils
 import com.example.lwj_common.common.utils.NumberUtils.goToZeroString
 import com.example.lwj_common.common.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Exception
 import java.util.HashMap
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
-    @Inject
-    lateinit var mInfoUtil: InfoUtil
-
+class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
+    private var isFirstResume = true
+    val mLoginViewModel: LoginViewModel by viewModels()
     private val mViewModels: MainInicioViewModel by viewModels()
-
     private val mHandler = Handler()
+
+
+
 
     @Inject
     @JvmField
     var mSimpleProgressDialogUtil: SimpleProgressDialogUtil? = null
-
      var mAuthUserInfoEntity: AuthUserInfoEntity? = null
      var mCurrDetailEntity: CurrDetailEntity? = null
 //    lateinit var mCurrDetailEntity: CurrDetailEntity
-    private var isProgressAll = 0
+    private var isProgressAllFinish = 0
     private var isProgressError = false
-    private var isCreate = true
-
-    private var isProgressAllHide = 0
-    private var isProgressErrorHide = false
+    private var isNotGetData = true
+    private var isProgressAllFinishWhenNotify = 0
+    private var isProgressErrorWhenNotify = false
 
     companion object{
         //注意该方法获取的不是单例, 该项目中只调用一次该方法, 所以效果也是只有一个对象创建
         fun getInstance(): MainInicioFragment = MainInicioFragment()
     }
+    override fun onResume() {
+        super.onResume()
+        if (!isFirstResume) {
+            getDataWhenLoginAtvNotify()
+        } else {
+            isFirstResume = false
+        }
+    }
+
+    override fun onDetach() {
+        mHandler.removeCallbacksAndMessages(null)
+        super.onDetach()
+    }
+
 
     override fun onDestroy() {
+        mHandler.removeCallbacksAndMessages(null)
         super.onDestroy()
         mSimpleProgressDialogUtil = null
     }
+
+    override fun afterInitView() {
+        super.afterInitView()
+    }
+
     override fun FragmentMainInicioBinding.initView() {
         binding.inclMainInicioProgress.tvTest.setOnClickListener {
             val intent = Intent(getFrgmActivity(), LoginActivity::class.java)
@@ -73,7 +91,7 @@ class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
             it.ivInicioItem.setImageResource(R.drawable.icon_home_help)
             it.tvInicioItemCenter.setText(R.string.ayuda)
         }
-        getData()
+        getDataWhenFirstComeIn()
     }
 
     override fun afterBindView() {
@@ -81,7 +99,7 @@ class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
 
         binding.inclMainInicioError.viewErrorUpdate.setOnClickListener(View.OnClickListener {
             if(isClickUseful()){
-                getData()
+                getDataWhenFirstComeIn()
             }
         })
 
@@ -90,8 +108,8 @@ class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
         //todo doing
         binding.tvInicioOlicita.setOnClickListener(View.OnClickListener {
             if(isClickUseful()){
-                if (mInfoUtil.isLogin) {
-                    if (mInfoUtil.authAllin) {
+                if (InfoUtil.isLogin) {
+                    if (InfoUtil.authAllin) {
                         /*if (mCurrDetailEntity != null) {
                             when (mCurrDetailEntity?.orderStatus) {
                                 -1 -> {
@@ -139,18 +157,19 @@ class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
                                 4 -> {
                                     val intent5 = Intent(activity,
                                         DetallesDeLosPrestamosActivity::class.java)
+
                                     intent5.putExtra("isAgain", true)
                                     startActivity(intent5)
                                 }
                             }
                         }*/
                     } else {
-                        val bankAuth: Boolean = mInfoUtil.isBankAuth
-                        val cardAuth: Boolean = mInfoUtil.isCardAuth
-                        val contactsAuth: Boolean = mInfoUtil.isContactsAuth
-                        val loanHisAuth: Boolean = mInfoUtil.isLoanHisAuth
-                        val employAuth: Boolean = mInfoUtil.isEmployAuth
-                        val addressAuth: Boolean = mInfoUtil.isAddressAuth
+                        val bankAuth: Boolean = InfoUtil.isBankAuth
+                        val cardAuth: Boolean = InfoUtil.isCardAuth
+                        val contactsAuth: Boolean = InfoUtil.isContactsAuth
+                        val loanHisAuth: Boolean = InfoUtil.isLoanHisAuth
+                        val employAuth: Boolean = InfoUtil.isEmployAuth
+                        val addressAuth: Boolean = InfoUtil.isAddressAuth
                         /*if (!bankAuth && cardAuth) {
                             startActivity(AgergarCuentaBancariaActivity::class.java)
                         } else if (!cardAuth && contactsAuth) {
@@ -195,61 +214,71 @@ class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
 
 
 
+
     override fun observe() {
-        //CurrDetail接口
-        mViewModels.inicioCurrDetailLiveData.observe(this, Observer {
+
+        mLoginViewModel.notifyLiveData.observe(this, Observer {
+            getDataWhenLoginAtvNotify()
+        })
+
+
+
+
+        //登录状态下调的CurrDetail接口
+        mViewModels.currDetailWhenLoginLiveData.observe(this, Observer {
             it.whenSuccess {
                 it?.run{mCurrDetailEntity = this}
-                isProgressAll++
-                setData()
+                isProgressAllFinish++
+                setDataWhenLogin()
 
             }
             it.whenError {
                 whenError()
-                isProgressAll++
+                isProgressAllFinish++
                 isProgressError = true
             }
             it.whenClear {
                 Toast.makeText(activity, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT).show()
-                mInfoUtil.clear()
-                getData()
+                InfoUtil.clear()
+                getDataWhenFirstComeIn()
             }
         })
 
-        //AuthUserInfo接口
-        mViewModels.inicioAuthUserInfoLiveData.observe(this, Observer {
+        //登录状态下调的AuthUserInfo接口
+        mViewModels.authUserInfoWhenLoginLiveData.observe(this, Observer {
             it.whenError {
                 whenError()
-                isProgressAll++
+                isProgressAllFinish++
                 isProgressError = true
             }
             it.whenSuccess {
                 it?.run{mAuthUserInfoEntity = this}
-                isProgressAll++
-                setData()
+                isProgressAllFinish++
+                setDataWhenLogin()
             }
         })
 
-        //(AuthUserInfoSingle)    AuthUserInfo接口
-        mViewModels.inicioAuthUserInfoSingleLiveData.observe(this, Observer {
+
+        //未登录状态下调的AuthUserInfo接口
+        mViewModels.authUserInfoWhenNotLoginLiveData.observe(this, Observer {
             it.whenError {
                 whenError()
             }
             it.whenSuccess {
-                isCreate = false
+                isNotGetData = false
                 binding.inclMainInicioProgress.llProgress.visibility = View.GONE
                 binding.inclMainInicioError.llError.visibility = View.GONE
 
                 it?.run{mAuthUserInfoEntity = this}
 
                 it?.run{
-                    mInfoUtil.authAllin = authAllin
-                    mInfoUtil.isAddressAuth = isAddressAuth
-                    mInfoUtil.isEmployAuth = isEmployAuth
-                    mInfoUtil.isLoanHisAuth = isLoanHisAuth
-                    mInfoUtil.isContactsAuth = isContactsAuth
-                    mInfoUtil.isCardAuth = isCardAuth
-                    mInfoUtil.isBankAuth = isBankAuth
+                    InfoUtil.authAllin = authAllin
+                    InfoUtil.isAddressAuth = isAddressAuth
+                    InfoUtil.isEmployAuth = isEmployAuth
+                    InfoUtil.isLoanHisAuth = isLoanHisAuth
+                    InfoUtil.isContactsAuth = isContactsAuth
+                    InfoUtil.isCardAuth = isCardAuth
+                    InfoUtil.isBankAuth = isBankAuth
 
                     if (!StringUtils.isEmpty(days)) {
                         binding.tvMainInicioDays.text = days
@@ -261,9 +290,7 @@ class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
                     binding.tvMainInicioDays.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
 
                     if (!StringUtils.isEmpty(quota)) {
-                        binding.tvMainInicioQuota.text = NumberUtils.goToZeroString(DoubleUtils.divTOString(quota,
-                            "100",
-                            2))
+                        binding.tvMainInicioQuota.text = NumberUtils.goToZeroString(DoubleUtils.divTOString(quota, "100", 2))
                     } else {
                         binding.tvMainInicioQuota.setText(Constants.EMPTY_STRING)
                     }
@@ -282,123 +309,124 @@ class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
             }
         })
 
-        //AuthUserInfoHide
-        mViewModels.inicioAuthUserInfoHideLiveData.observe(this, Observer {
+
+        //当被loginAtv登录后通知的调用的登录状态autherInfo接口
+        mViewModels.authUserInfoWhenLoginAndNotifyLiveData.observe(this, Observer {
             it.whenError {
-                isProgressAllHide++
-                isProgressErrorHide = true
-                setDataHide()
+                isProgressAllFinishWhenNotify++
+                isProgressErrorWhenNotify = true
+                setDataWhenLoginAndNotify()
             }
             it.whenSuccess {
                 it?.run{mAuthUserInfoEntity = this}
-                isProgressAllHide++
-                setDataHide()
+                isProgressAllFinishWhenNotify++
+                setDataWhenLoginAndNotify()
             }
         })
 
-        //CurrDetailHide
-        mViewModels.inicioCurrDetailHideLiveData.observe(this, Observer {
+
+        //当被loginAtv登录后通知的调用的登录状态currDetail接口
+        mViewModels.currDetailWhenLoginAndNotifyLiveData.observe(this, Observer {
             it.whenSuccess {
                 it?.run{mCurrDetailEntity = this}
-                isProgressAllHide++
-                setDataHide()
+                isProgressAllFinishWhenNotify++
+                setDataWhenLoginAndNotify()
             }
             it.whenError {
-                isProgressAllHide++
-                isProgressErrorHide = true
-                setDataHide()
+                isProgressAllFinishWhenNotify++
+                isProgressErrorWhenNotify = true
+                setDataWhenLoginAndNotify()
             }
             it.whenClear {
                 Toast.makeText(activity, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT).show()
-                mInfoUtil.clear()
-                getHide()
+                InfoUtil.clear()
+                getDataWhenLoginAtvNotify()
             }
         })
 
-        //AuthInfoSingleHide
-        mViewModels.inicioAuthUserInfoSingleHideLiveData.observe(this, Observer {
+        //当被loginAtv登录后通知的调用的  未登录状态autherInfo接口
+        mViewModels.authUserInfoWhenNotLoginAndNotifyLiveData.observe(this, Observer {
             it.whenSuccess {
-                    mSimpleProgressDialogUtil?.closeHUD()
-                    it?.run{mAuthUserInfoEntity = this}
-                    mInfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
-                    mInfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
-                    mInfoUtil.isEmployAuth = mAuthUserInfoEntity!!.isEmployAuth
-                    mInfoUtil.isLoanHisAuth = mAuthUserInfoEntity!!.isLoanHisAuth
-                    mInfoUtil.isContactsAuth = mAuthUserInfoEntity!!.isContactsAuth
-                    mInfoUtil.isCardAuth = mAuthUserInfoEntity!!.isCardAuth
-                    mInfoUtil.isBankAuth = mAuthUserInfoEntity!!.isBankAuth
+                mSimpleProgressDialogUtil?.closeHUD()
+                it?.run{mAuthUserInfoEntity = this}
+                InfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
+                InfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
+                InfoUtil.isEmployAuth = mAuthUserInfoEntity!!.isEmployAuth
+                InfoUtil.isLoanHisAuth = mAuthUserInfoEntity!!.isLoanHisAuth
+                InfoUtil.isContactsAuth = mAuthUserInfoEntity!!.isContactsAuth
+                InfoUtil.isCardAuth = mAuthUserInfoEntity!!.isCardAuth
+                InfoUtil.isBankAuth = mAuthUserInfoEntity!!.isBankAuth
 
 
-                    if (!StringUtils.isEmpty(mAuthUserInfoEntity?.days)) {
-                        binding.tvMainInicioDays.setText(mAuthUserInfoEntity?.days)
-                    } else {
-                        binding.tvMainInicioDays.setText(Constants.EMPTY_STRING)
-                    }
-                    binding.tvMainInicioDays.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
-                    if (!StringUtils.isEmpty(mAuthUserInfoEntity?.quota)) {
-                        binding.tvMainInicioQuota.setText(goToZeroString(DoubleUtils.divTOString(mAuthUserInfoEntity?.quota, "100", 2)))
-                    } else {
-                        binding.tvMainInicioQuota.setText(Constants.EMPTY_STRING)
-                    }
-                    binding.tvInicioDaysTitle.setText(resources.getString(R.string.plazo_de_préstamo))
-                    binding.tvInicioDaysUnit.setText(resources.getString(R.string.días))
-                    binding.tvInicioDaysUnit.setVisibility(View.VISIBLE)
-                    binding.tvInicioOlicita.setEnabled(true)
-                    binding.tvInicioOlicita.setTextColor(resources.getColor(R.color.color_main_background))
-                    binding.tvInicioOlicita.setText(resources.getString(R.string.isolicita))
+                if (!StringUtils.isEmpty(mAuthUserInfoEntity?.days)) {
+                    binding.tvMainInicioDays.setText(mAuthUserInfoEntity?.days)
+                } else {
+                    binding.tvMainInicioDays.setText(Constants.EMPTY_STRING)
+                }
+                binding.tvMainInicioDays.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
+                if (!StringUtils.isEmpty(mAuthUserInfoEntity?.quota)) {
+                    binding.tvMainInicioQuota.setText(goToZeroString(DoubleUtils.divTOString(mAuthUserInfoEntity?.quota, "100", 2)))
+                } else {
+                    binding.tvMainInicioQuota.setText(Constants.EMPTY_STRING)
+                }
+                binding.tvInicioDaysTitle.setText(resources.getString(R.string.plazo_de_préstamo))
+                binding.tvInicioDaysUnit.setText(resources.getString(R.string.días))
+                binding.tvInicioDaysUnit.setVisibility(View.VISIBLE)
+                binding.tvInicioOlicita.setEnabled(true)
+                binding.tvInicioOlicita.setTextColor(resources.getColor(R.color.color_main_background))
+                binding.tvInicioOlicita.setText(resources.getString(R.string.isolicita))
 
             }
             it.whenError {
                 mHandler.removeCallbacksAndMessages(null)
                 mHandler.postDelayed({
-                    mViewModels.queryInicioAuthUserInfoSingleHide()
-                                     }, 5000) //5秒
+                    mViewModels.queryWhenNotLoginAndNotify()
+                }, 5000) //5秒
 
             }
         })
-
     }
     //将getDataHide获取的数据全局存储
-    private fun setDataHide(){
-        if (isProgressAll == 2 && !isProgressError && mAuthUserInfoEntity != null && mCurrDetailEntity != null) {
+    private fun setDataWhenLoginAndNotify(){
+        if (isProgressAllFinish == 2 && !isProgressError && mAuthUserInfoEntity != null && mCurrDetailEntity != null) {
             mSimpleProgressDialogUtil?.closeHUD()
 
 
-            mInfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
+            InfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
 
-            mInfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
-            mInfoUtil.isEmployAuth = mAuthUserInfoEntity!!.isEmployAuth
-            mInfoUtil.isLoanHisAuth = mAuthUserInfoEntity!!.isLoanHisAuth
-            mInfoUtil.isContactsAuth = mAuthUserInfoEntity!!.isContactsAuth
-            mInfoUtil.isCardAuth = mAuthUserInfoEntity!!.isCardAuth
-            mInfoUtil.isBankAuth = mAuthUserInfoEntity!!.isBankAuth
-            setView()
+            InfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
+            InfoUtil.isEmployAuth = mAuthUserInfoEntity!!.isEmployAuth
+            InfoUtil.isLoanHisAuth = mAuthUserInfoEntity!!.isLoanHisAuth
+            InfoUtil.isContactsAuth = mAuthUserInfoEntity!!.isContactsAuth
+            InfoUtil.isCardAuth = mAuthUserInfoEntity!!.isCardAuth
+            InfoUtil.isBankAuth = mAuthUserInfoEntity!!.isBankAuth
+            setViewWhenAllLoginState()
 
 
-        } else if (isProgressAll == 2) {
+        } else if (isProgressAllFinish == 2) {
             mHandler.removeCallbacksAndMessages(null)
-            mHandler.postDelayed({ getHide() }, 5000) //5秒
+            mHandler.postDelayed({ getDataWhenLoginAtvNotify() }, 5000) //5秒
 
         }
     }
 
     //将getData获取的数据全局存储
-    private fun setData() {
-        if (isProgressAll == 2 && !isProgressError && mAuthUserInfoEntity != null && mCurrDetailEntity != null) {
+    private fun setDataWhenLogin() {
+        if (isProgressAllFinish == 2 && !isProgressError && mAuthUserInfoEntity != null && mCurrDetailEntity != null) {
             binding.inclMainInicioProgress.llProgress.visibility = View.GONE
             binding.inclMainInicioError.llError.visibility = View.GONE
-            isCreate = false
-            mInfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
+            isNotGetData = false
+            InfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
 
-            mInfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
-            mInfoUtil.isEmployAuth = mAuthUserInfoEntity!!.isEmployAuth
-            mInfoUtil.isLoanHisAuth = mAuthUserInfoEntity!!.isLoanHisAuth
-            mInfoUtil.isContactsAuth = mAuthUserInfoEntity!!.isContactsAuth
-            mInfoUtil.isCardAuth = mAuthUserInfoEntity!!.isCardAuth
-            mInfoUtil.isBankAuth = mAuthUserInfoEntity!!.isBankAuth
+            InfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
+            InfoUtil.isEmployAuth = mAuthUserInfoEntity!!.isEmployAuth
+            InfoUtil.isLoanHisAuth = mAuthUserInfoEntity!!.isLoanHisAuth
+            InfoUtil.isContactsAuth = mAuthUserInfoEntity!!.isContactsAuth
+            InfoUtil.isCardAuth = mAuthUserInfoEntity!!.isCardAuth
+            InfoUtil.isBankAuth = mAuthUserInfoEntity!!.isBankAuth
 
-            setView()
-        } else if (isProgressAll == 2) {
+            setViewWhenAllLoginState()
+        } else if (isProgressAllFinish == 2) {
             binding.inclMainInicioProgress.llProgress.visibility = View.GONE
             binding.inclMainInicioError.llError.visibility = View.VISIBLE
             binding.inclMainInicioError.viewErrorUpdate.visibility = View.VISIBLE
@@ -406,7 +434,7 @@ class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
     }
 
     //登录下的UI展示
-    private fun setView() {
+    private fun setViewWhenAllLoginState() {
         when (mCurrDetailEntity?.orderStatus) {
             -1, 1/*拒单*/, 4/*结单*/ -> {
                 if (!StringUtils.isEmpty(mAuthUserInfoEntity?.days)) {
@@ -447,7 +475,7 @@ class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
 
                 //删除handler所有的消息和回调函数
                 mHandler.removeCallbacksAndMessages(null)
-                mHandler.postDelayed(Runnable { getDataHide() }, 30000) //30秒
+                mHandler.postDelayed(Runnable { queryWhenLoginAndNotify() }, 30000) //30秒
             }
             3/*待还款*/, 5/*逾期*/ -> {
 
@@ -469,44 +497,42 @@ class MainInicioFragment : BaseDbFragment<FragmentMainInicioBinding>(){
         }
     }
 
-    private fun getHide(){
+    private fun getDataWhenLoginAtvNotify(){
         mSimpleProgressDialogUtil?.showHUD(getFrgmActivity(), false)
-        if (!isCreate && mInfoUtil.isLogin) {
-            getDataHide()
-        } else if (!isCreate && !mInfoUtil.isLogin) {
-            mViewModels.queryInicioAuthUserInfoSingleHide()
-        } else {
-            mSimpleProgressDialogUtil?.closeHUD()
+        if (!isNotGetData && InfoUtil.isLogin) {//登录状态下获取了数据
+            queryWhenLoginAndNotify()
+        } else if (!isNotGetData && !InfoUtil.isLogin) {//未登录状态下获取了数据
+            mViewModels.queryWhenNotLoginAndNotify()
+        } else {//当界面从未进入过的时候
+         mSimpleProgressDialogUtil?.closeHUD()
         }
     }
 
-    private fun getDataHide() {
-        isProgressAllHide = 0
-        isProgressErrorHide = false
-
+    private fun queryWhenLoginAndNotify() {
+        isProgressAllFinishWhenNotify = 0
+        isProgressErrorWhenNotify = false
         //登录的时候获取订单状态和可贷金额
-        mViewModels.queryInicioAuthUserInfoHide()
-
+        mViewModels.queryAuthUserInfoWhenLoginAndNotify()
         val map = HashMap<String, Any>()
         map["type"] = 0
-        mViewModels.queryInicioCurrDetailHide(map)
+        mViewModels.queryCurrDetailWhenLoginAndNotify(map)
     }
 
 
 
-    private fun getData() {
+    private fun getDataWhenFirstComeIn() {
         binding.inclMainInicioProgress.llProgress.visibility = View.VISIBLE
         binding.inclMainInicioError.llError.visibility = View.GONE
-        if(mInfoUtil.isLogin){
+        if(InfoUtil.isLogin){
 
             val map = HashMap<String, Any>()
             map["type"] = 0
             //登录的时候获取订单状态和可贷金额
-            mViewModels.queryInicioCurrDetail(map)
-            mViewModels.queryInicioAuthUserInfo()
+            mViewModels.queryCurrDetailWhenLogin(map)
+            mViewModels.queryAuthUserInfoWhenLogin()
         }else{
             //未登录只获取，认证状态和可贷款金额及天数
-            mViewModels.queryInicioAuthUserInfoSingle()
+            mViewModels.queryAuthUserInfoWhenNotLogin()
         }
 
     }

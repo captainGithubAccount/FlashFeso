@@ -22,4 +22,6 @@ class MainMiCuentaFragment : BaseDbFragment<FragmentMainMicuentaBinding>(){
 
     }
 
+    override var isReuse: Boolean = false
+
 }

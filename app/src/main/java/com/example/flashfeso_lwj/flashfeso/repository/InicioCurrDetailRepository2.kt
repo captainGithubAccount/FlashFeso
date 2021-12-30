@@ -13,7 +13,7 @@ import java.lang.Exception
 import javax.inject.Inject
 import kotlin.coroutines.coroutineContext
 
-class InicioCurrDetailRepository @Inject constructor(
+class InicioCurrDetailRepository2 @Inject constructor(
     private val service: InicioCurrDetailService
 ): CoroutineScope by CoroutineScope(Dispatchers.IO) {
     private val _dataLiveData = MutableLiveData<DataResult<CurrDetailEntity>>()

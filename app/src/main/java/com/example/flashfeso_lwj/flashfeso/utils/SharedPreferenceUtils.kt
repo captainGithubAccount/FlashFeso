@@ -2,21 +2,34 @@ package com.example.flashfeso_lwj.flashfeso.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.flashfeso_lwj.App
+
+import com.example.flashfeso_lwj.App.Companion.context
+import com.example.flashfeso_lwj.R
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import javax.inject.Inject
 
-class SharedPreferenceUtils @Inject constructor(
-    val mSharedPreferences: SharedPreferences,
-){
-    fun isFirstLuanch(): Boolean = mSharedPreferences.getBoolean("isFirstLuanch", true)
+object SharedPreferenceUtils{
 
-    fun setNotFirstLuanch() = with(mSharedPreferences.edit()){
-        putBoolean("isFirstLuanch", false)
-        apply()
+     var mInstance: SharedPreferences? = null
+
+    fun isFirstLuanch(): Boolean = mInstance?.getBoolean("isFirstLuanch", true)!!
+
+    fun setNotFirstLuanch() = with(mInstance?.edit()){
+        this?.run {
+
+            putBoolean("isFirstLuanch", false)
+            apply()
+        }
     }
 
+    init {
+        mInstance = App.context.applicationContext.getSharedPreferences(context.getString(
+            R.string.str_sharedpreference_key), Context.MODE_PRIVATE)
+
+    }
 
     /**
      * 是否第一次试用
@@ -171,7 +184,7 @@ class SharedPreferenceUtils @Inject constructor(
      * @Description: 获取String类型的数据
      */
     fun getString(key: String?, defValue: String?): String? {
-        return mSharedPreferences.getString(key, defValue)
+        return mInstance?.getString(key, defValue)
     }
 
     /**
@@ -195,7 +208,7 @@ class SharedPreferenceUtils @Inject constructor(
      * @Description: 获取boolean类型的数据
      */
     fun getBoolean(key: String?, defValue: Boolean): Boolean {
-        return mSharedPreferences.getBoolean(key, defValue)
+        return mInstance?.getBoolean(key, defValue)!!
     }
 
     /**
@@ -219,7 +232,7 @@ class SharedPreferenceUtils @Inject constructor(
      * @Description: 获取int型数据
      */
     fun getInt(key: String?, defValue: Int): Int {
-        return mSharedPreferences.getInt(key, defValue)
+        return mInstance?.getInt(key, defValue)!!
     }
 
     /**
@@ -243,7 +256,7 @@ class SharedPreferenceUtils @Inject constructor(
      * @Description: 获取int型数据
      */
     fun getLong(key: String?, defValue: Long): Long {
-        return mSharedPreferences.getLong(key, defValue)
+        return mInstance?.getLong(key, defValue)!!
     }
 
 
@@ -257,22 +270,22 @@ class SharedPreferenceUtils @Inject constructor(
      */
     private fun putObject(key: String, value: Any?) {
         if (value != null) {
-            val editor = mSharedPreferences.edit()
-            if (mSharedPreferences.contains(key)) {
-                editor.remove(key)
+            val editor = mInstance?.edit()
+            if (mInstance?.contains(key)!!) {
+                editor?.remove(key)
             }
             if (value is Boolean) {
-                editor.putBoolean(key, (value as Boolean?)!!)
+                editor?.putBoolean(key, (value as Boolean?)!!)
             } else if (value is Float) {
-                editor.putFloat(key, (value as Float?)!!)
+                editor?.putFloat(key, (value as Float?)!!)
             } else if (value is Int) {
-                editor.putInt(key, (value as Int?)!!)
+                editor?.putInt(key, (value as Int?)!!)
             } else if (value is Long) {
-                editor.putLong(key, (value as Long?)!!)
+                editor?.putLong(key, (value as Long?)!!)
             } else if (value is String) {
-                editor.putString(key, value as String?)
+                editor?.putString(key, value as String?)
             }
-            editor.apply()
+            editor?.apply()
         }
     }
 
@@ -283,9 +296,9 @@ class SharedPreferenceUtils @Inject constructor(
      * @Description: 清除所有数据
      */
     fun clearAll() {
-        val editor = mSharedPreferences.edit()
-        editor.clear()
-        editor.apply()
+        val editor = mInstance?.edit()
+        editor?.clear()
+        editor?.apply()
     }
 
     /**
@@ -296,9 +309,9 @@ class SharedPreferenceUtils @Inject constructor(
      * @Description: 根据key清除对应的数据
      */
     fun removeByKey(key: String?) {
-        val editor = mSharedPreferences.edit()
-        editor.remove(key)
-        editor.apply()
+        val editor = mInstance?.edit()
+        editor?.remove(key)
+        editor?.apply()
     }
 
 }

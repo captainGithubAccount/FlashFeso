@@ -6,8 +6,9 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import com.adjust.sdk.*
-import com.example.flashfeso_lwj.base.utils.InfoUtil
+import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
+import com.example.flashfeso_lwj.flashfeso.utils.SharedPreferenceUtils
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -15,8 +16,6 @@ import javax.inject.Inject
 class App: Application() {
 
 
-    @Inject
-    lateinit var mInfoUtil: InfoUtil
 
     companion object{
         lateinit var context: Context
@@ -30,6 +29,9 @@ class App: Application() {
         super.onCreate()
         instance = this
         context = applicationContext
+        //InfoUtil
+        //SharedPreferenceUtils
+
 
         //Adjust start ----------------------------------------------------------------------
         val appToken = "wn2muq29ak8w"
@@ -49,7 +51,7 @@ class App: Application() {
             Log.i("example", "Attribution: $attribution")
             val trackerName = attribution.trackerName
             Log.i("example", "trackerName:$trackerName")
-            mInfoUtil.channel = trackerName
+            InfoUtil.channel = trackerName
         }
         Adjust.onCreate(config2)
 
@@ -67,7 +69,7 @@ class App: Application() {
         }
 
         Adjust.getGoogleAdId(this
-        ) { googleAdId -> mInfoUtil.gpsAdid = googleAdId }
+        ) { googleAdId -> InfoUtil.gpsAdid = googleAdId }
         //Adjust end ----------------------------------------------------------------------
 
 

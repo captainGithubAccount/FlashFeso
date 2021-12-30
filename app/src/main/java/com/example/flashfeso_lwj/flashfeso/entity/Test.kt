@@ -2,23 +2,33 @@ package com.example.flashfeso_lwj.flashfeso.entity
 
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.versionedparcelable.ParcelField
 import com.example.flashfeso_lwj.base.entity.DataResult
+import retrofit2.http.Body
+import retrofit2.http.POST
 
-import javax.inject.Inject
 
-data class CurrDetailResponse(
+interface InicioCurrDetailService {
+
+    @POST("mexico/currDetails")
+    suspend fun getCurrDetails(
+        @Body map: HashMap<String, Any>
+    ): Test
+}
+
+
+data class Test(
     val code: Int,
-    val data: CurrDetailEntity?,
+    val data: testa?,
     val msg: String,
 ) {
 
-    fun getDataResult(): DataResult<CurrDetailEntity> {
+    fun getDataResult(): DataResult<testa> {
         if (code == 200 && data != null) {
             return DataResult.Success(data)
         } else if (code != 200 && code != 4011) {
             return DataResult.Error(errorMessage = "返回码为${code}")
         } else if (code != 200 && code == 4011) {
+            //mInfoUtil.clear()
             return DataResult.Clear(clearMessage = msg)
         } else {
             return DataResult.Error(errorMessage = "返回的数据为null")
@@ -26,7 +36,7 @@ data class CurrDetailResponse(
     }
 }
 
-data class CurrDetailEntity(
+data class testa(
     val applyStatus: String?,
     val disburalAmount: String?,
     val interest: String?,
@@ -47,7 +57,7 @@ data class CurrDetailEntity(
     val bankName: String?,
     val repaidMoney: String? ,
     val remainderMoney: String?,
-    ) : Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -98,12 +108,12 @@ data class CurrDetailEntity(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<CurrDetailEntity> {
-        override fun createFromParcel(parcel: Parcel): CurrDetailEntity {
-            return CurrDetailEntity(parcel)
+    companion object CREATOR : Parcelable.Creator<testa> {
+        override fun createFromParcel(parcel: Parcel): testa {
+            return testa(parcel)
         }
 
-        override fun newArray(size: Int): Array<CurrDetailEntity?> {
+        override fun newArray(size: Int): Array<testa?> {
             return arrayOfNulls(size)
         }
     }

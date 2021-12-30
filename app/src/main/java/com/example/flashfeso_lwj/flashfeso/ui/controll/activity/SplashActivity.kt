@@ -20,6 +20,7 @@ import com.example.flashfeso_lwj.flashfeso.event.SplashPermissionDialogEvent
 import com.example.flashfeso_lwj.flashfeso.ui.controll.dialog.SplashPermissionDialog
 import com.example.flashfeso_lwj.flashfeso.utils.*
 import com.example.flashfeso_lwj.flashfeso.viewmodel.SplashViewModel
+import com.example.flashfeso_lwj.flashfeso.utils.SharedPreferenceUtils
 import com.example.lwj_common.common.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -31,8 +32,7 @@ import javax.inject.Inject
 class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     private var mFirstClick: Long = 0
     private var mSecondClick: Long = 0
-    @Inject
-    lateinit var mSharedPreferenceUtils: SharedPreferenceUtils
+
     @Inject
     lateinit var mSplashPermissionDialog: SplashPermissionDialog
 
@@ -157,7 +157,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     }
 
     private fun afterInit() {
-        if (mSharedPreferenceUtils.isFirstLuanch()) {
+        if (SharedPreferenceUtils.isFirstLuanch()) {
             //弹出对话框
             mSplashPermissionDialog.show(supportFragmentManager, "SplashPermissionDialog")
         } else {
@@ -205,7 +205,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
 
     override fun confirmListener() {
         //点击对话框确定按钮, 打开系统请求权限对话框
-        mSharedPreferenceUtils.setNotFirstLuanch()
+        SharedPreferenceUtils.setNotFirstLuanch()
         mSplashPermissionDialog.dismiss()
         checkAppPermission(this@SplashActivity)
     }

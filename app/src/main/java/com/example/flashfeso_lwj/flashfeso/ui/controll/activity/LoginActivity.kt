@@ -15,7 +15,7 @@ import com.example.flashfeso_lwj.App
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.base.entity.DataResult
 import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
-import com.example.flashfeso_lwj.base.utils.InfoUtil
+import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.base.utils.SimpleProgressDialogUtil
 import com.example.flashfeso_lwj.databinding.ActivityLoginBinding
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
@@ -29,10 +29,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
     val mLoginViewModel: LoginViewModel by viewModels()
-    private lateinit var trackerName: String
-    private lateinit var adid: String
-    @Inject lateinit var mInfoUtil: InfoUtil
-
 
     @Inject
     @JvmField
@@ -41,28 +37,32 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
     private var mIsYzmLayoutVisible = false
     private lateinit var mEnterPhoneNumber: String
 
+
+
     override fun observe() {
         mLoginViewModel.loginUserLiveData.observe(this, Observer {
             it.whenSuccessResponse {  dr ->
                 val dataResult = dr as DataResult.Success
                 mSimpleProgressDialogUtil?.closeHUD()
                 if (!StringUtils.isEmpty(dataResult.data?.phone)) {
-                    mInfoUtil.setAccount(dataResult.data?.phone)
+                    InfoUtil.setAccount(dataResult.data?.phone)
                 } else {
-                    mInfoUtil.setAccount("")
+                    InfoUtil.setAccount("")
                 }
 
                 if (!StringUtils.isEmpty(dataResult.data?.token)) {
-                    mInfoUtil.setToken(dataResult.data?.token)
+                    InfoUtil.setToken(dataResult.data?.token)
                 } else {
-                    mInfoUtil.setToken("")
+                    InfoUtil.setToken("")
                 }
 
                 if (!StringUtils.isEmpty(dataResult.data?.userId.toString())) {
-                    mInfoUtil.setUserId(dataResult.data?.userId.toString())
+                    InfoUtil.setUserId(dataResult.data?.userId.toString())
                 } else {
-                    mInfoUtil.setUserId("")
+                    InfoUtil.setUserId("")
                 }
+                //登录成功通知其他需要登录的地方更新数据
+                mLoginViewModel.queryLiveData()
 
                 finish()
                 Toast.makeText(this@LoginActivity, dataResult.successMessagle, Toast.LENGTH_SHORT).show()
@@ -72,9 +72,10 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                 binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.GONE
                 binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.VISIBLE
                 mSimpleProgressDialogUtil?.closeHUD()
-                Toast.makeText(App.context, "Error: ${it}", Toast.LENGTH_LONG).show()
+                //Toast.makeText(App.context, "Error: ${it}", Toast.LENGTH_LONG).show()
             }
         })
+
 
         mLoginViewModel.loginYzmLiveData.observe(this@LoginActivity, Observer {
             it.whenSuccess {
@@ -107,7 +108,6 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                 mSimpleProgressDialogUtil?.closeHUD()
             }
         })
-
     }
 
 
@@ -199,7 +199,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
 
             })
 
-            ll.etLoginVerificationCode
+            //ll.etLoginVerificationCode
 
             ll.tvLoginPrivacyDetail.setOnClickListener {
                 if(isClickUseful()){
@@ -230,10 +230,11 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
         }
     }
 
+
     private fun userLogin(verificationCode: String){
-
         mSimpleProgressDialogUtil?.showHUD(this, false)
-
+        var trackerName = "Organic"
+        var adid = ""
 
         //获取请求参数, 从Adjust获取
         val attribution = Adjust.getAttribution()
@@ -248,14 +249,9 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
         map["me_smsCode"] = verificationCode
         map["me_regisChannel"] = trackerName
         map["adid"] = adid
-        map["gps_adid"] = mInfoUtil.gpsAdid
-
-        if(Constants.ISLOG)Log.d("---------------", map.toString())
+        map["gps_adid"] = InfoUtil.gpsAdid
+        if(Constants.ISLOG)Log.d("--登录接口请求参数", map.toString())
         mLoginViewModel.queryLoginUserInfo(map)
-
-
-
-
     }
 
 

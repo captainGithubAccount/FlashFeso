@@ -1,30 +1,44 @@
 package com.example.flashfeso_lwj
 
-import android.content.Context
-import android.content.SharedPreferences
 import com.example.flashfeso_lwj.base.base.RetrofitFactory
+import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.api.data.service.*
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Singleton
 import dagger.hilt.android.components.ApplicationComponent
+import okhttp3.Interceptor
+import okhttp3.Response
 import retrofit2.Retrofit
+import javax.inject.Inject
 
 @Module
 @InstallIn(ApplicationComponent::class)
 object AppModule {
 
-    @Singleton
-    @Provides
-    fun getSharedPreferences(@ApplicationContext context: Context): SharedPreferences = context.getSharedPreferences(context.getString(
-            R.string.str_sharedpreference_key), Context.MODE_PRIVATE)
 
     @Singleton
     @Provides
-    fun provideRetrofitClient(retrofitFactory: RetrofitFactory): Retrofit = retrofitFactory.getRetrofit(UrlConstants.BASE_URL)
+    fun provideRetrofitClient(retrofitFactory: RetrofitFactory): Retrofit = retrofitFactory.getRetrofit(UrlConstants.BASE_URL,
+        object: Interceptor {
+            override fun intercept(chain: Interceptor.Chain): Response {
+                val requestBuilder = chain.request().newBuilder()
+
+                if (InfoUtil.isLogin) {
+                    val userId: String = InfoUtil.getUserId()!!
+                    val token: String = InfoUtil.getToken()!!
+                    requestBuilder
+                        .addHeader("userId", userId)
+                        .addHeader("userToken", token)
+                }
+                val request = requestBuilder.build()
+                return chain.proceed(request)
+            }
+
+        }
+    )
 
     @Singleton
     @Provides

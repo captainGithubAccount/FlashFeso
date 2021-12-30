@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_base.common.base.GetBinding
 
 abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
@@ -19,6 +21,12 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
     private var mSecondClickTime = 0L
     private  var _binding: T? = null
     protected val binding get() = _binding!!
+
+
+    open var isReuse: Boolean = false //是否复用fragment
+
+    protected var isInit = false//记录是否已经初始化过一次视图
+    protected var lastView: View? = null//记录上次创建的view
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -32,8 +40,10 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
         super.onCreate(savedInstanceState)
         beforeCreateView()
         observe()
+        //在onCreate中执行,不会重写onCreateView,所已也可以达到复用视图的效果
         _binding = getAtvOrFrgmBindingByReflex(layoutInflater)
         afterBindView()
+        if(BaseConstants.ISLOG) Log.d("---ddd","onCreate" )
     }
 
     override fun onCreateView(
@@ -41,20 +51,40 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding.initView()
+        if(BaseConstants.ISLOG) Log.d("---ddd","onCreateView" )
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        afterInitView()
-        afterInitView(savedInstanceState)
+        if(isReuse){
+            if(!isInit){
+                if(BaseConstants.ISLOG) Log.d("---ddd","onViewCreatedWhenInit" )
+                binding.initView()
+                afterInitView()
+                afterInitView(savedInstanceState)
+                isInit = true
+            }
+        }else{
+            if(BaseConstants.ISLOG) Log.d("---ddd","onViewCreated" )
+            binding.initView()
+            afterInitView()
+            afterInitView(savedInstanceState)
+        }
+    }
+
+    override fun onDestroyView() {
+        if(BaseConstants.ISLOG) Log.d("---ddd","onDestoryView" )
+        super.onDestroyView()
+    }
+
+    override fun onDetach() {
+        if(BaseConstants.ISLOG) Log.d("---ddd","onDetach" )
+        super.onDetach()
     }
 
 
-    override fun onStart() {
-        super.onStart()
-    }
+
 
     //两次点击的时间
     protected fun isClickUseful(): Boolean{
@@ -75,15 +105,16 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
     protected open fun beforeCreateView() {}
 
     //拿到view之后创建适配器等
-    protected fun afterInitView( savedInstanceState: Bundle?){}
+    protected open fun afterInitView( savedInstanceState: Bundle?){}
 
     //拿到view之后创建适配器等
-    protected fun afterInitView(){}
+    protected open fun afterInitView(){}
 
     override fun onDestroy() {
         super.onDestroy()
         //注意由于使用的是viewBinding, 千万不能回收binding对象, 否则会报空指针异常
         //_binding = null
+        _activity = null
     }
 
     /**

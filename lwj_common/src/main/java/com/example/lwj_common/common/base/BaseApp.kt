@@ -5,17 +5,17 @@ import android.content.Context
 
 abstract class BaseApp: Application() {
     companion object{
-        lateinit var context: Context
+        lateinit var _context: Context
 
-        var instance: BaseApp? = null
+        var _instance: BaseApp? = null
 
 
     }
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
-        context = applicationContext
+        _instance = this
+        _context = applicationContext
     }
 
 }
