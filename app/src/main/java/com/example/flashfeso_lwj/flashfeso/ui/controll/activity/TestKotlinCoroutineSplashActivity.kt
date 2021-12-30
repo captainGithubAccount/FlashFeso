@@ -39,8 +39,7 @@ class TestKotlinCoroutineSplashActivity : AppCompatActivity(), SplashPermissionD
     //测试job是否取消
     lateinit var job: Job
 
-    @Inject
-    lateinit var mSplashPermissionDialog: SplashPermissionDialog
+    var mSplashPermissionDialog: SplashPermissionDialog = SplashPermissionDialog()
 
     val splashViewModel: SplashViewModel by viewModels()
     //    方式二: 绑定生命周期

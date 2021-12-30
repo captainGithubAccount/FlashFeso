@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.databinding.DialogSplashBinding
 import com.example.flashfeso_lwj.flashfeso.event.SplashPermissionDialogEvent
@@ -12,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SplashPermissionDialog @Inject constructor() : DialogFragment() {
+class SplashPermissionDialog : DialogFragment() {
     private lateinit var _binding: DialogSplashBinding
     val binding get() = _binding
     lateinit var mSplashPermissionDialogEvent: SplashPermissionDialogEvent
@@ -22,8 +23,39 @@ class SplashPermissionDialog @Inject constructor() : DialogFragment() {
         //若点击dialog覆盖不到的activity的空白或者按返回键，则调用cancel方法
         isCancelable = true
         //setStyle(STYLE_NO_TITLE, R.style.StyleCommonMultiDialog) //todo(不知道这行啥作用)
+        setStyle(STYLE_NO_TITLE, 0)
         beforeInitView()
     }
+
+    /*override fun show(manager: FragmentManager, tag: String?) {
+
+        if(isAdded){
+            try {
+                //在每个add事务前增加一个remove事务，防止连续的add
+                manager.beginTransaction().remove(this).commit()
+                super.show(manager, tag)
+            } catch (e: Exception ) {
+                //同一实例使用不同的tag会异常,这里捕获一下
+                e.printStackTrace();
+            }
+        }else{
+            super.show(manager, tag)
+        }
+
+    }*/
+
+
+    /*@Override
+    public void show(FragmentManager manager, String tag) {
+        try {
+            //在每个add事务前增加一个remove事务，防止连续的add
+            manager.beginTransaction().remove(this).commit();
+            super.show(manager, tag);
+        } catch (Exception e) {
+            //同一实例使用不同的tag会异常,这里捕获一下
+            e.printStackTrace();
+        }
+    }*/
 
     private fun beforeInitView() {
         dialog?.let {
@@ -64,11 +96,11 @@ class SplashPermissionDialog @Inject constructor() : DialogFragment() {
         afterInitView()
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+   /* override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         //val style = R.style.StyleCommonMultiDialog //todo(自定义样式)
         //@param: themeResild = 0默认提供的dialog样式
         return Dialog(requireContext(), 0)
-    }
+    }*/
 
     private fun afterInitView() {
 

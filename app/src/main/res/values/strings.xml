@@ -12,6 +12,25 @@
     <string name="inicio" translatable="false">Inicio</string>
     <string name="mi_cuenta" translatable="false">Mi Cuenta</string>
 
+    <!--InformacionLaboralActivity-->
+    <string name="en_una_página" translatable="false">En una página</string>
+    <string name="two" translatable="false">02</string>
+    <string name="informacion_laboral" translatable="false">Información Laboral</string>
+    <string name="cuentanos_sobre_tu_trabajo" translatable="false">Cuéntamos sobre tu trabajo.</string>
+    <string name="nivel_de_estudio" translatable="false">Nivel de estudio</string>
+    <string name="tu_correo_electronicao" translatable="false">Tu correo electrónico</string>
+    <string name="estas_trabajando_actualment" translatable="false">¿Estás trabajando actualment?</string>
+    <string name="si" translatable="false">SI</string>
+    <string name="no" translatable="false">NO</string>
+    <string name="como_obtienes_tus_ingresos" translatable="false">¿Cómo obtienes tus ingresos?</string>
+    <string name="tengo_un_empleo" translatable="false">Tengo un empleo</string>
+    <string name="trabajo_de_manera" translatable="false">Trabajo de manera</string>
+    <string name="de_otras_maneras" translatable="false">De otras maneras</string>
+    <string name="información_laboral" translatable="false">Información Laboral</string>
+    <string name="ingreso_mensual" translatable="false">Ingreso mensual</string>
+    <string name="dia_de_pago" translatable="false">Día de pago</string>
+    <string name="imss_o_issste" translatable="false">IMSS o ISSSTE</string>
+
     <!--common-->
     <string name="money_symbol" translatable="false">$</string>
     <string name="siguiente" translatable="false">Siguiente</string>

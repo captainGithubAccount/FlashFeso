@@ -13,9 +13,13 @@ import com.example.flashfeso_lwj.flashfeso.entity.CurrDetailEntity
 import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_common.common.utils.DoubleUtils
 import com.example.lwj_common.common.utils.NumberUtils
+import dagger.hilt.android.AndroidEntryPoint
+
 /*
 * 申请借款界面
 * */
+
+@AndroidEntryPoint
 class DetallesDeLosPrestamosActivity : BaseDbActivity<ActivityDetallesDeLosPrestamosBinding>(){
     var mCurrDetailEntity: CurrDetailEntity? = null
 

@@ -17,12 +17,14 @@
         <entry key="app/src/main/res/drawable/selector_main_bottom_navigation.xml" value="0.2916666666666667" />
         <entry key="app/src/main/res/drawable/selector_main_bottom_navigation_img_person.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/selector_main_bottom_navigation_text.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/shape_confirm_stroke.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/shape_default_10.xml" value="0.2046875" />
         <entry key="app/src/main/res/drawable/shape_e5_10.xml" value="0.1648148148148148" />
         <entry key="app/src/main/res/drawable/shape_login_bg_phone.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/shape_login_line_verification_code.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/shape_main_inicio_is_olicita.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detalles_de_los_prestamos.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_infomation_laboral.xml" value="0.2682291666666667" />
         <entry key="app/src/main/res/layout/activity_informacion_basica.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login_privacy_detail.xml" value="0.25" />

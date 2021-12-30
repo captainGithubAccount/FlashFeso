@@ -23,9 +23,15 @@ class LoginViewModel @ViewModelInject constructor(
         loginUserInfoRepository.query(map)
     }
 
-    val notifyLiveData = MutableLiveData<Int>()
-    fun queryLiveData(){
-        notifyLiveData.postValue(1)
+    val notifyLiveData = MutableLiveData<String>()
+    fun queryNotifyLiveData(){
+        notifyLiveData.postValue("LoginAtv用来通知触发观察者的observe方法")
+    }
+
+
+    val notifyLiveData2 = MutableLiveData<String>()
+    fun queryNotify2LiveData(){
+        notifyLiveData2.postValue("认证一界面用来通知触发观察者的observe方法,但又只想通知部分监听到")
     }
 
 

@@ -15,8 +15,8 @@ fun View.back(activity: Activity){
     }
 }
 
-fun View.textIsNotEmpty(): Boolean{
-    return !StringUtils.isEmpty((this as TextView).text.toString().trim())
+fun View.textIsEmpty(): Boolean{
+    return StringUtils.isEmpty((this as TextView).text.toString().trim())
 }
 
 fun <T> T.addToast(context: Context ,toastString: String): T{

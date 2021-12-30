@@ -12,7 +12,9 @@ import com.example.flashfeso_lwj.databinding.ActivityLoginPrivacyDetailBinding
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import com.example.flashfeso_lwj.flashfeso.utils.back
 import com.example.lwj_common.common.utils.StringUtils
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginPrivacyDetailActivity : BasePageStyleActivity<ActivityLoginPrivacyDetailBinding>(){
     var mUrl: String? = null
     companion object{

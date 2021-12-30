@@ -64,6 +64,9 @@ object AppModule {
     @Provides
     fun provideInicioAuthUserInfoService(retrofit: Retrofit): InicioAuthUserInfoService = retrofit.create(InicioAuthUserInfoService::class.java)
 
+    @Singleton
+    @Provides
+    fun provideAuthAddressRepository(retrofit: Retrofit): InfomationAuthAddressService = retrofit.create(InfomationAuthAddressService::class.java)
 
 
 }

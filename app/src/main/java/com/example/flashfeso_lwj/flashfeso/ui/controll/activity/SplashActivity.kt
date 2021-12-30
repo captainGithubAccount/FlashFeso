@@ -33,8 +33,9 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     private var mFirstClick: Long = 0
     private var mSecondClick: Long = 0
 
-    @Inject
-    lateinit var mSplashPermissionDialog: SplashPermissionDialog
+    /*@Inject
+    @JvmField*/
+    var mSplashPermissionDialog: SplashPermissionDialog? = SplashPermissionDialog()
 
     val mSplashViewModel: SplashViewModel by viewModels()
 //    方式二: 绑定生命周期
@@ -148,7 +149,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     }
 
     private fun initEvent() {
-        mSplashPermissionDialog.mSplashPermissionDialogEvent = this
+        mSplashPermissionDialog?.mSplashPermissionDialogEvent = this
     }
 
     override fun onResume() {
@@ -159,7 +160,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     private fun afterInit() {
         if (SharedPreferenceUtils.isFirstLuanch()) {
             //弹出对话框
-            mSplashPermissionDialog.show(supportFragmentManager, "SplashPermissionDialog")
+            mSplashPermissionDialog?.show(supportFragmentManager, "SplashPermissionDialog")
         } else {
             //检查权限
             checkAppPermission(this@SplashActivity)
@@ -200,13 +201,13 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     override fun cancelListener() {
         //低版本直接调用finish关闭Activity, 高版本首先去关闭ActionBar的展开菜单, 然后对FragmentManager进行退栈操作, 最后关闭Activity
         onBackPressed()
-        mSplashPermissionDialog.dismiss()
+        mSplashPermissionDialog?.dismiss()
     }
 
     override fun confirmListener() {
         //点击对话框确定按钮, 打开系统请求权限对话框
         SharedPreferenceUtils.setNotFirstLuanch()
-        mSplashPermissionDialog.dismiss()
+        mSplashPermissionDialog?.dismiss()
         checkAppPermission(this@SplashActivity)
     }
 
@@ -268,6 +269,11 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
 
     private fun getVersionLatestData() {
         mSplashViewModel.query2()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mSplashPermissionDialog = null
     }
 
 

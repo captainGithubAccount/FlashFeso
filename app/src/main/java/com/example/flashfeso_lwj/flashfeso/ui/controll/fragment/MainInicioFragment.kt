@@ -14,7 +14,7 @@ import com.example.flashfeso_lwj.base.utils.SimpleProgressDialogUtil
 import com.example.flashfeso_lwj.databinding.FragmentMainInicioBinding
 import com.example.flashfeso_lwj.flashfeso.entity.AuthUserInfoEntity
 import com.example.flashfeso_lwj.flashfeso.entity.CurrDetailEntity
-import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.InformacionBasicaActivity
+import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.InfomationBasicaActivity
 import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.LoginActivity
 import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.LoginPrivacyDetailActivity
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
@@ -181,7 +181,7 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
                         } else if (!employAuth && addressAuth) {
                             startActivity(InformacionLaboralActivity::class.java)
                         } else*/ if (!addressAuth) {
-                            startActivity(InformacionBasicaActivity::class.java)
+                            startActivity(InfomationBasicaActivity::class.java)
                         }
                     }
                 } else {
@@ -221,6 +221,9 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
             getDataWhenLoginAtvNotify()
         })
 
+        mLoginViewModel.notifyLiveData2.observe(this, Observer {
+            getDataWhenLoginAtvNotify()
+        })
 
 
 
@@ -315,12 +318,52 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
             it.whenError {
                 isProgressAllFinishWhenNotify++
                 isProgressErrorWhenNotify = true
-                setDataWhenLoginAndNotify()
+
+
+                if (isProgressAllFinish == 2 && !isProgressError && mAuthUserInfoEntity != null && mCurrDetailEntity != null) {
+                    mSimpleProgressDialogUtil?.closeHUD()
+
+
+                    InfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
+
+                    InfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
+                    InfoUtil.isEmployAuth = mAuthUserInfoEntity!!.isEmployAuth
+                    InfoUtil.isLoanHisAuth = mAuthUserInfoEntity!!.isLoanHisAuth
+                    InfoUtil.isContactsAuth = mAuthUserInfoEntity!!.isContactsAuth
+                    InfoUtil.isCardAuth = mAuthUserInfoEntity!!.isCardAuth
+                    InfoUtil.isBankAuth = mAuthUserInfoEntity!!.isBankAuth
+                    setViewWhenAllLoginState()
+
+
+                } else if (isProgressAllFinish == 2) {
+                    mHandler.removeCallbacksAndMessages(null)
+                    mHandler.postDelayed({ getDataWhenLoginAtvNotify() }, 5000) //5秒
+
+                }
             }
             it.whenSuccess {
                 it?.run{mAuthUserInfoEntity = this}
                 isProgressAllFinishWhenNotify++
-                setDataWhenLoginAndNotify()
+                if (isProgressAllFinishWhenNotify == 2 && !isProgressError && mAuthUserInfoEntity != null && mCurrDetailEntity != null) {
+                    mSimpleProgressDialogUtil?.closeHUD()
+
+
+                    InfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
+
+                    InfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
+                    InfoUtil.isEmployAuth = mAuthUserInfoEntity!!.isEmployAuth
+                    InfoUtil.isLoanHisAuth = mAuthUserInfoEntity!!.isLoanHisAuth
+                    InfoUtil.isContactsAuth = mAuthUserInfoEntity!!.isContactsAuth
+                    InfoUtil.isCardAuth = mAuthUserInfoEntity!!.isCardAuth
+                    InfoUtil.isBankAuth = mAuthUserInfoEntity!!.isBankAuth
+                    setViewWhenAllLoginState()
+
+
+                } else if (isProgressAllFinishWhenNotify == 2) {
+                    mHandler.removeCallbacksAndMessages(null)
+                    mHandler.postDelayed({ getDataWhenLoginAtvNotify() }, 5000) //5秒
+
+                }
             }
         })
 
@@ -330,12 +373,50 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
             it.whenSuccess {
                 it?.run{mCurrDetailEntity = this}
                 isProgressAllFinishWhenNotify++
-                setDataWhenLoginAndNotify()
+                if (isProgressAllFinishWhenNotify == 2 && !isProgressError && mAuthUserInfoEntity != null && mCurrDetailEntity != null) {
+                    mSimpleProgressDialogUtil?.closeHUD()
+
+
+                    InfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
+
+                    InfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
+                    InfoUtil.isEmployAuth = mAuthUserInfoEntity!!.isEmployAuth
+                    InfoUtil.isLoanHisAuth = mAuthUserInfoEntity!!.isLoanHisAuth
+                    InfoUtil.isContactsAuth = mAuthUserInfoEntity!!.isContactsAuth
+                    InfoUtil.isCardAuth = mAuthUserInfoEntity!!.isCardAuth
+                    InfoUtil.isBankAuth = mAuthUserInfoEntity!!.isBankAuth
+                    setViewWhenAllLoginState()
+
+
+                } else if (isProgressAllFinishWhenNotify == 2) {
+                    mHandler.removeCallbacksAndMessages(null)
+                    mHandler.postDelayed({ getDataWhenLoginAtvNotify() }, 5000) //5秒
+
+                }
             }
             it.whenError {
                 isProgressAllFinishWhenNotify++
                 isProgressErrorWhenNotify = true
-                setDataWhenLoginAndNotify()
+                if (isProgressAllFinish == 2 && !isProgressError && mAuthUserInfoEntity != null && mCurrDetailEntity != null) {
+                    mSimpleProgressDialogUtil?.closeHUD()
+
+
+                    InfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
+
+                    InfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
+                    InfoUtil.isEmployAuth = mAuthUserInfoEntity!!.isEmployAuth
+                    InfoUtil.isLoanHisAuth = mAuthUserInfoEntity!!.isLoanHisAuth
+                    InfoUtil.isContactsAuth = mAuthUserInfoEntity!!.isContactsAuth
+                    InfoUtil.isCardAuth = mAuthUserInfoEntity!!.isCardAuth
+                    InfoUtil.isBankAuth = mAuthUserInfoEntity!!.isBankAuth
+                    setViewWhenAllLoginState()
+
+
+                } else if (isProgressAllFinish == 2) {
+                    mHandler.removeCallbacksAndMessages(null)
+                    mHandler.postDelayed({ getDataWhenLoginAtvNotify() }, 5000) //5秒
+
+                }
             }
             it.whenClear {
                 Toast.makeText(activity, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT).show()
@@ -348,6 +429,7 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
         mViewModels.authUserInfoWhenNotLoginAndNotifyLiveData.observe(this, Observer {
             it.whenSuccess {
                 mSimpleProgressDialogUtil?.closeHUD()
+
                 it?.run{mAuthUserInfoEntity = this}
                 InfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
                 InfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
@@ -387,28 +469,7 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
         })
     }
     //将getDataHide获取的数据全局存储
-    private fun setDataWhenLoginAndNotify(){
-        if (isProgressAllFinish == 2 && !isProgressError && mAuthUserInfoEntity != null && mCurrDetailEntity != null) {
-            mSimpleProgressDialogUtil?.closeHUD()
 
-
-            InfoUtil.authAllin = mAuthUserInfoEntity!!.authAllin
-
-            InfoUtil.isAddressAuth = mAuthUserInfoEntity!!.isAddressAuth
-            InfoUtil.isEmployAuth = mAuthUserInfoEntity!!.isEmployAuth
-            InfoUtil.isLoanHisAuth = mAuthUserInfoEntity!!.isLoanHisAuth
-            InfoUtil.isContactsAuth = mAuthUserInfoEntity!!.isContactsAuth
-            InfoUtil.isCardAuth = mAuthUserInfoEntity!!.isCardAuth
-            InfoUtil.isBankAuth = mAuthUserInfoEntity!!.isBankAuth
-            setViewWhenAllLoginState()
-
-
-        } else if (isProgressAllFinish == 2) {
-            mHandler.removeCallbacksAndMessages(null)
-            mHandler.postDelayed({ getDataWhenLoginAtvNotify() }, 5000) //5秒
-
-        }
-    }
 
     //将getData获取的数据全局存储
     private fun setDataWhenLogin() {
