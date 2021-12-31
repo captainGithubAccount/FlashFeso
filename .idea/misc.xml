@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable-v24/shape_simple_progress_dialog_bg.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/drawable-xxhdpi/shape_banvomer.xml" value="0.1648148148148148" />
         <entry key="app/src/main/res/drawable/bg_confirm.xml" value="0.26944444444444443" />
+        <entry key="app/src/main/res/drawable/bg_confirm_stroke.xml" value="0.23703703703703705" />
         <entry key="app/src/main/res/drawable/bg_default_10.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/bg_login_phone.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/bg_splash.xml" value="0.2611111111111111" />
@@ -24,13 +25,14 @@
         <entry key="app/src/main/res/drawable/shape_login_line_verification_code.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/shape_main_inicio_is_olicita.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detalles_de_los_prestamos.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_infomation_laboral.xml" value="0.2682291666666667" />
+        <entry key="app/src/main/res/layout/activity_infomation_laboral.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_informacion_basica.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login_privacy_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_common.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/dialog_infomation_laboral_select.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/dialog_simpleprogressdialog.xml" value="0.165625" />
         <entry key="app/src/main/res/layout/dialog_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_main_inicio.xml" value="0.25" />
@@ -43,6 +45,8 @@
         <entry key="app/src/main/res/layout/incl_main_inicio_features.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/incl_main_inicio_progress.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/incl_splash_dialog_permission_content.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/item_laboral_select.xml" value="0.16302083333333334" />
+        <entry key="app/src/main/res/layout/test_dialog.xml" value="0.16302083333333334" />
         <entry key="app/src/main/res/layout/view_easyrcl_empty.xml" value="0.18854166666666666" />
         <entry key="app/src/main/res/layout/view_easyrcl_error.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/view_easyrcl_progress.xml" value="0.28229166666666666" />

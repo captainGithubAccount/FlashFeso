@@ -15,6 +15,7 @@ import com.example.flashfeso_lwj.databinding.FragmentMainInicioBinding
 import com.example.flashfeso_lwj.flashfeso.entity.AuthUserInfoEntity
 import com.example.flashfeso_lwj.flashfeso.entity.CurrDetailEntity
 import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.InfomationBasicaActivity
+import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.InfomationLaboralActivity
 import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.LoginActivity
 import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.LoginPrivacyDetailActivity
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
@@ -170,17 +171,17 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
                         val loanHisAuth: Boolean = InfoUtil.isLoanHisAuth
                         val employAuth: Boolean = InfoUtil.isEmployAuth
                         val addressAuth: Boolean = InfoUtil.isAddressAuth
-                        /*if (!bankAuth && cardAuth) {
-                            startActivity(AgergarCuentaBancariaActivity::class.java)
+                        if (!bankAuth && cardAuth) {
+                            //startActivity(AgergarCuentaBancariaActivity::class.java)
                         } else if (!cardAuth && contactsAuth) {
-                            startActivity(InformacionDeIdetidadActivity::class.java)
+                            //startActivity(InformacionDeIdetidadActivity::class.java)
                         } else if (!contactsAuth && loanHisAuth) {
-                            startActivity(InformacionDeContactosActivity::class.java)
+                            //startActivity(InformacionDeContactosActivity::class.java)
                         } else if (!loanHisAuth && employAuth) {
-                            startActivity(HistorialCrediticioActivity::class.java)
+                            //startActivity(HistorialCrediticioActivity::class.java)
                         } else if (!employAuth && addressAuth) {
-                            startActivity(InformacionLaboralActivity::class.java)
-                        } else*/ if (!addressAuth) {
+                            startActivity( InfomationLaboralActivity::class.java)
+                        } else if (!addressAuth) {
                             startActivity(InfomationBasicaActivity::class.java)
                         }
                     }

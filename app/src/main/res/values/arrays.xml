@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--教育信息-->
+    <string-array name="array_education_all">
+        <item>Escuela primaria</item>
+        <item>secundaria</item>
+        <item>Preparatpria</item>
+        <item>Educación media superior</item>
+        <item>Facultad</item>
+        <item>Universidades</item>
+        <item>Educación superior</item>
+    </string-array>
+
+
+    <!--打工类型-->
+    <string-array name="array_dagong_type_all">
+        <item>Empleado de IMSS</item>
+        <item>Empleado de CFE</item>
+        <item>Empleado de PEMEX</item>
+        <item>Empleado de SEP</item>
+        <item>Empleado de Gobierno</item>
+        <item>Empleado de ISSSTE</item>
+        <item>Administrativo</item>
+        <item>Ventas</item>
+        <item>Profesor</item>
+        <item>Doctor</item>
+        <item>Ingeniero</item>
+        <item>Almacen</item>
+        <item>Arquitecto</item>
+        <item>Atención a clientes</item>
+        <item>Ayudante General</item>
+        <item>Cobranza</item>
+        <item>Call Center</item>
+        <item>Chofer de Empresa</item>
+        <item>Director</item>
+        <item>Enfermera</item>
+        <item>Gerente</item>
+        <item>Guardia de Seguridad</item>
+        <item>Legal</item>
+        <item>Militar</item>
+        <item>Policia</item>
+        <item>Supervisor</item>
+        <item>Cotador/Finanzas</item>
+        <item>Soporte Técnico</item>
+        <item>Jubilado</item>
+        <item>Otro</item>
+    </string-array>
+
+
+    <!--自主类型-->
+    <string-array name="array_zizhu_job_type_all">
+        <item>Tienda de Abarrotes</item>
+        <item>Carnicería</item>
+        <item>Papelería</item>
+        <item>Estetica O Barbería</item>
+        <item>Negocio de Comida</item>
+        <item>Ciber Café</item>
+        <item>Recaudería</item>
+        <item>Venta de Ropa</item>
+        <item>Venta por Catálogo</item>
+        <item>Conductor UBER, DIDI, Etc</item>
+        <item>Uber Eats</item>
+        <item>Taxista</item>
+        <item>Construcción</item>
+        <item>Carpintería</item>
+        <item>Mecanica</item>
+        <item>Contratista</item>
+        <item>Consultor</item>
+        <item>Servicios Financieros</item>
+        <item>Manufactura y Maquila</item>
+        <item>Servicios Computacionales</item>
+        <item>Servicios de Limpieza</item>
+        <item>Servicios Legales</item>
+        <item>Software &amp; Internet</item>
+        <item>Otro</item>
+    </string-array>
+
+    <!--逾期天数-->
+    <string-array name="array_overdue_days_all">
+        <item>Nunca atrasado</item>
+        <item>1-7 diás</item>
+        <item>8-15 diás</item>
+        <item>16-30 diás</item>
+        <item>30-60 diás</item>
+        <item>Más de 60 diás</item>
+        <item>Nunca préstamo</item>
+    </string-array>
+
+    <!--贷款金额-->
+    <string-array name="array_Loan_amount_all">
+        <item>No debo nada</item>
+        <item>Menos de $500 pesos</item>
+        <item>$500 a $1000 pesos</item>
+        <item>$1001 a $2000 pesos</item>
+        <item>$2001 a $4000 pesos</item>
+        <item>$4001 a $8000 pesos</item>
+        <item>Más de $8000 pesos</item>
+    </string-array>
+
+
+    <!--月收入-->
+    <string-array name="array_money_all">
+        <item>$0 a $2000 pesos</item>
+        <item>$2001 a $3000 pesos</item>
+        <item>$3001 a $4000 pesos</item>
+        <item>$4001 a $5000 pesos</item>
+        <item>$5001 a $6000 pesos</item>
+        <item>$6001 a $8000 pesos</item>
+        <item>$8001 a $10000 pesos</item>
+        <item>$10001 a $12000 pesos</item>
+        <item>$12001 a $15000 pesos</item>
+        <item>$15001 a $20000 pesos</item>
+        <item>Más de $20001 pesos</item>
+    </string-array>
+
+
+
+
+
+
+    <!--贷款笔数-->
+    <!--还款笔数-->
+    <!--逾期笔数-->
+    <string-array name="array_Loan_counts_all">
+        <item>Ninguno</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>Más de 10</item>
+    </string-array>
+
+    <!--联系人关系-->
+    <string-array name="array_relatives_all">
+        <item>Padres</item>
+        <item>Hijos</item>
+        <item>Parejas</item>
+        <item>Familiares</item>
+        <item>Compañeros de Trabajo</item>
+    </string-array>
+
+
+    <!--银行卡种类-->
+    <string-array name="array_card_type">
+        <item>CLABE</item>
+        <item>Tarjeta de débito</item>
+    </string-array>
+
+
+    <!--发薪日-->
+    <string-array name="array_pay_date">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+
+</resources>

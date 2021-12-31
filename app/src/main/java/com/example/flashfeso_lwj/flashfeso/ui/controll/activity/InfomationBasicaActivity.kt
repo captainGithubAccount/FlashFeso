@@ -1,5 +1,6 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
 
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -19,6 +20,10 @@ import com.example.lwj_base.common.base.BaseConstants
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.HashMap
 import javax.inject.Inject
+/*
+*
+* 认证一
+* */
 
 @AndroidEntryPoint
 class InfomationBasicaActivity : BasePageStyleActivity<ActivityInformacionBasicaBinding>() {
@@ -39,8 +44,8 @@ class InfomationBasicaActivity : BasePageStyleActivity<ActivityInformacionBasica
                     onBackPressed()//将界面销毁, 相当于点击了返回键, 或相当于finish()
                     mLoginViewModel.queryNotify2LiveData()
 
-                    //todo waiting doing
-//                    startActivity(InfomationLaboralActivity::class.java)
+
+                    startActivity( InfomationLaboralActivity::class.java)
                     Toast.makeText(this, it.successMessagle, Toast.LENGTH_SHORT).show()
                 }
 

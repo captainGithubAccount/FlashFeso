@@ -30,6 +30,24 @@
     <string name="ingreso_mensual" translatable="false">Ingreso mensual</string>
     <string name="dia_de_pago" translatable="false">Día de pago</string>
     <string name="imss_o_issste" translatable="false">IMSS o ISSSTE</string>
+    <!--收入来源-->
+    <string name="fuentes_de_ingresos" translatable="false">Fuentes de ingresos</string>
+    <!--请选择学历水平-->
+    <string name="elija_el_nivel_de_educacion" translatable="false">Por favor, elija el nivel de estudio</string>
+    <!--请输入你的电子邮件-->
+    <string name="introduzca_su_correo_electronico" translatable="false">Por favor, introduzca su correo electrónico</string>
+    <!--请选择是否在工作-->
+    <string name="elija_si_esta_trabajando" translatable="false">Por favor, elija si está trabajando</string>
+    <!--请选择收入得到方式-->
+    <string name="elija_como_obtener_ingresos" translatable="false">Por favor, elija cómo obtener ingresos</string>
+    <!--请选择工作岗位-->
+    <string name="elija_un_trabajo" translatable="false">Por favor, elija el información laboral</string>
+    <!--请选择月收入-->
+    <string name="seleccione_ingresos_mensuales" translatable="false">Por favor, seleccione ingresos mensuales</string>
+    <!--请选择发薪日期-->
+    <string name="elija_el_dia_del_pago" translatable="false">Elija el día del pago</string>
+    <!--请选择社保号-->
+    <string name="seleccione_el_numero_de_la_seguridad_social" translatable="false">Por favor, seleccione el número de la seguridad social</string>
 
     <!--common-->
     <string name="money_symbol" translatable="false">$</string>

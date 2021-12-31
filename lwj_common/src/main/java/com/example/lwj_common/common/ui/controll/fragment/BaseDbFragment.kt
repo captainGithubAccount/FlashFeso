@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.lwj_base.common.base.BaseConstants
@@ -123,7 +125,7 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
      * @param cls 跳转的 Activity
      */
     protected open fun startActivity(cls: Class<*>?) {
-        val intent = Intent(this.activity, cls)
+        val intent = Intent(getFrgmActivity(), cls)
         this.startActivity(intent)
     }
 
@@ -135,10 +137,19 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
      * @param bundle 传递参数
      */
     protected open fun startActivity(cls: Class<*>?, bundle: Bundle?) {
-        val intent = Intent(this.activity, cls)
+        val intent = Intent(getFrgmActivity(), cls)
         if (bundle != null) {
             intent.putExtras(bundle)
         }
         this.startActivity(intent)
+    }
+
+    /**
+     * 隐藏软键盘
+     * view  触发软键盘弹出的控件
+     */
+    open fun hideKeyboard(view: View) {
+        val imm = view.context.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
