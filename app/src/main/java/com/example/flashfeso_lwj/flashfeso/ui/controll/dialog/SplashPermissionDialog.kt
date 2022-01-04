@@ -12,7 +12,6 @@ import com.example.flashfeso_lwj.flashfeso.event.SplashPermissionDialogEvent
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class SplashPermissionDialog : DialogFragment() {
     private lateinit var _binding: DialogSplashBinding
     val binding get() = _binding
@@ -27,7 +26,7 @@ class SplashPermissionDialog : DialogFragment() {
         beforeInitView()
     }
 
-    /*override fun show(manager: FragmentManager, tag: String?) {
+    override fun show(manager: FragmentManager, tag: String?) {
 
         if(isAdded){
             try {
@@ -42,7 +41,7 @@ class SplashPermissionDialog : DialogFragment() {
             super.show(manager, tag)
         }
 
-    }*/
+    }
 
 
     /*@Override
@@ -58,6 +57,16 @@ class SplashPermissionDialog : DialogFragment() {
     }*/
 
     private fun beforeInitView() {
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        _binding = DialogSplashBinding.inflate(layoutInflater, container, false)
+
         dialog?.let {
             it.window?.run {
                 //setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -80,14 +89,6 @@ class SplashPermissionDialog : DialogFragment() {
 
             it.requestWindowFeature(Window.FEATURE_NO_TITLE)
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        _binding = DialogSplashBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -103,6 +104,7 @@ class SplashPermissionDialog : DialogFragment() {
     }*/
 
     private fun afterInitView() {
+
 
         binding.run {
             tvPermissionDialogConfirm.setOnClickListener { v->

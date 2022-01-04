@@ -66,7 +66,14 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideAuthAddressRepository(retrofit: Retrofit): InfomationAuthAddressService = retrofit.create(InfomationAuthAddressService::class.java)
+    fun provideAuthAddressService(retrofit: Retrofit): InfomationAuthAddressService = retrofit.create(InfomationAuthAddressService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideInfomationLaboralAuthWorkService(retrofit: Retrofit): InfomationLaboralAuthWorkService = retrofit.create(InfomationLaboralAuthWorkService::class.java)
 
 
+    @Singleton
+    @Provides
+    fun provideHistorialCrediticioService(retrofit: Retrofit): HistorialCrediticioService = retrofit.create(HistorialCrediticioService::class.java)
 }

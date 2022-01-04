@@ -14,10 +14,7 @@ import com.example.flashfeso_lwj.base.utils.SimpleProgressDialogUtil
 import com.example.flashfeso_lwj.databinding.FragmentMainInicioBinding
 import com.example.flashfeso_lwj.flashfeso.entity.AuthUserInfoEntity
 import com.example.flashfeso_lwj.flashfeso.entity.CurrDetailEntity
-import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.InfomationBasicaActivity
-import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.InfomationLaboralActivity
-import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.LoginActivity
-import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.LoginPrivacyDetailActivity
+import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.*
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
@@ -178,7 +175,7 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
                         } else if (!contactsAuth && loanHisAuth) {
                             //startActivity(InformacionDeContactosActivity::class.java)
                         } else if (!loanHisAuth && employAuth) {
-                            //startActivity(HistorialCrediticioActivity::class.java)
+                            startActivity(HistorialCrediticioActivity::class.java)
                         } else if (!employAuth && addressAuth) {
                             startActivity( InfomationLaboralActivity::class.java)
                         } else if (!addressAuth) {

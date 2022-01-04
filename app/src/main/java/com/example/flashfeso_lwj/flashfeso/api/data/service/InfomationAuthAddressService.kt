@@ -7,7 +7,7 @@ import retrofit2.http.POST
 interface InfomationAuthAddressService {
 
     @POST("/mexico/authAddress")
-    fun getAuthAddressResponse(
+    suspend fun getAuthAddressResponse(
         @Body map: HashMap<String, Any>
     ): AuthAddressResponse
 }

@@ -16,8 +16,8 @@ class RvAdapterLaboralSelect(
 
         init {
             binding.flLaboralItemContainer.setOnClickListener {
-                val str =this.itemView.getTag(R.id.tag_item_laboral) as String
-                listener.onDialogItemClick(str, flag)
+                val list =this.itemView.getTag(R.id.tag_item_laboral) as List<String>
+                listener.onDialogItemClick(list, flag)
             }
         }
 
@@ -33,7 +33,8 @@ class RvAdapterLaboralSelect(
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         val str: String = data[position]
-        holder.itemView.setTag(R.id.tag_item_laboral, str)
+        val list: List<String> = listOf(str, (position+1).toString())
+        holder.itemView.setTag(R.id.tag_item_laboral, list)
         holder.bind(str)
     }
 

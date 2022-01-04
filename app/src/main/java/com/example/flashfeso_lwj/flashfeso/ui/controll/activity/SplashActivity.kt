@@ -33,36 +33,30 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     private var mFirstClick: Long = 0
     private var mSecondClick: Long = 0
 
+
     /*@Inject
     @JvmField*/
-    var mSplashPermissionDialog: SplashPermissionDialog? = SplashPermissionDialog()
+    var mSplashPermissionDialog: SplashPermissionDialog? = null
 
     val mSplashViewModel: SplashViewModel by viewModels()
-//    方式二: 绑定生命周期
-    init{
-        lifecycleScope.launchWhenCreated {
-            whenObserve()
-        }
 
-    }
+    //    方式二: 绑定生命周期
+    /* init{
+         lifecycleScope.launchWhenResumed {
+             whenObserve()
+         }
 
+     }
+ */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //判断是否是任务栈中的根Activity, 如果是就不做任何处理, 如果不是即this.isTaskRoot为false, 直接finish掉
         //第二次启动直接启动MainActivity
-        if (!this.isTaskRoot){
+        if (!this.isTaskRoot) {
             finish()
             return
         }
-        //whenObserve()
-        initEvent()
-    }
 
-    suspend fun observeWhenCreated(block: () -> Unit) = lifecycleScope.launchWhenCreated {
-        block.invoke()
-    }
-
-    private suspend fun whenObserve() {
         //数据带状态的实现
         mSplashViewModel.dataLiveData.observe(this, Observer { statedata ->
             statedata.whenSuccessAndDefaultErrorDeal { versionData ->
@@ -77,6 +71,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                                                 dismiss()
                                                 finish()
                                             }
+
                                             override fun confirmListener() {
                                                 openBrowser(requireActivity(),
                                                     versionData.downloadURl)
@@ -91,6 +86,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                                             override fun cancelListener() {
                                                 jumpToMainActivity()
                                             }
+
                                             override fun confirmListener() {
                                                 openBrowser(requireActivity(),
                                                     versionData.downloadURl)
@@ -109,6 +105,12 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                 }
             }
         })
+
+    }
+
+
+    private fun whenObserve() {
+
     }
 
     /**
@@ -154,13 +156,17 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
 
     override fun onResume() {
         super.onResume()
+        //initEvent()
         afterInit()
+
     }
 
     private fun afterInit() {
         if (SharedPreferenceUtils.isFirstLuanch()) {
+            mSplashPermissionDialog = SplashPermissionDialog()
+            mSplashPermissionDialog?.mSplashPermissionDialogEvent = this
             //弹出对话框
-            mSplashPermissionDialog?.show(supportFragmentManager, "SplashPermissionDialog")
+            mSplashPermissionDialog?.show(supportFragmentManager, "SplashPermissionDialo")
         } else {
             //检查权限
             checkAppPermission(this@SplashActivity)

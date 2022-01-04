@@ -55,7 +55,7 @@ class InfomationBasicaActivity : BasePageStyleActivity<ActivityInformacionBasica
             }
             it.whenClear {
                 InfoUtil.clear()
-                mLoginViewModel.queryNotifyLiveData()
+                mLoginViewModel.queryNotifyLiveData()//相当于mEventBus.post(new UpdateLoginBean());
                 Toast.makeText(this, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT).show()
                 onBackPressed()
             }

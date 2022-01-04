@@ -25,6 +25,7 @@ object SharedPreferenceUtils{
         }
     }
 
+
     init {
         mInstance = App.context.applicationContext.getSharedPreferences(context.getString(
             R.string.str_sharedpreference_key), Context.MODE_PRIVATE)

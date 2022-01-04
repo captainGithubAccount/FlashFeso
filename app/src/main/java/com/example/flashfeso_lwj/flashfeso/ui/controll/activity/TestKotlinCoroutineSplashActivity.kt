@@ -1,3 +1,4 @@
+/*
 package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
 
 
@@ -46,8 +47,11 @@ class TestKotlinCoroutineSplashActivity : AppCompatActivity(), SplashPermissionD
     init{
         lifecycleScope.launchWhenCreated {
 
-            /*supervisorScope {
-                *//*launch {
+            */
+/*supervisorScope {
+                *//*
+*/
+/*launch {
                     repeat(5){
                         //delay(100)
 
@@ -55,19 +59,28 @@ class TestKotlinCoroutineSplashActivity : AppCompatActivity(), SplashPermissionD
                     }
 
                 }*//*
-                *//*launch {
+*/
+/*
+                *//*
+*/
+/*launch {
 
 
                     whenObserve()
                 }*//*
+*/
+/*
                 whenObserve()
-            }*/
+            }*//*
+
 
 
             whenObserve()
-            /*Log.d("---before delay", "job.isCancelled: ${job.isCancelled.toString()} -- job.isActive: ${job.isActive.toString()} -- job.isCompleted:${job.isCompleted} ")
+            */
+/*Log.d("---before delay", "job.isCancelled: ${job.isCancelled.toString()} -- job.isActive: ${job.isActive.toString()} -- job.isCompleted:${job.isCompleted} ")
             delay(3000)
-            Log.d("---after delay", "job.isCancelled: ${job.isCancelled.toString()} -- job.isActive: ${job.isActive.toString()} -- job.isCompleted:${job.isCompleted} ")*/
+            Log.d("---after delay", "job.isCancelled: ${job.isCancelled.toString()} -- job.isActive: ${job.isActive.toString()} -- job.isCompleted:${job.isCompleted} ")*//*
+
 
         }
 
@@ -90,9 +103,11 @@ class TestKotlinCoroutineSplashActivity : AppCompatActivity(), SplashPermissionD
         if (!this.isTaskRoot)
             finish()
 //        方式一: 绑定生命周期
-        /*observeWhenCreated {
+        */
+/*observeWhenCreated {
             whenObserve()
-        }*/
+        }*//*
+
 
         //whenObserve()
         initEvent()
@@ -163,7 +178,8 @@ class TestKotlinCoroutineSplashActivity : AppCompatActivity(), SplashPermissionD
         })
 
         //数据不带状态的实现
-        /*splashViewModel.versionLiveData.observe(this, Observer{ versionResponse ->
+        */
+/*splashViewModel.versionLiveData.observe(this, Observer{ versionResponse ->
             Log.d("SplashActivity",versionResponse.data.toString())
             if(versionResponse.code == 200 && versionResponse.data != null && !StringUtils.isEmpty(versionResponse.data.VId)){
                 versionResponse.data.let{ data ->
@@ -203,15 +219,18 @@ class TestKotlinCoroutineSplashActivity : AppCompatActivity(), SplashPermissionD
             }else{
                 jumpToMainActivity()
             }
-        })*/
+        })*//*
+
     }
 
-    /**
+    */
+/**
      * 调用第三方浏览器打开
      *
      * @param context
      * @param url     要浏览的资源地址
-     */
+     *//*
+
     private fun openBrowser(context: Context, browserUrl: String) {
         val intent = Intent()
         intent.setAction(Intent.ACTION_VIEW)
@@ -222,7 +241,8 @@ class TestKotlinCoroutineSplashActivity : AppCompatActivity(), SplashPermissionD
 
         // 注意此处的判断intent.resolveActivity()可以返回显示该Intent的Activity对应的组件名
         // 官方解释 : Name of the component implementing an activity that can display the intent
-        /*if (intent.resolveActivity(context.packageManager) != null) {
+        */
+/*if (intent.resolveActivity(context.packageManager) != null) {
             val componentName = intent.resolveActivity(context.packageManager)
             context.startActivity(Intent.createChooser(intent,
                 context.resources.getString(R.string.choose_browser)))
@@ -230,7 +250,8 @@ class TestKotlinCoroutineSplashActivity : AppCompatActivity(), SplashPermissionD
             Toast.makeText(context.applicationContext,
                 context.resources.getString(R.string.download_browser),
                 Toast.LENGTH_SHORT).show()
-        }*/
+        }*//*
+
     }
 
     //todo 待实现Main
@@ -388,4 +409,4 @@ class TestKotlinCoroutineSplashActivity : AppCompatActivity(), SplashPermissionD
     }
 
 
-}
+}*/
