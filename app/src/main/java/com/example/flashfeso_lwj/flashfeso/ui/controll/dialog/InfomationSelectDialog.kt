@@ -6,34 +6,38 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.flashfeso_lwj.databinding.DialogInfomationLaboralSelectBinding
-import com.example.flashfeso_lwj.flashfeso.event.InfomationLaboralSelectItemOnclickListener
+import com.example.flashfeso_lwj.flashfeso.event.InfomationSelectItemOnClickListener
 import com.example.flashfeso_lwj.flashfeso.ui.controll.adapter.RvAdapterLaboralSelect
 
-class InfomationLaboralSelectDialog private constructor(): DialogFragment(){
+class InfomationSelectDialog private constructor(): DialogFragment(){
     var isSetAdapter: Boolean = false
 
     private var _binding: DialogInfomationLaboralSelectBinding? = null
     val binding: DialogInfomationLaboralSelectBinding get() = _binding!!
 
     companion object{
-        fun newInstance(): InfomationLaboralSelectDialog = InfomationLaboralSelectDialog()
+        fun newInstance(): InfomationSelectDialog = InfomationSelectDialog()
     }
-    private lateinit var itemListener: InfomationLaboralSelectItemOnclickListener
+    private lateinit var itemListener: InfomationSelectItemOnClickListener
     private lateinit var dataOnRv: List<String>
     private var flag: Int = 0
 
-    fun addSetting(flag: Int,data: List<String>, listener: InfomationLaboralSelectItemOnclickListener) =
+    /*
+    * @Param: flag: flag不同的数值代表不一样的列表数据源, 通过手动传flag然后再由rv适配器返回该flag, 最后通过flag的值进行判断
+    * 不同的flag表示可以对不同的列表进行不同的操作
+    * */
+    fun addSetting(flag: Int,data: List<String>, listener: InfomationSelectItemOnClickListener) =
         this.setFlag(flag).setData(data).setListener(listener)
 
-    private fun InfomationLaboralSelectDialog.setFlag(dialogFlag: Int): InfomationLaboralSelectDialog =
+    private fun InfomationSelectDialog.setFlag(dialogFlag: Int): InfomationSelectDialog =
         this.apply {  flag = dialogFlag}
 
 
-    private fun InfomationLaboralSelectDialog.setListener(listener: InfomationLaboralSelectItemOnclickListener): InfomationLaboralSelectDialog =
+    private fun InfomationSelectDialog.setListener(listener: InfomationSelectItemOnClickListener): InfomationSelectDialog =
         this.apply {  itemListener = listener}
 
 
-    private fun InfomationLaboralSelectDialog.setData(data: List<String>): InfomationLaboralSelectDialog =
+    private fun InfomationSelectDialog.setData(data: List<String>): InfomationSelectDialog =
         this.apply {  dataOnRv = data}
 
 

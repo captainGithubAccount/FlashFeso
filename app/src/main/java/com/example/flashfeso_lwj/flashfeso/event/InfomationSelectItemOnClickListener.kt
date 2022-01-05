@@ -1,6 +1,6 @@
 package com.example.flashfeso_lwj.flashfeso.event
 
-interface InfomationLaboralSelectItemOnclickListener {
+interface InfomationSelectItemOnClickListener {
 
     fun onDialogItemClick(list: List<String>, flag: Int)
 }

@@ -11,11 +11,10 @@ import com.example.flashfeso_lwj.base.entity.DataResult
 import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
 import com.example.flashfeso_lwj.base.utils.SimpleProgressDialogUtil
 import com.example.flashfeso_lwj.databinding.ActivityInfomationLaboralBinding
-import com.example.flashfeso_lwj.flashfeso.event.InfomationLaboralSelectItemOnclickListener
-import com.example.flashfeso_lwj.flashfeso.ui.controll.dialog.InfomationLaboralSelectDialog
+import com.example.flashfeso_lwj.flashfeso.event.InfomationSelectItemOnClickListener
+import com.example.flashfeso_lwj.flashfeso.ui.controll.dialog.InfomationSelectDialog
 import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.utils.textIsEmpty
-import com.example.flashfeso_lwj.flashfeso.viewmodel.InfomationAddressViewModel
 import com.example.flashfeso_lwj.flashfeso.viewmodel.InfomationLaboralAuthWorkViewModdel
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.lwj_base.common.base.BaseConstants
@@ -28,7 +27,7 @@ import javax.inject.Inject
 * 认证二
 * */
 @AndroidEntryPoint
-class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLaboralBinding>(), InfomationLaboralSelectItemOnclickListener{
+class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLaboralBinding>(), InfomationSelectItemOnClickListener{
 
     var educationPosition: Int = 0
     var jobPosition: Int = 0
@@ -39,11 +38,11 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
     @Inject
     @JvmField
     var mSimpleProgressDialogUtil: SimpleProgressDialogUtil? = null
-    lateinit var  mDialogEducation: InfomationLaboralSelectDialog
-    lateinit var  mDialogJobTypeDialog: InfomationLaboralSelectDialog
-    lateinit var  mDialogZiZhuJobDialog: InfomationLaboralSelectDialog
-    lateinit var  mDialogMonthMoneyDialog: InfomationLaboralSelectDialog
-    lateinit var  mDialogPayDate: InfomationLaboralSelectDialog
+    lateinit var  mDialogEducation: InfomationSelectDialog
+    lateinit var  mDialogJobTypeDialog: InfomationSelectDialog
+    lateinit var  mDialogZiZhuJobDialog: InfomationSelectDialog
+    lateinit var  mDialogMonthMoneyDialog: InfomationSelectDialog
+    lateinit var  mDialogPayDate: InfomationSelectDialog
     lateinit var mDataEducation: List<String>
     lateinit var mDataJobType: List<String>
     lateinit var mDataZiZhuJob: List<String>
@@ -86,7 +85,7 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
         binding.educationLl.setOnClickListener {
             hideOthersKeyboard()
             mDataEducation = resources.getStringArray(R.array.array_education_all).toList()
-            mDialogEducation = InfomationLaboralSelectDialog.newInstance()
+            mDialogEducation = InfomationSelectDialog.newInstance()
                 .addSetting(1 ,mDataEducation, this)
             mDialogEducation.show(supportFragmentManager, "mDialogEducationLl")
         }
@@ -128,11 +127,11 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
         binding.jobTypeLl.setOnClickListener {
             if(isDaGong){
                 mDataJobType = resources.getStringArray(R.array.array_dagong_type_all).toList()
-                mDialogJobTypeDialog = InfomationLaboralSelectDialog.newInstance().addSetting(2, mDataJobType, this)
+                mDialogJobTypeDialog = InfomationSelectDialog.newInstance().addSetting(2, mDataJobType, this)
                 mDialogJobTypeDialog.show(supportFragmentManager, "mDialogJobDialog")
             }else{
                 mDataZiZhuJob = resources.getStringArray(R.array.array_zizhu_job_type_all).toList()
-                mDialogZiZhuJobDialog = InfomationLaboralSelectDialog.newInstance().addSetting(3, mDataZiZhuJob, this)
+                mDialogZiZhuJobDialog = InfomationSelectDialog.newInstance().addSetting(3, mDataZiZhuJob, this)
                 mDialogZiZhuJobDialog.show(supportFragmentManager, "mDialogZiZhuJobDialog")
             }
         }
@@ -141,14 +140,14 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
         binding.monthlySalaryLl.setOnClickListener {
             hideOthersKeyboard()
             mDataMonthMoney = resources.getStringArray(R.array.array_money_all).toList()
-            mDialogMonthMoneyDialog = InfomationLaboralSelectDialog.newInstance().addSetting(4, mDataMonthMoney, this)
+            mDialogMonthMoneyDialog = InfomationSelectDialog.newInstance().addSetting(4, mDataMonthMoney, this)
             mDialogMonthMoneyDialog.show(supportFragmentManager, "mDialogMonthMoneyDialog")
         }
         //发薪日
         binding.diaDePagoLl.setOnClickListener {
             hideOthersKeyboard()
             mDataPayData = resources.getStringArray(R.array.array_pay_date).toList()
-            mDialogPayDate = InfomationLaboralSelectDialog.newInstance().addSetting(5, mDataPayData, this)
+            mDialogPayDate = InfomationSelectDialog.newInstance().addSetting(5, mDataPayData, this)
             mDialogPayDate.show(supportFragmentManager, "mDialogPayDate")
         }
         //确定按钮
@@ -225,42 +224,6 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
             "Educación superior" -> 7
             else -> null
         }
-
-    /*fun String.getJobPosition(): Int? =
-        when(this){
-            "Empleado de IMSS" -> 1
-            "Empleado de CFE" -> 2
-            "Empleado de PEMEX" -> 3
-            "Empleado de SEP" -> 4
-            "Empleado de Gobierno" -> 5
-            "Empleado de ISSSTE" -> 6
-            "Administrativo" -> 7
-            "Ventas" -> 8
-            "Profesor" -> 9
-            "Doctor" -> 10
-            "Ingeniero" -> 11
-            "Almacen" -> 12
-            "Arquitecto" -> 13
-            "Atención a clientes" -> 14
-            "Ayudante General" -> 15
-            "Cobranza" -> 16
-            "Call Center" -> 17
-            "Chofer de Empresa" -> 18
-            "Director" -> 19
-            "Enfermera" -> 20
-            "Gerente" -> 21
-            "Guardia de Seguridad" -> 22
-            "Legal" -> 23
-            "Militar" -> 24
-            "Policia" -> 25
-            "Supervisor" -> 26
-            "Cotador/Finanzas" -> 27
-            "Soporte Técnico" -> 28
-            "Jubilado" -> 29
-            "Otro" -> 30
-            else -> null
-        }*/
-
 
     private fun queryAuthWork(map: HashMap<String, Any>) {
 

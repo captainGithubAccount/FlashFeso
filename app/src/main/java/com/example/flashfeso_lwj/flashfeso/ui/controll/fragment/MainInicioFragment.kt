@@ -173,7 +173,7 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
                         } else if (!cardAuth && contactsAuth) {
                             //startActivity(InformacionDeIdetidadActivity::class.java)
                         } else if (!contactsAuth && loanHisAuth) {
-                            //startActivity(InformacionDeContactosActivity::class.java)
+                            startActivity(HistorialCrediticioActivity::class.java)
                         } else if (!loanHisAuth && employAuth) {
                             startActivity(HistorialCrediticioActivity::class.java)
                         } else if (!employAuth && addressAuth) {

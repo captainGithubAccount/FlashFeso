@@ -29,6 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppBaseColorTheme">
         <activity
+            android:name=".flashfeso.ui.controll.activity.InformacionDeContactosActivity"
+            android:exported="false" />
+        <activity
             android:name=".flashfeso.ui.controll.activity.HistorialCrediticioActivity"
             android:exported="false" />
         <activity

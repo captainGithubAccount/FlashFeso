@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.databinding.ItemLaboralSelectBinding
-import com.example.flashfeso_lwj.flashfeso.event.InfomationLaboralSelectItemOnclickListener
+import com.example.flashfeso_lwj.flashfeso.event.InfomationSelectItemOnClickListener
 
 class RvAdapterLaboralSelect(
     private val flag: Int,
     private val data: List<String>,
-    private val listener: InfomationLaboralSelectItemOnclickListener
+    private val listener: InfomationSelectItemOnClickListener
 ) : RecyclerView.Adapter<RvAdapterLaboralSelect.VH>() {
     inner class VH(val binding: ItemLaboralSelectBinding) : RecyclerView.ViewHolder(binding.root) {
 

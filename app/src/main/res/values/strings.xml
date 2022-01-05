@@ -12,6 +12,33 @@
     <string name="inicio" translatable="false">Inicio</string>
     <string name="mi_cuenta" translatable="false">Mi Cuenta</string>
 
+    <!--HistorialCrediticioActivity-->
+    <string name="historial_crediticio" translatable="false">Historial Crediticio</string>
+    <string name="three" translatable="false">03</string>
+    <string name="por_favor_elige" translatable="false">Por favor elige</string>
+    <string name="ya_casi_estas_preguntas" translatable="false">¡Ya casi!  Estas preguntas te ayudan a aumentar las probabilidades de la aprobación del préstamo.</string>
+    <string name="has_dejado_de_pagar" translatable="false">Q:¿Has dejado de pagar un préstamo en los últimos 6 meses?</string>
+    <string name="cual_es_el_tiempo" translatable="false">Q:¿Cuál es el tiempo máximo que has tardado en pagar tu deuda?</string>
+    <string name="cuanto_es_lo_que" translatable="false">Q:¿Cuánto es su deuda total en crédito digital?</string>
+    <string name="cuantos_creditos_digitales_has_tenido" translatable="false">Q:¿Cuántos préstamos digitales has hecho anteriormente?</string>
+    <string name="cuantos_de_estos_creditos_estan_vigentes_hoy" translatable="false">Q:¿Cuántos de estos créditos están vigentes hoy ?</string>
+    <string name="cuantos_creditos_digitales_has_pagado" translatable="false">Q:¿Cuántos préstamos digitales has pagado puntualmente?</string>
+    <string name="cuantos_de_estos_creditos_estan_venicidos_hoy" translatable="false">Q:¿Cuántos de estos créditos están vencidos hoy?</string>
+    <!--请选择是否放弃过还款-->
+    <string name="elija_si_ha_renunciado_al_reembolso" translatable="false">Por favor, elija si ha renunciado al reembolso</string>
+    <!--请选择最长逾期天数-->
+    <string name="seleccione_el_numero_maximo_de_dias_atrasados" translatable="false">Por favor, seleccione el número máximo de días atrasados</string>
+    <!--请选择贷款总额-->
+    <string name="seleccione_el_importe_total_del_prestamo" translatable="false">Por favor, seleccione el importe total del préstamo</string>
+    <!--请选择贷款笔数-->
+    <string name="seleccione_el_numero_de_prestamos" translatable="false">Por favor, seleccione el número de préstamos</string>
+    <!--请选择拨款金额-->
+    <string name="seleccione_el_importe_de_la_subvencion" translatable="false">Por favor, seleccione el importe de la subvención</string>
+    <!--请选择及时还款笔数-->
+    <string name="elija_el_numero_de_reembolso_oportuno" translatable="false">Por favor, elija el número de reembolso oportuno</string>
+    <!--请选择逾期还款笔数-->
+    <string name="seleccione_el_numero_de_pagos_atrasados" translatable="false">Por favor, seleccione el número de pagos atrasados</string>
+
     <!--InformacionLaboralActivity-->
     <string name="en_una_página" translatable="false">En una página</string>
     <string name="two" translatable="false">02</string>

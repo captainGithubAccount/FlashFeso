@@ -25,8 +25,10 @@
         <entry key="app/src/main/res/drawable/shape_login_line_verification_code.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/shape_main_inicio_is_olicita.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detalles_de_los_prestamos.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_historial_crediticio.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_infomation_laboral.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_informacion_basica.xml" value="0.17447916666666666" />
+        <entry key="app/src/main/res/layout/activity_informacion_de_contactos.xml" value="0.1734375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login_privacy_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
