@@ -600,11 +600,5 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
         binding.inclMainInicioProgress.llProgress.visibility = View.GONE
         binding.inclMainInicioError.llError.visibility = View.VISIBLE
         binding.inclMainInicioError.viewErrorUpdate.visibility = View.VISIBLE
-
     }
-
-
-
-
-
 }

@@ -113,6 +113,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
 
     override fun onDestroy() {
         super.onDestroy()
+
         //原项目工具类有内存泄漏风险, 但是目前这种方式通过installIn(application)中实现单例, 仍然会有内存泄漏, 需要置null解决内存泄漏
         mSimpleProgressDialogUtil = null
 

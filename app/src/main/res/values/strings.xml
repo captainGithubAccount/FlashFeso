@@ -11,6 +11,35 @@
     <!--MainActivity bottom navigation text-->
     <string name="inicio" translatable="false">Inicio</string>
     <string name="mi_cuenta" translatable="false">Mi Cuenta</string>
+    <!--HistorialCrediticioActivity-->
+    <string name="informacion_de_contactos" translatable="false">Información de Contactos</string>
+    <string name="four" translatable="false">04</string>
+    <string name="ingresa_datos_de_tus_contactos" translatable="false">Ingresa datos de tus contactos.</string>
+    <string name="referencia_1" translatable="false">Referencia       1</string>
+    <string name="referencia_2" translatable="false">Referencia       2</string>
+    <string name="relacion_contigo" translatable="false">Relación contigo</string>
+    <string name="numero_de_celular" translatable="false">Número de celular</string>
+    <string name="nombre_completo" translatable="false">Nombre completo</string>
+    <!--请选择与第一个联系人的关系-->
+    <string name="seleccione_la_relacion_con_el_primer_contacto" translatable="false">Seleccione la relación con el primer contacto</string>
+    <!--请选择第一个联系人的手机号码-->
+    <string name="por_favor_seleccione_el_numero_de_telefono_del_primer_contacto" translatable="false">Por favor, seleccione el número de teléfono del primer contacto</string>
+    <!--请输入第一个联系人的完整姓名-->
+    <string name="introduzca_el_nombre_completo_del_primer_contacto" translatable="false">Introduzca el nombre completo del primer contacto</string>
+    <!--请选择与第二个联系人的关系-->
+    <string name="seleccione_la_relacion_con_el_segundo_contacto" translatable="false">Seleccione la relación con el segundo contacto</string>
+    <!--请选择第二个联系人的手机号码-->
+    <string name="por_favor_seleccione_el_numero_de_telefono_del_segundo_contacto" translatable="false">Por favor, seleccione el número de teléfono del segundo contacto</string>
+    <!--请输入第二个联系人的完整姓名-->
+    <string name="introduzca_el_nombre_completo_del_segundo_contacto" translatable="false">Introduzca el nombre completo del segundo contacto</string>
+    <!--两个联系人不能有相同的号码-->
+    <string name="dos_contactos_no_pueden_tener_el_mismo_nmero" translatable="false">Dos contactos no pueden tener el mismo número</string>
+    <!--两个联系人不能名字一样-->
+    <string name="dos_contactos_no_pueden_tener_el_miusmo_nombre" translatable="false">Dos contactos no pueden tener el mismo nombre</string>
+    <!--不能有两个父亲-->
+    <string name="no_puede_haber_dos_padres" translatable="false">No puede haber dos padres.</string>
+    <!--不能有两个配偶-->
+    <string name="no_puede_tener_dos_conyuges" translatable="false">No puede tener dos cónyuges</string>
 
     <!--HistorialCrediticioActivity-->
     <string name="historial_crediticio" translatable="false">Historial Crediticio</string>
