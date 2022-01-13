@@ -76,4 +76,8 @@ object AppModule {
     @Singleton
     @Provides
     fun provideHistorialCrediticioService(retrofit: Retrofit): HistorialCrediticioService = retrofit.create(HistorialCrediticioService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideInformacionDeldetidadMobiRecordService(retrofit: Retrofit): InformacionDeldetidadMobiRecordService = retrofit.create(InformacionDeldetidadMobiRecordService::class.java)
 }

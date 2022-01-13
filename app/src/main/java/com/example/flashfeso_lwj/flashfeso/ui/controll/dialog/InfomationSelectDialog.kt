@@ -41,8 +41,6 @@ class InfomationSelectDialog private constructor(): DialogFragment(){
         this.apply {  dataOnRv = data}
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isCancelable = true
@@ -78,7 +76,6 @@ class InfomationSelectDialog private constructor(): DialogFragment(){
         if(isSetAdapter){
 
         }else{
-
             binding.rvLaboralSelectContent.adapter = RvAdapterLaboralSelect(flag, dataOnRv, itemListener)
         }
     }

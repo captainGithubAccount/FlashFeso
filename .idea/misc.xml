@@ -29,11 +29,13 @@
         <entry key="app/src/main/res/layout/activity_infomation_laboral.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_informacion_basica.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/activity_informacion_de_contactos.xml" value="0.1734375" />
+        <entry key="app/src/main/res/layout/activity_informacion_de_idetidad.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login_privacy_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_common.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/dialog_common_select.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/dialog_infomation_laboral_select.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/dialog_simpleprogressdialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_splash.xml" value="0.25" />
@@ -48,6 +50,7 @@
         <entry key="app/src/main/res/layout/incl_main_inicio_progress.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/incl_splash_dialog_permission_content.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/item_laboral_select.xml" value="0.16302083333333334" />
+        <entry key="app/src/main/res/layout/item_take_photo_select.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/test_dialog.xml" value="0.16302083333333334" />
         <entry key="app/src/main/res/layout/view_easyrcl_empty.xml" value="0.18854166666666666" />
         <entry key="app/src/main/res/layout/view_easyrcl_error.xml" value="0.28229166666666666" />

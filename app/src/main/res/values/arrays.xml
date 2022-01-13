@@ -189,4 +189,11 @@
         <item>31</item>
     </string-array>
 
+
+    <string-array name="array_deldetidad_take_photo">
+        <item>Take Picture</item>
+        <item>Select Image</item>
+        <item>Cancel</item>
+    </string-array>
+
 </resources>

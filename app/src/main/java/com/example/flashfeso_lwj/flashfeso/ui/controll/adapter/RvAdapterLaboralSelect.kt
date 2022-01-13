@@ -33,7 +33,7 @@ class RvAdapterLaboralSelect(
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         val str: String = data[position]
-        val list: List<String> = listOf(str, (position+1).toString())
+        val list: List<String> = listOf(str, position.toString())
         holder.itemView.setTag(R.id.tag_item_laboral, list)
         holder.bind(str)
     }

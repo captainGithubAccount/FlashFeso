@@ -8,6 +8,38 @@
     <string name="puede_tardar_unos_minutos" translatable="false">Puede tardar unos minutos.</string>
     <string name="ya_veo" translatable="false">Ya veo</string>
 
+    <!--HistorialCrediticioActivity-->
+    <string name="informacion_de_idetidad" translatable="false">Información de Identidad</string>
+    <string name="five" translatable="false">05</string>
+    <string name="para_poder_aprobar_tu_prestamo" translatable="false">Para poder aprobar tu préstamo.debemos verficar tu identidad.¡Es muy fácil!Puedes hacerlo desde aquí mismo.</string>
+    <string name="frente_de_ine" translatable="false">Frente de INE/IFE</string>
+    <string name="detras_de_ine" translatable="false">Detrás de INE/IFE</string>
+    <string name="selfies_de_tu_rostro_completo" translatable="false">Selfies de tu rostro completo</string>
+    <string name="curp" translatable="false">CURP</string>
+    <string name="apellido_paterno" translatable="false">Apellido paterno</string>
+    <string name="apellido_materno" translatable="false">Apellido materno</string>
+    <string name="homoclave_de_rfc" translatable="false">Homoclave del RFC</string>
+    <!--请上传正确的身份证正面照片-->
+    <string name="favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion" translatable="false">Favor de subir una foto de la parte frontal de su identificación</string>
+    <!--请先上传正确的身份证正面照片-->
+    <string name="favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion_primero" translatable="false">Favor de subir una foto de la parte frontal de su identificación primero</string>
+    <!--请上传正确的身份证背面照片-->
+    <string name="favor_de_subir_una_foto_de_la_parte_trasera_de_su_identificacion" translatable="false">Favor de subir una foto de la parte trasera de su identificación</string>
+    <!--请先上传正确的身份证背面照片-->
+    <string name="favor_de_subir_una_foto_de_la_parte_trasera_de_su_identificacion_primero" translatable="false">Favor de subir una foto de la parte trasera de su identificación primero</string>
+    <!--请自拍-->
+    <string name="favor_de_tomarse_una_selfie" translatable="false">Favor de tomarse una selfie</string>
+    <!--请填写完整的身份证号码-->
+    <string name="rellene_el_numero_de_identificacion_completo" translatable="false">Por favor, rellene el número de identificación completo</string>
+    <!--请填写父姓-->
+    <string name="rellene_el_apellido_paterno" translatable="false">Por favor, rellene el apellido paterno</string>
+    <!--请填写母姓-->
+    <string name="rellene_el_apellido_materno" translatable="false">Por favor, rellene el apellido materno</string>
+    <!--请填写完整的名字-->
+    <string name="rellene_el_nombre_completo" translatable="false">Por favor, rellene el nombre completo</string>
+    <!--请填写税号-->
+    <string name="introduzca_el_numero_de_impuesto_correcto" translatable="false">Introduzca el número de impuesto correcto</string>
+
     <!--MainActivity bottom navigation text-->
     <string name="inicio" translatable="false">Inicio</string>
     <string name="mi_cuenta" translatable="false">Mi Cuenta</string>
