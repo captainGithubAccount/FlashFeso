@@ -1,8 +1,6 @@
-package com.example.lwj_common.common.ui.controll.view
+package com.example.lwjtest_popupwindow.view
 
-import android.app.ActionBar
 import android.app.Activity
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
@@ -10,16 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
-import android.widget.TextView
+import androidx.viewbinding.ViewBinding
+import com.example.lwj_base.common.base.GetBinding
+import com.example.lwj_common.R
 import com.example.lwj_common.common.utils.ScreenUtils
 
-abstract class CommonPopupWindow<T>(
-     val mContext: Activity,
-     val mListener: T,
-): PopupWindow() {
-
-
-    lateinit var inflateView: View
+abstract class CommonPopupWindow<T: ViewBinding>(
+    private val mContext: Activity,
+): PopupWindow(), GetBinding<T> {
+    private var _binding: T? = null
+    val binding: T get() = _binding!!
+    private var inflateView: View
 
     //需要弹出的window是否是满宽/match_parent
     private var isMatchParent = false
@@ -28,30 +27,15 @@ abstract class CommonPopupWindow<T>(
     }
 
     init{
-        inflateView = LayoutInflater.from(mContext).inflate(/*R.layout.layout_selector_image_type_window*/ getInflateLayout(), null)
-        initPopupWindow()
-        initListener()
+        _binding = getAtvOrFrgmBindingByReflex(LayoutInflater.from(mContext))
+        inflateView = binding.root
+        initPopupWindowSetting()
+        binding.initView()
     }
 
-    abstract fun getInflateLayout(): Int
-    abstract fun initListener()
+    abstract fun T.initView()
 
-    /*private fun initListener() {
-        inflateView.findViewById<TextView>(R.id.selector_popup_window_string_one).setOnClickListener {
-            mListener.onItemOnclickListener(1)
-        }
-
-        inflateView.findViewById<TextView>(R.id.selector_popup_window_string_two).setOnClickListener {
-            mListener.onItemOnclickListener(2)
-        }
-
-        inflateView.findViewById<TextView>(R.id.selector_popup_window_string_three).setOnClickListener {
-            mListener.onItemOnclickListener(3)
-        }
-    }*/
-
-
-     protected open fun initPopupWindow() {
+    protected open fun initPopupWindowSetting() {
         contentView = inflateView
 
         // 设置SelectPicPopupWindow弹出窗体的宽
@@ -77,12 +61,11 @@ abstract class CommonPopupWindow<T>(
         // 点back键和其他地方使其消失,设置了这个才能触发OnDismisslistener ，设置其他控件变化等操作
         setBackgroundDrawable(dw)
 
-        // mPopupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
         // 设置SelectPicPopupWindow弹出窗体动画效果
-       // animationStyle = R.style.PopupWindowAnimation
+         animationStyle = R.style.PopupWindowAnimation
 
-        // 如果触摸位置在窗口外面则销毁
-        //set
+        // 设置如果触摸位置在窗口外面则销毁
+
 
     }
 
@@ -90,7 +73,7 @@ abstract class CommonPopupWindow<T>(
      * 屏幕底部弹出
      * */
     fun showInScreenBottom(yoff: Int = 0){
-            showAtLocation(inflateView, Gravity.BOTTOM, 0, 0)
+        showAtLocation(inflateView, Gravity.BOTTOM, 0, 0)
     }
 
     /**
@@ -189,7 +172,7 @@ abstract class CommonPopupWindow<T>(
                             //当弹出window不贴着屏幕右边, 并且弹出window宽度 不等于 anchorView宽度
                             contentWindowPos[0] = anchorPos[0] + anchorWidth/2 - contentWindowWidth/2
                         }
-                        contentWindowPos[1] = anchorPos[1] + anchorHeight
+                        contentWindowPos[1] = anchorPos[1] - contentWindowHeight
                     }else{
                         if(contentWindowWidth == anchorWidth){
                             //当弹出window不贴着屏幕右边, 并且弹出window宽度和anchorView宽度一样宽时候
