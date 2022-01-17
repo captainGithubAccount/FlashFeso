@@ -1,7 +1,7 @@
 package com.example.lwjtest_popupwindow.view
 
+import android.animation.ObjectAnimator
 import android.app.Activity
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -11,29 +11,42 @@ import android.widget.PopupWindow
 import androidx.viewbinding.ViewBinding
 import com.example.lwj_base.common.base.GetBinding
 import com.example.lwj_common.R
-import com.example.lwj_common.common.utils.ScreenUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.ScreenUtils
 
 abstract class CommonPopupWindow<T : ViewBinding>(
     val mContext: Activity,
 ) : PopupWindow(), GetBinding<T> {
+    //是否添加遮罩层
+    private var isNeedMask: Boolean = false
+    //是否使用默认的动画
     private var isDefaultAnimation: Boolean = false
-    private var _binding: T? = null
-    val binding: T get() = _binding!!
-    private var inflateView: View
-
     //需要弹出的window是否是满宽/match_parent
     private var isMatchParent = false
+
+    fun setDefaultAnimation(){
+        isDefaultAnimation = true
+    }
+
     fun setMatchParent() {
         isMatchParent = true
     }
 
+    fun setNeedMask(){
+        isNeedMask = true
+    }
+
+    private var _binding: T? = null
+    val binding: T get() = _binding!!
+
+    private var inflateView: View
+
     init {
         //inflateView = LayoutInflater.from(mContext).inflate(/*R.layout.layout_selector_image_type_window*/ getInflateLayout(), null)
-
-        _binding = getAtvOrFrgmBindingByReflex(LayoutInflater.from(mContext))
+        _binding = getViewBindingByReflex(LayoutInflater.from(mContext))
         inflateView = binding.root
         initPopupWindowSetting()
         binding.initView()
+
     }
 
     abstract fun T.initView()
@@ -79,6 +92,9 @@ abstract class CommonPopupWindow<T : ViewBinding>(
      * */
     fun showInScreenBottom(yoff: Int = 0) {
         showAtLocation(inflateView, Gravity.BOTTOM, 0, 0)
+        if(isNeedMask){
+            beginAnimation(true)
+        }
     }
 
     /**
@@ -125,11 +141,30 @@ abstract class CommonPopupWindow<T : ViewBinding>(
             contentWindowPos[1])
     }
 
+    override fun dismiss() {
+        super.dismiss()
+        if(isNeedMask){
+            beginAnimation(false)
+        }
+    }
 
-    enum class WINDOW_TYPE(var flag: Int) {
-        //弹出的window是贴附屏幕右边
-        WINDOW_ATTACH_SCREEN_RIGHT(0),
-        WINDOW_NO_ATTACH_SCREEN_RIGHT(1)
+
+
+    /*
+    * 添加半透明遮罩层
+    * */
+    private  fun beginAnimation(show: Boolean) {
+        val animator = ObjectAnimator.ofFloat(if (show) 1f else .8f, if (show) .8f else 1f)
+        animator.addUpdateListener { animation -> setWindowAlpha(animation.animatedValue as Float) }
+        animator.duration = 80
+        animator.start()
+    }
+
+    private  fun setWindowAlpha(alpha: Float) {
+        val window = mContext.window
+        val attributes = window.attributes
+        attributes.alpha = alpha
+        window.attributes = attributes
     }
 
     companion object {
@@ -210,6 +245,15 @@ abstract class CommonPopupWindow<T : ViewBinding>(
             return contentWindowPos
         }
     }
+
+    enum class WINDOW_TYPE(var flag: Int) {
+        //弹出的window是贴附屏幕右边
+        WINDOW_ATTACH_SCREEN_RIGHT(0),
+        //弹出的window没有贴附屏幕右边
+        WINDOW_NO_ATTACH_SCREEN_RIGHT(1)
+    }
+
+
 
 
 }

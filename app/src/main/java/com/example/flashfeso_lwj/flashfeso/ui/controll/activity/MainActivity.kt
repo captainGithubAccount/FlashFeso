@@ -10,7 +10,7 @@ import com.example.flashfeso_lwj.databinding.ActivityMainBinding
 import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
 import com.example.flashfeso_lwj.flashfeso.ui.controll.fragment.MainInicioFragment
 import com.example.flashfeso_lwj.flashfeso.ui.controll.fragment.MainMiCuentaFragment
-import com.example.lwj_common.common.utils.DensityUtil
+import com.example.lwj_common.common.ui.controll.tools.utils.DensityUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

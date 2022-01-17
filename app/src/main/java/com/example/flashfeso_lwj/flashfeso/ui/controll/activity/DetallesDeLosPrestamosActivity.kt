@@ -5,14 +5,13 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.base.ui.controll.activity.BaseDbActivity
 import com.example.flashfeso_lwj.databinding.ActivityDetallesDeLosPrestamosBinding
 import com.example.flashfeso_lwj.flashfeso.entity.CurrDetailEntity
 import com.example.lwj_base.common.base.BaseConstants
-import com.example.lwj_common.common.utils.DoubleUtils
-import com.example.lwj_common.common.utils.NumberUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.DoubleUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.NumberUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 /*

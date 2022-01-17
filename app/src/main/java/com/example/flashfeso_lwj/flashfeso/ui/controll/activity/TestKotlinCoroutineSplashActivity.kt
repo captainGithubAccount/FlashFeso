@@ -25,7 +25,7 @@ import com.example.flashfeso_lwj.flashfeso.ui.controll.dialog.SplashPermissionDi
 import com.example.flashfeso_lwj.flashfeso.utils.*
 import com.example.flashfeso_lwj.flashfeso.viewmodel.SplashViewModel
 import com.example.flashfeso_lwj.flashfeso.utils.SharedPreferenceUtils
-import com.example.lwj_common.common.utils.StringUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import java.lang.Exception

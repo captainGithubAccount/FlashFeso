@@ -1,6 +1,6 @@
-package com.example.lwj_common.common.utils
+package com.example.lwj_common.common.ui.controll.tools.utils
 
-import com.example.lwj_common.common.utils.StringUtils.isEmpty
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils.isEmpty
 import java.lang.Exception
 import java.text.ParseException
 import java.text.SimpleDateFormat

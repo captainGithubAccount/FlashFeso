@@ -6,12 +6,11 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
 import com.example.flashfeso_lwj.databinding.ActivityLoginPrivacyDetailBinding
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import com.example.flashfeso_lwj.flashfeso.utils.back
-import com.example.lwj_common.common.utils.StringUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

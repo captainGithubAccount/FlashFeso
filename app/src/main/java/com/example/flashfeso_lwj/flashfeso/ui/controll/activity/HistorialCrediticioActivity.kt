@@ -14,7 +14,7 @@ import com.example.flashfeso_lwj.flashfeso.utils.back
 import com.example.flashfeso_lwj.flashfeso.utils.textIsEmpty
 import com.example.flashfeso_lwj.flashfeso.viewmodel.HistorialCreditcioViewModel
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
-import com.example.lwj_common.common.utils.StringUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 /*

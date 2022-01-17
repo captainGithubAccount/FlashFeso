@@ -5,9 +5,7 @@ import android.content.Context
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import com.example.lwj_base.common.base.BaseApp
-import com.example.lwj_common.R
-import com.example.lwj_common.common.utils.StringUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 
 fun View.back(activity: Activity){
     this.setOnClickListener {

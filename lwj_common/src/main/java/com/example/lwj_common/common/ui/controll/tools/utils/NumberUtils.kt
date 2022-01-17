@@ -1,7 +1,7 @@
-package com.example.lwj_common.common.utils
+package com.example.lwj_common.common.ui.controll.tools.utils
 
-import com.example.lwj_common.common.utils.StringUtils.isEmpty
-import com.example.lwj_common.common.utils.StringUtils.isNumber
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils.isEmpty
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils.isNumber
 import java.lang.NumberFormatException
 import java.math.BigDecimal
 import java.math.RoundingMode

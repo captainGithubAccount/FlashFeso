@@ -82,7 +82,7 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
         beforeCreateView()
         observe()
 
-        _binding = getAtvOrFrgmBindingByReflex(layoutInflater)
+        _binding = getViewBindingByReflex(layoutInflater)
         afterBindView()
         setContentView(binding.root)
         binding.initView()

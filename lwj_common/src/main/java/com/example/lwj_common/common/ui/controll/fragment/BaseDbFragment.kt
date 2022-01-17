@@ -43,7 +43,7 @@ abstract class BaseDbFragment<T: ViewBinding>: Fragment(), GetBinding<T> {
         beforeCreateView()
         observe()
         //在onCreate中执行,不会重写onCreateView,所已也可以达到复用视图的效果
-        _binding = getAtvOrFrgmBindingByReflex(layoutInflater)
+        _binding = getViewBindingByReflex(layoutInflater)
         afterBindView()
         if(BaseConstants.ISLOG) Log.d("---ddd","onCreate" )
     }

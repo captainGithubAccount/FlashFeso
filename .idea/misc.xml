@@ -51,6 +51,7 @@
         <entry key="app/src/main/res/layout/incl_splash_dialog_permission_content.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/item_laboral_select.xml" value="0.16302083333333334" />
         <entry key="app/src/main/res/layout/item_take_photo_select.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/layout_selector_image_type_window.xml" value="0.27794871794871795" />
         <entry key="app/src/main/res/layout/test_dialog.xml" value="0.16302083333333334" />
         <entry key="app/src/main/res/layout/view_easyrcl_empty.xml" value="0.18854166666666666" />
         <entry key="app/src/main/res/layout/view_easyrcl_error.xml" value="0.28229166666666666" />

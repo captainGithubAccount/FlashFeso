@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.flashfeso_lwj.flashfeso.repository.MobiRecordRepository
 
 class InformacionDeldetidadMobiRecordViewModel @ViewModelInject constructor(
-    val mobiRecordRepository: MobiRecordRepository
+    private val mobiRecordRepository: MobiRecordRepository
 ): ViewModel() {
 
     val liveData = mobiRecordRepository.getDataLiveData()

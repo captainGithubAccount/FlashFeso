@@ -23,7 +23,7 @@ abstract class CommonDialogFragment<T: ViewBinding>: DialogFragment(), GetBindin
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = getAtvOrFrgmBindingByReflex(inflater)
+        _binding = getViewBindingByReflex(inflater)
         afterBindingView()
         return binding.root
     }

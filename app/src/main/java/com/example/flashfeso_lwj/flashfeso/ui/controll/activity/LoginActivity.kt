@@ -21,7 +21,7 @@ import com.example.flashfeso_lwj.databinding.ActivityLoginBinding
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
-import com.example.lwj_common.common.utils.StringUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.example.lwj_common.common.utils
+package com.example.lwj_common.common.ui.controll.tools.utils
 
 import android.content.Context
 import android.util.TypedValue

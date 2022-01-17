@@ -20,10 +20,10 @@ import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.flashfeso_lwj.flashfeso.viewmodel.MainInicioViewModel
 import com.example.lwj_common.common.ui.controll.fragment.BaseRecyclerFragment
-import com.example.lwj_common.common.utils.DoubleUtils
-import com.example.lwj_common.common.utils.NumberUtils
-import com.example.lwj_common.common.utils.NumberUtils.goToZeroString
-import com.example.lwj_common.common.utils.StringUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.DoubleUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.NumberUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.NumberUtils.goToZeroString
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.HashMap
 import javax.inject.Inject

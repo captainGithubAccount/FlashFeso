@@ -1,6 +1,6 @@
-package com.example.lwj_common.common.utils
+package com.example.lwj_common.common.ui.controll.tools.utils
 
-import com.example.lwj_common.common.utils.StringUtils.isNumber
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils.isNumber
 import java.math.BigDecimal
 
 object DoubleUtils {

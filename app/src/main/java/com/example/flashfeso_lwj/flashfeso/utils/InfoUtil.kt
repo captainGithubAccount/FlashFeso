@@ -1,6 +1,6 @@
 package com.example.flashfeso_lwj.flashfeso.utils
 
-import com.example.lwj_common.common.utils.StringUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 
 object InfoUtil{
 

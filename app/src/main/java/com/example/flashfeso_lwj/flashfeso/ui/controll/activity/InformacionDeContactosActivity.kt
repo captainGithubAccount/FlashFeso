@@ -18,10 +18,9 @@ import com.example.flashfeso_lwj.flashfeso.event.InfomationSelectItemOnClickList
 import com.example.flashfeso_lwj.flashfeso.ui.controll.dialog.InfomationSelectDialog
 import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.utils.back
-import com.example.flashfeso_lwj.flashfeso.utils.textIsEmpty
 import com.example.flashfeso_lwj.flashfeso.viewmodel.InformacionDeContactosViewModel
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
-import com.example.lwj_common.common.utils.StringUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 import java.lang.Exception
 import java.util.regex.Pattern
 import javax.inject.Inject
