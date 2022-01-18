@@ -6,17 +6,19 @@ import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import com.example.lwj_common.common.ui.controll.tools.ktx.fromJson
 import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
+import com.google.gson.JsonSyntaxException
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
+import org.json.JSONException
 import java.io.File
 import java.io.IOException
+import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 object ImageFileUpload {
 
     val uploadUrl: String = "${UrlConstants.BASE_URL}/mexico/other/image"
-
-
     /**
      * @param locationRequestParamValue 与后台约定好的接口Post(请求头中)请求参数对应的值
      * @param file     创建RequestBody(请求体)所需要的上传的文件
@@ -29,7 +31,7 @@ object ImageFileUpload {
         val requestBody: RequestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
             .addFormDataPart("location", locationRequestParamValue)
-            .addFormDataPart("file", fileName, RequestBody.create("image/jpg; charset=utf-8".toMediaTypeOrNull(), file))
+            .addFormDataPart("file", fileName, file.asRequestBody("image/jpg; charset=utf-8".toMediaTypeOrNull()))
             .build()
 
 //        构建请求
@@ -50,23 +52,35 @@ object ImageFileUpload {
         client.newCall(request).enqueue(object: Callback{
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
-                callBack.onError()
+                callBack.onError(0x01, "请求失败")
             }
 
             override fun onResponse(call: Call, response: Response) {
                 val jsonData = response.body.toString()
-                val response = jsonData.fromJson(UploadImageResponse::class.java)
-                if(response.code == 200 && response.data != null && StringUtils.isEmpty(response.data.toString())){
-                    callBack.onSuccess(response.data)
-                }else{
+                if(!StringUtils.isEmpty(jsonData)){
+                    try {
+                        val responseEntity = jsonData.fromJson(UploadImageResponse::class.java)
+                        if(response.code == 200 && responseEntity.data != null && StringUtils.isEmpty(responseEntity.data.toString())){
+                            callBack.onSuccess(responseEntity.data, locationRequestParamValue)
+                        }else{
+                            if(responseEntity.data != null && !StringUtils.isEmpty(responseEntity.msg)){
+                                callBack.onError(0x05, "上传失败，请重试")
+                            }else{
+                                callBack.onError(0x02, "上传失败，请重试")
+                            }
+                        }
+                    }catch (e: JsonSyntaxException){
+                        e.printStackTrace()
+                        callBack.onError(0x03, "上传失败，请重试")
+                    }
 
+                }else{
+                    callBack.onError(0x04, "上传失败，请重试")
                 }
+
             }
 
         })
-
-
-
 
     }
 
@@ -74,7 +88,7 @@ object ImageFileUpload {
     * 上传回掉接口
     * */
     interface UploadImageCallBack{
-        fun onSuccess(data: UploadImageEntity)
-        fun onError()
+        fun onSuccess(data: UploadImageEntity, locationRequestParamValue: String)
+        fun onError(code: Int, info: String)
     }
 }

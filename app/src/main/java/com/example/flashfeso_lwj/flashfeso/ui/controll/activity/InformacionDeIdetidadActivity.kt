@@ -4,29 +4,42 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
+import com.example.flashfeso_lwj.base.utils.ProgressDialogUtil
+import com.example.flashfeso_lwj.base.utils.SimpleProgressDialogUtil
 import com.example.flashfeso_lwj.databinding.ActivityInformacionDeIdetidadBinding
+import com.example.flashfeso_lwj.flashfeso.api.data.net.ImageFileUpload
+import com.example.flashfeso_lwj.flashfeso.entity.UploadImageEntity
 import com.example.flashfeso_lwj.flashfeso.ui.controll.dialog.CommonSelectDialog
 import com.example.flashfeso_lwj.flashfeso.ui.controll.view.TakePhotoPopupWindow
 import com.example.flashfeso_lwj.flashfeso.utils.back
 import com.example.flashfeso_lwj.flashfeso.viewmodel.InformacionDeldetidadMobiRecordViewModel
+import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_common.common.camera.GlideEngine
 import com.example.lwj_common.common.ui.controll.event.CommonItemOnclickListener
 import com.example.lwj_common.common.ui.controll.tools.utils.FileUtil
+import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
+import com.google.gson.JsonSyntaxException
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.language.LanguageConfig
 import com.yalantis.ucrop.view.OverlayView.FREESTYLE_CROP_MODE_ENABLE_WITH_PASS_THROUGH
+import org.json.JSONTokener
 import java.io.File
+import javax.inject.Inject
 import kotlin.collections.HashMap
 
 class InformacionDeIdetidadActivity: BasePageStyleActivity<ActivityInformacionDeIdetidadBinding>() {
+    @Inject
+    @JvmField
+    var mSimpleProgressDialogUtil: SimpleProgressDialogUtil? = null
 
     private val FRENTA_DE_INE = 999
     private val DETRAS_DE_INE = 1000
@@ -40,11 +53,17 @@ class InformacionDeIdetidadActivity: BasePageStyleActivity<ActivityInformacionDe
     private val REQUEST_CODE_LIVENESS = 102
     private val REQUEST_CODE_MOBI_LIVENESS = 103
 
+
     private val viewModel: InformacionDeldetidadMobiRecordViewModel by viewModels()
     lateinit var mFirstCommonSelectDialog: CommonSelectDialog
-    private val frentaDeIneUrl = ""
-    private val detrasDeIneUrl = ""
-    private val selfiesDeTuUrl = ""
+    private var frentaDeIneUrl = ""
+    private var detrasDeIneUrl = ""
+    private var selfiesDeTuUrl = ""
+
+    //是否走人脸识别 0-不 1-是
+    private val flag = "0"
+    private var orcFlag = ""
+
     override fun observe() {
         viewModel.liveData.observe(this, Observer {
             it.whenError {
@@ -105,17 +124,94 @@ class InformacionDeIdetidadActivity: BasePageStyleActivity<ActivityInformacionDe
                             //decodeFile(String pathName, Options opts)：从 pathName 指定的文件中解析、创建 Bitmap 对象。
                             val bitmap: Bitmap = BitmapFactory.decodeFile(FileUtil.checkDirPath(compressPath))
                             val file: File = File(FileUtil.checkDirPath(compressPath))
-                            uploadImage("front",file ,compressPath, bitmap)
+                            uploadImage("front",compressPath, file, bitmap)
+                        }else{
+                            binding.franteImg.setImageDrawable(resources.getDrawable(R.drawable.icon_img_failed))
                         }
+                    }else{
+                        binding.franteImg.setImageDrawable(resources.getDrawable(R.drawable.icon_img_failed))
                     }
 
                 }
             }
+
+
         }
     }
 
-    private fun uploadImage(type: String, file: File, filePath: String, bitmap: Bitmap) {
-        doing
+    private fun uploadImage(type: String, fileName: String, file: File,bitmap: Bitmap) {
+        mSimpleProgressDialogUtil?.showHUD(this, false)
+
+        ImageFileUpload.uploadImage(type, fileName, file, object: ImageFileUpload.UploadImageCallBack{
+            override fun onSuccess(data: UploadImageEntity, locationRequestParamValue: String) {
+                try {
+                    when(fileName){
+                        "front" -> {
+                            mSimpleProgressDialogUtil?.closeHUD()
+                            if(!StringUtils.isEmpty(data.url)){
+                                runOnUiThread {
+                                    frentaDeIneUrl = data.url!!
+                                    binding.franteImg.setImageBitmap(bitmap)
+                                    if(!StringUtils.isEmpty(data.orcFlag)){
+                                        orcFlag = data.orcFlag!!
+                                    }else{
+                                        orcFlag = ""
+                                    }
+
+                                    if(!StringUtils.isEmpty(data.idNumber)){
+                                        binding.curpTv.setText( data.idNumber)
+                                    }
+
+                                    if (!StringUtils.isEmpty(data.name)) {
+                                        binding.nombreCompletoTv.setText(data.name)
+                                    }
+
+                                    if (!StringUtils.isEmpty(data.fatherLastName)) {
+                                        binding.apellidoPaternoTv.setText(data.fatherLastName)
+                                    }
+
+
+                                    if (!StringUtils.isEmpty(data.motherLastName)) {
+                                        binding.apellidoMaternoTv.setText(data.motherLastName)
+                                    }
+                                }
+                            }else{
+                                runOnUiThread{
+                                    frentaDeIneUrl = ""
+                                    binding.franteImg.setImageDrawable(resources.getDrawable(R.drawable.icon_img_failed))
+                                }
+                            }
+                        }
+                    }
+                }catch (e: JsonSyntaxException){
+                    if(BaseConstants.ISLOG)Log.i("---JsonSyntaxException", "onUploadSuccess: ~~~~JSONException")
+                    e.printStackTrace()
+                    when (type) {
+                        "front" -> runOnUiThread {
+                            frentaDeIneUrl = ""
+                            binding.franteImg.setImageDrawable(resources.getDrawable(R.drawable.icon_img_failed))
+                        }
+                        "back" -> runOnUiThread {
+                            detrasDeIneUrl = ""
+                            binding.detrasImg.setImageDrawable(resources.getDrawable(R.drawable.icon_img_failed))
+                        }
+                        "self" -> runOnUiThread {
+                            selfiesDeTuUrl = ""
+                            binding.selfiesImg.setImageDrawable(resources.getDrawable(R.drawable.icon_img_failed))
+                        }
+                    }
+                }
+
+
+
+            }
+
+            override fun onError(code: Int, info: String) {
+                mSimpleProgressDialogUtil?.closeHUD()
+
+            }
+
+        })
     }
 
 
@@ -183,6 +279,11 @@ class InformacionDeIdetidadActivity: BasePageStyleActivity<ActivityInformacionDe
             val imm = binding.rfcTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.rfcTv.windowToken, 0)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mSimpleProgressDialogUtil = null
     }
 
 
