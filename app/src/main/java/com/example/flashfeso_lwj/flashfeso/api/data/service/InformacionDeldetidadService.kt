@@ -7,12 +7,12 @@ import retrofit2.http.POST
 
 interface InformacionDeldetidadService {
     @POST("mexico/other/mobi/live/record")
-    fun getRecordResponse(
+    suspend fun getRecordResponse(
         @Body map: HashMap<String, Any>
     ): MobiRecordResponse
 
     @POST("mexico/authIdCard")
-    fun getAuthIdCardResponse(
+    suspend fun getAuthIdCardResponse(
         @Body map: HashMap<String, Any>
     ): AuthIdCardResponse
 }
