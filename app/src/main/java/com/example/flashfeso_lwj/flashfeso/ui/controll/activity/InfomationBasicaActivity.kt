@@ -1,6 +1,5 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
 
-import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -42,7 +41,7 @@ class InfomationBasicaActivity : BasePageStyleActivity<ActivityInformacionBasica
                 mSimpleProgressDialogUtil?.closeHUD()
                 if ((it as DataResult.Success).successMessagle.equals(getResources().getString(R.string.success))) {
                     onBackPressed()//将界面销毁, 相当于点击了返回键, 或相当于finish()
-                    mLoginViewModel.queryNotify2LiveData()
+                    mLoginViewModel.queryNotifyInicioBeanLiveData()
 
 
                     startActivity( InfomationLaboralActivity::class.java)
@@ -55,7 +54,7 @@ class InfomationBasicaActivity : BasePageStyleActivity<ActivityInformacionBasica
             }
             it.whenClear {
                 InfoUtil.clear()
-                mLoginViewModel.queryNotifyLiveData()//相当于mEventBus.post(new UpdateLoginBean());
+                mLoginViewModel.queryNotifyUpdateLoginLiveData()//相当于mEventBus.post(new UpdateLoginBean());
                 Toast.makeText(this, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT).show()
                 onBackPressed()
             }

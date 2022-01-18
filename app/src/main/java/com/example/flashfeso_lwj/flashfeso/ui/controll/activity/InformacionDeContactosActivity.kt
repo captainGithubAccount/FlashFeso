@@ -47,12 +47,12 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
             it.whenSuccessResponse {
                 Toast.makeText(this@InformacionDeContactosActivity, (it as DataResult.Success).successMessagle, Toast.LENGTH_SHORT).show()
                 onBackPressed()
-                mLoginViewModel.queryNotify2LiveData()
+                mLoginViewModel.queryNotifyInicioBeanLiveData()
                 startActivity(InformacionDeIdetidadActivity::class.java)
             }
             it.whenClear {
                 InfoUtil.clear()
-                mLoginViewModel.queryNotifyLiveData()
+                mLoginViewModel.queryNotifyUpdateLoginLiveData()
                 Toast.makeText(this@InformacionDeContactosActivity, (it as DataResult.Error).errorMessage, Toast.LENGTH_SHORT).show()
                 onBackPressed()
             }

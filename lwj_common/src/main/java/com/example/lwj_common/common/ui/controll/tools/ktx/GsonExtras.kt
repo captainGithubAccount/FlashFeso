@@ -4,15 +4,19 @@ import com.google.gson.Gson
 import com.google.gson.JsonParser
 
 
-private val gson by lazy{ Gson() }
+private val gson by lazy { Gson() }
 
-//object(Bean)对象反序列化
-fun <T> String.fromJson(clz: Class<T>): T{
-    return gson.fromJson(this,clz)
+/**
+ * 使用gson实现object(Bean)对象反序列化
+ * */
+fun <T> String.fromJson(clz: Class<T>): T {
+    return gson.fromJson(this, clz)
 }
 
-//Any[list, object, array...]序列化
-fun <T> T.toJson(): String{
+/**
+ * 使用gson实现Any[list, object, array...]序列化
+ * */
+fun <T> T.toJson(): String {
     return gson.toJson(this)
 }
 
@@ -32,9 +36,12 @@ fun <T> T.toJson(): String{
     Event event = gson.fromJson(array.get(2), Event.class);
     System.out.printf("Using Gson.fromJson() to get: %s, %d, %s", message, number, event);
  */
-//任意类型的对象反序列化
-fun <T> String.fromJsonArray(clz: Class<T>): List<T>{
+/**
+ * 使用gson实现任意类型的对象反序列化
+ * */
+fun <T> String.fromJsonArray(clz: Class<T>): List<T> {
     val array = JsonParser.parseString(this).asJsonArray
     return array.map { gson.fromJson(it, clz) }
 }
+
 

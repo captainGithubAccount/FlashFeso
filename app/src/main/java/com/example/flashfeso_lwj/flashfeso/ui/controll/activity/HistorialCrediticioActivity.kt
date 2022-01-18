@@ -47,7 +47,7 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
                 if((it as DataResult.Success).successMessagle?.equals(getResources().getString(R.string.success))!!){
                     Toast.makeText(this@HistorialCrediticioActivity, it.successMessagle, Toast.LENGTH_SHORT).show()
                     onBackPressed()
-                    mLoginViewModel.queryNotify2LiveData()
+                    mLoginViewModel.queryNotifyInicioBeanLiveData()
                     startActivity(InformacionDeContactosActivity::class.java)
                 }
             }
@@ -57,7 +57,7 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
             }
             it.whenClear {
                 InfoUtil.clear()
-                mLoginViewModel.queryNotifyLiveData()
+                mLoginViewModel.queryNotifyUpdateLoginLiveData()
                 Toast.makeText(this@HistorialCrediticioActivity, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT).show()
                 onBackPressed()
             }

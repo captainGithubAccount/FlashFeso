@@ -61,7 +61,7 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
             it.whenClear {
                 mSimpleProgressDialogUtil?.closeHUD()
                 InfoUtil.clear()
-                mLoginViewModel.queryNotifyLiveData()
+                mLoginViewModel.queryNotifyUpdateLoginLiveData()
                 Toast.makeText(this, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT).show()
                 onBackPressed()
             }
@@ -73,7 +73,7 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
                     Toast.makeText(this, (it as DataResult.Success).successMessagle, Toast.LENGTH_SHORT).show()
                     onBackPressed()
                     startActivity(HistorialCrediticioActivity::class.java)
-                    mLoginViewModel.queryNotify2LiveData()
+                    mLoginViewModel.queryNotifyInicioBeanLiveData()
                 }
             }
         })

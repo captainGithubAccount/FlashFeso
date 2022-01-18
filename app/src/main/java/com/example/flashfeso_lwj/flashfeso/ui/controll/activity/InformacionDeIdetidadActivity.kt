@@ -82,7 +82,7 @@ class InformacionDeIdetidadActivity :
             it.whenSuccessResponse {
                 Toast.makeText(this@InformacionDeIdetidadActivity, (it as DataResult.Success).successMessagle, Toast.LENGTH_SHORT).show()
                 onBackPressed()
-                mLoginViewModel.queryNotify2LiveData()
+                mLoginViewModel.queryNotifyInicioBeanLiveData()
                 startActivity(AgergarCuentaBancariaActivity::class.java)
             }
             it.whenError {
@@ -90,7 +90,7 @@ class InformacionDeIdetidadActivity :
                 Toast.makeText(this@InformacionDeIdetidadActivity, (it as DataResult.Error).errorMessage, Toast.LENGTH_SHORT).show()
             }
             it.whenClear {
-                mLoginViewModel.queryNotifyLiveData()
+                mLoginViewModel.queryNotifyUpdateLoginLiveData()
                 Toast.makeText(this@InformacionDeIdetidadActivity, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT).show()
                 onBackPressed()
             }

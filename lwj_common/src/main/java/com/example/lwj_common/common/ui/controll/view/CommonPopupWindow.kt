@@ -23,14 +23,23 @@ abstract class CommonPopupWindow<T : ViewBinding>(
     //需要弹出的window是否是满宽/match_parent
     private var isMatchParent = false
 
+    /**
+     * 设置默认动画(注意: 该方法需要在super.initPopupWindowSetting()前调用)
+     * */
     fun setDefaultAnimation(){
         isDefaultAnimation = true
     }
 
+    /**
+     * 设置控件宽度满宽(注意: 该方法需要在super.initPopupWindowSetting()前调用)
+     * */
     fun setMatchParent() {
         isMatchParent = true
     }
 
+    /**
+     * 设置添加遮罩层(注意: 该方法需要在super.initPopupWindowSetting()后调用)
+     * */
     fun setNeedMask(){
         isNeedMask = true
     }
@@ -109,6 +118,7 @@ abstract class CommonPopupWindow<T : ViewBinding>(
 
     /**
     * 控件下方下拉方式弹出
+    * @param anchorView 锚点view(即点击该view弹出window)
     * */
     fun showBelowView(anchorView: View) {
         showAsDropDown(anchorView, anchorView.getLayoutParams().width / 2, 18)
@@ -164,7 +174,7 @@ abstract class CommonPopupWindow<T : ViewBinding>(
 
 
     /*
-    * 添加半透明遮罩层
+    * 添加半透明遮罩层的渐变属性动画
     * */
     private  fun beginAnimation(show: Boolean) {
         val animator = ObjectAnimator.ofFloat(if (show) 1f else .8f, if (show) .8f else 1f)
@@ -173,6 +183,9 @@ abstract class CommonPopupWindow<T : ViewBinding>(
         animator.start()
     }
 
+    /*
+    * 设置window透明度
+    * */
     private  fun setWindowAlpha(alpha: Float) {
         val window = mContext.window
         val attributes = window.attributes

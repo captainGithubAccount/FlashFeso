@@ -62,7 +62,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                     InfoUtil.setUserId("")
                 }
                 //登录成功通知其他需要登录的地方更新数据
-                mLoginViewModel.queryNotifyLiveData()
+                mLoginViewModel.queryNotifyUpdateLoginLiveData()
 
                 finish()
                 Toast.makeText(this@LoginActivity, dataResult.successMessagle, Toast.LENGTH_SHORT).show()

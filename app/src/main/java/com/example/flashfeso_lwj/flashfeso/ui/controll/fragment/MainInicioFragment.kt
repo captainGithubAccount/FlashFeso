@@ -215,11 +215,11 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
 
     override fun observe() {
 
-        mLoginViewModel.notifyLiveData.observe(this, Observer {
+        mLoginViewModel.notifyUpdateLoginLiveData.observe(this, Observer {
             getDataWhenLoginAtvNotify()
         })
 
-        mLoginViewModel.notifyLiveData2.observe(this, Observer {
+        mLoginViewModel.notifyInicioBeanLiveData.observe(this, Observer {
             getDataWhenLoginAtvNotify()
         })
 
