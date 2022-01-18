@@ -18,7 +18,9 @@ import com.example.flashfeso_lwj.flashfeso.utils.back
 import com.example.flashfeso_lwj.flashfeso.viewmodel.AgergarCuentaBancariaViewModel
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.lwj_common.common.ui.controll.tools.ktx.toBankCardEditText
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuentaBancariaBinding>(),
     InfomationSelectItemOnClickListener {
     var tipoDeCuentaDialog: InfomationSelectDialog? = null

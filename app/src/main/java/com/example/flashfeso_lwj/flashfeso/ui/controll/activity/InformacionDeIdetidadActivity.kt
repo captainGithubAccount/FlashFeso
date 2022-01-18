@@ -35,10 +35,12 @@ import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.language.LanguageConfig
 import com.yalantis.ucrop.view.OverlayView.FREESTYLE_CROP_MODE_ENABLE_WITH_PASS_THROUGH
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import javax.inject.Inject
 import kotlin.collections.HashMap
 
+@AndroidEntryPoint
 class InformacionDeIdetidadActivity :
     BasePageStyleActivity<ActivityInformacionDeIdetidadBinding>() {
     @Inject
@@ -80,18 +82,24 @@ class InformacionDeIdetidadActivity :
         viewModel.idCardLiveData.observe(this, Observer {
             mSimpleProgressDialogUtil?.closeHUD()
             it.whenSuccessResponse {
-                Toast.makeText(this@InformacionDeIdetidadActivity, (it as DataResult.Success).successMessagle, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    (it as DataResult.Success).successMessagle,
+                    Toast.LENGTH_SHORT).show()
                 onBackPressed()
                 mLoginViewModel.queryNotifyInicioBeanLiveData()
                 startActivity(AgergarCuentaBancariaActivity::class.java)
             }
             it.whenError {
 
-                Toast.makeText(this@InformacionDeIdetidadActivity, (it as DataResult.Error).errorMessage, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    (it as DataResult.Error).errorMessage,
+                    Toast.LENGTH_SHORT).show()
             }
             it.whenClear {
                 mLoginViewModel.queryNotifyUpdateLoginLiveData()
-                Toast.makeText(this@InformacionDeIdetidadActivity, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    (it as DataResult.Clear).clearMessage,
+                    Toast.LENGTH_SHORT).show()
                 onBackPressed()
             }
         })
@@ -157,15 +165,19 @@ class InformacionDeIdetidadActivity :
         binding.selfiesImg.setOnClickListener {
             hideKeyboardAll()
             if (StringUtils.isEmpty(frentaDeIneUrl)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion_primero), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion_primero),
+                    Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (StringUtils.isEmpty(detrasDeIneUrl)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_trasera_de_su_identificacion_primero), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_trasera_de_su_identificacion_primero),
+                    Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 queryMobiRecord("003：Click the face recognition button!")
                 if (StringUtils.equals(orcFlag, "Advance")) {
                     //todo doing- - - - - - - -- - - - -- - -- - - - -- - - - - - -- - --- - - -  - - - - -
@@ -183,59 +195,91 @@ class InformacionDeIdetidadActivity :
         binding.confirm.setOnClickListener {
             hideKeyboardAll()
             if (StringUtils.isEmpty(frentaDeIneUrl)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion),
+                    Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (StringUtils.isEmpty(detrasDeIneUrl)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_trasera_de_su_identificacion), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_trasera_de_su_identificacion),
+                    Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (StringUtils.isEmpty(selfiesDeTuUrl)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.favor_de_tomarse_una_selfie), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    resources.getString(R.string.favor_de_tomarse_una_selfie),
+                    Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val curp = binding.curpTv.text.toString().trim()
-            if(!StringUtils.isIdCard(curp)){
-                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.rellene_el_numero_de_identificacion_completo), Toast.LENGTH_SHORT).show()
+            if (!StringUtils.isIdCard(curp)) {
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    resources.getString(R.string.rellene_el_numero_de_identificacion_completo),
+                    Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val apellidoPaterno: String = binding.apellidoPaternoTv.text.toString().trim()
             if (StringUtils.isEmpty(apellidoPaterno)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.rellene_el_apellido_paterno), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    resources.getString(R.string.rellene_el_apellido_paterno),
+                    Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val apellidoMaterno: String = binding.apellidoMaternoTv.text.toString().trim()
             if (StringUtils.isEmpty(apellidoMaterno)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.rellene_el_apellido_materno), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    resources.getString(R.string.rellene_el_apellido_materno),
+                    Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val nombreCompleto: String = binding.nombreCompletoTv.text.toString().trim()
             if (StringUtils.isEmpty(nombreCompleto)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.rellene_el_nombre_completo), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    resources.getString(R.string.rellene_el_nombre_completo),
+                    Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val rfc: String = binding.rfcTv.text.toString().trim()
             if (StringUtils.isEmpty(rfc)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.introduzca_el_numero_de_impuesto_correcto), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity,
+                    resources.getString(R.string.introduzca_el_numero_de_impuesto_correcto),
+                    Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 queryMobiRecord("004：Click the authentication button!")
-                queryAuthIdCard(frentaDeIneUrl, detrasDeIneUrl, selfiesDeTuUrl, curp, apellidoPaterno, apellidoMaterno, nombreCompleto, rfc)
+                queryAuthIdCard(frentaDeIneUrl,
+                    detrasDeIneUrl,
+                    selfiesDeTuUrl,
+                    curp,
+                    apellidoPaterno,
+                    apellidoMaterno,
+                    nombreCompleto,
+                    rfc)
             }
 
         }
     }
 
-    private fun queryAuthIdCard(topImage: String, downImage: String, selfImage: String, onlyCode: String, userFatherName: String, userMaterName: String, userName: String, taxNumber: String) {
+    private fun queryAuthIdCard(
+        topImage: String,
+        downImage: String,
+        selfImage: String,
+        onlyCode: String,
+        userFatherName: String,
+        userMaterName: String,
+        userName: String,
+        taxNumber: String,
+    ) {
         mSimpleProgressDialogUtil?.showHUD(this, false)
         val map: MutableMap<String, Any> = HashMap()
         map["onlyCode"] = onlyCode
@@ -275,7 +319,7 @@ class InformacionDeIdetidadActivity :
         }
     }
 
-    private fun pictureSelectResultHandle(type: String, data: Intent?, view: ImageView){
+    private fun pictureSelectResultHandle(type: String, data: Intent?, view: ImageView) {
         //图片结果回掉
         val selectList: List<LocalMedia>? = PictureSelector.obtainMultipleResult(data)
         if (selectList != null && selectList.size > 0) {
@@ -300,14 +344,11 @@ class InformacionDeIdetidadActivity :
     private fun uploadImage(type: String, fileName: String, file: File, bitmap: Bitmap) {
         mSimpleProgressDialogUtil?.showHUD(this, false)
 
-        ImageFileUpload.uploadImage(type,
-            fileName,
-            file,
-            object : ImageFileUpload.UploadImageCallBack {
+        ImageFileUpload.uploadImage(type, fileName, file, object : ImageFileUpload.UploadImageCallBack {
                 override fun onSuccess(data: UploadImageEntity, locationRequestParamValue: String) {
                     mSimpleProgressDialogUtil?.closeHUD()
                     try {
-                        when (fileName) {
+                        when (locationRequestParamValue) {
                             "front" -> {
                                 if (!StringUtils.isEmpty(data.url)) {
                                     runOnUiThread {
@@ -338,19 +379,21 @@ class InformacionDeIdetidadActivity :
                                 } else {
                                     runOnUiThread {
                                         frentaDeIneUrl = ""
-                                        binding.franteImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                                        binding.franteImg.setImageDrawable(ContextCompat.getDrawable(
+                                            this@InformacionDeIdetidadActivity,
+                                            R.drawable.icon_img_failed))
                                     }
                                 }
                             }
 
                             "back" -> {
-                                if(!StringUtils.isEmpty(data.url)){
-                                    runOnUiThread{
+                                if (!StringUtils.isEmpty(data.url)) {
+                                    runOnUiThread {
                                         detrasDeIneUrl = data.url!!
                                         binding.detrasImg.setImageBitmap(bitmap)
-                                        if(StringUtils.isEmpty(data.orcFlag)){
+                                        if (StringUtils.isEmpty(data.orcFlag)) {
                                             orcFlag = data.orcFlag!!
-                                        }else{
+                                        } else {
                                             orcFlag = ""
                                         }
 
@@ -362,24 +405,28 @@ class InformacionDeIdetidadActivity :
                                             binding.apellidoMaternoTv.setText(data.motherLastName)
                                         }
                                     }
-                                }else{
+                                } else {
                                     runOnUiThread {
                                         detrasDeIneUrl = ""
-                                        binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                                        binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(
+                                            this@InformacionDeIdetidadActivity,
+                                            R.drawable.icon_img_failed))
                                     }
                                 }
                             }
 
                             "self" -> {
-                                if(!StringUtils.isEmpty(data.url)){
+                                if (!StringUtils.isEmpty(data.url)) {
                                     runOnUiThread {
                                         binding.selfiesImg.setImageBitmap(bitmap)
                                         selfiesDeTuUrl = data.url!!
                                     }
-                                }else{
+                                } else {
                                     runOnUiThread {
                                         selfiesDeTuUrl = ""
-                                        binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                                        binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(
+                                            this@InformacionDeIdetidadActivity,
+                                            R.drawable.icon_img_failed))
                                     }
                                 }
                             }
@@ -391,42 +438,48 @@ class InformacionDeIdetidadActivity :
                         when (type) {
                             "front" -> runOnUiThread {
                                 frentaDeIneUrl = ""
-                                binding.franteImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                                binding.franteImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
+                                    R.drawable.icon_img_failed))
                             }
                             "back" -> runOnUiThread {
                                 detrasDeIneUrl = ""
-                                binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                                binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
+                                    R.drawable.icon_img_failed))
                             }
                             "self" -> runOnUiThread {
                                 selfiesDeTuUrl = ""
-                                binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                                binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
+                                    R.drawable.icon_img_failed))
                             }
                         }
                     }
-
-
                 }
 
                 override fun onError(code: Int, info: String) {
                     mSimpleProgressDialogUtil?.closeHUD()
                     runOnUiThread {
                         if (code == 0x05 && !StringUtils.isEmpty(info)) {
-                            Toast.makeText(this@InformacionDeIdetidadActivity, info, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@InformacionDeIdetidadActivity,
+                                info,
+                                Toast.LENGTH_SHORT).show()
                         }
                     }
                     Log.i("---6666", "onUPloadFailure：~~~~ code: $code;  info$info")
                     when (type) {
                         "front" -> runOnUiThread {
                             frentaDeIneUrl = ""
-                            binding.franteImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                            binding.franteImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
+                                R.drawable.icon_img_failed))
                         }
                         "back" -> runOnUiThread {
                             detrasDeIneUrl = ""
-                            binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                            binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
+                                R.drawable.icon_img_failed))
                         }
                         "self" -> runOnUiThread {
                             selfiesDeTuUrl = ""
-                            binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                            binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
+                                R.drawable.icon_img_failed))
                         }
                     }
 
@@ -444,7 +497,7 @@ class InformacionDeIdetidadActivity :
             .freeStyleCropMode(FREESTYLE_CROP_MODE_ENABLE_WITH_PASS_THROUGH)
             .isPreviewImage(true)
             .isCompress(true)
-            /*.isCamera(false)*///显示or隐藏拍摄  false: 隐藏(仅仅当openGallery时候才有作用)
+            .isCamera(true)//显示or隐藏拍摄  false: 隐藏(仅仅当openGallery时候才有作用)
             .hideBottomControls(false)
             .imageEngine(GlideEngine.createGlideEngine())
             .setLanguage(LanguageConfig.SPANISH)
@@ -460,11 +513,12 @@ class InformacionDeIdetidadActivity :
             .freeStyleCropMode(FREESTYLE_CROP_MODE_ENABLE_WITH_PASS_THROUGH)
             .isPreviewImage(true)
             .isCompress(true)
-            .isCamera(false)//显示or隐藏拍摄  false: 隐藏(仅仅当openGallery时候才有作用)
             .hideBottomControls(false)
             .imageEngine(GlideEngine.createGlideEngine())
             .setLanguage(LanguageConfig.SPANISH)
             .forResult(requestCode)
+
+
     }
 
     enum class TvPosition {

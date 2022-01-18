@@ -15,7 +15,7 @@ class InformacionDeldetidadViewModel @ViewModelInject constructor(
         mobiRecordRepository.query(map)
     }
 
-    val idCardLiveData = mobiRecordRepository.getDataLiveData()
+    val idCardLiveData = idCardRepository.getDataLiveData()
     fun queryIdCard(map: HashMap<String, Any>){
         idCardRepository.query(map)
     }

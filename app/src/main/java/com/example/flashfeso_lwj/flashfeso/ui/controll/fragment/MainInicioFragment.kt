@@ -169,9 +169,9 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
                         val employAuth: Boolean = InfoUtil.isEmployAuth
                         val addressAuth: Boolean = InfoUtil.isAddressAuth
                         if (!bankAuth && cardAuth) {
-                            //startActivity(AgergarCuentaBancariaActivity::class.java)
+                            startActivity(AgergarCuentaBancariaActivity::class.java)
                         } else if (!cardAuth && contactsAuth) {
-                            //startActivity(InformacionDeIdetidadActivity::class.java)
+                            startActivity(InformacionDeIdetidadActivity::class.java)
                         } else if (!contactsAuth && loanHisAuth) {
                             startActivity(HistorialCrediticioActivity::class.java)
                         } else if (!loanHisAuth && employAuth) {

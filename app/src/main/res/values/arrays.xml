@@ -153,11 +153,7 @@
     </string-array>
 
 
-    <!--银行卡种类-->
-    <string-array name="array_card_type">
-        <item>CLABE</item>
-        <item>Tarjeta de débito</item>
-    </string-array>
+
 
 
     <!--发薪日-->

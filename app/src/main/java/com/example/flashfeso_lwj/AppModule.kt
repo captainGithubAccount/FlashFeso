@@ -83,4 +83,9 @@ object AppModule {
     @Singleton
     @Provides
     fun provideAggergarCuentaBancariaService(retrofit: Retrofit): AgergarCuentaBancariaService = retrofit.create(AgergarCuentaBancariaService::class.java)
+
+
+    @Singleton
+    @Provides
+    fun provideInformacionDeContactosService(retrofit: Retrofit): InformacionDeContactosService = retrofit.create(InformacionDeContactosService::class.java)
 }

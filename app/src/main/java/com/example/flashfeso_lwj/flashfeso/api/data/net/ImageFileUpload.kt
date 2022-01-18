@@ -1,9 +1,11 @@
 package com.example.flashfeso_lwj.flashfeso.api.data.net
 
+import android.util.Log
 import com.example.flashfeso_lwj.flashfeso.entity.UploadImageEntity
 import com.example.flashfeso_lwj.flashfeso.entity.UploadImageResponse
 import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
+import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_common.common.ui.controll.tools.ktx.fromJson
 import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 import com.google.gson.JsonSyntaxException
@@ -56,14 +58,17 @@ object ImageFileUpload {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                val jsonData = response.body.toString()
+                /*
+                * 切记!!!: 这里是string, 而不是toString
+                * */
+                val jsonData = response.body?.string()
                 if(!StringUtils.isEmpty(jsonData)){
                     try {
-                        val responseEntity = jsonData.fromJson(UploadImageResponse::class.java)
-                        if(response.code == 200 && responseEntity.data != null && StringUtils.isEmpty(responseEntity.data.toString())){
+                        val responseEntity = jsonData?.fromJson(UploadImageResponse::class.java)
+                        if(responseEntity != null && responseEntity?.code == 200 && responseEntity?.data != null && !StringUtils.isEmpty(responseEntity.data.toString())){
                             callBack.onSuccess(responseEntity.data, locationRequestParamValue)
                         }else{
-                            if(responseEntity.data != null && !StringUtils.isEmpty(responseEntity.msg)){
+                            if(responseEntity?.data != null && !StringUtils.isEmpty(responseEntity.msg)){
                                 callBack.onError(0x05, "上传失败，请重试")
                             }else{
                                 callBack.onError(0x02, "上传失败，请重试")
@@ -71,6 +76,7 @@ object ImageFileUpload {
                         }
                     }catch (e: JsonSyntaxException){
                         e.printStackTrace()
+                        //todo error
                         callBack.onError(0x03, "上传失败，请重试")
                     }
 
