@@ -13,7 +13,7 @@
 
     <include
         android:id="@+id/progress"
-        layout="@layout/incl_main_inicio_progress"
+        layout="@layout/incl_loading"
         android:visibility="gone" />
 
 
@@ -24,7 +24,7 @@
 
     <include
         android:id="@+id/error"
-        layout="@layout/incl_main_inicio_error"
+        layout="@layout/incl_error"
         android:visibility="gone" />
 
 

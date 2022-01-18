@@ -9,11 +9,11 @@
 
     <include
         android:id="@+id/incl_main_inicio_progress"
-        layout="@layout/incl_main_inicio_progress" />
+        layout="@layout/incl_loading" />
 
     <include
         android:id="@+id/incl_main_inicio_error"
-        layout="@layout/incl_main_inicio_error" />
+        layout="@layout/incl_error" />
 
     <androidx.core.widget.NestedScrollView
         android:background="@color/color_F2F2F2"

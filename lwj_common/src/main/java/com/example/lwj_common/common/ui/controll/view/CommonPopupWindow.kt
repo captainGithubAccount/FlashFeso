@@ -102,13 +102,26 @@ abstract class CommonPopupWindow<T : ViewBinding>(
      * */
     fun showInScreenTop(yoff: Int = 0) {
         showAtLocation(inflateView, Gravity.TOP, 0, 0)
+        if(isNeedMask){
+            beginAnimation(true)
+        }
     }
 
-    /*
+    /**
     * 控件下方下拉方式弹出
     * */
     fun showBelowView(anchorView: View) {
         showAsDropDown(anchorView, anchorView.getLayoutParams().width / 2, 18)
+    }
+
+    /**
+    * 控件居中显示
+    * */
+    fun showInScreenCenter(){
+        showAtLocation(inflateView, Gravity.CENTER, 0, 0)
+        if(isNeedMask){
+            beginAnimation(true)
+        }
     }
 
 

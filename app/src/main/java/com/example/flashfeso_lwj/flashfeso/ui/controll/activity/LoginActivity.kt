@@ -83,7 +83,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                 Toast.makeText(App.context, "SUCCESS: ${it}", Toast.LENGTH_LONG).show()
 
                 //倒计时实现
-                object : CountDownTimer(5 * 1000L, 1000) {
+                object : CountDownTimer(60 * 1000L, 1000) {
                     override fun onFinish() {
                         binding.inclLoginVerificationCode.llLoginUpdateTime.visibility =
                             View.GONE

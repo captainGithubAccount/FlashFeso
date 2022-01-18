@@ -9,6 +9,20 @@
     <string name="ya_veo" translatable="false">Ya veo</string>
 
     <!--HistorialCrediticioActivity-->
+    <string name="agergar_cuenta_bancaria" translatable="false">Agregar cuenta bancaria</string>
+    <string name="sixs" translatable="false">06</string>
+    <string name="donde_te_depositamos" translatable="false">¿Dónde te depositamos?</string>
+    <string name="consuita_tui_contrato_de_cuenta" translatable="false">Consulta tu contrato de cuenta o banco en caso de desconocer algún dato.</string>
+    <string name="ingresa_tu_cuenta_bancaria" translatable="false">Ingresa tu cuenta bancaria</string>
+    <string name="tipo_de_cuenta" translatable="false">Tipo de cuenta</string>
+    <string name="tarjeta_18_digitos" translatable="false">CLABE 18 dígitos</string>
+    <string name="tarjeta_16_digitos" translatable="false">Tarjeta 16 digitos</string>
+    <string name="banco" translatable="false">Banco</string>
+    <string name="tarjeta_de_debito" translatable="false">Tarjeta de débito</string>
+    <string name="introduzca_el_numero_correcto_de_tarjeta_de_16_bits" translatable="false">Introduzca el número correcto de tarjeta</string>
+    <string name="introduzca_el_banco" translatable="false">Por favor, introduzca el Banco</string>
+
+    <!--ActivityAgergarCuentaBancariaActivity-->
     <string name="informacion_de_idetidad" translatable="false">Información de Identidad</string>
     <string name="five" translatable="false">05</string>
     <string name="para_poder_aprobar_tu_prestamo" translatable="false">Para poder aprobar tu préstamo.debemos verficar tu identidad.¡Es muy fácil!Puedes hacerlo desde aquí mismo.</string>

@@ -39,6 +39,24 @@ class FileUtil {
 
     companion object {
         /**
+         * 质量压缩方法
+         *
+         * @param image
+         * @return
+         */
+        fun compressImage(image: Bitmap): Bitmap? {
+            val baos = ByteArrayOutputStream()
+            image.compress(Bitmap.CompressFormat.JPEG, 100, baos) //质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+            var options = 100
+            while (baos.toByteArray().size / 1024 > 5120) {  //循环判断如果压缩后图片是否大于5120kb,大于继续压缩 baos.reset() //重置baos即清空baos
+                //第一个参数 ：图片格式 ，第二个参数： 图片质量，100为最高，0为最差  ，第三个参数：保存压缩后的数据的流
+                image.compress(Bitmap.CompressFormat.JPEG, options, baos) //这里压缩options%，把压缩后的数据存放到baos中
+                options -= 10 //每次都减少10
+            }
+            val isBm = ByteArrayInputStream(baos.toByteArray()) //把压缩后的数据baos存放到ByteArrayInputStream中
+            return BitmapFactory.decodeStream(isBm, null, null) //把ByteArrayInputStream数据生成图片
+        }
+        /**
          * 根据Uri返回文件绝对路径
          * 兼容了file:///开头的 和 content://开头的情况
          */
@@ -77,7 +95,18 @@ class FileUtil {
          * dir.mkdir(): 该文件或文件夹必须有上级目录才可以创建
          * dir.mkdirs(): 无论上级目录是否存在都可以创建一个文件或文件夹, 当上级目录不存在的时候会同时创建上级目录
          */
-        fun checkDirPath(dirPath: String?): String? {
+        fun checkDirPath(dirPath: String?): String {
+            if (TextUtils.isEmpty(dirPath)) {
+                return ""
+            }
+            val dir = File(dirPath)
+            if (!dir.exists()) {
+                dir.mkdirs()
+            }
+            return dirPath!!
+        }
+
+        fun isDirPath(dirPath: String?): String? {
             if (TextUtils.isEmpty(dirPath)) {
                 return ""
             }

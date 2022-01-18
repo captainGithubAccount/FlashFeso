@@ -17,7 +17,7 @@ object StringUtils{
     /**
      * 验证身份证号码
      */
-    fun isOnlyCode(str: String?): Boolean {
+    fun isIdCard(str: String?): Boolean {
         if (isEmpty(str)) {
             return false
         }

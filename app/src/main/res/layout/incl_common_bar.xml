@@ -5,7 +5,7 @@
     android:background="@color/color_main_background"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_40"
-    tools:showIn="@layout/activity_login_privacy_detail">
+    >
 
     <ImageView
         android:id="@+id/iv_common_bar_back"

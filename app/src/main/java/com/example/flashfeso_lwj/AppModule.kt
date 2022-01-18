@@ -12,7 +12,6 @@ import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.Interceptor
 import okhttp3.Response
 import retrofit2.Retrofit
-import javax.inject.Inject
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -79,5 +78,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideInformacionDeldetidadMobiRecordService(retrofit: Retrofit): InformacionDeldetidadMobiRecordService = retrofit.create(InformacionDeldetidadMobiRecordService::class.java)
+    fun provideInformacionDeldetidadMobiRecordService(retrofit: Retrofit): InformacionDeldetidadService = retrofit.create(InformacionDeldetidadService::class.java)
+
+
 }

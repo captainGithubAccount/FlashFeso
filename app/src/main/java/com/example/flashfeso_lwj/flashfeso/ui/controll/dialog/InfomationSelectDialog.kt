@@ -15,7 +15,8 @@ class InfomationSelectDialog private constructor(): DialogFragment(){
     private var _binding: DialogInfomationLaboralSelectBinding? = null
     val binding: DialogInfomationLaboralSelectBinding get() = _binding!!
 
-    companion object{
+    companion
+    object{
         fun newInstance(): InfomationSelectDialog = InfomationSelectDialog()
     }
     private lateinit var itemListener: InfomationSelectItemOnClickListener
