@@ -20,6 +20,11 @@ fun <T> T.toJson(): String {
     return gson.toJson(this)
 }
 
+fun main(){
+    val list = listOf("a", 3, "dwafa")
+    print(list.toJson())
+}
+
 /*
     //gson官网demo:(https://github.com/google/gson/blob/master/extras/src/main/java/com/google/gson/extras/examples/rawcollections/RawCollectionsExample.java)
     //作用: 用来处理包含混合类型的 JSON 数组。例如： ['hello',5,{name:'GREETINGS',source:'guest'}]

@@ -30,7 +30,7 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
      * view  触发软键盘弹出的控件
      */
     open fun hideKeyboard(view: View) {
-        val imm = view.context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm = view.context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
         imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
