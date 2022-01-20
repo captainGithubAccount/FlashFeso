@@ -1,7 +1,6 @@
 
 package com.example.flashfeso_lwj.common.ui.controll.dialog
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.flashfeso_lwj.base.event.CommonDialogEvent
 import com.example.lwj_common.databinding.DialogCommonBinding
-import javax.inject.Inject
 
 class CommonDialog constructor(
     private val title: String,
@@ -22,12 +20,23 @@ class CommonDialog constructor(
         binding.tvTitle.text = title
 
         binding.tvCancel.setOnClickListener {
-            mCommonDialogEvent.cancelListener()
+            mCommonDialogEvent.onCancel()
+
+            //或者也可以取消35 - 41行注释dialog?.cancel()
         }
 
         binding.tvConfirm.setOnClickListener {
-            mCommonDialogEvent.confirmListener()
+            mCommonDialogEvent.onConfirm()
         }
+
+        /*
+        dialog?.let{
+            //当返回箭头和视图里面或点击对话框外面后取消对话框的逻辑是一样的话可以设置这个监听
+            it.setOnCancelListener{
+                mCommonDialogEvent.cancelListener()
+                //Log.d("---", "dialog cancel")
+            }
+        }*/
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,11 +48,6 @@ class CommonDialog constructor(
     }
 
     private fun beforeInitView() {
-        dialog?.let{
-            it.setOnCancelListener{
-                mCommonDialogEvent.cancelListener()
-            }
-        }
     }
 
     override fun onCreateView(

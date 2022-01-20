@@ -75,6 +75,5 @@ sealed class DataResult<T>{
             block()
         }
     }
-
 }
 

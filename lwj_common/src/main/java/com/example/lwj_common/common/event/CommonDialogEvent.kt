@@ -3,7 +3,7 @@ package com.example.flashfeso_lwj.base.event
 
 interface CommonDialogEvent {
 
-    fun cancelListener()
+    fun onCancel()
 
-    fun confirmListener()
+    fun onConfirm()
 }

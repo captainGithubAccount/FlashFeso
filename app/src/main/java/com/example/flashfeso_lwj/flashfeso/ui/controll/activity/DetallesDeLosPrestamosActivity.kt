@@ -15,7 +15,7 @@ import com.example.lwj_common.common.ui.controll.tools.utils.NumberUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 /*
-* 申请借款界面
+* 第七步 申请借款界面
 * */
 
 @AndroidEntryPoint

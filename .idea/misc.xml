@@ -38,6 +38,7 @@
         <entry key="app/src/main/res/layout/dialog_common.xml" value="0.375" />
         <entry key="app/src/main/res/layout/dialog_common_select.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/dialog_infomation_laboral_select.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/dialog_jump_sysytem_loc.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/dialog_simpleprogressdialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_main_inicio.xml" value="0.25" />
@@ -74,6 +75,7 @@
         <entry key="lwj_common/src/main/res/drawable/shape_login_bg_phone.xml" value="0.2675925925925926" />
         <entry key="lwj_common/src/main/res/drawable/shape_login_line_verification_code.xml" value="0.2675925925925926" />
         <entry key="lwj_common/src/main/res/drawable/shape_main_micuenta_submit.xml" value="0.2675925925925926" />
+        <entry key="lwj_common/src/main/res/layout/dialog_common.xml" value="0.28229166666666666" />
       </map>
     </option>
   </component>

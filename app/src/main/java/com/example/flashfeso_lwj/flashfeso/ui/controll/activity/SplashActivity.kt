@@ -65,12 +65,12 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                                 CommonDialog(resources.getString(R.string.new_version_found))
                                     .apply {
                                         mCommonDialogEvent = object : CommonDialogEvent {
-                                            override fun cancelListener() {
+                                            override fun onCancel() {
                                                 dismiss()
                                                 finish()
                                             }
 
-                                            override fun confirmListener() {
+                                            override fun onConfirm() {
                                                 openBrowser(requireActivity(),
                                                     versionData.downloadURl)
                                             }
@@ -81,11 +81,11 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                                 CommonDialog(resources.getString(R.string.new_version_found))
                                     .apply {
                                         mCommonDialogEvent = object : CommonDialogEvent {
-                                            override fun cancelListener() {
+                                            override fun onCancel() {
                                                 jumpToMainActivity()
                                             }
 
-                                            override fun confirmListener() {
+                                            override fun onConfirm() {
                                                 openBrowser(requireActivity(),
                                                     versionData.downloadURl)
                                             }

@@ -1,6 +1,8 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.dialog
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +14,19 @@ abstract class CommonDialogFragment<T: ViewBinding>: DialogFragment(), GetBindin
     private var _binding: T? = null
     val binding: T get() = _binding!!
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        isCancelable = true
+        isCancelable = isCancel()
         setStyle(DialogFragment.STYLE_NO_TITLE, 0)
     }
+
+    abstract fun isCancel(): Boolean
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = getViewBindingByReflex(inflater)
         afterBindingView()
@@ -35,12 +40,22 @@ abstract class CommonDialogFragment<T: ViewBinding>: DialogFragment(), GetBindin
     }
 
     abstract fun T.initView()
+    /*
+    若需要重写返回键监听, 在覆盖initView后写如下代码:
+    dialog!!.setOnKeyListener { dialogInterface, i, keyEvent ->
+            if (i == KeyEvent.KEYCODE_BACK) {
+                //do something
+                true
+            } else false
+        }
 
-    private fun afterInitView() {
+     */
+
+    protected open fun afterInitView() {
 
     }
 
-    private fun afterBindingView() {
+    protected open fun afterBindingView() {
 
     }
 
