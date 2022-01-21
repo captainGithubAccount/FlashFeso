@@ -2,10 +2,7 @@ package com.example.flashfeso_lwj.flashfeso.entity
 
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.versionedparcelable.ParcelField
-import com.example.flashfeso_lwj.base.entity.DataResult
-
-import javax.inject.Inject
+import com.example.flashfeso_lwj.flashfeso.base.DataResult
 
 data class CurrDetailResponse(
     val code: Int,

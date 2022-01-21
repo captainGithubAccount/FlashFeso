@@ -2,7 +2,7 @@ package com.example.flashfeso_lwj.flashfeso.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.flashfeso_lwj.base.entity.DataResult
+import com.example.flashfeso_lwj.flashfeso.base.DataResult
 import com.example.flashfeso_lwj.flashfeso.api.data.service.LoginUserInfoService
 import com.example.flashfeso_lwj.flashfeso.entity.UserInfoEntity
 import kotlinx.coroutines.CoroutineScope

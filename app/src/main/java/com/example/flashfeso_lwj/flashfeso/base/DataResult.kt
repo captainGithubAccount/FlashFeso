@@ -1,4 +1,4 @@
-package com.example.flashfeso_lwj.base.entity
+package com.example.flashfeso_lwj.flashfeso.base
 
 import android.util.Log
 import com.example.lwj_base.common.base.BaseConstants

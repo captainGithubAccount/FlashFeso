@@ -16,7 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.flashfeso_lwj.R
-import com.example.flashfeso_lwj.base.entity.DataResult
+import com.example.flashfeso_lwj.flashfeso.base.DataResult
 import com.example.flashfeso_lwj.base.event.CommonDialogEvent
 import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
 import com.example.flashfeso_lwj.base.utils.SimpleProgressDialogUtil
@@ -37,7 +37,6 @@ import com.example.lwj_common.common.ui.controll.tools.ktx.isUseful
 import com.example.lwj_common.common.ui.controll.tools.ktx.toBankCardEditText
 import com.example.lwj_common.common.ui.controll.tools.ktx.toJson
 import com.example.lwj_common.common.ui.controll.tools.utils.LocationUtils
-import com.example.lwj_common.common.ui.controll.tools.utils.LocationUtils2
 import com.rs.flashpeso.management.ManagementUtils
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
@@ -58,7 +57,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
     var mSimpleProgressDialogUtil: SimpleProgressDialogUtil? = null
 
 
-    var locationUtils: LocationUtils2 = LocationUtils2()
+    var locationUtils: LocationUtils = LocationUtils()
     lateinit var bkCardNumber: String
     lateinit var bkName: String
     var bankNo: Int = 0
@@ -280,7 +279,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
         mSimpleProgressDialogUtil?.showHUD(this, false)
         val locationResultFlag: Int = getLocationResultFlag()
 
-        if (locationResultFlag == 1) {
+        if (locationResultFlag == LocationUtils.GetLocationResult.NO_GPS_OR_INTERNET_PROVIDER.ordinal) {
             //没有打开gps或网络
             mSimpleProgressDialogUtil?.closeHUD()
             val jumpSysytemLocDialog = JumpSysytemLocDialog()
@@ -299,7 +298,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
             }
             jumpSysytemLocDialog.show(supportFragmentManager, "jumpSysytemLocDialog")
 
-        } else if (locationResultFlag == 2) {
+        } else if (locationResultFlag == LocationUtils.GetLocationResult.NO_PERMISSION.ordinal) {
             mSimpleProgressDialogUtil?.closeHUD()
         }
 
@@ -307,7 +306,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
     }
 
     fun getLocationResultFlag(): Int {
-        val locationResultType: Int = locationUtils.getLocation(this@AgergarCuentaBancariaActivity, object : LocationUtils2.LocationCallBack {
+        locationUtils.locationCallBack = object : LocationUtils.LocationCallBack {
             override fun gotLocation(location: Location?) {
                 if (location != null) {
                     //当前经度
@@ -352,7 +351,8 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
                     }
                 }
             }
-        })
+        }
+        val locationResultType: Int = locationUtils.isGetLocation(this@AgergarCuentaBancariaActivity)
         return locationResultType
     }
 

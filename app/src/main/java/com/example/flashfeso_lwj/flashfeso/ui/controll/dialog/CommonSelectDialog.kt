@@ -7,11 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.flashfeso_lwj.base.entity.DataResult
+import com.example.flashfeso_lwj.flashfeso.base.DataResult
 import com.example.flashfeso_lwj.databinding.DialogCommonSelectBinding
-import com.example.flashfeso_lwj.databinding.DialogInfomationLaboralSelectBinding
-import com.example.flashfeso_lwj.flashfeso.event.InfomationSelectItemOnClickListener
-import com.example.flashfeso_lwj.flashfeso.ui.controll.adapter.RvAdapterLaboralSelect
 
 /*
 * 认证五

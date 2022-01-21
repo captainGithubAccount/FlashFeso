@@ -88,4 +88,8 @@ object AppModule {
     @Singleton
     @Provides
     fun provideInformacionDeContactosService(retrofit: Retrofit): InformacionDeContactosService = retrofit.create(InformacionDeContactosService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideDetallesDeLosPrestamosService(retrofit: Retrofit): DetallesDeLosPrestamosService = retrofit.create(DetallesDeLosPrestamosService::class.java)
 }

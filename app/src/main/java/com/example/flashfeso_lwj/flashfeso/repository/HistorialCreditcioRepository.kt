@@ -1,15 +1,14 @@
 package com.example.flashfeso_lwj.flashfeso.repository
 
-import com.example.flashfeso_lwj.base.ui.controll.activity.BaseDbActivity
 import com.example.flashfeso_lwj.flashfeso.api.data.service.HistorialCrediticioService
-import com.example.lwj_common.common.repository.BaseRepository
+import com.example.flashfeso_lwj.flashfeso.base.BaseRepository2
 import javax.inject.Inject
 
 class HistorialCreditcioRepository @Inject constructor(
     private val service: HistorialCrediticioService
-): BaseRepository<Int>() {
+): BaseRepository2<Int>() {
 
-    fun query(map: HashMap<String, Any>) = whenLauchInIO {
+    fun query(map: HashMap<String, Any>) = onLauchInIO {
         val dataResult = service.getAuthLoanHistoryResponse(map).getDataResult()
         dataResult.whenSuccessResponse {
             it?.run{_dataLiveData.postValue(this)}

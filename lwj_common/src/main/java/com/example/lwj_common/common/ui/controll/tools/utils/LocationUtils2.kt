@@ -20,7 +20,7 @@ class LocationUtils2 {
     var gps_enabled = false
     var network_enabled = false
     fun getLocation(context: Context, callBack: LocationCallBack?): Int {
-        locationCallBack = callBack
+        //locationCallBack = callBack
         this.context = context
         if (lm == null) lm = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         try {

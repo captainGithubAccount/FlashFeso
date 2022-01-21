@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import com.adjust.sdk.Adjust
 import com.example.flashfeso_lwj.App
 import com.example.flashfeso_lwj.R
-import com.example.flashfeso_lwj.base.entity.DataResult
+import com.example.flashfeso_lwj.flashfeso.base.DataResult
 import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
 import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.base.utils.SimpleProgressDialogUtil

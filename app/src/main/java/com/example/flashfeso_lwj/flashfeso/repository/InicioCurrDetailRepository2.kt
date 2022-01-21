@@ -2,16 +2,14 @@ package com.example.flashfeso_lwj.flashfeso.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.flashfeso_lwj.base.entity.DataResult
+import com.example.flashfeso_lwj.flashfeso.base.DataResult
 import com.example.flashfeso_lwj.flashfeso.api.data.service.InicioCurrDetailService
 import com.example.flashfeso_lwj.flashfeso.entity.CurrDetailEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 class InicioCurrDetailRepository2 @Inject constructor(
     private val service: InicioCurrDetailService

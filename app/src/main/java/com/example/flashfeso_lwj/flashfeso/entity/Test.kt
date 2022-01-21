@@ -2,7 +2,7 @@ package com.example.flashfeso_lwj.flashfeso.entity
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.example.flashfeso_lwj.base.entity.DataResult
+import com.example.flashfeso_lwj.flashfeso.base.DataResult
 import retrofit2.http.Body
 import retrofit2.http.POST
 
