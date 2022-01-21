@@ -3,12 +3,12 @@ package com.example.flashfeso_lwj.flashfeso.repository
 import com.example.flashfeso_lwj.flashfeso.base.DataResult
 import com.example.flashfeso_lwj.flashfeso.api.data.service.InicioAuthUserInfoService
 import com.example.flashfeso_lwj.flashfeso.entity.AuthUserInfoEntity
-import com.example.flashfeso_lwj.flashfeso.base.BaseRepository2
+import com.example.flashfeso_lwj.flashfeso.base.BaseRepositoryPrevious
 import javax.inject.Inject
 
 class InicioAuthUserInfoRepository2 @Inject constructor(
     private val service: InicioAuthUserInfoService
-): BaseRepository2<AuthUserInfoEntity>() {
+): BaseRepositoryPrevious<AuthUserInfoEntity>() {
 
     fun query() = onLauchInIO {
         val dataResult = service.getAuthUserInfo().getDataResult()

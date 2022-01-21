@@ -15,7 +15,8 @@ import kotlin.coroutines.CoroutineContext
  * alter time: 1.21
  *
  * 注意事项: 需要在构造器传入协程上下文, 否则会出现类型强转错误
- * 一个数据一个库
+ * 一个数据一个库, 因此需要创建多个库在项目中, (viewModel只1个, 命名为活动名去掉Atv后缀, XxxViewModel)
+ * 库的命名(接口返回的实体类去掉Entity后缀, XxxRepository)
  * */
 abstract class BaseRepository<T>(override val coroutineContext: CoroutineContext = Dispatchers.IO) : CoroutineScope  {
 

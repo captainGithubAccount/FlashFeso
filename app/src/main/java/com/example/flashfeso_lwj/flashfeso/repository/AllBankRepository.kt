@@ -3,12 +3,12 @@ package com.example.flashfeso_lwj.flashfeso.repository
 import com.example.flashfeso_lwj.flashfeso.base.DataResult
 import com.example.flashfeso_lwj.flashfeso.api.data.service.AgergarCuentaBancariaService
 import com.example.flashfeso_lwj.flashfeso.entity.AllBankEntity
-import com.example.flashfeso_lwj.flashfeso.base.BaseRepository2
+import com.example.flashfeso_lwj.flashfeso.base.BaseRepositoryPrevious
 import javax.inject.Inject
 
 class AllBankRepository @Inject constructor(
     val service: AgergarCuentaBancariaService
-): BaseRepository2<List<AllBankEntity>>(){
+): BaseRepositoryPrevious<List<AllBankEntity>>(){
 
     fun query() = onLauchInIO {
         val dataResult = service.getAllBank().getDataResult()

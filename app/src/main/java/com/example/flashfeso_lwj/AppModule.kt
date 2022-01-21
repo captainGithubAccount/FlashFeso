@@ -91,5 +91,5 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideDetallesDeLosPrestamosService(retrofit: Retrofit): DetallesDeLosPrestamosService = retrofit.create(DetallesDeLosPrestamosService::class.java)
+    fun provideAppService(retrofit: Retrofit): AppService = retrofit.create(AppService::class.java)
 }

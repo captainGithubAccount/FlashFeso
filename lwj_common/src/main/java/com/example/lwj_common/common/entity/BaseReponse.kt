@@ -14,7 +14,7 @@ abstract class BaseResponse<T>(
     val data: T?,
     val msg: String?
 ){
-    fun getResponse(): ResultState<T> {
+    fun getResultState(): ResultState<T> {
         if (code == 200) {
             return ResultState.Success(msg, data)
         } else if (code == 4011) {

@@ -117,9 +117,8 @@
       </arrangement>
     </codeStyleSettings>
     <codeStyleSettings language="kotlin">
-      <option name="ALIGN_MULTILINE_PARAMETERS" value="false" />
       <option name="SPACE_AROUND_UNARY_OPERATOR" value="true" />
-      <option name="WRAP_ON_TYPING" value="0" />
+      <option name="WRAP_ON_TYPING" value="1" />
     </codeStyleSettings>
   </code_scheme>
 </component>

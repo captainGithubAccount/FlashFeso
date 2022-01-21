@@ -36,6 +36,9 @@ sealed class ResultState<T>(
         }
     }
 
+    /**
+     * 默认错误处理
+     * */
     inline fun whenSuccessAndDefaultErrorDeal(blockSuccess: (T?) -> Unit) {
         when (this) {
             is Success -> blockSuccess(data)
@@ -54,14 +57,17 @@ sealed class ResultState<T>(
         }
     }
 
-    inline fun whenSuccess(block: (T?) -> Unit) {
+    /**
+    * 当只需要response中的data不需要msg时可用
+    * */
+    inline fun whenSuccessData(block: (T?) -> Unit) {
         //注意这里的block里代码应该是不耗时的
         if (this is Success) {
             block(data)
         }
     }
 
-    inline fun whenSuccessResponse(block: (ResultState<T>?) -> Unit) {
+    inline fun whenSuccess(block: (ResultState<T>) -> Unit) {
         if (this is Success) {
             block(this)
         }

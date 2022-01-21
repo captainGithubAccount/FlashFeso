@@ -15,7 +15,7 @@ import kotlin.coroutines.CoroutineContext
 * 注意事项: 需要在构造器传入协程上下文, 否则会出现类型强转错误
 * 一个数据一个库
 * */
-abstract class BaseRepository2<T>(override val coroutineContext: CoroutineContext = Dispatchers.IO) : CoroutineScope{
+abstract class BaseRepositoryPrevious<T>(override val coroutineContext: CoroutineContext = Dispatchers.IO) : CoroutineScope{
     val _dataLiveData = MutableLiveData<DataResult<T>>()
     fun getDataLiveData(): LiveData<DataResult<T>> = _dataLiveData
 
@@ -30,6 +30,5 @@ abstract class BaseRepository2<T>(override val coroutineContext: CoroutineContex
     }
 
 
-
-
 }
+

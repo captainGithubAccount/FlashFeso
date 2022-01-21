@@ -10,6 +10,7 @@ import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.base.ui.controll.activity.BaseDbActivity
 import com.example.flashfeso_lwj.databinding.ActivityDetallesDeLosPrestamosBinding
 import com.example.flashfeso_lwj.flashfeso.entity.CurrDetailEntity
+import com.example.flashfeso_lwj.flashfeso.utils.back
 import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_common.common.ui.controll.tools.utils.DoubleUtils
 import com.example.lwj_common.common.ui.controll.tools.utils.NumberUtils
@@ -52,19 +53,20 @@ class DetallesDeLosPrestamosActivity : BaseDbActivity<ActivityDetallesDeLosPrest
         super.beforeCreateView()
         mCurrDetailEntity = intent.getParcelableExtra("currDetailsBean")
         if (BaseConstants.ISLOG) Log.d("DetallesDeLosPrestamos", mCurrDetailEntity.toString())
-
         mIsAuthentication = intent.getBooleanExtra("authentication", false)
-
         mIsAgain = intent.getBooleanExtra("isAgain", false)
     }
 
     override fun ActivityDetallesDeLosPrestamosBinding.initView() {
-
-
         binding.header.tvCommonBarTitle.text = resources.getString(R.string.detalles_de_los_prestamos)
         binding.progress.llProgress.visibility = View.GONE
         binding.empty.viewEmpty.visibility = View.GONE
         //initViewWhenOtherSituations()
+    }
+
+    override fun afterBindView() {
+        super.afterBindView()
+        binding.header.ivCommonBarBack.back(this)
     }
 
     @SuppressLint("SetTextI18n")
