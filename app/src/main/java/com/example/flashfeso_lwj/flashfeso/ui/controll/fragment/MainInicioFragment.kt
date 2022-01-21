@@ -2,6 +2,7 @@ package com.example.flashfeso_lwj.flashfeso.ui.controll.fragment
 
 import android.content.Intent
 import android.os.Handler
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
@@ -19,6 +20,7 @@ import com.example.flashfeso_lwj.flashfeso.utils.Constants
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.flashfeso_lwj.flashfeso.viewmodel.MainInicioViewModel
+import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_common.common.ui.controll.fragment.BaseRecyclerFragment
 import com.example.lwj_common.common.ui.controll.tools.utils.DoubleUtils
 import com.example.lwj_common.common.ui.controll.tools.utils.NumberUtils
@@ -107,8 +109,9 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
         binding.tvInicioOlicita.setOnClickListener(View.OnClickListener {
             if(isClickUseful()){
                 if (InfoUtil.isLogin) {
-                    if (InfoUtil.authAllin) {
-                        /*if (mCurrDetailEntity != null) {
+                    if (InfoUtil.authAllin) {//todo 注意测试加了个!
+                        if(BaseConstants.ISLOG)Log.d("----","authAllin为false，所有认证完成")
+                        if (mCurrDetailEntity != null) {
                             when (mCurrDetailEntity?.orderStatus) {
                                 -1 -> {
                                     val intent = Intent(activity,
@@ -116,6 +119,7 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
                                     intent.putExtra("currDetailsBean", mCurrDetailEntity)
                                     startActivity(intent)
                                 }
+                                /*
                                 1 -> if (mCurrDetailEntity != null) {
                                     if (!StringUtils.isEmpty(mCurrDetailEntity?.rejectedReDate)) {
                                         val rejectedReDate: String =
@@ -159,9 +163,14 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
                                     intent5.putExtra("isAgain", true)
                                     startActivity(intent5)
                                 }
+
+                                 */
                             }
-                        }*/
+                        }
+                        //startActivity(InformacionDeIdetidadActivity::class.java)
+                        startActivity(AgergarCuentaBancariaActivity::class.java)//todo 测试加的一行代码
                     } else {
+                        if(BaseConstants.ISLOG)Log.d("----","authAllin为false，有认证未完成")
                         val bankAuth: Boolean = InfoUtil.isBankAuth
                         val cardAuth: Boolean = InfoUtil.isCardAuth
                         val contactsAuth: Boolean = InfoUtil.isContactsAuth

@@ -219,30 +219,18 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
     private fun checkAppPermission(activity: Activity) {
         try {
             //拿到对应的权限名
-            val permission =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.INTERNET")
-            val permission2 = ActivityCompat.checkSelfPermission(activity,
-                "android.permission.WRITE_EXTERNAL_STORAGE")
-            val permission3 = ActivityCompat.checkSelfPermission(activity,
-                "android.permission.READ_EXTERNAL_STORAGE")
-            val permission4 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.READ_CONTACTS")
-            val permission5 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.READ_PHONE_STATE")
-            val permission7 = ActivityCompat.checkSelfPermission(activity,
-                "android.permission.ACCESS_NETWORK_STATE")
-            val permission8 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_WIFI_STATE")
-            val permission9 = ActivityCompat.checkSelfPermission(activity,
-                "android.permission.ACCESS_FINE_LOCATION")
-            val permission10 = ActivityCompat.checkSelfPermission(activity,
-                "android.permission.ACCESS_COARSE_LOCATION")
-            val permission12 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.CAMERA")
-            val permission13 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.WRITE_CONTACTS")
-            val permission14 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.READ_SMS")
+            val permission = ActivityCompat.checkSelfPermission(activity, "android.permission.INTERNET")
+            val permission2 = ActivityCompat.checkSelfPermission(activity, "android.permission.WRITE_EXTERNAL_STORAGE")
+            val permission3 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_EXTERNAL_STORAGE")
+            val permission4 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_CONTACTS")
+            val permission5 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_PHONE_STATE")
+            val permission7 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_NETWORK_STATE")
+            val permission8 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_WIFI_STATE")
+            val permission9 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_FINE_LOCATION")
+            val permission10 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_COARSE_LOCATION")
+            val permission12 = ActivityCompat.checkSelfPermission(activity, "android.permission.CAMERA")
+            val permission13 = ActivityCompat.checkSelfPermission(activity, "android.permission.WRITE_CONTACTS")
+            val permission14 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_SMS")
             //检测上面权限是否全部被授予
             if (permission != PackageManager.PERMISSION_GRANTED
                 || permission2 != PackageManager.PERMISSION_GRANTED

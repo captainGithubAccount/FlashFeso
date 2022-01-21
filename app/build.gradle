@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "com.example.flashfeso_lwj"
         minSdk 21
-        targetSdk 28 //适配PictureSeletor出现的bug
+        targetSdk 29 //适配PictureSeletor会出现bug, 解决方案清单文件里application节点下添加android:requestLegacyExternalStorage="true"
         versionCode 16
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -91,7 +91,8 @@ dependencies {
     implementation 'com.adjust.sdk:adjust-android:4.25.0'
     implementation 'com.android.installreferrer:installreferrer:2.1'
     //adjust添加Google play服务
-    implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+    implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'//切记使用的是这个库, 而不是AndroidX的库,在使用的时候导入的包切记检查
+    implementation 'androidx.ads:ads-identifier:1.0.0-alpha04'//结合上面的库使用
 
 
     // 基础依赖包，必须要依赖
@@ -106,7 +107,7 @@ dependencies {
     //glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
 
-    implementation 'androidx.ads:ads-identifier:1.0.0-alpha04'
+
 
 
 

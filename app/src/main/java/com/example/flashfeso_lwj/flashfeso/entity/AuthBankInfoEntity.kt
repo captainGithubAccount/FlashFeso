@@ -8,7 +8,7 @@ data class AuthBankInfoResponse (
 ){
     fun getDataResult(): DataResult<Int> {
         if(code == 200){
-            return DataResult.Success(code)
+            return DataResult.Success(code, msg)
         }else if(code == 4011){
             return DataResult.Clear(clearMessage = msg)
         }else{

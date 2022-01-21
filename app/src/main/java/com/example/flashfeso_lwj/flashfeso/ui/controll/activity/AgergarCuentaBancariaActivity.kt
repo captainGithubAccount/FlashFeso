@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.drawable.Drawable
 import android.location.Location
 import android.net.Uri
 import android.provider.Settings
@@ -15,7 +14,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.Observer
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.base.entity.DataResult
@@ -39,11 +37,10 @@ import com.example.lwj_common.common.ui.controll.tools.ktx.isUseful
 import com.example.lwj_common.common.ui.controll.tools.ktx.toBankCardEditText
 import com.example.lwj_common.common.ui.controll.tools.ktx.toJson
 import com.example.lwj_common.common.ui.controll.tools.utils.LocationUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.LocationUtils2
 import com.rs.flashpeso.management.ManagementUtils
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
-import java.security.Permission
-import java.util.jar.Manifest
 import javax.inject.Inject
 import kotlin.collections.HashMap
 
@@ -60,8 +57,8 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
     @JvmField
     var mSimpleProgressDialogUtil: SimpleProgressDialogUtil? = null
 
-    @Inject
-    lateinit var locationUtils: LocationUtils
+
+     var locationUtils: LocationUtils2 = LocationUtils2()
     lateinit var bkCardNumber: String
     lateinit var bkName: String
     var bankNo: Int = 0
@@ -110,12 +107,16 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
         mViewModel.authBankInfoLiveData.observe(this, Observer {
             mSimpleProgressDialogUtil?.closeHUD()
             it.whenSuccessResponse {
-                if((it as DataResult.Success).successMessagle == resources.getString(R.string.success)){
-                    addToast(this, it.successMessagle!!)
+                if ((it as DataResult.Success).successMessagle == resources.getString(R.string.success)) {
+                    //addToast(this, it.successMessagle!!)
                     val intent = Intent(this@AgergarCuentaBancariaActivity, DetallesDeLosPrestamosActivity::class.java)
-                    startActivity(intent.apply { putExtra("authentication", true) })
+                    startActivity(
+                        intent.apply { putExtra("authentication", true) }
+                    )
                     loginViewModel.queryNotifyInicioBeanLiveData()
-                    onBackPressed()
+                    //onBackPressed()
+                }else{
+                    addToast(this, it.successMessagle!!)
                 }
             }
             it.whenClear {
@@ -170,6 +171,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
                 }
                 selectBankDialog = InfomationSelectDialog.newInstance()
                     .addSetting(Dialog.SELECT_BANK.ordinal, data, this)
+                selectBankDialog!!.show(supportFragmentManager, "selectBankDialog")
 
             }
         }
@@ -184,12 +186,10 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
             }
             val tarjeta: String = binding.tarjetaTt.text.deleteBlank()
             if (tipoDeCuentaPosition == 0 && (!tarjeta.isUseful() || tarjeta.length != 18)) {
-                addToast(this,
-                    getResources().getString(R.string.introduzca_el_numero_correcto_de_tarjeta_de_16_bits))
+                addToast(this, getResources().getString(R.string.introduzca_el_numero_correcto_de_tarjeta_de_16_bits))
                 return@setOnClickListener
             } else if (tipoDeCuentaPosition == 0 && (!tarjeta.isUseful() || tarjeta.length != 16)) {
-                addToast(this,
-                    getResources().getString(R.string.introduzca_el_numero_correcto_de_tarjeta_de_16_bits))
+                addToast(this, getResources().getString(R.string.introduzca_el_numero_correcto_de_tarjeta_de_16_bits))
                 return@setOnClickListener
             }
 
@@ -212,9 +212,11 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
     }
 
     private fun checkPermissions(actvtity: Activity) {
+        //这里之所以检查权限是因为下来要获取gps、手机型号等信息、应用版本号、版本名、包名、应用名等信息均需要各种权限
         try {
 
-            if (ContextCompat.checkSelfPermission(actvtity,android.Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
+            if (ContextCompat.checkSelfPermission(actvtity,
+                    android.Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(actvtity,
                     "android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(actvtity,
@@ -256,16 +258,16 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
         permissions: Array<out String>,
         grantResults: IntArray,
     ) {
-        when(requestCode){
+        when (requestCode) {
             REQUEST_EXTERNAL_STORAGE -> {
                 var isSuccess = true
-                if(grantResults.isNotEmpty()){
+                if (grantResults.isNotEmpty()) {
                     grantResults.forEachIndexed { _, it ->
                         it != PackageManager.PERMISSION_DENIED
                         isSuccess = false
                     }
 
-                    if(isSuccess){
+                    if (isSuccess) {
                         //打开本应用信息界面
                         val intent = Intent("android.settings.APPLICATION_DETAILS_SETTINGS")
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -280,12 +282,13 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
 
     private fun clickSubmit() {
         mSimpleProgressDialogUtil?.showHUD(this, false)
-        val location: Int = getLocation()
-        if(location == 1){
+        val locationResultFlag: Int = getLocationResultFlag()
+
+        if (locationResultFlag == 1) {
             //没有打开gps或网络
             mSimpleProgressDialogUtil?.closeHUD()
             val jumpSysytemLocDialog = JumpSysytemLocDialog()
-            jumpSysytemLocDialog.listener = object: CommonDialogEvent{
+            jumpSysytemLocDialog.listener = object : CommonDialogEvent {
                 override fun onCancel() {
                     jumpSysytemLocDialog.dismiss()
                 }
@@ -300,71 +303,62 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
             }
             jumpSysytemLocDialog.show(supportFragmentManager, "jumpSysytemLocDialog")
 
-        }else if(location == 2){
+        } else if (locationResultFlag == 2) {
             mSimpleProgressDialogUtil?.closeHUD()
         }
 
+
+
     }
 
-    fun getLocation(): Int {
-        val locationResult: Int =
-            locationUtils.getLocation(this, object : LocationUtils.LocationCallBack {
-                override fun gotLocation(location: Location?) {
-                    if (location != null) {
-                        //当前经度
-                        val longitude: Double = location.getLongitude()
-                        //当前纬度
-                        val latitude: Double = location.getLatitude()
+    fun getLocationResultFlag(): Int {
+        val locationResultType: Int = locationUtils.getLocation(this@AgergarCuentaBancariaActivity,  object : LocationUtils2.LocationCallBack {
+            override fun gotLocation(location: Location?) {
+                if (location != null) {
+                    //当前经度
+                    val longitude: Double = location.getLongitude()
+                    //当前纬度
+                    val latitude: Double = location.getLatitude()
 
-                        if (longitude != 0.0) {
-                            InfoUtil.longitude = longitude.toString()
+                    if (longitude != 0.0) {
+                        InfoUtil.longitude = longitude.toString()
+                    }
+
+                    if (latitude != 0.0) {
+                        InfoUtil.latitude = latitude.toString()
+                    }
+
+                    try {
+
+                        if (!isRisk) {
+                            isRisk = true
+                            val appInfoList: List<AppInfoBean> = ManagementUtils.getAppList(this@AgergarCuentaBancariaActivity)
+                            val devideInfo: DeviceInfoBean = ManagementUtils.getDeviceInfo(this@AgergarCuentaBancariaActivity)
+                            devideInfo.longitude = longitude.toString()
+                            devideInfo.latitude = latitude.toString()
+
+                            val contactsList: List<PhoneInfoBean> = ManagementUtils.getContacts(this@AgergarCuentaBancariaActivity)
+                            val messageList: List<MessageBean> = MessageUtils.getMessage(this@AgergarCuentaBancariaActivity)
+
+
+                            //先上传风控信息，再提交银行卡信息
+                            queryRiskInfo(appInfoList.toJson(), devideInfo.toJson(), contactsList.toJson(), messageList.toJson())
                         }
+                    } catch (e: Exception) {
 
-                        if (latitude != 0.0) {
-                            InfoUtil.latitude = latitude.toString()
-                        }
-
-                        try {
-
-                            if (!isRisk) {
-                                isRisk = true
-                                val appInfoList: List<AppInfoBean> =
-                                    ManagementUtils.getAppList(this@AgergarCuentaBancariaActivity)
-                                val devideInfo: DeviceInfoBean =
-                                    ManagementUtils.getDeviceInfo(this@AgergarCuentaBancariaActivity)
-                                devideInfo.longitude = longitude.toString()
-                                devideInfo.latitude = longitude.toString()
-
-                                val contactsList: List<PhoneInfoBean> =
-                                    ManagementUtils.getContacts(this@AgergarCuentaBancariaActivity)
-                                val messageList: List<MessageBean> =
-                                    MessageUtils.getMessage(this@AgergarCuentaBancariaActivity)
-
-
-                                //先上传风控信息，再提交银行卡信息
-                                queryRiskInfo(appInfoList.toJson(),
-                                    devideInfo.toJson(),
-                                    contactsList.toJson(),
-                                    messageList.toJson())
-                            }
-                        } catch (e: Exception) {
-
-                            e.printStackTrace()
-                            runOnUiThread {
-                                mSimpleProgressDialogUtil?.closeHUD()
-                            }
-                        }
-                    } else {
+                        e.printStackTrace()
                         runOnUiThread {
                             mSimpleProgressDialogUtil?.closeHUD()
                         }
                     }
-
-
+                } else {
+                    runOnUiThread {
+                        mSimpleProgressDialogUtil?.closeHUD()
+                    }
                 }
-
-            })
-        return locationResult
+            }
+        })
+        return locationResultType
     }
 
     private fun queryRiskInfo(
@@ -385,8 +379,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
 
     private fun hideKeyboardAll() {
         if (binding.tarjetaTv.hasFocus()) {
-            val imm =
-                binding.tarjetaTt.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            val imm = binding.tarjetaTt.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
             imm?.hideSoftInputFromWindow(binding.tarjetaTt.windowToken, 0)
         }
     }
@@ -414,6 +407,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
     override fun onDialogItemClick(list: List<String>, flag: Int) {
         when (flag) {
             Dialog.TIPO_DECUENT.ordinal -> {
+                tipoDeCuentaDialog?.dismiss()
                 binding.tipoDeCuentaTv.text = list[0]
                 val position = list[1]
                 when (position.toInt()) {
@@ -437,7 +431,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
             }
 
             Dialog.SELECT_BANK.ordinal -> {
-                binding.bancoTv.text = list[1]
+                binding.bancoTv.text = list[0]
                 selectBankDialog?.dismiss()
             }
         }

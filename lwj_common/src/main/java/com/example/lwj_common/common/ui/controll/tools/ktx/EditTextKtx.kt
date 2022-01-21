@@ -12,7 +12,7 @@ import android.widget.EditText
 fun EditText.toBankCardEditText(): EditText =
     this.apply {
         //设置输入长度不超过24位(包含空格)
-        this.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(24))
+        //this.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(24))
         this.addTextChangedListener(object : TextWatcher {
             var kongge = ' '
 

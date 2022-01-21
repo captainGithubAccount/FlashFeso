@@ -237,7 +237,7 @@ object DoubleUtils {
         }
         val bd1 = BigDecimal(d1)
         val bd2 = BigDecimal(d2)
-        return java.lang.Double.toString(bd1.divide(bd2, scale, BigDecimal.ROUND_HALF_UP).toDouble())
+        return (bd1.divide(bd2, scale, BigDecimal.ROUND_HALF_UP).toDouble()).toString()
         //divide  @param: 除法计算的时候，括号里第一个参数是除数，第二个是精确小数位，第三个是舍入模式
     }
 }

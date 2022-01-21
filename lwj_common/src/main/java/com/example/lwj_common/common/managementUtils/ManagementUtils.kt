@@ -25,12 +25,12 @@ import android.text.format.Formatter
 import android.util.Log
 import androidx.ads.identifier.AdvertisingIdClient
 import androidx.ads.identifier.AdvertisingIdInfo
-
 import androidx.core.app.ActivityCompat
 import androidx.core.os.ConfigurationCompat
 import com.example.lwj_common.common.managementUtils.AppInfoBean
 import com.example.lwj_common.common.managementUtils.DeviceInfoBean
 import com.example.lwj_common.common.managementUtils.PhoneInfoBean
+
 import java.io.*
 import java.lang.Exception
 import java.lang.RuntimeException
@@ -182,7 +182,7 @@ object ManagementUtils {
         }
     }
 
-    @JvmStatic
+
     fun getDeviceInfo(context: Context): DeviceInfoBean {
         val deviceInfoBean = DeviceInfoBean()
         deviceInfoBean.iMEI = getIMEI(context)
@@ -191,10 +191,8 @@ object ManagementUtils {
         deviceInfoBean.uuid = getUUID(context)
         deviceInfoBean.generalDeviceId = getDeviceId(context)
         deviceInfoBean.ipAddress = getIpAddress(context) //需要权限android.permission.ACCESS_WIFI_STATE
-        deviceInfoBean.macAddress =
-            getMacAddress(context) //需要权限android.permission.ACCESS_WIFI_STATE 打开wifi才能获取到数据
-        deviceInfoBean.networkType =
-            getNetworkType(context) //需要权限android.permission.READ_PHONE_STATE android.permission.ACCESS_NETWORK_STATE
+        deviceInfoBean.macAddress = getMacAddress(context) //需要权限android.permission.ACCESS_WIFI_STATE 打开wifi才能获取到数据
+        deviceInfoBean.networkType = getNetworkType(context) //需要权限android.permission.READ_PHONE_STATE android.permission.ACCESS_NETWORK_STATE
         deviceInfoBean.model = Build.MODEL
         deviceInfoBean.brand = Build.BRAND
         deviceInfoBean.idForAdvertising = getIdForAdvertising(context)
@@ -281,16 +279,31 @@ object ManagementUtils {
         get() {
             var result: String? = null
             val cpuInfo = readCPUinfo()
-            val cpuInfoArray = cpuInfo.split(":|\\n").toTypedArray()
+            Log.d("---couInfo", cpuInfo)
+            val cpuInfoArray = cpuInfo.split( ":|\n".toRegex()).toTypedArray()
+
+            Log.d("---size", cpuInfoArray.size.toString())
+
+
+                Log.d("---", cpuInfoArray[0])
+
             for (i in cpuInfoArray.indices) {
-                if (cpuInfoArray[i].toLowerCase().contains("bogomips")) {
+                //cpuInfoArray[i]
+                if (cpuInfoArray[i].toLowerCase(Locale.getDefault()).contains("bogomips")) {
                     result = cpuInfoArray[i + 1]
+                    if (result == null) {
+                        Log.d("---", "result is null")
+                    } else {
+                        Log.d("---", "result is not null")
+                    }
                     break
                 }
             }
             if (result != null) result = result.trim { it <= ' ' }
             return result
         }
+
+
 
     /**
      * @return the CPU info.
@@ -443,15 +456,15 @@ object ManagementUtils {
     fun getIdForAdvertising(context: Context?): String? {
         var info: AdvertisingIdInfo? = null
         info = try {
-            val adInfo =
-                AdvertisingIdClient.getAdvertisingIdInfo(
-                    context!!)
+            val adInfo = AdvertisingIdClient.getAdvertisingIdInfo(context!!)
             adInfo.get()
         } catch (e: Exception) {
             e.printStackTrace()
             return null
         }
         return info?.id
+
+
     }
 
     fun getMacAddress(context: Context): String? {

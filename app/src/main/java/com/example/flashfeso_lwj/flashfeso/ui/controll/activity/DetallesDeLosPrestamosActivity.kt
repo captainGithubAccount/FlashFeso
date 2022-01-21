@@ -49,19 +49,21 @@ class DetallesDeLosPrestamosActivity : BaseDbActivity<ActivityDetallesDeLosPrest
 
     override fun beforeCreateView() {
         super.beforeCreateView()
-        mCurrDetailEntity = intent.getParcelableExtra("currDetailsBean")!!
-        if(BaseConstants.ISLOG) Log.d("DetallesDeLosPrestamos", mCurrDetailEntity.toString())
 
-        mIsAuthentication = intent.getBooleanExtra("currDetailsBean", false)
-
-        mIsAgain = intent.getBooleanExtra("isAgain", false)
     }
 
     override fun ActivityDetallesDeLosPrestamosBinding.initView() {
+        mCurrDetailEntity = intent.getParcelableExtra("currDetailsBean")
+       // if(BaseConstants.ISLOG) Log.d("DetallesDeLosPrestamos", mCurrDetailEntity.toString())
+
+        mIsAuthentication = intent.getBooleanExtra("authentication", false)
+
+        mIsAgain = intent.getBooleanExtra("isAgain", false)
+
         binding.header.tvCommonBarTitle.text = resources.getString(R.string.detalles_de_los_prestamos)
         binding.progress.llProgress.visibility = View.GONE
         binding.empty.viewEmpty.visibility = View.GONE
-        initViewWhenOtherSituations()
+        //initViewWhenOtherSituations()
     }
 
     private fun initViewWhenOtherSituations() {
