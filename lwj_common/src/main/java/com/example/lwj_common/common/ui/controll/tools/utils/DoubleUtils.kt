@@ -202,7 +202,7 @@ object DoubleUtils {
         return bd1.divide(bd2, scale, BigDecimal.ROUND_HALF_UP).toDouble()
     }
 
-    fun divTOString(d1: Double, d2: Double, scale: Int): String {
+    fun divToString(d1: Double, d2: Double, scale: Int): String {
         //  当然在此之前，你要判断分母是否为0，
         //  为0你可以根据实际需求做相应的处理
         if (d1 == 0.0) {
@@ -217,13 +217,16 @@ object DoubleUtils {
             .toDouble())
     }
 
-    /*
-    * 更精准的除法运算
+    /**
+    * 更精准的除法运算divide
+    * @param d1 被除数
+    * @param d2 除数
+    * @param scale 精确小数位
     * */
-    fun divTOString(d1: String?, d2: String?, scale: Int): String {
+    fun divToString(d1: String?, d2: String?, scale: Int): String {
         //  当然在此之前，你要判断分母是否为0，
         //  为0你可以根据实际需求做相应的处理
-        if (!isNumber(d1!!)) {
+        if (!isNumber(d1!!)) {//判断传入的string是否可以转换为double类型
             return "0"
         }
         if (!isNumber(d2!!)) {
@@ -237,7 +240,9 @@ object DoubleUtils {
         }
         val bd1 = BigDecimal(d1)
         val bd2 = BigDecimal(d2)
+        //除法计算的时候，bd1是被除数(分子), 括号里第一个参数bd2是除数(也就是分母)，第二个scle是精确小数位，第三个是舍入模式
         return (bd1.divide(bd2, scale, BigDecimal.ROUND_HALF_UP).toDouble()).toString()
-        //divide  @param: 除法计算的时候，括号里第一个参数是除数，第二个是精确小数位，第三个是舍入模式
+
+
     }
 }

@@ -14,7 +14,7 @@ import com.example.lwj_common.common.ui.controll.tools.utils.DensityUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BasePageStyleActivity<ActivityMainBinding>(){
+class MainActivity : BasePageStyleActivity<ActivityMainBinding>() {
     //注意fragmentTransaction和fragmentmanager实例化需要在局部方法中实例化, 不能为全局方法
     private lateinit var _fragmentTransacation: FragmentTransaction
     private var mInicioFragment: MainInicioFragment? = null
@@ -33,26 +33,26 @@ class MainActivity : BasePageStyleActivity<ActivityMainBinding>(){
         setSize(binding.rbMainBottomInfo)
         setSize(binding.rbMainBottomMe)
 
-        binding.rgMainBottom.setOnCheckedChangeListener(object: RadioGroup.OnCheckedChangeListener{
+        binding.rgMainBottom.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
             override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
                 _fragmentTransacation = supportFragmentManager.beginTransaction()
 
                 hideAllFragment(_fragmentTransacation)
 
-                when(checkedId){
+                when (checkedId) {
                     R.id.rb_main_bottom_info -> {
-                        if(mInicioFragment == null){
+                        if (mInicioFragment == null) {
                             mInicioFragment = MainInicioFragment.getInstance()
                             showOneFragment(mInicioFragment!!, true)
-                        }else{
+                        } else {
                             showOneFragment(mInicioFragment!!, false)
                         }
                     }
                     R.id.rb_main_bottom_me -> {
-                        if(mMiCuentaFragment == null){
+                        if (mMiCuentaFragment == null) {
                             mMiCuentaFragment = MainMiCuentaFragment.getInstance()
                             showOneFragment(mMiCuentaFragment!!, true)
-                        }else{
+                        } else {
                             showOneFragment(mMiCuentaFragment!!, false)
                         }
                     }
@@ -67,12 +67,12 @@ class MainActivity : BasePageStyleActivity<ActivityMainBinding>(){
 
     private fun hideAllFragment(fragmentTransaction: FragmentTransaction) {
         mInicioFragment?.let { fragmentTransaction.hide(it) }
-        mMiCuentaFragment?.let{ fragmentTransaction.hide(it) }
+        mMiCuentaFragment?.let { fragmentTransaction.hide(it) }
     }
 
     private fun showOneFragment(fragment: Fragment, isNeedAdd: Boolean) {
-        if(isNeedAdd){
-            _fragmentTransacation.add(R.id.fl_main_frgm_container,fragment)
+        if (isNeedAdd) {
+            _fragmentTransacation.add(R.id.fl_main_frgm_container, fragment)
         }
         _fragmentTransacation.show(fragment)
         //注意: 是用commit()提交还是commitAllowingStateLoss()根据场景来决定
@@ -88,8 +88,7 @@ class MainActivity : BasePageStyleActivity<ActivityMainBinding>(){
     private fun setSize(rb: RadioButton) {
         val rect = Rect()
         //距离父窗体的距离，可以理解为左上和右下的坐标
-        rect[0, 0, DensityUtil.dip2px(this, 20F)] =
-            DensityUtil.dip2px(this, 20F)
+        rect[0, 0, DensityUtil.dip2px(this, 20F)] = DensityUtil.dip2px(this, 20F)
         val drawables = rb.compoundDrawables
         //取出上边的图片设置大小
         drawables[1].bounds = rect

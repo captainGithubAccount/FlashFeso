@@ -38,10 +38,9 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
     private lateinit var mEnterPhoneNumber: String
 
 
-
     override fun observe() {
         mLoginViewModel.loginUserLiveData.observe(this, Observer {
-            it.whenSuccessResponse {  dr ->
+            it.whenSuccessResponse { dr ->
                 val dataResult = dr as DataResult.Success
                 mSimpleProgressDialogUtil?.closeHUD()
                 if (!StringUtils.isEmpty(dataResult.data?.phone)) {
@@ -85,15 +84,12 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                 //倒计时实现
                 object : CountDownTimer(60 * 1000L, 1000) {
                     override fun onFinish() {
-                        binding.inclLoginVerificationCode.llLoginUpdateTime.visibility =
-                            View.GONE
-                        binding.inclLoginVerificationCode.tvLoginYzmSend.visibility =
-                            View.VISIBLE
+                        binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.GONE
+                        binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.VISIBLE
                     }
 
                     override fun onTick(p0: Long) {
-                        binding.inclLoginVerificationCode.llLoginUpdateTime.visibility =
-                            View.VISIBLE
+                        binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.VISIBLE
                         binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.GONE
                         binding.inclLoginVerificationCode.tvUpdateTime.setText(String.format(resources.getString(R.string.login_verification_code_time), p0.div(1000)))
                     }
@@ -103,7 +99,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
             it.whenError {
                 binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.GONE
                 binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.VISIBLE
-                if(Constants.ISLOG)Log.d("TAG:yzm error mes", "ERROR: ${(it as DataResult.Error).errorMessage}")
+                if (Constants.ISLOG) Log.d("TAG:yzm error mes", "ERROR: ${(it as DataResult.Error).errorMessage}")
                 Toast.makeText(App.context, "ERROR: ${(it as DataResult.Error).errorMessage}", Toast.LENGTH_LONG).show()
                 mSimpleProgressDialogUtil?.closeHUD()
             }
@@ -120,11 +116,11 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
     }
 
     override fun onBackPressed() {
-        if(mIsYzmLayoutVisible){
+        if (mIsYzmLayoutVisible) {
             mIsYzmLayoutVisible = false
             binding.inclLoginEnterTelephone.llLoginEnterTelephone.visibility = View.VISIBLE
             binding.inclLoginEnterTelephone.llLoginEnterTelephone.visibility = View.GONE
-        }else{
+        } else {
             super.onBackPressed()
         }
     }
@@ -145,17 +141,13 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                     mEnterPhoneNumber = p0.toString()
                     if (!StringUtils.isEmpty(mEnterPhoneNumber) && mEnterPhoneNumber.length == 10) {
                         if (StringUtils.isPhone(mEnterPhoneNumber)) {
-                            inclLoginEnterTelephone.llLoginEnterTelephone.visibility =
-                                View.GONE
-                            inclLoginVerificationCode.llLoginVerificationCode.visibility =
-                                View.VISIBLE
+                            inclLoginEnterTelephone.llLoginEnterTelephone.visibility = View.GONE
+                            inclLoginVerificationCode.llLoginVerificationCode.visibility = View.VISIBLE
                             mIsYzmLayoutVisible = true
                             sendMs()
 
                         } else {
-                            Toast.makeText(App.context,
-                                getResources().getString(R.string.enter_phone_number),
-                                Toast.LENGTH_LONG).show()
+                            Toast.makeText(App.context, getResources().getString(R.string.enter_phone_number), Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -178,7 +170,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                 }
             }
 
-            ll.etLoginVerificationCode.addTextChangedListener(object : TextWatcher{
+            ll.etLoginVerificationCode.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
                 }
@@ -188,11 +180,11 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
 
                 override fun afterTextChanged(p0: Editable?) {
                     val verificationCode = p0.toString().trim()
-                    if(!StringUtils.isEmpty(verificationCode) && verificationCode.length == 6){
-                        if(mIsAgreePrivacy){
+                    if (!StringUtils.isEmpty(verificationCode) && verificationCode.length == 6) {
+                        if (mIsAgreePrivacy) {
                             //todo ---
                             userLogin(verificationCode)
-                        }else{
+                        } else {
                             Toast.makeText(this@LoginActivity, resources.getString(R.string.read_privacidad), Toast.LENGTH_LONG).show()
                         }
                     }
@@ -203,28 +195,26 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
             //ll.etLoginVerificationCode
 
             ll.tvLoginPrivacyDetail.setOnClickListener {
-                if(isClickUseful()){
+                if (isClickUseful()) {
                     //跳转协议详情Atv界面
                     val intent = Intent(this@LoginActivity, LoginPrivacyDetailActivity::class.java)
-                    intent.putExtra(LoginPrivacyDetailActivity.HEADER_TITLE_TEXT,
-                        resources.getString(R.string.seguridad_de_los_datos))
-                    intent.putExtra(LoginPrivacyDetailActivity.WEBSITE_URL,
-                        UrlConstants.SEGURIDAD_DE_LOS_DATOS_URL)
+                    intent.putExtra(LoginPrivacyDetailActivity.HEADER_TITLE_TEXT, resources.getString(R.string.seguridad_de_los_datos))
+                    intent.putExtra(LoginPrivacyDetailActivity.WEBSITE_URL, UrlConstants.SEGURIDAD_DE_LOS_DATOS_URL)
                     startActivity(intent)
                 }
             }
 
             ll.ivLoginPrivacyImg.setOnClickListener {
-                if(mIsAgreePrivacy){
+                if (mIsAgreePrivacy) {
                     mIsAgreePrivacy = false
                     (it as ImageView).setImageResource(R.drawable.icon_disagree)
-                }else{
+                } else {
                     mIsAgreePrivacy = true
                     (it as ImageView).setImageResource(R.drawable.icon_agree)
                     val verificationCode = inclLoginVerificationCode.etLoginVerificationCode.text.toString().trim()
-                    if(!StringUtils.isEmpty(verificationCode) && verificationCode.length == 6){
+                    if (!StringUtils.isEmpty(verificationCode) && verificationCode.length == 6) {
 
-                    userLogin(ll.etLoginVerificationCode.text.toString().trim())
+                        userLogin(ll.etLoginVerificationCode.text.toString().trim())
                     }
                 }
             }
@@ -232,7 +222,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
     }
 
 
-    private fun userLogin(verificationCode: String){
+    private fun userLogin(verificationCode: String) {
         mSimpleProgressDialogUtil?.showHUD(this, false)
         var trackerName = "Organic"
         var adid = ""
@@ -251,10 +241,9 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
         map["me_regisChannel"] = trackerName
         map["adid"] = adid
         map["gps_adid"] = InfoUtil.gpsAdid
-        if(Constants.ISLOG)Log.d("--登录接口请求参数", map.toString())
+        if (Constants.ISLOG) Log.d("--登录接口请求参数", map.toString())
         mLoginViewModel.queryLoginUserInfo(map)
     }
-
 
 
     private fun sendMs() {
@@ -271,7 +260,6 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
         mLoginViewModel.queryLoginYzm(map)
 
     }
-
 
 
 }

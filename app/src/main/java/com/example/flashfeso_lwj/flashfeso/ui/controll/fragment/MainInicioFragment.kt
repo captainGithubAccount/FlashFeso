@@ -300,7 +300,7 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
                     binding.tvMainInicioDays.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
 
                     if (!StringUtils.isEmpty(quota)) {
-                        binding.tvMainInicioQuota.text = NumberUtils.goToZeroString(DoubleUtils.divTOString(quota, "100", 2))
+                        binding.tvMainInicioQuota.text = NumberUtils.goToZeroString(DoubleUtils.divToString(quota, "100", 2))
                     } else {
                         binding.tvMainInicioQuota.setText(Constants.EMPTY_STRING)
                     }
@@ -454,7 +454,7 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
                 }
                 binding.tvMainInicioDays.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
                 if (!StringUtils.isEmpty(mAuthUserInfoEntity?.quota)) {
-                    binding.tvMainInicioQuota.setText(goToZeroString(DoubleUtils.divTOString(mAuthUserInfoEntity?.quota, "100", 2)))
+                    binding.tvMainInicioQuota.setText(goToZeroString(DoubleUtils.divToString(mAuthUserInfoEntity?.quota, "100", 2)))
                 } else {
                     binding.tvMainInicioQuota.setText(Constants.EMPTY_STRING)
                 }
@@ -512,7 +512,7 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
                 }
                 binding.tvMainInicioDays.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f)
                 if (!StringUtils.isEmpty(mAuthUserInfoEntity?.quota)) {
-                    binding.tvMainInicioQuota.setText(goToZeroString(DoubleUtils.divTOString(mAuthUserInfoEntity?.quota,
+                    binding.tvMainInicioQuota.setText(goToZeroString(DoubleUtils.divToString(mAuthUserInfoEntity?.quota,
                         "100",
                         2)))
                 } else {
@@ -526,7 +526,7 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
                 binding.tvInicioOlicita.setText(resources.getString(R.string.isolicita))
             }
             0/*待审核*/, 2/*待放款*/ -> {
-                binding.tvMainInicioQuota.setText(goToZeroString(DoubleUtils.divTOString(mCurrDetailEntity?.loanAmount,
+                binding.tvMainInicioQuota.setText(goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.loanAmount,
                     "100",
                     2)))
                 if (!StringUtils.isEmpty(mCurrDetailEntity?.repayDate)) {
@@ -547,7 +547,7 @@ class MainInicioFragment : BaseRecyclerFragment<FragmentMainInicioBinding>(){
             }
             3/*待还款*/, 5/*逾期*/ -> {
 
-                binding.tvMainInicioQuota.setText(goToZeroString(DoubleUtils.divTOString(mCurrDetailEntity?.loanAmount,
+                binding.tvMainInicioQuota.setText(goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.loanAmount,
                     "100",
                     2)))
                 if (!StringUtils.isEmpty(mCurrDetailEntity?.repayDate)) {

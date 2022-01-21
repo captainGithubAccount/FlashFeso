@@ -1,5 +1,6 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -19,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 * */
 
 @AndroidEntryPoint
-class DetallesDeLosPrestamosActivity : BaseDbActivity<ActivityDetallesDeLosPrestamosBinding>(){
+class DetallesDeLosPrestamosActivity : BaseDbActivity<ActivityDetallesDeLosPrestamosBinding>() {
     var mCurrDetailEntity: CurrDetailEntity? = null
 
     var mIsAgain: Boolean = false
@@ -49,16 +50,16 @@ class DetallesDeLosPrestamosActivity : BaseDbActivity<ActivityDetallesDeLosPrest
 
     override fun beforeCreateView() {
         super.beforeCreateView()
-
-    }
-
-    override fun ActivityDetallesDeLosPrestamosBinding.initView() {
         mCurrDetailEntity = intent.getParcelableExtra("currDetailsBean")
-       // if(BaseConstants.ISLOG) Log.d("DetallesDeLosPrestamos", mCurrDetailEntity.toString())
+        if (BaseConstants.ISLOG) Log.d("DetallesDeLosPrestamos", mCurrDetailEntity.toString())
 
         mIsAuthentication = intent.getBooleanExtra("authentication", false)
 
         mIsAgain = intent.getBooleanExtra("isAgain", false)
+    }
+
+    override fun ActivityDetallesDeLosPrestamosBinding.initView() {
+
 
         binding.header.tvCommonBarTitle.text = resources.getString(R.string.detalles_de_los_prestamos)
         binding.progress.llProgress.visibility = View.GONE
@@ -66,8 +67,9 @@ class DetallesDeLosPrestamosActivity : BaseDbActivity<ActivityDetallesDeLosPrest
         //initViewWhenOtherSituations()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initViewWhenOtherSituations() {
-        if(mCurrDetailEntity != null){
+        if (mCurrDetailEntity != null) {
             binding.progress.llProgress.visibility = View.GONE
             binding.empty.viewEmpty.visibility = View.GONE
             binding.error.llError.visibility = View.GONE
@@ -77,41 +79,29 @@ class DetallesDeLosPrestamosActivity : BaseDbActivity<ActivityDetallesDeLosPrest
 
 
             //最小申请金额
-            minAmount = DoubleUtils.divTOString(mCurrDetailEntity?.minAmount, "100", 2)
+            minAmount = DoubleUtils.divToString(mCurrDetailEntity?.minAmount, "100", 2)
             minAmountText?.setText(money + NumberUtils.goToZeroString(minAmount))
 
             //最大申请金额
-            maxAmount = DoubleUtils.divTOString(mCurrDetailEntity?.loanAmount, "100", 2)
+            maxAmount = DoubleUtils.divToString(mCurrDetailEntity?.loanAmount, "100", 2)
             loadAmount = maxAmount
             binding.loanAmountText.setText(money + NumberUtils.goToZeroString(loadAmount))
             //申请金额
             montoDelPrestamosTv?.setText(money + NumberUtils.goToZeroString(maxAmount))
             //放款金额
-            binding.disburalAmount.setText(money + NumberUtils.goToZeroString(DoubleUtils.divTOString(
-                mCurrDetailEntity?.disburalAmount,
-                "100",
-                2)))
+            binding.disburalAmount.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.disburalAmount, "100", 2)))
             //借贷期限
             binding.tenure.setText(mCurrDetailEntity?.tenure.toString() + " " + dias)
             //银行卡号
             binding.bbvaBanvomerTv.setText(mCurrDetailEntity?.bankNo)
             //应付金额
-            binding.montoTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divTOString(
-                mCurrDetailEntity?.repaymentAmount,
-                "100",
-                2)))
+            binding.montoTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.repaymentAmount, "100", 2)))
             //付款截止日期
             binding.fechaTv.setText(mCurrDetailEntity?.repayDate)
             //管理费
-            binding.comisionTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divTOString(
-                mCurrDetailEntity?.processingFee,
-                "100",
-                2)))
+            binding.comisionTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.processingFee, "100", 2)))
             //利息
-            binding.interesTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divTOString(
-                mCurrDetailEntity?.interest,
-                "100",
-                2)))
+            binding.interesTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.interest, "100", 2)))
 
             addImg?.setImageDrawable(resources.getDrawable(R.drawable.icon_add_grey))
 
@@ -120,7 +110,7 @@ class DetallesDeLosPrestamosActivity : BaseDbActivity<ActivityDetallesDeLosPrest
             } else {
                 subImg?.setImageDrawable(resources.getDrawable(R.drawable.icon_sub_black))
             }
-        }else if(isAgain){
+        } else if (isAgain) {
 
         }
 

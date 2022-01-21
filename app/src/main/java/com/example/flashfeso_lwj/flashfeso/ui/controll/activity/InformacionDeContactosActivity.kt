@@ -25,10 +25,11 @@ import java.lang.Exception
 import java.util.regex.Pattern
 import javax.inject.Inject
 
-class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacionDeContactosBinding>(), InfomationSelectItemOnClickListener{
+class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacionDeContactosBinding>(), InfomationSelectItemOnClickListener {
     var mHandler = Handler()
     private val mViewModel: InformacionDeContactosViewModel by viewModels()
     val mLoginViewModel: LoginViewModel by viewModels()
+
     @Inject
     @JvmField
     var mSimpleProgressDialogUtil: SimpleProgressDialogUtil? = null
@@ -68,7 +69,7 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
         binding.header.ivCommonBarBack.back(this@InformacionDeContactosActivity)
 
         binding.relativesOneLl.setOnClickListener {
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 hideKeyAll()
                 val data = resources.getStringArray(R.array.array_relatives_all).toList()
                 mRelativeOneDialog = InfomationSelectDialog.newInstance().addSetting(1, data, this)
@@ -77,10 +78,10 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
         }
 
         binding.personalPhoneOneLl.setOnClickListener {
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 hideKeyAll()
                 //等待200毫秒，是为了防止软键盘未完全关闭收回，跳转回来下方空白（红米手机易产生的BUG）
-                mHandler.postDelayed(object: Runnable{
+                mHandler.postDelayed(object : Runnable {
                     override fun run() {
                         //调用本地联系人
                         val intent = Intent(Intent.ACTION_PICK)
@@ -92,25 +93,25 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
         }
 
         binding.relativesTwoLl.setOnClickListener {
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 hideKeyAll()
                 val data = resources.getStringArray(R.array.array_relatives_all).toList()
-                mRelativeTwoDialog = InfomationSelectDialog.newInstance().addSetting(2, data, this )
+                mRelativeTwoDialog = InfomationSelectDialog.newInstance().addSetting(2, data, this)
                 mRelativeTwoDialog.show(supportFragmentManager, "mRelativeTwoDialog")
             }
         }
 
         binding.personalPhoneTwoLl.setOnClickListener {
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 hideKeyAll()
                 //等待200毫秒，是为了防止软键盘未完全关闭收回，跳转回来下方空白（红米手机易产生的BUG）
-                mHandler.postDelayed(object: Runnable{
+                mHandler.postDelayed(object : Runnable {
                     override fun run() {
                         var intent = Intent(Intent.ACTION_PICK)
                         intent.type = ContactsContract.Contacts.CONTENT_TYPE
                         startActivityForResult(intent, REQUEST_CODE_TWO)
                     }
-                },200)
+                }, 200)
             }
         }
 
@@ -118,7 +119,7 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
             hideKeyAll()
 
             val relativesOne = binding.relativesOneTv.getText().toString().trim()
-            if(StringUtils.isEmpty(relativesOne)){
+            if (StringUtils.isEmpty(relativesOne)) {
                 Toast.makeText(this@InformacionDeContactosActivity, resources.getString(R.string.seleccione_la_relacion_con_el_primer_contacto), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -136,7 +137,7 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
             }
 
             val relativesTwo: String = binding.relativesTwoTv.getText().toString().trim()
-            if (StringUtils.isEmpty(relativesTwo) ) {
+            if (StringUtils.isEmpty(relativesTwo)) {
                 Toast.makeText(this@InformacionDeContactosActivity, resources.getString(R.string.seleccione_la_relacion_con_el_segundo_contacto), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -173,7 +174,7 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
                 return@setOnClickListener
             }
 
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 queryAuthContactPerson(mRelativesOnePosition, personalNameOne, personalPhoneOne, mRelativeTwoPosition, personalNameTwo, personalPhoneTwo)
             }
         }
@@ -204,36 +205,29 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
     //todo need to study contentReciver
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when(resultCode){
+        when (resultCode) {
             REQUEST_CODE_ONE -> {
                 //回掉, 选择通讯录联系人返回
-                if(data == null){
+                if (data == null) {
                     return
                 }
-                val projection: Array<String> = arrayOf(
-                    ContactsContract.CommonDataKinds.Phone.NUMBER,
-                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
-                )
+                val projection: Array<String> = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
                 try {
-                    val cursor: Cursor? = contentResolver.query(
-                        data.data!!,
-                        projection,
-                        null,null,null
-                    )
+                    val cursor: Cursor? = contentResolver.query(data.data!!, projection, null, null, null)
                     cursor?.let {
-                        while(it.moveToNext()){
+                        while (it.moveToNext()) {
                             val number: String = it.getString(0)
                             val displayName: String = it.getString(1)
                             binding.personalPhoneOneTv.text = number.apply {
                                 replace(" ", "")
                                 Pattern.compile("[^0-9]]").matcher(this).replaceAll("").trim()
                             }
-                            binding.personalNameOneEt.setText( displayName)
+                            binding.personalNameOneEt.setText(displayName)
 
                         }
                         it.close()
                     }
-                }catch (e: Exception){
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
 
@@ -242,22 +236,15 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
 
             REQUEST_CODE_TWO -> {
                 //回掉, 选择通讯录联系人返回
-                if(data == null){
+                if (data == null) {
                     return
                 }
 
-                val projections: Array<String> = arrayOf(
-                    ContactsContract.CommonDataKinds.Phone.NUMBER,
-                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
-                )
+                val projections: Array<String> = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
                 try {
-                    val cursor: Cursor? = contentResolver.query(
-                        data?.data!!,
-                        projections,
-                        null, null, null
-                    )
-                    cursor?.let{
-                        while(cursor.moveToNext()){
+                    val cursor: Cursor? = contentResolver.query(data?.data!!, projections, null, null, null)
+                    cursor?.let {
+                        while (cursor.moveToNext()) {
                             val number: String = it.getString(0)
                             val displayName: String = it.getString(1)
                             binding.personalPhoneTwoTv.text = number.apply {
@@ -268,28 +255,29 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
                         }
                         it.close()
                     }
-                }catch (e: Exception){
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
 
-            else -> {}
+            else -> {
+            }
         }
     }
 
     private fun hideKeyAll() {
-        if(binding.personalNameOneEt.isFocused){
+        if (binding.personalNameOneEt.isFocused) {
             val imm = binding.personalNameOneEt.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.personalNameOneEt.windowToken, 0)
         }
-        if(binding.personalNameTwoEt.isFocused){
+        if (binding.personalNameTwoEt.isFocused) {
             val imm = binding.personalNameTwoEt.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.personalNameTwoEt.windowToken, 0)
         }
     }
 
     override fun onDialogItemClick(list: List<String>, flag: Int) {
-        when(flag){
+        when (flag) {
             RelativeLl.ONE.value -> {
                 mRelativeOneDialog.dismiss()
                 binding.relativesOneTv.text = list[0]
@@ -303,7 +291,7 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
         }
     }
 
-    enum class RelativeLl(val value: Int){
+    enum class RelativeLl(val value: Int) {
         ONE(1), TWO(2)
     }
 

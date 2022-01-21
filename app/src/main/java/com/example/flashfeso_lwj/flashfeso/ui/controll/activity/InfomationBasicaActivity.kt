@@ -19,6 +19,7 @@ import com.example.lwj_base.common.base.BaseConstants
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.HashMap
 import javax.inject.Inject
+
 /*
 *
 * 认证一
@@ -44,7 +45,7 @@ class InfomationBasicaActivity : BasePageStyleActivity<ActivityInformacionBasica
                     mLoginViewModel.queryNotifyInicioBeanLiveData()
 
 
-                    startActivity( InfomationLaboralActivity::class.java)
+                    startActivity(InfomationLaboralActivity::class.java)
                     Toast.makeText(this, it.successMessagle, Toast.LENGTH_SHORT).show()
                 }
 

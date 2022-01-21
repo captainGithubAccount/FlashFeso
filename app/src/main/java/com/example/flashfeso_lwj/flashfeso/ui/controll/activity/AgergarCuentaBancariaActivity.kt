@@ -46,7 +46,7 @@ import kotlin.collections.HashMap
 
 @AndroidEntryPoint
 class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuentaBancariaBinding>(),
-    InfomationSelectItemOnClickListener {
+        InfomationSelectItemOnClickListener {
     var tipoDeCuentaDialog: InfomationSelectDialog? = null
     var selectBankDialog: InfomationSelectDialog? = null
     private var tipoDeCuentaPosition = 1
@@ -58,7 +58,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
     var mSimpleProgressDialogUtil: SimpleProgressDialogUtil? = null
 
 
-     var locationUtils: LocationUtils2 = LocationUtils2()
+    var locationUtils: LocationUtils2 = LocationUtils2()
     lateinit var bkCardNumber: String
     lateinit var bkName: String
     var bankNo: Int = 0
@@ -76,12 +76,12 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
             it.whenError {
                 binding.error.llError.visibility = View.VISIBLE
                 binding.progress.llProgress.visibility = View.GONE
-                addToast(this, (it as DataResult.Error).errorMessage!!)
+                addToast(this, (it as DataResult.Error).errorMessage !!)
             }
             it.whenClear {
                 InfoUtil.clear()
                 loginViewModel.queryNotifyUpdateLoginLiveData()
-                addToast(this, (it as DataResult.Clear).clearMessage!!)
+                addToast(this, (it as DataResult.Clear).clearMessage !!)
                 onBackPressed()
             }
         })
@@ -99,7 +99,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
             it.whenClear {
                 InfoUtil.clear()
                 loginViewModel.queryNotifyUpdateLoginLiveData()
-                addToast(this, (it as DataResult.Clear).clearMessage!!)
+                addToast(this, (it as DataResult.Clear).clearMessage !!)
                 onBackPressed()
             }
         })
@@ -111,24 +111,24 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
                     //addToast(this, it.successMessagle!!)
                     val intent = Intent(this@AgergarCuentaBancariaActivity, DetallesDeLosPrestamosActivity::class.java)
                     startActivity(
-                        intent.apply { putExtra("authentication", true) }
+                            intent.apply { putExtra("authentication", true) }
                     )
                     loginViewModel.queryNotifyInicioBeanLiveData()
                     //onBackPressed()
-                }else{
-                    addToast(this, it.successMessagle!!)
+                } else {
+                    addToast(this, it.successMessagle !!)
                 }
             }
             it.whenClear {
 
                 InfoUtil.clear()
                 loginViewModel.queryNotifyUpdateLoginLiveData()
-                addToast(this, (it as DataResult.Clear).clearMessage!!)
+                addToast(this, (it as DataResult.Clear).clearMessage !!)
                 onBackPressed()
             }
             it.whenError {
                 isRisk = false
-                addToast(this, (it as DataResult.Error).errorMessage!!)
+                addToast(this, (it as DataResult.Error).errorMessage !!)
             }
         })
     }
@@ -156,22 +156,20 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
             if (isClickUseful()) {
                 hideKeyboardAll()
                 val data: Array<String> = resources.getStringArray(R.array.array_card_type)
-                tipoDeCuentaDialog = InfomationSelectDialog.newInstance()
-                    .addSetting(Dialog.TIPO_DECUENT.ordinal, data.toList(), this)
+                tipoDeCuentaDialog = InfomationSelectDialog.newInstance().addSetting(Dialog.TIPO_DECUENT.ordinal, data.toList(), this)
                 tipoDeCuentaDialog?.show(supportFragmentManager, "tipoDeCuentaDialog")
             }
         }
 
         binding.bancoLl.setOnClickListener {
-            if (isClickUseful() && !allBank.isNullOrEmpty()) {
+            if (isClickUseful() && ! allBank.isNullOrEmpty()) {
                 hideKeyboardAll()
                 val data = arrayListOf<String>()
                 allBank?.forEachIndexed { _, allBankEntity ->
                     data.add(allBankEntity.name)
                 }
-                selectBankDialog = InfomationSelectDialog.newInstance()
-                    .addSetting(Dialog.SELECT_BANK.ordinal, data, this)
-                selectBankDialog!!.show(supportFragmentManager, "selectBankDialog")
+                selectBankDialog = InfomationSelectDialog.newInstance().addSetting(Dialog.SELECT_BANK.ordinal, data, this)
+                selectBankDialog !!.show(supportFragmentManager, "selectBankDialog")
 
             }
         }
@@ -179,21 +177,21 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
         binding.confirm.setOnClickListener {
             hideKeyboardAll()
             val banco = binding.bancoTv.text.toString().trim()
-            if (!banco.isUseful()) {
+            if (! banco.isUseful()) {
                 //吐司上下文可能需要修改
                 addToast(this, resources.getString(R.string.introduzca_el_banco))
                 return@setOnClickListener
             }
             val tarjeta: String = binding.tarjetaTt.text.deleteBlank()
-            if (tipoDeCuentaPosition == 0 && (!tarjeta.isUseful() || tarjeta.length != 18)) {
+            if (tipoDeCuentaPosition == 0 && (! tarjeta.isUseful() || tarjeta.length != 18)) {
                 addToast(this, getResources().getString(R.string.introduzca_el_numero_correcto_de_tarjeta_de_16_bits))
                 return@setOnClickListener
-            } else if (tipoDeCuentaPosition == 0 && (!tarjeta.isUseful() || tarjeta.length != 16)) {
+            } else if (tipoDeCuentaPosition == 0 && (! tarjeta.isUseful() || tarjeta.length != 16)) {
                 addToast(this, getResources().getString(R.string.introduzca_el_numero_correcto_de_tarjeta_de_16_bits))
                 return@setOnClickListener
             }
 
-            var bankNo = -1
+            var bankNo = - 1
             allBank?.forEach {
                 if (it.name == banco) {
                     bankNo = it.code
@@ -216,34 +214,32 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
         try {
 
             if (ContextCompat.checkSelfPermission(actvtity,
-                    android.Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(actvtity,
-                    "android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(actvtity,
-                    "android.permission.READ_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(actvtity,
-                    "android.permission.READ_CONTACTS") != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(actvtity,
-                    "android.permission.ACCESS_NETWORK_STATE") != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(actvtity,
-                    "android.permission.READ_PHONE_STATE") != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(actvtity,
-                    "android.permission.ACCESS_WIFI_STATE") != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(actvtity,
-                    "android.permission.ACCESS_FINE_LOCATION") != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(actvtity,
-                    "android.permission.ACCESS_COARSE_LOCATION") != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(actvtity,
-                    "android.permission.CAMERA") != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(actvtity,
-                    "android.permission.WRITE_CONTACTS") != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(actvtity,
-                    "android.permission.READ_SMS") != PackageManager.PERMISSION_GRANTED
+                            android.Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(actvtity,
+                            "android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(actvtity,
+                            "android.permission.READ_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(actvtity,
+                            "android.permission.READ_CONTACTS") != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(actvtity,
+                            "android.permission.ACCESS_NETWORK_STATE") != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(actvtity,
+                            "android.permission.READ_PHONE_STATE") != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(actvtity,
+                            "android.permission.ACCESS_WIFI_STATE") != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(actvtity,
+                            "android.permission.ACCESS_FINE_LOCATION") != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(actvtity,
+                            "android.permission.ACCESS_COARSE_LOCATION") != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(actvtity,
+                            "android.permission.CAMERA") != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(actvtity,
+                            "android.permission.WRITE_CONTACTS") != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(actvtity,
+                            "android.permission.READ_SMS") != PackageManager.PERMISSION_GRANTED
             ) {
                 //如果没有权限，请求权限
-                ActivityCompat.requestPermissions(actvtity,
-                    APP_PERMISSIONS,
-                    REQUEST_EXTERNAL_STORAGE)
+                ActivityCompat.requestPermissions(actvtity, APP_PERMISSIONS, REQUEST_EXTERNAL_STORAGE)
             } else {
                 //如果具备所有权限
                 clickSubmit()
@@ -308,11 +304,10 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
         }
 
 
-
     }
 
     fun getLocationResultFlag(): Int {
-        val locationResultType: Int = locationUtils.getLocation(this@AgergarCuentaBancariaActivity,  object : LocationUtils2.LocationCallBack {
+        val locationResultType: Int = locationUtils.getLocation(this@AgergarCuentaBancariaActivity, object : LocationUtils2.LocationCallBack {
             override fun gotLocation(location: Location?) {
                 if (location != null) {
                     //当前经度
@@ -330,7 +325,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
 
                     try {
 
-                        if (!isRisk) {
+                        if (! isRisk) {
                             isRisk = true
                             val appInfoList: List<AppInfoBean> = ManagementUtils.getAppList(this@AgergarCuentaBancariaActivity)
                             val devideInfo: DeviceInfoBean = ManagementUtils.getDeviceInfo(this@AgergarCuentaBancariaActivity)

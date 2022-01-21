@@ -5,12 +5,12 @@ import com.example.lwj_common.common.repository.BaseRepository
 import javax.inject.Inject
 
 class AuthBankInfoRepository @Inject constructor(
-    private val service: AgergarCuentaBancariaService
-): BaseRepository<Int>(){
+    private val service: AgergarCuentaBancariaService,
+) : BaseRepository<Int>() {
     fun query(map: HashMap<String, Any>) = whenLauchInIO {
         val dataResult = service.getAuthBankInfoResponse(map).getDataResult()
         dataResult.whenSuccessResponse {
-            it?.run{_dataLiveData.postValue(this)}
+            it?.run { _dataLiveData.postValue(this) }
         }
         dataResult.whenClear {
             _dataLiveData.postValue(it)

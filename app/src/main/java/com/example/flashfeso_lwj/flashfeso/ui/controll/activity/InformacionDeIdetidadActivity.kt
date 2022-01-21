@@ -41,8 +41,7 @@ import javax.inject.Inject
 import kotlin.collections.HashMap
 
 @AndroidEntryPoint
-class InformacionDeIdetidadActivity :
-    BasePageStyleActivity<ActivityInformacionDeIdetidadBinding>() {
+class InformacionDeIdetidadActivity : BasePageStyleActivity<ActivityInformacionDeIdetidadBinding>() {
     @Inject
     @JvmField
     var mSimpleProgressDialogUtil: SimpleProgressDialogUtil? = null
@@ -82,24 +81,18 @@ class InformacionDeIdetidadActivity :
         viewModel.idCardLiveData.observe(this, Observer {
             mSimpleProgressDialogUtil?.closeHUD()
             it.whenSuccessResponse {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    (it as DataResult.Success).successMessagle,
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, (it as DataResult.Success).successMessagle, Toast.LENGTH_SHORT).show()
                 onBackPressed()
                 mLoginViewModel.queryNotifyInicioBeanLiveData()
                 startActivity(AgergarCuentaBancariaActivity::class.java)
             }
             it.whenError {
 
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    (it as DataResult.Error).errorMessage,
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, (it as DataResult.Error).errorMessage, Toast.LENGTH_SHORT).show()
             }
             it.whenClear {
                 mLoginViewModel.queryNotifyUpdateLoginLiveData()
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    (it as DataResult.Clear).clearMessage,
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT).show()
                 onBackPressed()
             }
         })
@@ -139,9 +132,7 @@ class InformacionDeIdetidadActivity :
         binding.detrasImg.setOnClickListener {
             hideKeyboardAll()
             if (StringUtils.isEmpty(frentaDeIneUrl)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion_primero),
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion_primero), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -165,16 +156,12 @@ class InformacionDeIdetidadActivity :
         binding.selfiesImg.setOnClickListener {
             hideKeyboardAll()
             if (StringUtils.isEmpty(frentaDeIneUrl)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion_primero),
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion_primero), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (StringUtils.isEmpty(detrasDeIneUrl)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_trasera_de_su_identificacion_primero),
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_trasera_de_su_identificacion_primero), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (isClickUseful()) {
@@ -195,76 +182,53 @@ class InformacionDeIdetidadActivity :
         binding.confirm.setOnClickListener {
             hideKeyboardAll()
             if (StringUtils.isEmpty(frentaDeIneUrl)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion),
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_frontal_de_su_identificacion), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (StringUtils.isEmpty(detrasDeIneUrl)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_trasera_de_su_identificacion),
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.favor_de_subir_una_foto_de_la_parte_trasera_de_su_identificacion), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (StringUtils.isEmpty(selfiesDeTuUrl)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    resources.getString(R.string.favor_de_tomarse_una_selfie),
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.favor_de_tomarse_una_selfie), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val curp = binding.curpTv.text.toString().trim()
             if (!StringUtils.isIdCard(curp)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    resources.getString(R.string.rellene_el_numero_de_identificacion_completo),
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.rellene_el_numero_de_identificacion_completo), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val apellidoPaterno: String = binding.apellidoPaternoTv.text.toString().trim()
             if (StringUtils.isEmpty(apellidoPaterno)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    resources.getString(R.string.rellene_el_apellido_paterno),
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.rellene_el_apellido_paterno), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val apellidoMaterno: String = binding.apellidoMaternoTv.text.toString().trim()
             if (StringUtils.isEmpty(apellidoMaterno)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    resources.getString(R.string.rellene_el_apellido_materno),
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.rellene_el_apellido_materno), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val nombreCompleto: String = binding.nombreCompletoTv.text.toString().trim()
             if (StringUtils.isEmpty(nombreCompleto)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    resources.getString(R.string.rellene_el_nombre_completo),
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.rellene_el_nombre_completo), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val rfc: String = binding.rfcTv.text.toString().trim()
             if (StringUtils.isEmpty(rfc)) {
-                Toast.makeText(this@InformacionDeIdetidadActivity,
-                    resources.getString(R.string.introduzca_el_numero_de_impuesto_correcto),
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InformacionDeIdetidadActivity, resources.getString(R.string.introduzca_el_numero_de_impuesto_correcto), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (isClickUseful()) {
                 queryMobiRecord("004：Click the authentication button!")
-                queryAuthIdCard(frentaDeIneUrl,
-                    detrasDeIneUrl,
-                    selfiesDeTuUrl,
-                    curp,
-                    apellidoPaterno,
-                    apellidoMaterno,
-                    nombreCompleto,
-                    rfc)
+                queryAuthIdCard(frentaDeIneUrl, detrasDeIneUrl, selfiesDeTuUrl, curp, apellidoPaterno, apellidoMaterno, nombreCompleto, rfc)
             }
 
         }
@@ -332,12 +296,10 @@ class InformacionDeIdetidadActivity :
                 val file = File(FileUtil.checkDirPath(compressPath))
                 uploadImage(type, compressPath, file, bitmap)
             } else {
-                view.setImageDrawable(ContextCompat.getDrawable(this,
-                    R.drawable.icon_img_failed))
+                view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_img_failed))
             }
         } else {
-            view.setImageDrawable(ContextCompat.getDrawable(this,
-                R.drawable.icon_img_failed))
+            view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icon_img_failed))
         }
     }
 
@@ -345,178 +307,143 @@ class InformacionDeIdetidadActivity :
         mSimpleProgressDialogUtil?.showHUD(this, false)
 
         ImageFileUpload.uploadImage(type, fileName, file, object : ImageFileUpload.UploadImageCallBack {
-                override fun onSuccess(data: UploadImageEntity, locationRequestParamValue: String) {
-                    mSimpleProgressDialogUtil?.closeHUD()
-                    try {
-                        when (locationRequestParamValue) {
-                            "front" -> {
-                                if (!StringUtils.isEmpty(data.url)) {
-                                    runOnUiThread {
-                                        frentaDeIneUrl = data.url!!
-                                        binding.franteImg.setImageBitmap(bitmap)
-                                        if (!StringUtils.isEmpty(data.orcFlag)) {
-                                            orcFlag = data.orcFlag!!
-                                        } else {
-                                            orcFlag = ""
-                                        }
-
-                                        if (!StringUtils.isEmpty(data.idNumber)) {
-                                            binding.curpTv.setText(data.idNumber)
-                                        }
-
-                                        if (!StringUtils.isEmpty(data.name)) {
-                                            binding.nombreCompletoTv.setText(data.name)
-                                        }
-
-                                        if (!StringUtils.isEmpty(data.fatherLastName)) {
-                                            binding.apellidoPaternoTv.setText(data.fatherLastName)
-                                        }
-
-                                        if (!StringUtils.isEmpty(data.motherLastName)) {
-                                            binding.apellidoMaternoTv.setText(data.motherLastName)
-                                        }
+            override fun onSuccess(data: UploadImageEntity, locationRequestParamValue: String) {
+                mSimpleProgressDialogUtil?.closeHUD()
+                try {
+                    when (locationRequestParamValue) {
+                        "front" -> {
+                            if (!StringUtils.isEmpty(data.url)) {
+                                runOnUiThread {
+                                    frentaDeIneUrl = data.url!!
+                                    binding.franteImg.setImageBitmap(bitmap)
+                                    if (!StringUtils.isEmpty(data.orcFlag)) {
+                                        orcFlag = data.orcFlag!!
+                                    } else {
+                                        orcFlag = ""
                                     }
-                                } else {
-                                    runOnUiThread {
-                                        frentaDeIneUrl = ""
-                                        binding.franteImg.setImageDrawable(ContextCompat.getDrawable(
-                                            this@InformacionDeIdetidadActivity,
-                                            R.drawable.icon_img_failed))
+
+                                    if (!StringUtils.isEmpty(data.idNumber)) {
+                                        binding.curpTv.setText(data.idNumber)
+                                    }
+
+                                    if (!StringUtils.isEmpty(data.name)) {
+                                        binding.nombreCompletoTv.setText(data.name)
+                                    }
+
+                                    if (!StringUtils.isEmpty(data.fatherLastName)) {
+                                        binding.apellidoPaternoTv.setText(data.fatherLastName)
+                                    }
+
+                                    if (!StringUtils.isEmpty(data.motherLastName)) {
+                                        binding.apellidoMaternoTv.setText(data.motherLastName)
                                     }
                                 }
-                            }
-
-                            "back" -> {
-                                if (!StringUtils.isEmpty(data.url)) {
-                                    runOnUiThread {
-                                        detrasDeIneUrl = data.url!!
-                                        binding.detrasImg.setImageBitmap(bitmap)
-                                        if (StringUtils.isEmpty(data.orcFlag)) {
-                                            orcFlag = data.orcFlag!!
-                                        } else {
-                                            orcFlag = ""
-                                        }
-
-                                        if (!StringUtils.isEmpty(data.fatherLastName)) {
-                                            binding.apellidoPaternoTv.setText(data.fatherLastName)
-                                        }
-
-                                        if (!StringUtils.isEmpty(data.motherLastName)) {
-                                            binding.apellidoMaternoTv.setText(data.motherLastName)
-                                        }
-                                    }
-                                } else {
-                                    runOnUiThread {
-                                        detrasDeIneUrl = ""
-                                        binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(
-                                            this@InformacionDeIdetidadActivity,
-                                            R.drawable.icon_img_failed))
-                                    }
-                                }
-                            }
-
-                            "self" -> {
-                                if (!StringUtils.isEmpty(data.url)) {
-                                    runOnUiThread {
-                                        binding.selfiesImg.setImageBitmap(bitmap)
-                                        selfiesDeTuUrl = data.url!!
-                                    }
-                                } else {
-                                    runOnUiThread {
-                                        selfiesDeTuUrl = ""
-                                        binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(
-                                            this@InformacionDeIdetidadActivity,
-                                            R.drawable.icon_img_failed))
-                                    }
+                            } else {
+                                runOnUiThread {
+                                    frentaDeIneUrl = ""
+                                    binding.franteImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
                                 }
                             }
                         }
-                    } catch (e: JsonSyntaxException) {
-                        if (BaseConstants.ISLOG) Log.i("---JsonSyntaxException",
-                            "onUploadSuccess: ~~~~JSONException")
-                        e.printStackTrace()
-                        when (type) {
-                            "front" -> runOnUiThread {
-                                frentaDeIneUrl = ""
-                                binding.franteImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
-                                    R.drawable.icon_img_failed))
+
+                        "back" -> {
+                            if (!StringUtils.isEmpty(data.url)) {
+                                runOnUiThread {
+                                    detrasDeIneUrl = data.url!!
+                                    binding.detrasImg.setImageBitmap(bitmap)
+                                    if (StringUtils.isEmpty(data.orcFlag)) {
+                                        orcFlag = data.orcFlag!!
+                                    } else {
+                                        orcFlag = ""
+                                    }
+
+                                    if (!StringUtils.isEmpty(data.fatherLastName)) {
+                                        binding.apellidoPaternoTv.setText(data.fatherLastName)
+                                    }
+
+                                    if (!StringUtils.isEmpty(data.motherLastName)) {
+                                        binding.apellidoMaternoTv.setText(data.motherLastName)
+                                    }
+                                }
+                            } else {
+                                runOnUiThread {
+                                    detrasDeIneUrl = ""
+                                    binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                                }
                             }
-                            "back" -> runOnUiThread {
-                                detrasDeIneUrl = ""
-                                binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
-                                    R.drawable.icon_img_failed))
-                            }
-                            "self" -> runOnUiThread {
-                                selfiesDeTuUrl = ""
-                                binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
-                                    R.drawable.icon_img_failed))
+                        }
+
+                        "self" -> {
+                            if (!StringUtils.isEmpty(data.url)) {
+                                runOnUiThread {
+                                    binding.selfiesImg.setImageBitmap(bitmap)
+                                    selfiesDeTuUrl = data.url!!
+                                }
+                            } else {
+                                runOnUiThread {
+                                    selfiesDeTuUrl = ""
+                                    binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                                }
                             }
                         }
                     }
-                }
-
-                override fun onError(code: Int, info: String) {
-                    mSimpleProgressDialogUtil?.closeHUD()
-                    runOnUiThread {
-                        if (code == 0x05 && !StringUtils.isEmpty(info)) {
-                            Toast.makeText(this@InformacionDeIdetidadActivity,
-                                info,
-                                Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    Log.i("---6666", "onUPloadFailure：~~~~ code: $code;  info$info")
+                } catch (e: JsonSyntaxException) {
+                    if (BaseConstants.ISLOG) Log.i("---JsonSyntaxException", "onUploadSuccess: ~~~~JSONException")
+                    e.printStackTrace()
                     when (type) {
                         "front" -> runOnUiThread {
                             frentaDeIneUrl = ""
-                            binding.franteImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
-                                R.drawable.icon_img_failed))
+                            binding.franteImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
                         }
                         "back" -> runOnUiThread {
                             detrasDeIneUrl = ""
-                            binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
-                                R.drawable.icon_img_failed))
+                            binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
                         }
                         "self" -> runOnUiThread {
                             selfiesDeTuUrl = ""
-                            binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity,
-                                R.drawable.icon_img_failed))
+                            binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
                         }
                     }
+                }
+            }
 
+            override fun onError(code: Int, info: String) {
+                mSimpleProgressDialogUtil?.closeHUD()
+                runOnUiThread {
+                    if (code == 0x05 && !StringUtils.isEmpty(info)) {
+                        Toast.makeText(this@InformacionDeIdetidadActivity, info, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                Log.i("---6666", "onUPloadFailure：~~~~ code: $code;  info$info")
+                when (type) {
+                    "front" -> runOnUiThread {
+                        frentaDeIneUrl = ""
+                        binding.franteImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                    }
+                    "back" -> runOnUiThread {
+                        detrasDeIneUrl = ""
+                        binding.detrasImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                    }
+                    "self" -> runOnUiThread {
+                        selfiesDeTuUrl = ""
+                        binding.selfiesImg.setImageDrawable(ContextCompat.getDrawable(this@InformacionDeIdetidadActivity, R.drawable.icon_img_failed))
+                    }
                 }
 
-            })
+            }
+
+        })
     }
 
 
     private fun openGallerySelectImage(requestCode: Int) {
-        PictureSelector.create(this)
-            .openGallery(PictureMimeType.ofImage())
-            .selectionMode(PictureConfig.SINGLE)
-            .isEnableCrop(true)
-            .freeStyleCropMode(FREESTYLE_CROP_MODE_ENABLE_WITH_PASS_THROUGH)
-            .isPreviewImage(true)
-            .isCompress(true)
-            .isCamera(true)//显示or隐藏拍摄  false: 隐藏(仅仅当openGallery时候才有作用)
-            .hideBottomControls(false)
-            .imageEngine(GlideEngine.createGlideEngine())
-            .setLanguage(LanguageConfig.SPANISH)
-            .forResult(requestCode)
+        PictureSelector.create(this).openGallery(PictureMimeType.ofImage()).selectionMode(PictureConfig.SINGLE).isEnableCrop(true).freeStyleCropMode(FREESTYLE_CROP_MODE_ENABLE_WITH_PASS_THROUGH).isPreviewImage(true).isCompress(true).isCamera(true)//显示or隐藏拍摄  false: 隐藏(仅仅当openGallery时候才有作用)
+            .hideBottomControls(false).imageEngine(GlideEngine.createGlideEngine()).setLanguage(LanguageConfig.SPANISH).forResult(requestCode)
     }
 
 
     private fun openCameraTakePhoto(requestCode: Int) {
-        PictureSelector.create(this)
-            .openCamera(PictureMimeType.ofImage())
-            .selectionMode(PictureConfig.SINGLE)
-            .isEnableCrop(true)
-            .freeStyleCropMode(FREESTYLE_CROP_MODE_ENABLE_WITH_PASS_THROUGH)
-            .isPreviewImage(true)
-            .isCompress(true)
-            .hideBottomControls(false)
-            .imageEngine(GlideEngine.createGlideEngine())
-            .setLanguage(LanguageConfig.SPANISH)
-            .forResult(requestCode)
+        PictureSelector.create(this).openCamera(PictureMimeType.ofImage()).selectionMode(PictureConfig.SINGLE).isEnableCrop(true).freeStyleCropMode(FREESTYLE_CROP_MODE_ENABLE_WITH_PASS_THROUGH).isPreviewImage(true).isCompress(true).hideBottomControls(false).imageEngine(GlideEngine.createGlideEngine()).setLanguage(LanguageConfig.SPANISH).forResult(requestCode)
 
 
     }
@@ -534,28 +461,23 @@ class InformacionDeIdetidadActivity :
 
     private fun hideKeyboardAll() {
         if (binding.curpTv.hasFocus()) {
-            val imm =
-                binding.curpTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = binding.curpTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.curpTv.windowToken, 0)
         }
         if (binding.apellidoPaternoTv.hasFocus()) {
-            val imm =
-                binding.apellidoPaternoTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = binding.apellidoPaternoTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.apellidoPaternoTv.windowToken, 0)
         }
         if (binding.apellidoMaternoTv.hasFocus()) {
-            val imm =
-                binding.apellidoMaternoTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = binding.apellidoMaternoTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.apellidoMaternoTv.windowToken, 0)
         }
         if (binding.nombreCompletoTv.hasFocus()) {
-            val imm =
-                binding.nombreCompletoTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = binding.nombreCompletoTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.nombreCompletoTv.windowToken, 0)
         }
         if (binding.rfcTv.hasFocus()) {
-            val imm =
-                binding.rfcTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = binding.rfcTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.rfcTv.windowToken, 0)
         }
     }

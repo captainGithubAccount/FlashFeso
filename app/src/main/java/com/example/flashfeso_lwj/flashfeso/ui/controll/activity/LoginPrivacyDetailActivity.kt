@@ -14,9 +14,10 @@ import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginPrivacyDetailActivity : BasePageStyleActivity<ActivityLoginPrivacyDetailBinding>(){
+class LoginPrivacyDetailActivity : BasePageStyleActivity<ActivityLoginPrivacyDetailBinding>() {
     var mUrl: String? = null
-    companion object{
+
+    companion object {
         val WEBSITE_URL = "website_url"
         val HEADER_TITLE_TEXT = "header_title_text"
     }
@@ -28,8 +29,7 @@ class LoginPrivacyDetailActivity : BasePageStyleActivity<ActivityLoginPrivacyDet
 
     override fun ActivityLoginPrivacyDetailBinding.initView() {
         mUrl = intent.getStringExtra(WEBSITE_URL)
-        val headerTitleText =
-            intent.getStringExtra(HEADER_TITLE_TEXT)
+        val headerTitleText = intent.getStringExtra(HEADER_TITLE_TEXT)
 
 
         inclLoginPrivacyDetailBar.run {
@@ -42,7 +42,7 @@ class LoginPrivacyDetailActivity : BasePageStyleActivity<ActivityLoginPrivacyDet
             ivCommonBarBack.back(this@LoginPrivacyDetailActivity)
         }
 
-        wvLoginPrivacyDetailContent.run{
+        wvLoginPrivacyDetailContent.run {
             loadUrl(UrlConstants.SEGURIDAD_DE_LOS_DATOS_URL)
         }
     }
@@ -76,7 +76,7 @@ class LoginPrivacyDetailActivity : BasePageStyleActivity<ActivityLoginPrivacyDet
 
             }
         }.apply {
-            webChromeClient = object: WebChromeClient(){
+            webChromeClient = object : WebChromeClient() {
                 //作用：获取Web页中的标题
                 override fun onReceivedTitle(view: WebView?, title: String?) {
                     super.onReceivedTitle(view, title)
@@ -85,13 +85,13 @@ class LoginPrivacyDetailActivity : BasePageStyleActivity<ActivityLoginPrivacyDet
                 //作用：获得网页的加载进度并显示
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     super.onProgressChanged(view, newProgress)
-                    if(newProgress < 100){
+                    if (newProgress < 100) {
                         binding.pbLoginPrivacyDetail.progress = newProgress
                     }
                 }
             }
         }.apply {
-            webViewClient = object: WebViewClient(){
+            webViewClient = object : WebViewClient() {
 
                 //作用：开始载入页面调用的，我们可以设定一个loading的页面，告诉用户程序在等待网络响应
                 override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {

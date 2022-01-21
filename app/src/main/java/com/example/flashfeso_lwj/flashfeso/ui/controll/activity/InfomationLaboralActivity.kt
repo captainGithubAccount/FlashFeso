@@ -1,4 +1,5 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
+
 import android.content.Context
 import android.util.Log
 import android.view.View
@@ -27,7 +28,7 @@ import javax.inject.Inject
 * 认证二
 * */
 @AndroidEntryPoint
-class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLaboralBinding>(), InfomationSelectItemOnClickListener{
+class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLaboralBinding>(), InfomationSelectItemOnClickListener {
 
     var educationPosition: Int = 0
     var jobPosition: Int = 0
@@ -38,11 +39,11 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
     @Inject
     @JvmField
     var mSimpleProgressDialogUtil: SimpleProgressDialogUtil? = null
-    lateinit var  mDialogEducation: InfomationSelectDialog
-    lateinit var  mDialogJobTypeDialog: InfomationSelectDialog
-    lateinit var  mDialogZiZhuJobDialog: InfomationSelectDialog
-    lateinit var  mDialogMonthMoneyDialog: InfomationSelectDialog
-    lateinit var  mDialogPayDate: InfomationSelectDialog
+    lateinit var mDialogEducation: InfomationSelectDialog
+    lateinit var mDialogJobTypeDialog: InfomationSelectDialog
+    lateinit var mDialogZiZhuJobDialog: InfomationSelectDialog
+    lateinit var mDialogMonthMoneyDialog: InfomationSelectDialog
+    lateinit var mDialogPayDate: InfomationSelectDialog
     lateinit var mDataEducation: List<String>
     lateinit var mDataJobType: List<String>
     lateinit var mDataZiZhuJob: List<String>
@@ -79,20 +80,20 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
         })
 
     }
+
     override fun afterBindView() {
         super.afterBindView()
         //教育ll
         binding.educationLl.setOnClickListener {
             hideOthersKeyboard()
             mDataEducation = resources.getStringArray(R.array.array_education_all).toList()
-            mDialogEducation = InfomationSelectDialog.newInstance()
-                .addSetting(1 ,mDataEducation, this)
+            mDialogEducation = InfomationSelectDialog.newInstance().addSetting(1, mDataEducation, this)
             mDialogEducation.show(supportFragmentManager, "mDialogEducationLl")
         }
 
         //我有一份工作tv
         binding.daGong.setOnClickListener {
-            if(!isDaGong) {
+            if (!isDaGong) {
                 hideOthersKeyboard()
                 isDaGong = true
                 binding.daGong.setBackgroundDrawable(resources.getDrawable(R.drawable.bg_confirm))
@@ -125,11 +126,11 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
 
         //工作类型
         binding.jobTypeLl.setOnClickListener {
-            if(isDaGong){
+            if (isDaGong) {
                 mDataJobType = resources.getStringArray(R.array.array_dagong_type_all).toList()
                 mDialogJobTypeDialog = InfomationSelectDialog.newInstance().addSetting(2, mDataJobType, this)
                 mDialogJobTypeDialog.show(supportFragmentManager, "mDialogJobDialog")
-            }else{
+            } else {
                 mDataZiZhuJob = resources.getStringArray(R.array.array_zizhu_job_type_all).toList()
                 mDialogZiZhuJobDialog = InfomationSelectDialog.newInstance().addSetting(3, mDataZiZhuJob, this)
                 mDialogZiZhuJobDialog.show(supportFragmentManager, "mDialogZiZhuJobDialog")
@@ -153,31 +154,31 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
         //确定按钮
         binding.confirm.setOnClickListener {
             val education = binding.educationTv.text.toString().trim()
-            if(binding.educationTv.textIsEmpty()){
+            if (binding.educationTv.textIsEmpty()) {
                 Toast.makeText(this@InfomationLaboralActivity, resources.getString(R.string.elija_el_nivel_de_educacion), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val email = binding.emailEt.text.toString().trim()
-            if(!StringUtils.isEmail(email)){
+            if (!StringUtils.isEmail(email)) {
                 Toast.makeText(this@InfomationLaboralActivity, resources.getString(R.string.introduzca_su_correo_electronico), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val jobType = binding.jobTypeTv.text.toString().trim()
-            if(binding.jobTypeTv.textIsEmpty()){
+            if (binding.jobTypeTv.textIsEmpty()) {
                 Toast.makeText(this@InfomationLaboralActivity, resources.getString(R.string.elija_un_trabajo), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val monthlySalary = binding.monthlySalaryTv.text.toString().trim()
-            if(binding.monthlySalaryTv.textIsEmpty()){
+            if (binding.monthlySalaryTv.textIsEmpty()) {
                 Toast.makeText(this@InfomationLaboralActivity, resources.getString(R.string.seleccione_ingresos_mensuales), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val diaDePago = binding.diaDePagoTv.text.toString().trim()
-            if(binding.diaDePagoTv.textIsEmpty()){
+            if (binding.diaDePagoTv.textIsEmpty()) {
                 Toast.makeText(this@InfomationLaboralActivity, resources.getString(R.string.elija_el_dia_del_pago), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -194,7 +195,7 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
                 isEmp = 0
             }
 
-            if(isClickUseful()){
+            if (isClickUseful()) {
 
                 mSimpleProgressDialogUtil?.showHUD(this, false)
                 val map = HashMap<String, Any>()
@@ -213,17 +214,16 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
 
     }
 
-    fun String.getEducationPosition(): Int? =
-        when(this){
-            "Escuela primaria" -> 1
-            "secundaria" -> 2
-            "Preparatpria" -> 3
-            "Educación media superior" -> 4
-            "Facultad" -> 5
-            "Universidades" -> 6
-            "Educación superior" -> 7
-            else -> null
-        }
+    fun String.getEducationPosition(): Int? = when (this) {
+        "Escuela primaria" -> 1
+        "secundaria" -> 2
+        "Preparatpria" -> 3
+        "Educación media superior" -> 4
+        "Facultad" -> 5
+        "Universidades" -> 6
+        "Educación superior" -> 7
+        else -> null
+    }
 
     private fun queryAuthWork(map: HashMap<String, Any>) {
 
@@ -231,16 +231,16 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
     }
 
     private fun hideOthersKeyboard() {
-        if(binding.emailEt.hasFocus()){
+        if (binding.emailEt.hasFocus()) {
             val imm = binding.emailEt.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-            imm?.run{
+            imm?.run {
                 hideKeyboard(binding.emailEt)
             }
         }
 
-        if(binding.imssTv.hasFocus()){
+        if (binding.imssTv.hasFocus()) {
             val imm = binding.imssTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-            imm?.run{
+            imm?.run {
                 hideKeyboard(binding.imssTv)
             }
         }
@@ -254,7 +254,7 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
         /*
         * 1: 教育对话框 2: jobType对话框 3: 自主job对话框 4: 月收入对话框 5: 支付日
         * */
-        when(flag){
+        when (flag) {
             1 -> {
                 mDialogEducation.dismiss()
                 binding.educationTv.text = list.get(0)
@@ -274,12 +274,12 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
                 binding.monthlySalaryTv.text = list.get(0)
                 monthlySalaryPosition = list.get(1).toInt()
             }
-            5 ->{
+            5 -> {
                 mDialogPayDate.dismiss()
                 binding.diaDePagoTv.text = list.get(0)
             }
         }
-        if(BaseConstants.ISLOG)Log.d("----data on click", list.get(0))
+        if (BaseConstants.ISLOG) Log.d("----data on click", list.get(0))
     }
 
     override fun onDestroy() {

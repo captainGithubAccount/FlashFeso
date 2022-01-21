@@ -1,4 +1,5 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
+
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -17,6 +18,7 @@ import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 /*
 * 认证三
 * */
@@ -44,7 +46,7 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
         mViewModel.liveData.observe(this, Observer {
             mSimpleProgressDialogUtil?.closeHUD()
             it.whenSuccessResponse {
-                if((it as DataResult.Success).successMessagle?.equals(getResources().getString(R.string.success))!!){
+                if ((it as DataResult.Success).successMessagle?.equals(getResources().getString(R.string.success))!!) {
                     Toast.makeText(this@HistorialCrediticioActivity, it.successMessagle, Toast.LENGTH_SHORT).show()
                     onBackPressed()
                     mLoginViewModel.queryNotifyInicioBeanLiveData()
@@ -95,7 +97,7 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
         }
 
         binding.questionTwoLl.setOnClickListener {
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 val data = resources.getStringArray(R.array.array_overdue_days_all).toList()
                 mQuestionTwoDialog = InfomationSelectDialog.newInstance().addSetting(2, data, this)
                 mQuestionTwoDialog.show(supportFragmentManager, "mQuestionTwoDialog")
@@ -103,7 +105,7 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
         }
 
         binding.questionThreeLl.setOnClickListener {
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 val data = resources.getStringArray(R.array.array_Loan_amount_all).toList()
                 mQuestionThreeDialog = InfomationSelectDialog.newInstance().addSetting(3, data, this)
                 mQuestionThreeDialog.show(supportFragmentManager, "mQuestionThreeDialog")
@@ -111,7 +113,7 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
         }
 
         binding.questionFourLl.setOnClickListener {
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 val data = resources.getStringArray(R.array.array_Loan_counts_all).toList()
                 mQuestionFourDialog = InfomationSelectDialog.newInstance().addSetting(4, data, this)
                 mQuestionFourDialog.show(supportFragmentManager, "mQuestionFourDialog")
@@ -119,7 +121,7 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
         }
 
         binding.questionFiveLl.setOnClickListener {
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 val data = resources.getStringArray(R.array.array_Loan_counts_all).toList()
                 mQuestionFiveDialog = InfomationSelectDialog.newInstance().addSetting(5, data, this)
                 mQuestionFiveDialog.show(supportFragmentManager, "mQuestioniFiveDialog")
@@ -127,7 +129,7 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
         }
 
         binding.questionSixLl.setOnClickListener {
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 val data = resources.getStringArray(R.array.array_Loan_counts_all).toList()
                 mQuestionSixDialog = InfomationSelectDialog.newInstance().addSetting(6, data, this)
                 mQuestionSixDialog.show(supportFragmentManager, "mQuestionSixDialog")
@@ -135,7 +137,7 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
         }
 
         binding.questionSevenLl.setOnClickListener {
-            if(isClickUseful()){
+            if (isClickUseful()) {
                 val data = resources.getStringArray(R.array.array_Loan_counts_all).toList()
                 mQuestionSevenDialog = InfomationSelectDialog.newInstance().addSetting(7, data, this)
                 mQuestionSevenDialog.show(supportFragmentManager, "mQuestionSevenDialog")
@@ -145,7 +147,7 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
 
         binding.confirm.setOnClickListener { v ->
             val questionTwo = binding.questionTwoTv.text.toString().trim()
-            if(binding.questionTwoTv.textIsEmpty()){
+            if (binding.questionTwoTv.textIsEmpty()) {
                 Toast.makeText(this@HistorialCrediticioActivity, resources.getString(R.string.seleccione_el_numero_maximo_de_dias_atrasados), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -157,19 +159,19 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
             }
 
             val questionFour: String = binding.questionFourTv.getText().toString().trim()
-            if (StringUtils.isEmpty(questionFour) ) {
+            if (StringUtils.isEmpty(questionFour)) {
                 Toast.makeText(this@HistorialCrediticioActivity, resources.getString(R.string.seleccione_el_numero_de_prestamos), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val questionFive: String = binding.questionFiveTv.getText().toString().trim()
-            if (StringUtils.isEmpty(questionFive) ) {
+            if (StringUtils.isEmpty(questionFive)) {
                 Toast.makeText(this@HistorialCrediticioActivity, resources.getString(R.string.seleccione_el_importe_de_la_subvencion), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val questionSix: String = binding.questionSixTv.getText().toString().trim()
-            if (StringUtils.isEmpty(questionSix) ) {
+            if (StringUtils.isEmpty(questionSix)) {
                 Toast.makeText(this@HistorialCrediticioActivity, resources.getString(R.string.elija_el_numero_de_reembolso_oportuno), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -183,9 +185,8 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
             var isStopRepay = 1
             isStopRepay = if (isAbandonmentOfRepayment) 1 else 0
 
-            if(isClickUseful()){
-                queryAuthLoanHistory(isStopRepay, mQuestionTwoPosition, mQuestionThreePosition
-                    , mQuestionFourPosition, mQuestionFivePosition, mQuestionSixPosition, mQuestionSevenPosition)
+            if (isClickUseful()) {
+                queryAuthLoanHistory(isStopRepay, mQuestionTwoPosition, mQuestionThreePosition, mQuestionFourPosition, mQuestionFivePosition, mQuestionSixPosition, mQuestionSevenPosition)
             }
 
 
@@ -206,7 +207,7 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
     }
 
     override fun onDialogItemClick(list: List<String>, flag: Int) {
-        when(flag){
+        when (flag) {
             Question.TWO.value -> {
                 mQuestionTwoDialog.dismiss()
                 binding.questionTwoTv.text = list.get(0)
@@ -244,7 +245,8 @@ class HistorialCrediticioActivity : BasePageStyleActivity<ActivityHistorialCredi
             }
         }
     }
-    enum class Question(val value: Int){
+
+    enum class Question(val value: Int) {
         ONE(1), TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7)
     }
 }
