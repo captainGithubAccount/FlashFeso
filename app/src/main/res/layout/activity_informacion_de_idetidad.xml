@@ -189,7 +189,7 @@
                         android:textColor="@color/color_999999"
                         android:textSize="@dimen/sp_13" />
 
-                    <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                    <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                         android:id="@+id/curp_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -218,7 +218,7 @@
                         android:textColor="@color/color_999999"
                         android:textSize="@dimen/sp_13" />
 
-                    <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                    <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                         android:id="@+id/apellido_paterno_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -248,7 +248,7 @@
                         android:textColor="@color/color_999999"
                         android:textSize="@dimen/sp_13" />
 
-                    <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                    <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                         android:id="@+id/apellido_materno_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -277,7 +277,7 @@
                         android:textColor="@color/color_999999"
                         android:textSize="@dimen/sp_13" />
 
-                    <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                    <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                         android:id="@+id/nombre_completo_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -306,7 +306,7 @@
                         android:textColor="@color/color_999999"
                         android:textSize="@dimen/sp_13" />
 
-                    <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                    <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                         android:id="@+id/rfc_tv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

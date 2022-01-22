@@ -12,7 +12,9 @@ import androidx.viewbinding.ViewBinding
 import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_base.common.base.GetBinding
 
-
+/**
+ * autor lwj
+ * */
 abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T> {
 
     private var mFirstClickTime = 0L
@@ -70,7 +72,9 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
     }
 
 
-    //两次点击的时间
+    /**
+     * 两次点击的时间
+     * */
     protected fun isClickUseful(): Boolean{
         mFirstClickTime = mSecondClickTime
         mSecondClickTime = System.currentTimeMillis()
@@ -90,6 +94,9 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
         afterInitView(savedInstanceState)
     }
 
+    /**
+     * 启动一个活动
+     * */
     protected open fun startActivity(cls: Class<*>?) {
         val intent = Intent(this, cls)
         this.startActivity(intent)

@@ -1,4 +1,4 @@
-package com.example.lwj_common.common.entity
+package com.example.lwj_common.common.net
 
 import android.util.Log
 import com.example.lwj_base.common.base.BaseConstants

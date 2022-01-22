@@ -3,9 +3,9 @@ package com.example.flashfeso_lwj.flashfeso.ui.controll.view
 import android.app.Activity
 import com.example.flashfeso_lwj.databinding.LayoutSelectorImageTypeWindowBinding
 import com.example.lwj_common.common.ui.controll.event.CommonItemOnclickListener
-import com.example.lwjtest_popupwindow.view.CommonPopupWindow
+import com.example.lwjtest_popupwindow.view.BasePopupWindow
 
-class TakePhotoPopupWindow(mContext: Activity): CommonPopupWindow<LayoutSelectorImageTypeWindowBinding>(mContext) {
+class TakePhotoPopupWindow(mContext: Activity): BasePopupWindow<LayoutSelectorImageTypeWindowBinding>(mContext) {
     var mListener: CommonItemOnclickListener? = null
     fun setListener(listener: CommonItemOnclickListener){
         mListener = listener

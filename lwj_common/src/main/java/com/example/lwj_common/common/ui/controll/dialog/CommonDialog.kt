@@ -9,6 +9,9 @@ import androidx.fragment.app.DialogFragment
 import com.example.flashfeso_lwj.base.event.CommonDialogEvent
 import com.example.lwj_common.databinding.DialogCommonBinding
 
+/**
+ * frgm作view
+ * */
 class CommonDialog constructor(
     private val title: String,
 ): DialogFragment() {

@@ -19,7 +19,7 @@ import com.example.lwj_common.common.ui.controll.tools.utils.DensityUtil
  * Created by Cheng Bao on 2015/6/17.
  * 带删除图标的EditText
  */
-class ClearEditText @JvmOverloads constructor(
+class CommonClearEditText @JvmOverloads constructor(
     private val mContext: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = R.attr.editTextStyle,

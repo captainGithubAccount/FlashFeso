@@ -62,8 +62,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                     if (!StringUtils.isEmpty(versionData.VId)) {
                         if (versionData.VId.toLong() > BuildConfig.VERSION_CODE) {
                             if (versionData.isUpdate) {
-                                CommonDialog(resources.getString(R.string.new_version_found))
-                                    .apply {
+                                CommonDialog(resources.getString(R.string.new_version_found)).apply {
                                         mCommonDialogEvent = object : CommonDialogEvent {
                                             override fun onCancel() {
                                                 dismiss()
@@ -71,27 +70,23 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                                             }
 
                                             override fun onConfirm() {
-                                                openBrowser(requireActivity(),
-                                                    versionData.downloadURl)
+                                                openBrowser(requireActivity(), versionData.downloadURl)
                                             }
                                         }
                                     }.show(supportFragmentManager, "CommonDialogFragment")
                                 //commonDialog.show(supportFragmentManager, "CommonDialogFragment")
                             } else {
-                                CommonDialog(resources.getString(R.string.new_version_found))
-                                    .apply {
+                                CommonDialog(resources.getString(R.string.new_version_found)).apply {
                                         mCommonDialogEvent = object : CommonDialogEvent {
                                             override fun onCancel() {
                                                 jumpToMainActivity()
                                             }
 
                                             override fun onConfirm() {
-                                                openBrowser(requireActivity(),
-                                                    versionData.downloadURl)
+                                                openBrowser(requireActivity(), versionData.downloadURl)
                                             }
                                         }
-                                    }
-                                    .show(supportFragmentManager, "CommonDialogFragment2")
+                                    }.show(supportFragmentManager, "CommonDialogFragment2")
                             }
                         } else {
                             jumpToMainActivity()
@@ -122,8 +117,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
         intent.setAction(Intent.ACTION_VIEW)
         intent.setData(Uri.parse(browserUrl))
         //启动下载当前应用的app链接
-        startActivity(Intent.createChooser(intent,
-            context.getResources().getString(R.string.choose_browser)))
+        startActivity(Intent.createChooser(intent, context.getResources().getString(R.string.choose_browser)))
 
         // 注意此处的判断intent.resolveActivity()可以返回显示该Intent的Activity对应的组件名
         // 官方解释 : Name of the component implementing an activity that can display the intent
@@ -232,23 +226,9 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
             val permission13 = ActivityCompat.checkSelfPermission(activity, "android.permission.WRITE_CONTACTS")
             val permission14 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_SMS")
             //检测上面权限是否全部被授予
-            if (permission != PackageManager.PERMISSION_GRANTED
-                || permission2 != PackageManager.PERMISSION_GRANTED
-                || permission3 != PackageManager.PERMISSION_GRANTED
-                || permission4 != PackageManager.PERMISSION_GRANTED
-                || permission5 != PackageManager.PERMISSION_GRANTED
-                || permission7 != PackageManager.PERMISSION_GRANTED
-                || permission8 != PackageManager.PERMISSION_GRANTED
-                || permission9 != PackageManager.PERMISSION_GRANTED
-                || permission10 != PackageManager.PERMISSION_GRANTED
-                || permission12 != PackageManager.PERMISSION_GRANTED
-                || permission13 != PackageManager.PERMISSION_GRANTED
-                || permission14 != PackageManager.PERMISSION_GRANTED
-            ) {
+            if (permission != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED || permission3 != PackageManager.PERMISSION_GRANTED || permission4 != PackageManager.PERMISSION_GRANTED || permission5 != PackageManager.PERMISSION_GRANTED || permission7 != PackageManager.PERMISSION_GRANTED || permission8 != PackageManager.PERMISSION_GRANTED || permission9 != PackageManager.PERMISSION_GRANTED || permission10 != PackageManager.PERMISSION_GRANTED || permission12 != PackageManager.PERMISSION_GRANTED || permission13 != PackageManager.PERMISSION_GRANTED || permission14 != PackageManager.PERMISSION_GRANTED) {
                 //若有权限未授予, 会弹出系统自带的申请权限对话框
-                ActivityCompat.requestPermissions(activity,
-                    APP_PERMISSIONS,
-                    PERMISSION_REQUEST_CODE)
+                ActivityCompat.requestPermissions(activity, APP_PERMISSIONS, PERMISSION_REQUEST_CODE)
             } else {
                 //适配小米手机, 但是小米出现情况很少可忽略
                 //checkXiaoMiSms()

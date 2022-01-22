@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lwj_base.common.base.BaseConstants
-import com.example.lwj_common.common.entity.ResultState
+import com.example.lwj_common.common.net.ResultState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,7 +26,7 @@ abstract class BaseRepository<T>(override val coroutineContext: CoroutineContext
     /**
      * block: 需要在后台操作的代码块(如通过retrofit获取后台数据)
      * */
-    inline fun onLaunch(crossinline block: suspend () -> Unit) = launch{
+    inline fun onLaunch(crossinline block: suspend () -> Unit ) = launch{
         try {
             block.invoke()
         }catch (e: Exception){

@@ -177,7 +177,7 @@
                         android:textColor="@color/color_333333"
                         android:textSize="@dimen/sp_12" />
 
-                    <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                    <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                         android:id="@+id/personal_name_one_et"
                         android:layout_width="match_parent"
                         android:layout_marginTop="@dimen/dp_4"
@@ -299,7 +299,7 @@
                         android:textColor="@color/color_333333"
                         android:textSize="@dimen/sp_12" />
 
-                    <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                    <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                         android:id="@+id/personal_name_two_et"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

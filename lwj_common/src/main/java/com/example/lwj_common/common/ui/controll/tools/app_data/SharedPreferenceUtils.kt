@@ -1,38 +1,25 @@
-package com.example.flashfeso_lwj.flashfeso.utils
+package com.example.lwj_common.common.ui.controll.tools.app_data
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.flashfeso_lwj.App
+import com.example.lwj_base.common.base.BaseApp
 
-import com.example.flashfeso_lwj.R
-import com.example.lwj_base.common.base.BaseApp2
-import com.example.lwj_base.common.base.BaseApp2.Companion.context
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import javax.inject.Inject
-
-object SharedPreferenceUtils{
-
-     var mInstance: SharedPreferences? = null
-
-    fun isFirstLuanch(): Boolean = mInstance?.getBoolean("isFirstLuanch", true)!!
-
-    fun setNotFirstLuanch() = with(mInstance?.edit()){
-        this?.run {
-
-            putBoolean("isFirstLuanch", false)
-            apply()
-        }
-    }
-
-
+/**
+ * 注意, 使用前必须将应用app设置为继承自BaseApp的类, 否则BaseApp.appContext无法初始化获取
+ * */
+object SharedPreferenceUtils {
+    private var _spInstance: SharedPreferences? = null
     init {
-        mInstance = BaseApp2.context.applicationContext.getSharedPreferences(context
-                .getString(
-            R.string.str_sharedpreference_key), Context.MODE_PRIVATE)
-
+        _spInstance = BaseApp.appContext.getSharedPreferences(AppConstants.SP_CREATE_KEY,
+                Context.MODE_PRIVATE)
     }
+
+
+
+    /**
+     * 是否第一次登录
+     * */
+    val IS_FIRST_LOGIN = "isFirstLogin"
 
     /**
      * 是否第一次试用
@@ -164,8 +151,6 @@ object SharedPreferenceUtils{
      */
     val IS_FIRST_APPLY = "isFirstApply"
 
-
-
     /**
      * @param key
      * @param value
@@ -187,7 +172,7 @@ object SharedPreferenceUtils{
      * @Description: 获取String类型的数据
      */
     fun getString(key: String?, defValue: String?): String? {
-        return mInstance?.getString(key, defValue)
+        return _spInstance?.getString(key, defValue)
     }
 
     /**
@@ -211,7 +196,7 @@ object SharedPreferenceUtils{
      * @Description: 获取boolean类型的数据
      */
     fun getBoolean(key: String?, defValue: Boolean): Boolean {
-        return mInstance?.getBoolean(key, defValue)!!
+        return _spInstance?.getBoolean(key, defValue)!!
     }
 
     /**
@@ -235,7 +220,7 @@ object SharedPreferenceUtils{
      * @Description: 获取int型数据
      */
     fun getInt(key: String?, defValue: Int): Int {
-        return mInstance?.getInt(key, defValue)!!
+        return _spInstance?.getInt(key, defValue)!!
     }
 
     /**
@@ -259,7 +244,7 @@ object SharedPreferenceUtils{
      * @Description: 获取int型数据
      */
     fun getLong(key: String?, defValue: Long): Long {
-        return mInstance?.getLong(key, defValue)!!
+        return _spInstance?.getLong(key, defValue)!!
     }
 
 
@@ -273,8 +258,8 @@ object SharedPreferenceUtils{
      */
     private fun putObject(key: String, value: Any?) {
         if (value != null) {
-            val editor = mInstance?.edit()
-            if (mInstance?.contains(key)!!) {
+            val editor = _spInstance?.edit()
+            if (_spInstance?.contains(key)!!) {
                 editor?.remove(key)
             }
             if (value is Boolean) {
@@ -299,7 +284,7 @@ object SharedPreferenceUtils{
      * @Description: 清除所有数据
      */
     fun clearAll() {
-        val editor = mInstance?.edit()
+        val editor = _spInstance?.edit()
         editor?.clear()
         editor?.apply()
     }
@@ -312,9 +297,11 @@ object SharedPreferenceUtils{
      * @Description: 根据key清除对应的数据
      */
     fun removeByKey(key: String?) {
-        val editor = mInstance?.edit()
+        val editor = _spInstance?.edit()
         editor?.remove(key)
         editor?.apply()
     }
 
 }
+
+

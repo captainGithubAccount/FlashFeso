@@ -98,7 +98,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp_15" />
 
-                <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                     android:id="@+id/you_bian"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -134,7 +134,7 @@
                     android:textSize="@dimen/sp_15" />
 
 
-                <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                     android:id="@+id/bang"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -170,7 +170,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp_15" />
 
-                <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                     android:id="@+id/city"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -205,7 +205,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp_15" />
 
-                <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                     android:id="@+id/sheng_huo_qu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -241,7 +241,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp_15" />
 
-                <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                     android:id="@+id/jie_dao"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -276,7 +276,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp_15" />
 
-                <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                     android:id="@+id/waibu_bianhao"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -312,7 +312,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp_15" />
 
-                <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                     android:id="@+id/neibu_bianhao"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

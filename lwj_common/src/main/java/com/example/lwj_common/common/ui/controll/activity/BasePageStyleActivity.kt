@@ -6,6 +6,10 @@ import com.example.lwj_common.R
 
 import com.gyf.immersionbar.ktx.immersionBar
 
+/**
+ * @author lwj
+ * 不带title bar的样式风格Atv
+ * */
 abstract class BasePageStyleActivity<T: ViewBinding>: BaseDbActivity<T>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
