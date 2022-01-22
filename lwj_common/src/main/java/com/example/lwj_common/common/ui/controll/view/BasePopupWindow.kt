@@ -13,7 +13,11 @@ import com.example.lwj_base.common.base.GetBinding
 import com.example.lwj_common.R
 import com.example.lwj_common.common.ui.controll.tools.utils.ScreenUtils
 
-abstract class CommonPopupWindow<T : ViewBinding>(
+/**
+ * @author lwj
+ * 注意此基类包含y轴方向的自适应, 但是不包含水平方向自适应, 可以仿造我这个推导
+ * */
+abstract class BasePopupWindow<T : ViewBinding>(
     val mContext: Activity,
 ) : PopupWindow(), GetBinding<T> {
     //是否添加遮罩层

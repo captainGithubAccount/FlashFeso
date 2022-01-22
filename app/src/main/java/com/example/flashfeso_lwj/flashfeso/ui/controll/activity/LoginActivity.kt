@@ -79,7 +79,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
         mLoginViewModel.loginYzmLiveData.observe(this@LoginActivity, Observer {
             it.whenSuccess {
                 mSimpleProgressDialogUtil?.closeHUD()
-                Toast.makeText(App.context, "SUCCESS: ${it}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "SUCCESS: ${it}", Toast.LENGTH_LONG).show()
 
                 //倒计时实现
                 object : CountDownTimer(60 * 1000L, 1000) {
@@ -100,7 +100,8 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                 binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.GONE
                 binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.VISIBLE
                 if (Constants.ISLOG) Log.d("TAG:yzm error mes", "ERROR: ${(it as DataResult.Error).errorMessage}")
-                Toast.makeText(App.context, "ERROR: ${(it as DataResult.Error).errorMessage}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "ERROR: ${(it as DataResult.Error).errorMessage}", Toast
+                        .LENGTH_LONG).show()
                 mSimpleProgressDialogUtil?.closeHUD()
             }
         })
@@ -147,7 +148,8 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                             sendMs()
 
                         } else {
-                            Toast.makeText(App.context, getResources().getString(R.string.enter_phone_number), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@LoginActivity, getResources().getString(R.string
+                                    .enter_phone_number), Toast.LENGTH_LONG).show()
                         }
                     }
                 }

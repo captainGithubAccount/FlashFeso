@@ -103,6 +103,13 @@ object DoubleUtils {
         return java.lang.Double.toString(bd1.subtract(bd2).toDouble())
     }
 
+    /**
+     * 提供精确减法运算的sub方法
+     *
+     * @param value1 被减数
+     * @param value2 减数
+     * @return 两个参数的差
+     */
     fun subToString(d1: String?, d2: String?): String {
         var d1 = d1
         var d2 = d2

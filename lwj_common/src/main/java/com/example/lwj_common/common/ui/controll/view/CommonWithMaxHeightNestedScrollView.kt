@@ -1,4 +1,3 @@
-
 package com.example.lwj_common.common.ui.controll.view
 
 import android.content.AttributionSource
@@ -7,7 +6,7 @@ import android.util.AttributeSet
 import android.util.Log
 import androidx.core.widget.NestedScrollView
 
-class HaveMaxHeightNestedScrollView @JvmOverloads constructor(
+class CommonWithMaxHeightNestedScrollView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0

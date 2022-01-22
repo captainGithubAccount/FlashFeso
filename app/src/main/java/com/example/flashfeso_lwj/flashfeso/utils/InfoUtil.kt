@@ -2,7 +2,7 @@ package com.example.flashfeso_lwj.flashfeso.utils
 
 import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
 
-object InfoUtil{
+object InfoUtil {
 
     //用户id
     private var userId: String? = null
@@ -22,7 +22,7 @@ object InfoUtil{
     //虚拟账户唯一识别码
     var dummyId: String? = null
         get() {
-            if (StringUtils.isEmpty(field)) {
+            if(StringUtils.isEmpty(field)) {
                 field = SharedPreferenceUtils.getString(SharedPreferenceUtils.DUMMYID, "")
             }
             return field
@@ -35,7 +35,7 @@ object InfoUtil{
     //渠道
     var channel: String? = null
         get() {
-            if (StringUtils.isEmpty(field)) {
+            if(StringUtils.isEmpty(field)) {
                 field = SharedPreferenceUtils.getString(SharedPreferenceUtils.CHANNEL, "")
             }
             return field
@@ -48,7 +48,7 @@ object InfoUtil{
     //当前经度
     var longitude: String? = null
         get() {
-            if (StringUtils.isEmpty(field)) {
+            if(StringUtils.isEmpty(field)) {
                 field = SharedPreferenceUtils.getString(SharedPreferenceUtils.LONGITUDE, "")
             }
             return field
@@ -61,7 +61,7 @@ object InfoUtil{
     //当前纬度
     var latitude: String? = null
         get() {
-            if (StringUtils.isEmpty(field)) {
+            if(StringUtils.isEmpty(field)) {
                 field = SharedPreferenceUtils.getString(SharedPreferenceUtils.LATITUDE, "")
             }
             return field
@@ -75,7 +75,7 @@ object InfoUtil{
     //AppInfo
     var appInfoToString: String? = null
         get() {
-            if (StringUtils.isEmpty(field)) {
+            if(StringUtils.isEmpty(field)) {
                 field = SharedPreferenceUtils.getString(SharedPreferenceUtils.APP_INFO_TO_STRING, "")
             }
             return field
@@ -88,7 +88,7 @@ object InfoUtil{
     //deviceInfo
     var deviceInfoToString: String? = null
         get() {
-            if (StringUtils.isEmpty(field)) {
+            if(StringUtils.isEmpty(field)) {
                 field = SharedPreferenceUtils.getString(SharedPreferenceUtils.DEVICE_INFO_TO_STRING, "")
             }
             return field
@@ -101,7 +101,7 @@ object InfoUtil{
     //contacts
     var contactsToString: String? = null
         get() {
-            if (StringUtils.isEmpty(field)) {
+            if(StringUtils.isEmpty(field)) {
                 field = SharedPreferenceUtils.getString(SharedPreferenceUtils.CONTACTS_TO_STRING, "")
             }
             return field
@@ -114,7 +114,7 @@ object InfoUtil{
     //message
     var messageToString: String? = null
         get() {
-            if (StringUtils.isEmpty(field)) {
+            if(StringUtils.isEmpty(field)) {
                 field = SharedPreferenceUtils.getString(SharedPreferenceUtils.MESSAGE_TO_STRING, "")
             }
             return field
@@ -125,7 +125,7 @@ object InfoUtil{
         }
     var gpsAdid: String? = null
         get() {
-            if (StringUtils.isEmpty(field)) {
+            if(StringUtils.isEmpty(field)) {
                 field = SharedPreferenceUtils.getString(SharedPreferenceUtils.GPS_ADID, "")
             }
             return field
@@ -197,7 +197,7 @@ object InfoUtil{
     }
 
     fun getUserId(): String? {
-        if (StringUtils.isEmpty(userId)) {
+        if(StringUtils.isEmpty(userId)) {
             userId = SharedPreferenceUtils.getString(SharedPreferenceUtils.USER_ID, "-1")
         }
         return userId
@@ -209,7 +209,7 @@ object InfoUtil{
     }
 
     fun getUserName(): String? {
-        if (StringUtils.isEmpty(userName)) {
+        if(StringUtils.isEmpty(userName)) {
             userName = SharedPreferenceUtils.getString(SharedPreferenceUtils.USER_NAME, "-1")
         }
         return userName
@@ -221,7 +221,7 @@ object InfoUtil{
     }
 
     fun getToken(): String? {
-        if (StringUtils.isEmpty(token)) {
+        if(StringUtils.isEmpty(token)) {
             token = SharedPreferenceUtils.getString(SharedPreferenceUtils.TOKEN, "")
         }
         return token
@@ -233,7 +233,7 @@ object InfoUtil{
     }
 
     fun getPassword(): String? {
-        if (StringUtils.isEmpty(password)) {
+        if(StringUtils.isEmpty(password)) {
             password = SharedPreferenceUtils.getString(SharedPreferenceUtils.PASSWORD, "")
         }
         return password
@@ -245,7 +245,7 @@ object InfoUtil{
     }
 
     fun getAccount(): String? {
-        if (StringUtils.isEmpty(account)) {
+        if(StringUtils.isEmpty(account)) {
             account = SharedPreferenceUtils.getString(SharedPreferenceUtils.ACCOUNT, "")
         }
         return account
@@ -262,7 +262,7 @@ object InfoUtil{
             SharedPreferenceUtils.setBoolean(SharedPreferenceUtils.IS_FIRST_APPLY, isFirstApply)
         }
     val isLogin: Boolean
-        get() = !StringUtils.isEmpty(getToken())
+        get() = ! StringUtils.isEmpty(getToken())
     var isReadJurisdiction: Boolean
         get() = SharedPreferenceUtils.getBoolean(SharedPreferenceUtils.IS_READ_JURISDICTION, false)
         set(isReadJurisdiction) {

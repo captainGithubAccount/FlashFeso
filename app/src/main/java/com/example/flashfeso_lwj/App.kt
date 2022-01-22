@@ -9,26 +9,21 @@ import com.adjust.sdk.*
 import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.utils.Constants
 import com.example.flashfeso_lwj.flashfeso.utils.SharedPreferenceUtils
+
+import com.example.lwj_base.common.base.BaseApp2
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
-class App: Application() {
-
-
-
-    companion object{
-        lateinit var context: Context
-
-        var instance: App? = null
-
-
-    }
+class App: BaseApp2() {
+    /*companion object{
+        fun  getApplicationContext(): Context = context
+    }*/
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
-        context = applicationContext
+        /*_instance = this
+        _context = applicationContext*/
         //InfoUtil
         //SharedPreferenceUtils
 

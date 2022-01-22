@@ -1,6 +1,6 @@
 package com.example.flashfeso_lwj.flashfeso.base
 
-import com.example.lwj_common.common.entity.BaseResponse
+import com.example.lwj_common.common.net.BaseResponse
 
 abstract class FlashFesoAppBaseResponse<T>(
     code: Int ,

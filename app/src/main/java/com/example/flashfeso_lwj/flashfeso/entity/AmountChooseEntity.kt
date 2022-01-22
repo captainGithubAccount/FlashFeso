@@ -8,13 +8,13 @@ package com.example.flashfeso_lwj.flashfeso.entity
 )*/
 
 data class AmountChooseEntity(
-    val disburalAmount: Int,
-    val gst: Int,
-    val interest: Int,
-    val loanAmount: Int,
-    val minAmount: Int,
-    val processingFee: Int,
-    val repaymentAmount: Int,
-    val serviceFee: Int,
-    val tenure: Int
+        val disburalAmount: String,
+        val gst: String,
+        val interest: String,
+        val loanAmount: String,
+        var minAmount: String,
+        val processingFee: String,
+        val repaymentAmount: String,
+        val serviceFee: String,
+        val tenure: String
 )

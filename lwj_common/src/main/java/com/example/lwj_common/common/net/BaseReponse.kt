@@ -1,6 +1,7 @@
-package com.example.lwj_common.common.entity
+package com.example.lwj_common.common.net
 
 /**
+* @author lwj
 * 使用的时候可以继承该类新增返回字段, 如XxxAppBaseResponse
 * 接口使用:
 * @POST("mexico/generateOrder")

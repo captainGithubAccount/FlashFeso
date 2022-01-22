@@ -25,7 +25,7 @@
         <entry key="app/src/main/res/drawable/shape_login_line_verification_code.xml" value="0.2984375" />
         <entry key="app/src/main/res/drawable/shape_main_inicio_is_olicita.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_agergar_cuenta_bancaria.xml" value="0.28229166666666666" />
-        <entry key="app/src/main/res/layout/activity_detalles_de_los_prestamos.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_detalles_de_los_prestamos.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_historial_crediticio.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_infomation_laboral.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_informacion_basica.xml" value="0.17447916666666666" />
@@ -55,7 +55,7 @@
         <entry key="app/src/main/res/layout/item_take_photo_select.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/layout_selector_image_type_window.xml" value="0.27794871794871795" />
         <entry key="app/src/main/res/layout/test_dialog.xml" value="0.16302083333333334" />
-        <entry key="app/src/main/res/layout/view_easyrcl_empty.xml" value="0.18854166666666666" />
+        <entry key="app/src/main/res/layout/view_easyrcl_empty.xml" value="0.335" />
         <entry key="app/src/main/res/layout/view_easyrcl_error.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/view_easyrcl_progress.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.23796296296296296" />

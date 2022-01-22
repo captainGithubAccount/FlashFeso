@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
 
-    <com.example.lwj_common.common.ui.controll.view.HaveMaxHeightNestedScrollView
+    <com.example.lwj_common.common.ui.controll.view.CommonWithMaxHeightNestedScrollView
         android:layout_width="@dimen/dp_280"
         android:layout_height="wrap_content"
         android:scrollbarSize="4dp"
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </com.example.lwj_common.common.ui.controll.view.HaveMaxHeightNestedScrollView>
+    </com.example.lwj_common.common.ui.controll.view.CommonWithMaxHeightNestedScrollView>
 
 
 </FrameLayout>

@@ -34,7 +34,9 @@ class MainInicioViewModel @ViewModelInject constructor(
 
 
 
-
+    /**
+     * 这里命名有问题, 应该改为查询默认数据如, queryDefaultData
+     * */
     fun queryAuthUserInfoWhenLogin(){
         inicioAuthUserInfoRepository2.query()
     }
@@ -43,6 +45,9 @@ class MainInicioViewModel @ViewModelInject constructor(
 
 
 
+    /**
+     * 这里命名有问题, 应该改为查询默认数据如, queryDefaultData
+     * */
     fun queryAuthUserInfoWhenNotLogin(){
         inicioAuthUserInfoRepository3.query()
     }

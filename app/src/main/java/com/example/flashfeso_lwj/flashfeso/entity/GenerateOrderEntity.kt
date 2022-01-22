@@ -1,8 +1,5 @@
 package com.example.flashfeso_lwj.flashfeso.entity
 
-import com.example.lwj_common.common.entity.BaseResponse
-import com.example.lwj_common.common.entity.ResultState
-
 data class GenerateOrderResponse(
     val code: Int,
     val data: GenerateOrderEntity?,

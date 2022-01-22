@@ -11,7 +11,7 @@ fun CharSequence?.isUseful(): Boolean{
     return !(this.isNullOrBlank() || this == "null")
 }
 
-/*
+/**
 * 删除文本中含有的空格
 * */
 fun CharSequence.deleteBlank(): String = this.toString().trim().replace(" ", "")

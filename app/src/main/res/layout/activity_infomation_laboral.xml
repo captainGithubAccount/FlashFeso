@@ -138,7 +138,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp_15" />
 
-                <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                     android:id="@+id/emailEt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -410,7 +410,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp_15" />
 
-                <com.example.lwj_common.common.ui.controll.view.ClearEditText
+                <com.example.lwj_common.common.ui.controll.view.CommonClearEditText
                     android:id="@+id/imss_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
