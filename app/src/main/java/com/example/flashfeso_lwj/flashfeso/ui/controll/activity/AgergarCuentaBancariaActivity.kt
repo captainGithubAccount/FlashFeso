@@ -89,7 +89,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
             mSimpleProgressDialogUtil?.closeHUD()
             it.whenSuccessResponse {
                 if((it as DataResult.Success).successMessagle == resources.getString(R.string.success)) {
-                    queryAuthBackInfo(bkCardNumber, bkName, bankNo)
+                    queryAuthBankInfo(bkCardNumber, bkName, bankNo)
                 }
             }
             it.whenError {
@@ -130,7 +130,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
         })
     }
 
-    private fun queryAuthBackInfo(bkCardNumber: String, bkName: String, bankNo: Int) {
+    private fun queryAuthBankInfo(bkCardNumber: String, bkName: String, bankNo: Int) {
         val map: MutableMap<String, Any> = HashMap()
         map["bkType"] = tipoDeCuentaPosition
         map["bkCardNumber"] = bkCardNumber

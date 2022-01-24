@@ -8,6 +8,9 @@
     <string name="puede_tardar_unos_minutos" translatable="false">Puede tardar unos minutos.</string>
     <string name="ya_veo" translatable="false">Ya veo</string>
 
+    <!--ModifyBankCardActivity-->
+    <string name="modificar_la_cuenta_bancaria" translatable="false">Modificar la cuenta bancaria</string>
+
     <!--HistorialCrediticioActivity-->
     <string name="agergar_cuenta_bancaria" translatable="false">Agregar cuenta bancaria</string>
     <string name="sixs" translatable="false">06</string>

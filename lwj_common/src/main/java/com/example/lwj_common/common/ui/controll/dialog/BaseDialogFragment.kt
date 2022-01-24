@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
+import com.example.flashfeso_lwj.base.event.CommonDialogEvent
 import com.example.lwj_base.common.base.GetBinding
 
 /**
@@ -15,10 +16,18 @@ abstract class BaseDialogFragment<T: ViewBinding>: DialogFragment(), GetBinding<
     private var _binding: T? = null
     val binding: T get() = _binding!!
 
+    var listener: CommonDialogEvent? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isCancelable = isCancel()
+        /*
+        注意: 当isCancelable为false时候等同于设置
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.setCancelable(false)
+
+         */
         setStyle(DialogFragment.STYLE_NO_TITLE, 0)
     }
 
@@ -45,7 +54,7 @@ abstract class BaseDialogFragment<T: ViewBinding>: DialogFragment(), GetBinding<
     若需要重写返回键监听, 在覆盖initView后写如下代码:
     dialog!!.setOnKeyListener { dialogInterface, i, keyEvent ->
             if (i == KeyEvent.KEYCODE_BACK) {
-                //do something
+                do something
                 true
             } else false
         }

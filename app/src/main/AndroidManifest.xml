@@ -13,19 +13,13 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- adjust -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-permission android:name="android.hardwre.location.gps" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.READ_SMS" />
 
-    <!--
-    android:requestLegacyExternalStorage="true"
-    用来解决PictureSelector版本冲突
-    -->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -35,6 +29,9 @@
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/AppBaseColorTheme">
+        <activity
+            android:name=".flashfeso.ui.controll.activity.ModifyBankCardActivity"
+            android:exported="false" />
         <activity
             android:name=".flashfeso.ui.controll.activity.AgergarCuentaBancariaActivity"
             android:exported="false" />

@@ -5,15 +5,15 @@ import com.example.flashfeso_lwj.databinding.DialogJumpSysytemLocBinding
 import com.example.lwj_common.common.ui.controll.dialog.BaseDialogFragment
 
 class JumpSysytemLocDialog(): BaseDialogFragment<DialogJumpSysytemLocBinding>() {
-    var listener: CommonDialogEvent? = null
+    var listener2: CommonDialogEvent? = null
     override fun DialogJumpSysytemLocBinding.initView() {}
     override fun afterBindingView() {
         super.afterBindingView()
         binding.btnCancel.setOnClickListener {
-            listener?.onCancel()
+            listener2?.onCancel()
         }
         binding.btnConfirm.setOnClickListener {
-            listener?.onConfirm()
+            listener2?.onConfirm()
         }
     }
     override fun isCancel(): Boolean = false

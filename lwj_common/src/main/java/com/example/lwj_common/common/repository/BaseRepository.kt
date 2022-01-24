@@ -28,13 +28,15 @@ abstract class BaseRepository<T>(override val coroutineContext: CoroutineContext
      * */
     inline fun onLaunch(crossinline block: suspend () -> Unit ) = launch{
         try {
-            block.invoke()
+            block()
+            //注意: 这里使用block.invoke()会报错
         }catch (e: Exception){
             postErrorMessage(e)
             if(BaseConstants.ISLOG) Log.e("--REP ERROR MESSAGE", e.message.toString())
             e.printStackTrace()
         }
     }
+
 
     /**
      * 当需要post异常时(在界面获取异常信息显示或处理)重写

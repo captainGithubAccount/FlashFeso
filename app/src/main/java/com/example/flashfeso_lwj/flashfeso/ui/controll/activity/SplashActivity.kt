@@ -62,6 +62,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                     if (!StringUtils.isEmpty(versionData.VId)) {
                         if (versionData.VId.toLong() > BuildConfig.VERSION_CODE) {
                             if (versionData.isUpdate) {
+                                //这里的isUpdate可以理解为是否必要更新, 若是则点击取消按钮直接退出应用, 若不是必要更新则点击取消按钮直接进入主界面
                                 CommonDialog(resources.getString(R.string.new_version_found)).apply {
                                         mCommonDialogEvent = object : CommonDialogEvent {
                                             override fun onCancel() {
@@ -96,6 +97,9 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
                         jumpToMainActivity()
                     }
                 }
+            }
+            statedata.whenError {
+                jumpToMainActivity()
             }
         })
 

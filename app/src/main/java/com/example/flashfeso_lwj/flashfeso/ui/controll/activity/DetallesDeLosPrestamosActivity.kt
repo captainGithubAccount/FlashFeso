@@ -19,10 +19,12 @@ import androidx.lifecycle.Observer
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.base.event.CommonDialogEvent
 import com.example.flashfeso_lwj.base.ui.controll.activity.BaseDbActivity
+import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
 import com.example.flashfeso_lwj.base.utils.SimpleProgressDialogUtil
 import com.example.flashfeso_lwj.databinding.ActivityDetallesDeLosPrestamosBinding
 import com.example.flashfeso_lwj.flashfeso.base.DataResult
 import com.example.flashfeso_lwj.flashfeso.entity.CurrDetailEntity
+import com.example.flashfeso_lwj.flashfeso.ui.controll.dialog.ExamenDeLosPrestamosDialog
 import com.example.flashfeso_lwj.flashfeso.ui.controll.dialog.JumpSysytemLocDialog
 import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.utils.UrlConstants
@@ -50,7 +52,7 @@ import javax.inject.Inject
 * */
 
 @AndroidEntryPoint
-class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPrestamosBinding>() {
+class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLosPrestamosBinding>() {
     var mCurrDetailEntity: CurrDetailEntity? = null
     private var isRisk = false
     var locationUtils: LocationUtils = LocationUtils()
@@ -112,14 +114,18 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
                 if(it.msg == resources.getString(R.string.success)) {
                     loginViewModel.queryNotifyInicioBeanLiveData()
                     val money = resources.getString(R.string.money_symbol)
-                    val s = NumberUtils.goToZeroString(montoDelPrestamosTv !!.text.toString()
-                        .trim {it <= ' '})
-                    val dialog: ExamenDeLosPrestamosDialog =
-                        ExamenDeLosPrestamosDialog.newInstance(s, currDetailsBean.getRepayDate())
-                    dialog.setConfirmListener(View.OnClickListener {
-                        dialog.dismiss()
-                        finish()
-                    })
+                    val s = NumberUtils.goToZeroString(montoDelPrestamosTv !!.text.toString().trim {it <= ' '})
+                    val dialog: ExamenDeLosPrestamosDialog = ExamenDeLosPrestamosDialog.newInstance(s, currDetailsBean?.repayDate !!)
+                    dialog.listener = object: CommonDialogEvent {
+                        override fun onCancel() {
+
+                        }
+
+                        override fun onConfirm() {
+                            dialog.dismiss()
+                            finish()
+                        }
+                    }
                     dialog.show(supportFragmentManager, "ExamenDeLosPrestamosDialog")
                 }
             }
@@ -139,9 +145,7 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
             it.whenClear {
                 InfoUtil.clear()
                 loginViewModel.queryNotifyUpdateLoginLiveData()
-                addToast(
-                    this@DetallesDeLosPrestamosActivity, (it as DataResult.Clear).clearMessage !!
-                )
+                addToast(this@DetallesDeLosPrestamosActivity, (it as DataResult.Clear).clearMessage !!)
                 onBackPressed()
             }
         })
@@ -161,39 +165,15 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
                     maxAmount = DoubleUtils.divToString(this.loanAmount, "100", 2)
                     binding.loanAmountText.setText(suffix + NumberUtils.goToZeroString(maxAmount)) //放款金额
                     //放款金额
-                    binding.disburalAmount.setText(
-                        suffix + NumberUtils.goToZeroString(
-                            DoubleUtils.divToString(
-                                this.disburalAmount, "100", 2
-                            )
-                        )
-                    ) //借贷期限
+                    binding.disburalAmount.setText(suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(this.disburalAmount, "100", 2))) //借贷期限
                     //借贷期限
                     binding.tenure.setText(this.tenure.toString() + " " + dias) //应付金额
                     //应付金额
-                    binding.montoTv.setText(
-                        suffix + NumberUtils.goToZeroString(
-                            DoubleUtils.divToString(
-                                this.repaymentAmount, "100", 2
-                            )
-                        )
-                    ) //管理费
+                    binding.montoTv.setText(suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(this.repaymentAmount, "100", 2))) //管理费
                     //管理费
-                    binding.comisionTv.setText(
-                        suffix + NumberUtils.goToZeroString(
-                            DoubleUtils.divToString(
-                                this.processingFee, "100", 2
-                            )
-                        )
-                    ) //利息
+                    binding.comisionTv.setText(suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(this.processingFee, "100", 2))) //利息
                     //利息
-                    binding.interesTv.setText(
-                        suffix + NumberUtils.goToZeroString(
-                            DoubleUtils.divToString(
-                                this.interest, "100", 2
-                            )
-                        )
-                    )
+                    binding.interesTv.setText(suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(this.interest, "100", 2)))
 
                     if(loadAmount.toDouble() + 100 <= maxAmount.toDouble()) {
                         addImg !!.setImageDrawable(resources.getDrawable(R.drawable.icon_add_black))
@@ -231,8 +211,7 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
                 InfoUtil.clear()
                 mSimpleProgressDialogUtil?.closeHUD()
                 loginViewModel.queryNotifyUpdateLoginLiveData()
-                Toast.makeText(this, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(this, (it as DataResult.Clear).clearMessage, Toast.LENGTH_SHORT).show()
                 onBackPressed()
             }
             it.whenSuccess {
@@ -264,15 +243,15 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
 
     override fun beforeCreateView() {
         super.beforeCreateView()
+        //todo eee currDetailsBean
         mCurrDetailEntity = intent.getParcelableExtra("currDetailsBean")
-        if(BaseConstants.ISLOG) Log.d("DetallesDeLosPrestamos", mCurrDetailEntity.toString())
+        if(BaseConstants.ISLOG) Log.d("---DetallesDeLosPrestam", mCurrDetailEntity.toString())
         mIsAuthentication = intent.getBooleanExtra("authentication", false)
         mIsAgain = intent.getBooleanExtra("isAgain", false)
     }
 
     override fun ActivityDetallesDeLosPrestamosBinding.initView() {
-        binding.header.tvCommonBarTitle.text =
-            resources.getString(R.string.detalles_de_los_prestamos)
+        binding.header.tvCommonBarTitle.text = resources.getString(R.string.detalles_de_los_prestamos)
         binding.progress.llProgress.visibility = View.GONE
         binding.empty.viewEmpty.visibility = View.GONE
         this@DetallesDeLosPrestamosActivity.initView()
@@ -298,25 +277,18 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
 
         binding.btnCambiar.setOnClickListener {
 
+            //todo doing
             if(isClickUseful()) {
-                val intent =
-                    Intent(this@DetallesDeLosPrestamosActivity, ModifyBankCardActivity::class.java)
-                startActivityForResult(intent, DetallesDeLosPrestamosActivity.REQUESTCODE)
+                val intent = Intent(this@DetallesDeLosPrestamosActivity, ModifyBankCardActivity::class.java)
+                startActivityForResult(intent, REQUESTCODE)
             }
         }
 
         binding.acetpaTv.setOnClickListener {
             if(isClickUseful()) {
-                val intent = Intent(
-                    this@DetallesDeLosPrestamosActivity, LoginPrivacyDetailActivity::class.java
-                )
-                intent.putExtra(
-                    LoginPrivacyDetailActivity.HEADER_TITLE_TEXT,
-                    resources.getString(R.string.aprobacion_de_prestamo)
-                )
-                intent.putExtra(
-                    LoginPrivacyDetailActivity.WEBSITE_URL, UrlConstants.LOAN_POLICY_URL
-                )
+                val intent = Intent(this@DetallesDeLosPrestamosActivity, LoginPrivacyDetailActivity::class.java)
+                intent.putExtra(LoginPrivacyDetailActivity.HEADER_TITLE_TEXT, resources.getString(R.string.aprobacion_de_prestamo))
+                intent.putExtra(LoginPrivacyDetailActivity.WEBSITE_URL, UrlConstants.LOAN_POLICY_URL)
                 startActivity(intent)
             }
         }
@@ -325,8 +297,7 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
             if(isClickUseful()) {
                 if(loadAmount.toDouble() - 100.0 >= minAmount.toDouble()) {
                     val suffix = resources.getString(R.string.money_symbol)
-                    loadAmount =
-                        NumberUtils.goToZeroString(DoubleUtils.subToString(loadAmount, "100"))
+                    loadAmount = NumberUtils.goToZeroString(DoubleUtils.subToString(loadAmount, "100"))
                     binding.montoDelPrestamosTv.text = "${suffix}${loadAmount}"
                     queryAmountChoose(loadAmount)
                 }
@@ -338,8 +309,7 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
             if(isClickUseful()) {
                 if(loadAmount.toDouble() + 100.0 <= maxAmount.toDouble()) {
                     val suffix = resources.getString(R.string.money_symbol)
-                    loadAmount =
-                        NumberUtils.goToZeroString(DoubleUtils.subToString(loadAmount, "100"))
+                    loadAmount = NumberUtils.goToZeroString(DoubleUtils.subToString(loadAmount, "100"))
                     binding.montoDelPrestamosTv.text = "${suffix}${loadAmount}"
                     queryAmountChoose(loadAmount)
                 }
@@ -347,18 +317,16 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
         }
 
         binding.confirm.setOnClickListener {
-            if(! isAgree) {
-                Toast.makeText(
-                    this,
-                    resources.getString(R.string.compruebe_el_contrato_de_prestamo),
-                    Toast.LENGTH_SHORT
-                ).show()
+            if(!isAgree) {
+                Toast.makeText(this, resources.getString(R.string.compruebe_el_contrato_de_prestamo), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if(isClickUseful()) {
                 if(isAgain) {
                     checkPermissions(this)
+                }else{
+                    queryGenerateOrder()
                 }
             }
         }
@@ -368,39 +336,20 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
     //检查权限
     fun checkPermissions(activity: Activity?) {
         try { //检测是否有写的权限
-            val permission =
-                ActivityCompat.checkSelfPermission(activity !!, "android.permission.INTERNET")
-            val permission2 = ActivityCompat.checkSelfPermission(
-                activity, "android.permission.WRITE_EXTERNAL_STORAGE"
-            )
-            val permission3 = ActivityCompat.checkSelfPermission(
-                activity, "android.permission.READ_EXTERNAL_STORAGE"
-            )
-            val permission4 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.READ_CONTACTS")
-            val permission5 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.READ_PHONE_STATE")
-            val permission7 = ActivityCompat.checkSelfPermission(
-                activity, "android.permission.ACCESS_NETWORK_STATE"
-            )
-            val permission8 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_WIFI_STATE")
-            val permission9 = ActivityCompat.checkSelfPermission(
-                activity, "android.permission.ACCESS_FINE_LOCATION"
-            )
-            val permission10 = ActivityCompat.checkSelfPermission(
-                activity, "android.permission.ACCESS_COARSE_LOCATION"
-            )
-            val permission12 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.CAMERA")
-            val permission13 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.WRITE_CONTACTS")
-            val permission14 =
-                ActivityCompat.checkSelfPermission(activity, "android.permission.READ_SMS")
+            val permission = ActivityCompat.checkSelfPermission(activity !!, "android.permission.INTERNET")
+            val permission2 = ActivityCompat.checkSelfPermission(activity, "android.permission.WRITE_EXTERNAL_STORAGE")
+            val permission3 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_EXTERNAL_STORAGE")
+            val permission4 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_CONTACTS")
+            val permission5 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_PHONE_STATE")
+            val permission7 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_NETWORK_STATE")
+            val permission8 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_WIFI_STATE")
+            val permission9 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_FINE_LOCATION")
+            val permission10 = ActivityCompat.checkSelfPermission(activity, "android.permission.ACCESS_COARSE_LOCATION")
+            val permission12 = ActivityCompat.checkSelfPermission(activity, "android.permission.CAMERA")
+            val permission13 = ActivityCompat.checkSelfPermission(activity, "android.permission.WRITE_CONTACTS")
+            val permission14 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_SMS")
             if(permission != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED || permission3 != PackageManager.PERMISSION_GRANTED || permission4 != PackageManager.PERMISSION_GRANTED || permission5 != PackageManager.PERMISSION_GRANTED || permission7 != PackageManager.PERMISSION_GRANTED || permission8 != PackageManager.PERMISSION_GRANTED || permission9 != PackageManager.PERMISSION_GRANTED || permission10 != PackageManager.PERMISSION_GRANTED || permission12 != PackageManager.PERMISSION_GRANTED || permission13 != PackageManager.PERMISSION_GRANTED || permission14 != PackageManager.PERMISSION_GRANTED) { // 没有写的权限，去申请写的权限，会弹出对话框
-                ActivityCompat.requestPermissions(
-                    activity, AppConstants.App_PERMISSIONS_FROM_MANIFEST, REQUEST_EXTERNAL_STORAGE
-                )
+                ActivityCompat.requestPermissions(activity, AppConstants.App_PERMISSIONS_FROM_MANIFEST, REQUEST_EXTERNAL_STORAGE)
             } else {
                 clickSubmit()
             }
@@ -456,26 +405,17 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
 
                         if(! isRisk) {
                             isRisk = true
-                            val appInfoList: List<AppInfoBean> =
-                                ManagementUtils.getAppList(this@DetallesDeLosPrestamosActivity)
-                            val devideInfo: DeviceInfoBean =
-                                ManagementUtils.getDeviceInfo(this@DetallesDeLosPrestamosActivity)
+                            val appInfoList: List<AppInfoBean> = ManagementUtils.getAppList(this@DetallesDeLosPrestamosActivity)
+                            val devideInfo: DeviceInfoBean = ManagementUtils.getDeviceInfo(this@DetallesDeLosPrestamosActivity)
                             devideInfo.longitude = longitude.toString()
                             devideInfo.latitude = latitude.toString()
 
-                            val contactsList: List<PhoneInfoBean> =
-                                ManagementUtils.getContacts(this@DetallesDeLosPrestamosActivity)
-                            val messageList: List<MessageBean> =
-                                MessageUtils.getMessage(this@DetallesDeLosPrestamosActivity)
+                            val contactsList: List<PhoneInfoBean> = ManagementUtils.getContacts(this@DetallesDeLosPrestamosActivity)
+                            val messageList: List<MessageBean> = MessageUtils.getMessage(this@DetallesDeLosPrestamosActivity)
 
 
                             //先上传风控信息，再提交银行卡信息
-                            queryRiskInfo(
-                                appInfoList.toJson(),
-                                devideInfo.toJson(),
-                                contactsList.toJson(),
-                                messageList.toJson()
-                            )
+                            queryRiskInfo(appInfoList.toJson(), devideInfo.toJson(), contactsList.toJson(), messageList.toJson())
                         }
                     } catch(e: Exception) {
 
@@ -491,8 +431,7 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
                 }
             }
         }
-        val locationResultType: Int =
-            locationUtils.isGetLocation(this@DetallesDeLosPrestamosActivity)
+        val locationResultType: Int = locationUtils.isGetLocation(this@DetallesDeLosPrestamosActivity)
         return locationResultType
     }
 
@@ -520,6 +459,11 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
 
     }
 
+    override fun afterInitView() {
+        super.afterInitView()
+
+    }
+
     @SuppressLint("SetTextI18n")
     private fun initView() {
         if(mCurrDetailEntity != null) {
@@ -540,37 +484,13 @@ class DetallesDeLosPrestamosActivity: BaseDbActivity<ActivityDetallesDeLosPresta
             loadAmount = maxAmount
             binding.loanAmountText.setText(money + NumberUtils.goToZeroString(loadAmount)) //申请金额
             montoDelPrestamosTv?.setText(money + NumberUtils.goToZeroString(maxAmount)) //放款金额
-            binding.disburalAmount.setText(
-                money + NumberUtils.goToZeroString(
-                    DoubleUtils.divToString(
-                        mCurrDetailEntity?.disburalAmount, "100", 2
-                    )
-                )
-            ) //借贷期限
+            binding.disburalAmount.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.disburalAmount, "100", 2))) //借贷期限
             binding.tenure.setText(mCurrDetailEntity?.tenure.toString() + " " + dias) //银行卡号
             binding.bbvaBanvomerTv.setText(mCurrDetailEntity?.bankNo) //应付金额
-            binding.montoTv.setText(
-                money + NumberUtils.goToZeroString(
-                    DoubleUtils.divToString(
-                        mCurrDetailEntity?.repaymentAmount, "100", 2
-                    )
-                )
-            ) //付款截止日期
+            binding.montoTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.repaymentAmount, "100", 2))) //付款截止日期
             binding.fechaTv.setText(mCurrDetailEntity?.repayDate) //管理费
-            binding.comisionTv.setText(
-                money + NumberUtils.goToZeroString(
-                    DoubleUtils.divToString(
-                        mCurrDetailEntity?.processingFee, "100", 2
-                    )
-                )
-            ) //利息
-            binding.interesTv.setText(
-                money + NumberUtils.goToZeroString(
-                    DoubleUtils.divToString(
-                        mCurrDetailEntity?.interest, "100", 2
-                    )
-                )
-            )
+            binding.comisionTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.processingFee, "100", 2))) //利息
+            binding.interesTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.interest, "100", 2)))
 
             addImg?.setImageDrawable(resources.getDrawable(R.drawable.icon_add_grey))
 
