@@ -11,6 +11,12 @@
     <!--ModifyBankCardActivity-->
     <string name="modificar_la_cuenta_bancaria" translatable="false">Modificar la cuenta bancaria</string>
 
+    <!--ComentariosActivity-->
+    <string name="comentarios" translatable="false">Comentarios/Susgerencias</string>
+    <string name="discupe_las_molestias" translatable="false">Discupe las molestias ,envíe un comentaeio sobre su problema,lo solucionaremos lo antes posible.</string>
+    <string name="enviar" translatable="false">Enviar</string>
+    <string name="historia" translatable="false">Historia</string>
+
     <!--HistorialCrediticioActivity-->
     <string name="agergar_cuenta_bancaria" translatable="false">Agregar cuenta bancaria</string>
     <string name="sixs" translatable="false">06</string>

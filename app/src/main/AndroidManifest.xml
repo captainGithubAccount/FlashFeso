@@ -30,6 +30,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppBaseColorTheme">
         <activity
+            android:name=".flashfeso.ui.controll.activity.ComentariosActivity"
+            android:exported="false" />
+        <activity
             android:name=".flashfeso.ui.controll.activity.ModifyBankCardActivity"
             android:exported="false" />
         <activity
