@@ -11,7 +11,9 @@ import com.example.flashfeso_lwj.base.ui.controll.fragment.BaseDbFragment
 import com.example.flashfeso_lwj.common.ui.controll.dialog.CommonDialog
 import com.example.flashfeso_lwj.databinding.FragmentMainMicuentaBinding
 import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.ComentariosActivity
+import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.ConfiguracionActivity
 import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.LoginActivity
+import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.PreguntasFrecuentesActivity
 import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.lwj_common.common.ui.controll.tools.ktx.isUseful

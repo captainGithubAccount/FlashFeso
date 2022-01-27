@@ -22,7 +22,7 @@ abstract class BaseRepository<T>(override val coroutineContext: CoroutineContext
 
     var liveData = MutableLiveData<ResultState<T>>()
     private val _liveData: LiveData<ResultState<T>> get() = liveData
-    fun getDataLiveData(): LiveData<ResultState<T>> = _liveData
+    fun getLiveData(): LiveData<ResultState<T>> = _liveData
     /**
      * block: 需要在后台操作的代码块(如通过retrofit获取后台数据)
      * */

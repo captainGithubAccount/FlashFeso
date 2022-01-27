@@ -1,9 +1,13 @@
 package com.example.flashfeso_lwj.base.ui.controll.activity
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 
@@ -11,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_base.common.base.GetBinding
+import com.example.lwj_common.common.ui.controll.tools.ktx.toTrim
 
 /**
  * autor lwj
@@ -25,15 +30,6 @@ abstract class BaseDbActivity<T: ViewBinding>: AppCompatActivity(), GetBinding<T
     override fun onStart() {
         super.onStart()
 
-    }
-
-    /**
-     * 隐藏软键盘
-     * view  触发软键盘弹出的控件
-     */
-    open fun hideKeyboard(view: View) {
-        val imm = view.context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
-        imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     protected open suspend fun observeWhenCreatedWithLifecycle(){}

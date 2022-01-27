@@ -1,6 +1,8 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">flashfeso_lwj</string>
     <string name="str_sharedpreference_key">App_SharedPreference_Key</string>
+
+
 
     <!--ExamenDeLosPrestamosDialog-->
     <string name="examen_de_los_prestamos" translatable="false">Exámen de los préstamos</string>
@@ -10,6 +12,9 @@
 
     <!--ModifyBankCardActivity-->
     <string name="modificar_la_cuenta_bancaria" translatable="false">Modificar la cuenta bancaria</string>
+
+    <!--ComentariosActivity-->
+    <string name="por_favor_introduza_su_retroalimentacion" translatable="false">Por favor introduza su retroalimentación</string>
 
     <!--ComentariosActivity-->
     <string name="comentarios" translatable="false">Comentarios/Susgerencias</string>
@@ -30,6 +35,7 @@
     <string name="tarjeta_de_debito" translatable="false">Tarjeta de débito</string>
     <string name="introduzca_el_numero_correcto_de_tarjeta_de_16_bits" translatable="false">Introduzca el número correcto de tarjeta</string>
     <string name="introduzca_el_banco" translatable="false">Por favor, introduzca el Banco</string>
+
 
     <!--ActivityAgergarCuentaBancariaActivity-->
     <string name="informacion_de_idetidad" translatable="false">Información de Identidad</string>
@@ -171,6 +177,12 @@
     <string name="email" translatable="false">E-mail</string>
     <string name="el_ema_del_correo_electronico_debe" translatable="false">El tema del correo electrónico debe ser su cuenta de registro</string>
     <string name="whatsapp" translatable="false">WhatsAPP</string>
+
+
+
+    <!--ConfiguracionActivity-->
+    <string name="software_relacionado_no_encontrado" translatable="false" >Software relacionado no encontrado</string>
+    <string name="seleccionar_cliente_de_correo_electronico" translatable="false" >Seleccionar cliente de correo electrónico</string>
 
 
     <!--MiCuentaFragment-->

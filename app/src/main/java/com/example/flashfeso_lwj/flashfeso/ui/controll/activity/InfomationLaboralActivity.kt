@@ -20,6 +20,7 @@ import com.example.flashfeso_lwj.flashfeso.viewmodel.InfomationLaboralAuthWorkVi
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
+import com.example.lwj_common.common.ui.controll.tools.utils.SystemServiceUtil
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -234,14 +235,14 @@ class InfomationLaboralActivity : BasePageStyleActivity<ActivityInfomationLabora
         if (binding.emailEt.hasFocus()) {
             val imm = binding.emailEt.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
             imm?.run {
-                hideKeyboard(binding.emailEt)
+                SystemServiceUtil.hideKeyboard(binding.emailEt)
             }
         }
 
         if (binding.imssTv.hasFocus()) {
             val imm = binding.imssTv.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
             imm?.run {
-                hideKeyboard(binding.imssTv)
+                SystemServiceUtil.hideKeyboard(binding.imssTv)
             }
         }
     }

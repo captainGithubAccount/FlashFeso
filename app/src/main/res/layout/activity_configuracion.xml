@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F2F2F2"
+    android:orientation="vertical"
+    tools:context=".flashfeso.ui.controll.activity.ConfiguracionActivity">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/incl_common_bar" />
+
+    <include
+        android:id="@+id/progress"
+        layout="@layout/incl_common_loading" />
+
+    <include
+        android:id="@+id/error"
+        layout="@layout/incl_common_error" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_15"
+        android:text="@string/para_mas_informacion"
+        android:textColor="@color/color_333333"
+        android:textSize="@dimen/sp_15" />
+
+    <LinearLayout
+        android:id="@+id/email_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_15"
+        android:background="@drawable/bg_white_10"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp_10">
+
+        <ImageView
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
+            android:src="@drawable/icon_mail" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp_15" />
+
+
+            <TextView
+                android:id="@+id/email_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp_15"
+                tools:text="123@wue.inaada" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/dp_23"
+            android:layout_height="@dimen/dp_23"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:src="@drawable/icon_copy" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:textColor="@color/color_FF3434"
+        android:textSize="@dimen/sp_15"
+        android:text="@string/el_ema_del_correo_electronico_debe" />
+
+    <LinearLayout
+        android:id="@+id/phone_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_15"
+        android:background="@drawable/bg_white_10"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp_10">
+
+        <ImageView
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
+            android:src="@drawable/icon_phone" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/whatsapp"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp_15" />
+
+
+            <TextView
+                android:id="@+id/phone_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp_15"
+                tools:text="123@wue.inaada" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/dp_23"
+            android:layout_height="@dimen/dp_23"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:src="@drawable/icon_copy" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/version_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_999999"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/sp_13"
+        tools:text="V1.1.1"/>
+
+</LinearLayout>

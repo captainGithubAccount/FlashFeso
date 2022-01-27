@@ -13,18 +13,18 @@
 
     <include
         android:id="@+id/progress"
-        layout="@layout/incl_loading"
+        layout="@layout/incl_common_loading"
         android:visibility="gone" />
 
 
     <include
         android:id="@+id/empty"
-        layout="@layout/view_easyrcl_empty"
+        layout="@layout/incl_common_empty"
         android:visibility="gone" />
 
     <include
         android:id="@+id/error"
-        layout="@layout/incl_error"
+        layout="@layout/incl_common_error"
         android:visibility="gone" />
 
 

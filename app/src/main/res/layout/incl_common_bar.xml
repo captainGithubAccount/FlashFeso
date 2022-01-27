@@ -5,6 +5,7 @@
     android:background="@color/color_main_background"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_40"
+    tools:showIn="@layout/incl_common_bar"
     >
 
     <ImageView

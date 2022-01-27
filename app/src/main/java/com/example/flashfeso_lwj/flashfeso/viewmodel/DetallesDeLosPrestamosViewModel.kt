@@ -9,12 +9,12 @@ class DetallesDeLosPrestamosViewModel @ViewModelInject constructor(
     private val generateOrderRepository: GenerateOrderRepository,
     private val amountChooseRepository: AmountChooseRepository
 ): ViewModel() {
-    val generateOrderLiveData = generateOrderRepository.getDataLiveData()
+    val generateOrderLiveData = generateOrderRepository.getLiveData()
     fun queryGenerateOrder(map: HashMap<String, Any>) {
         generateOrderRepository.query(map)
     }
 
-    val amountChooseLiveData = amountChooseRepository.getDataLiveData()
+    val amountChooseLiveData = amountChooseRepository.getLiveData()
     fun queryAmountChoose(map: HashMap<String, Any>) {
         amountChooseRepository.query(map)
     }

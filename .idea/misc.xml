@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/drawable/shape_main_inicio_is_olicita.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_agergar_cuenta_bancaria.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_comentarios.xml" value="0.2682291666666667" />
+        <entry key="app/src/main/res/layout/activity_configuracion.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_detalles_de_los_prestamos.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_historial_crediticio.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_infomation_laboral.xml" value="0.25" />
@@ -38,6 +39,7 @@
         <entry key="app/src/main/res/layout/activity_login_privacy_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_modify_bank_card.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/activity_preguntas_frecuentes.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/dialog_common.xml" value="0.375" />
         <entry key="app/src/main/res/layout/dialog_common_select.xml" value="0.28229166666666666" />
@@ -48,8 +50,10 @@
         <entry key="app/src/main/res/layout/dialog_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_main_inicio.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_main_micuenta.xml" value="0.26666666666666666" />
-        <entry key="app/src/main/res/layout/incl_common_bar.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/incl_common_bar.xml" value="0.25" />
         <entry key="app/src/main/res/layout/incl_con.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/layout/incl_error.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/incl_loading.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/incl_login_enter_telephone.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/incl_login_verification_code.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/incl_main_inicio_error.xml" value="0.27794871794871795" />
@@ -58,6 +62,8 @@
         <entry key="app/src/main/res/layout/incl_splash_dialog_permission_content.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/item_laboral_select.xml" value="0.16302083333333334" />
         <entry key="app/src/main/res/layout/item_take_photo_select.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/layout_comentarios_item.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/layout_preguntas_item.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/layout_selector_image_type_window.xml" value="0.27794871794871795" />
         <entry key="app/src/main/res/layout/test_dialog.xml" value="0.16302083333333334" />
         <entry key="app/src/main/res/layout/view_easyrcl_empty.xml" value="0.335" />
