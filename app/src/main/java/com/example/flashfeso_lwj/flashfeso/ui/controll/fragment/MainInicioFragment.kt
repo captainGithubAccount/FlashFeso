@@ -219,11 +219,25 @@ class MainInicioFragment: BaseRecyclerFragment<FragmentMainInicioBinding>() {
     override fun observe() {
 
         mLoginViewModel.notifyUpdateLoginLiveData.observe(this, Observer {
-            getDataWhenLoginAtvNotify()
+            mSimpleProgressDialogUtil?.showHUD(getFrgmActivity(), false)
+            if(! isNotGetData && InfoUtil.isLogin) { //登录状态下获取了数据
+                queryWhenLoginAndNotify()
+            } else if(! isNotGetData && ! InfoUtil.isLogin) { //未登录状态下获取了数据
+                mViewModels.queryWhenNotLoginAndNotify()
+            } else { //当界面从未进入过的时候
+                mSimpleProgressDialogUtil?.closeHUD()
+            }
         })
 
         mLoginViewModel.notifyInicioBeanLiveData.observe(this, Observer {
-            getDataWhenLoginAtvNotify()
+            mSimpleProgressDialogUtil?.showHUD(getFrgmActivity(), false)
+            if(! isNotGetData && InfoUtil.isLogin) { //登录状态下获取了数据
+                queryWhenLoginAndNotify()
+            } else if(! isNotGetData && ! InfoUtil.isLogin) { //未登录状态下获取了数据
+                mViewModels.queryWhenNotLoginAndNotify()
+            } else { //当界面从未进入过的时候
+                mSimpleProgressDialogUtil?.closeHUD()
+            }
         })
 
 

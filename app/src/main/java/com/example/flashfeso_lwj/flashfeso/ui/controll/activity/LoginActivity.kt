@@ -71,7 +71,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                 binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.GONE
                 binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.VISIBLE
                 mSimpleProgressDialogUtil?.closeHUD()
-                //Toast.makeText(App.context, "Error: ${it}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, (it as DataResult.Error).errorMessage, Toast.LENGTH_LONG).show()
             }
         })
 
@@ -82,7 +82,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                 Toast.makeText(this, "SUCCESS: ${it}", Toast.LENGTH_LONG).show()
 
                 //倒计时实现
-                object : CountDownTimer(60 * 1000L, 1000) {
+                object : CountDownTimer(5 * 1000L, 1000) {
                     override fun onFinish() {
                         binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.GONE
                         binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.VISIBLE
@@ -127,16 +127,18 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
     }
 
     override fun ActivityLoginBinding.initView() {
+
         inclLoginEnterTelephone.let { ll ->
+
             ll.etLoginPhoneNumber.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
                 }
 
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
                 }
+
 
                 override fun afterTextChanged(p0: Editable?) {
                     mEnterPhoneNumber = p0.toString()
@@ -167,6 +169,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
                 if(mSecoundClick - mFirstClick > Constants.DOUBLE_CLICK_TIME){
                     sendMs()
                 }*/
+                Log.d("---TAG", "initView:点击了 ")
                 if (isClickUseful()) {
                     sendMs()
                 }
@@ -249,8 +252,8 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
 
 
     private fun sendMs() {
+        //binding.inclLoginVerificationCode.tvLoginYzmSend.isClickable = false
         binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.VISIBLE
-        binding.inclLoginVerificationCode.tvLoginYzmSend.isClickable = false
         binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.GONE
 
         mSimpleProgressDialogUtil?.showHUD(this, false)

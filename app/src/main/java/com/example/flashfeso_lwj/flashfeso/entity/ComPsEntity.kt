@@ -9,9 +9,9 @@ package com.example.flashfeso_lwj.flashfeso.entity
 data class ComPsEntity(
     val answer: String?,
     val createtime: String?,
-    val id: Int?,
+    val id: String?,
     val question: String?,
-    val status: Int?,
+    val status: String?,
     val updatetime: String?,
     var isOpen: Boolean = false
 )

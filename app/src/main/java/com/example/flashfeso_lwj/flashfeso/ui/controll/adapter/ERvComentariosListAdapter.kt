@@ -17,34 +17,35 @@ import com.example.lwj_common.common.ui.controll.tools.ktx.isUseful
 import com.example.lwj_common.common.ui.controll.tools.utils.DateUtil
 import com.jude.easyrecyclerview.adapter.BaseViewHolder
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter
+import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
-class EasyRvAdapterComentariosList (_context: Context):
-    RecyclerArrayAdapter<CustomerFeedListDetailEntity>(_context) {
+class ERvComentariosListAdapter @Inject constructor(
+    @ActivityContext private val _context: Context
+): RecyclerArrayAdapter<CustomerFeedListDetailEntity>(_context) {
     override fun OnCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder<*> {
         val binding = LayoutComentariosItemBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
-        return VH(binding)
+        val holder = VH(binding)
+
+        binding.comentariosItemQuestionLl.setOnClickListener {
+            val bindItemData = holder.itemView.getTag(R.id.tag_item_comentarios) as CustomerFeedListDetailEntity
+            if(bindItemData.isOpen) {
+                bindItemData.isOpen = false
+                binding.comentariosItemQuestionAnswer.setVisibility(View.GONE)
+                binding.comentariosItemQuestionTime.setVisibility(View.GONE)
+                binding.comentariosItemQuestionImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_arrow_right))
+
+            } else {
+                bindItemData.isOpen = true
+                binding.comentariosItemQuestionAnswer.setVisibility(View.VISIBLE)
+                binding.comentariosItemQuestionTime.setVisibility(View.VISIBLE)
+                binding.comentariosItemQuestionImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_arrow_down))
+            }
+        }
+        return holder
     }
 
     inner class VH(val binding: LayoutComentariosItemBinding): BaseViewHolder<CustomerFeedListDetailEntity>(binding.root) {
-
-        init {
-            val bindItemData = this.itemView.getTag(R.id.tag_item_comentarios) as CustomerFeedListDetailEntity
-            binding.comentariosItemQuestionLl.setOnClickListener {
-                if(bindItemData.isOpen) {
-                    bindItemData.isOpen = false
-                    binding.comentariosItemQuestionAnswer.setVisibility(View.GONE)
-                    binding.comentariosItemQuestionTime.setVisibility(View.GONE)
-                    binding.comentariosItemQuestionImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_arrow_right))
-
-                } else {
-                    bindItemData.isOpen = true
-                    binding.comentariosItemQuestionAnswer.setVisibility(View.VISIBLE)
-                    binding.comentariosItemQuestionTime.setVisibility(View.VISIBLE)
-                    binding.comentariosItemQuestionImg.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.icon_arrow_down))
-                }
-            }
-        }
 
         override fun setData(data: CustomerFeedListDetailEntity?) { //类似与我自己的bind方法 fun bind(data: CustomerFeedListDetailEntity?){...}
             super.setData(data)
@@ -79,11 +80,26 @@ class EasyRvAdapterComentariosList (_context: Context):
         }
     }
 
+
+
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int, payloads: MutableList<Any>) {
-        val bindItemData = mObjects[0]
+        val i = position - headers.size - mObjects.size
+        /*if(footers.size != 0 && i >= 0) {
+            *//*val bindItemData = footers.get(i)
+            holder.itemView.setTag(R.id.tag_item_comentarios, bindItemData)*//*
+
+            val bindItemData = mObjects[i]
+            holder.itemView.setTag(R.id.tag_item_comentarios, bindItemData)
+        }*/
+
+        val bindItemData = mObjects[position]
         holder.itemView.setTag(R.id.tag_item_comentarios, bindItemData)
+
+
         super.onBindViewHolder(holder, position, payloads)
     }
+
+
 }
 
 

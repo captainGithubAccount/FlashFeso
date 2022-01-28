@@ -10,10 +10,7 @@ import com.example.flashfeso_lwj.base.event.CommonDialogEvent
 import com.example.flashfeso_lwj.base.ui.controll.fragment.BaseDbFragment
 import com.example.flashfeso_lwj.common.ui.controll.dialog.CommonDialog
 import com.example.flashfeso_lwj.databinding.FragmentMainMicuentaBinding
-import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.ComentariosActivity
-import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.ConfiguracionActivity
-import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.LoginActivity
-import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.PreguntasFrecuentesActivity
+import com.example.flashfeso_lwj.flashfeso.ui.controll.activity.*
 import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.lwj_common.common.ui.controll.tools.ktx.isUseful
@@ -32,7 +29,22 @@ class MainMiCuentaFragment: BaseDbFragment<FragmentMainMicuentaBinding>() {
 
     override fun observe() {
         loginViewModel.notifyUpdateLoginLiveData.observe(this, Observer {
-            isLogin()
+            if(InfoUtil.isLogin) {
+                binding.logOut.visibility = View.VISIBLE
+                val acountPhone = InfoUtil.getAccount() //这里的acount实际上就是电话号码
+                if(!acountPhone.isUseful() && acountPhone?.length !! >= 10) {
+                    val leftSubStr = acountPhone.substring(0, 3)
+                    val rightSubStr = acountPhone.substring(7)
+                    binding.meAccount.text = leftSubStr.plus("****").plus(rightSubStr)
+                } else {
+                    InfoUtil.clear()
+                    binding.meAccount.text = resources.getString(R.string.unlogin_text)
+                    binding.logOut.visibility = View.GONE
+                }
+            } else {
+                binding.logOut.visibility = View.GONE
+                binding.meAccount.text = getFrgmActivity().resources.getString(R.string.unlogin_text)
+            }
         })
     }
 
@@ -84,8 +96,9 @@ class MainMiCuentaFragment: BaseDbFragment<FragmentMainMicuentaBinding>() {
             }
         }
 
+        //账户
         binding.meAccount.setOnClickListener {
-            if(isClickUseful()) {
+            if(isClickUseful() && !InfoUtil.isLogin) {
                 startActivity(Intent(getFrgmActivity(), LoginActivity::class.java))
             }
         }
@@ -137,7 +150,7 @@ class MainMiCuentaFragment: BaseDbFragment<FragmentMainMicuentaBinding>() {
         if(InfoUtil.isLogin) {
             binding.logOut.visibility = View.VISIBLE
             val acountPhone = InfoUtil.getAccount() //这里的acount实际上就是电话号码
-            if(! acountPhone.isUseful() && acountPhone?.length !! >= 10) {
+            if(acountPhone.isUseful() && acountPhone?.length!! >= 10) {
                 val leftSubStr = acountPhone.substring(0, 3)
                 val rightSubStr = acountPhone.substring(7)
                 binding.meAccount.text = leftSubStr.plus("****").plus(rightSubStr)

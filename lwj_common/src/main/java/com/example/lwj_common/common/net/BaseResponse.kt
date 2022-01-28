@@ -13,7 +13,8 @@ package com.example.lwj_common.common.net
 open class BaseResponse<T>(//或将open改为data
      val code: Int,
      val data: T?,
-     val msg: String?) {
+     val msg: String?,
+    ) {
     fun getResultState(): ResultState<T> {
         if(code == 200) {
             return ResultState.Success(msg, data)

@@ -1,11 +1,10 @@
 package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
 import com.example.flashfeso_lwj.databinding.ActivityPreguntasFrecuentesBinding
@@ -14,7 +13,9 @@ import com.example.flashfeso_lwj.flashfeso.utils.InfoUtil
 import com.example.flashfeso_lwj.flashfeso.utils.back
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.flashfeso_lwj.flashfeso.viewmodel.PreguntasFrecuentesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PreguntasFrecuentesActivity: BasePageStyleActivity<ActivityPreguntasFrecuentesBinding>() {
     private val viewModel: PreguntasFrecuentesViewModel by viewModels()
     private val loginViewModel: LoginViewModel by viewModels()
@@ -28,7 +29,9 @@ class PreguntasFrecuentesActivity: BasePageStyleActivity<ActivityPreguntasFrecue
                 binding.ercv.showError()
             }
             it.whenSuccess {
-                if(!it.data?.dataList.isNullOrEmpty()){
+                mAdapter.clear()
+                if(it.data != null && it.data?.isNullOrEmpty() != true){
+                    mAdapter.addAll(it.data)
                     binding.ercv.recyclerView.requestLayout()
                 }else{
                     binding.ercv.showEmpty()
@@ -57,11 +60,12 @@ class PreguntasFrecuentesActivity: BasePageStyleActivity<ActivityPreguntasFrecue
         binding.ercv.setEmptyView(R.layout.incl_common_empty)
         binding.ercv.setErrorView(R.layout.incl_common_error)
         binding.ercv.setProgressView(R.layout.incl_common_loading)
-        binding.ercv.setRefreshListener{
-            queryComPs()
-        }
+        binding.ercv.setRefreshListener(object : SwipeRefreshLayout.OnRefreshListener{
+            override fun onRefresh() {
+                queryComPs()
+            }
+        })
         queryComPs()
-
     }
 
     fun queryComPs() {

@@ -23,11 +23,13 @@ import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_common.common.ui.controll.tools.ktx.isUseful
 import com.example.lwj_common.common.ui.controll.tools.ktx.toTrim
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
 
+@AndroidEntryPoint
 class ConfiguracionActivity: BasePageStyleActivity<ActivityConfiguracionBinding>() {
     val VERSION_VALUE: String = BuildConfig.VERSION_NAME
-    private val viewModel: ConfiguracionViewModel by viewModels()
+    val viewModel: ConfiguracionViewModel by viewModels()
     val loginViewModel: LoginViewModel by viewModels()
     override fun observe() {
         viewModel.proSupportLiveData.observe(this, Observer {

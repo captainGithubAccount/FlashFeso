@@ -30,6 +30,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppBaseColorTheme">
         <activity
+            android:name=".flashfeso.ui.controll.activity.DetallesDelPrestamoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".flashfeso.ui.controll.activity.MiPrestamoActivity"
+            android:exported="false" />
+        <activity
             android:name=".flashfeso.ui.controll.activity.ConfiguracionActivity"
             android:exported="false" />
         <activity
@@ -37,6 +43,7 @@
             android:exported="false" />
         <activity
             android:name=".flashfeso.ui.controll.activity.ComentariosActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".flashfeso.ui.controll.activity.ModifyBankCardActivity"

@@ -4,4 +4,5 @@
     <item name="tag_item_take_photo" type="id" />
     <item name="tag_item_comentarios" type="id" />
     <item name="tag_item_preguntas" type="id" />
+    <item name="tag_item_orderHistoryData" type="id" />
 </resources>

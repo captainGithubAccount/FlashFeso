@@ -3,7 +3,6 @@
     <string name="str_sharedpreference_key">App_SharedPreference_Key</string>
 
 
-
     <!--ExamenDeLosPrestamosDialog-->
     <string name="examen_de_los_prestamos" translatable="false">Exámen de los préstamos</string>
     <string name="importe_del_prestamo" translatable="false">Importe del préstamo</string>
@@ -179,11 +178,21 @@
     <string name="whatsapp" translatable="false">WhatsAPP</string>
 
 
-
     <!--ConfiguracionActivity-->
-    <string name="software_relacionado_no_encontrado" translatable="false" >Software relacionado no encontrado</string>
-    <string name="seleccionar_cliente_de_correo_electronico" translatable="false" >Seleccionar cliente de correo electrónico</string>
+    <string name="software_relacionado_no_encontrado" translatable="false">Software relacionado no encontrado</string>
+    <string name="seleccionar_cliente_de_correo_electronico" translatable="false">Seleccionar cliente de correo electrónico</string>
 
+    <!--DetallesDelPrestamoActivity-->
+    <string name="detalles_del_prestamo" translatable="false">Detalles del préstamo</string>
+    <string name="rechazado" translatable="false">Rechazado</string>
+    <string name="informacion_atrasada" translatable="false">Información atrasada</string>
+
+    <!--ExamenDeLosPrestamosDialog-->
+    <string name="reembolso" translatable="false">Reembolso</string>
+    <string name="importe_del_reembolso" translatable="false">Importe del reembolso</string>
+    <string name="fecha_de_vencimiento" translatable="false">Fecha de vencimiento</string>
+    <string name="cantidad_atrasada" translatable="false">Cantidad atrasada</string>
+    <string name="dias_atrasados" translatable="false">Días atrasados</string>
 
     <!--MiCuentaFragment-->
     <string name="unlogin_text" translatable="false">Iniciar sesión/\nRegistrarse</string>

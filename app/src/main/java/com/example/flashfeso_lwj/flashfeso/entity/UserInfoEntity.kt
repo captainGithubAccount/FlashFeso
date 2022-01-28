@@ -11,9 +11,9 @@ data class UserInfoResponse(
         return if(code == 200 && data != null){
             DataResult.Success(data, msg)
         }else if(code != 200){
-            DataResult.Error(errorMessage = "返回码为${code}")
+            DataResult.Error(errorMessage = msg)
         }else{
-            DataResult.Error(errorMessage = "返回的数据为null")
+            DataResult.Error(errorMessage = msg)
         }
 
     }
