@@ -5,4 +5,5 @@
     <item name="tag_item_comentarios" type="id" />
     <item name="tag_item_preguntas" type="id" />
     <item name="tag_item_orderHistoryData" type="id" />
+    <item name="tag_item_paychannel" type="id" />
 </resources>

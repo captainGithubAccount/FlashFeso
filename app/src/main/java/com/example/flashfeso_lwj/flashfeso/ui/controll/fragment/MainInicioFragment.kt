@@ -119,7 +119,7 @@ class MainInicioFragment: BaseRecyclerFragment<FragmentMainInicioBinding>() {
                                     //todo ddd currDetailsBean
                                     intent.putExtra("currDetailsBean", mCurrDetailEntity)
                                     startActivity(intent)
-                                }/*
+                                }
                                 1 -> if (mCurrDetailEntity != null) {
                                     if (!StringUtils.isEmpty(mCurrDetailEntity?.rejectedReDate)) {
                                         val rejectedReDate: String =
@@ -164,7 +164,7 @@ class MainInicioFragment: BaseRecyclerFragment<FragmentMainInicioBinding>() {
                                     startActivity(intent5)
                                 }
 
-                                 */
+
                             }
                         } //startActivity(InformacionDeIdetidadActivity::class.java)
                         //startActivity(AgergarCuentaBancariaActivity::class.java)//todo 测试加的一行代码

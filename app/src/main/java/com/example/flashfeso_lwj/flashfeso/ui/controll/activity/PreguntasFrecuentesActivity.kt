@@ -14,12 +14,14 @@ import com.example.flashfeso_lwj.flashfeso.utils.back
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.flashfeso_lwj.flashfeso.viewmodel.PreguntasFrecuentesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PreguntasFrecuentesActivity: BasePageStyleActivity<ActivityPreguntasFrecuentesBinding>() {
     private val viewModel: PreguntasFrecuentesViewModel by viewModels()
     private val loginViewModel: LoginViewModel by viewModels()
 
+    @Inject
     lateinit var mAdapter: ERvPreguntasAdapter
 
     override fun observe() {
@@ -29,13 +31,13 @@ class PreguntasFrecuentesActivity: BasePageStyleActivity<ActivityPreguntasFrecue
                 binding.ercv.showError()
             }
             it.whenSuccess {
-                mAdapter.clear()
+                /*mAdapter.clear()
                 if(it.data != null && it.data?.isNullOrEmpty() != true){
                     mAdapter.addAll(it.data)
                     binding.ercv.recyclerView.requestLayout()
                 }else{
                     binding.ercv.showEmpty()
-                }
+                }*/
             }
             it.whenClear {
                 InfoUtil.clear()
@@ -54,7 +56,7 @@ class PreguntasFrecuentesActivity: BasePageStyleActivity<ActivityPreguntasFrecue
 
     override fun afterInitView() {
         super.afterInitView()
-        mAdapter = ERvPreguntasAdapter(this@PreguntasFrecuentesActivity)
+        //mAdapter = ERvPreguntasAdapter(this@PreguntasFrecuentesActivity)
         binding.ercv.setLayoutManager(LinearLayoutManager(this@PreguntasFrecuentesActivity))
         binding.ercv.adapter = mAdapter
         binding.ercv.setEmptyView(R.layout.incl_common_empty)

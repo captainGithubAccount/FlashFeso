@@ -23,11 +23,6 @@ data class CurrDetailResponse(
     }
 }
 
-fun a(){
-    bb(3).c
-}
-data class bb(var c: Int)
-
 data class CurrDetailEntity(
     val applyStatus: String?,
     val disburalAmount: String?,

@@ -10,8 +10,12 @@ import com.example.flashfeso_lwj.flashfeso.entity.ComPsEntity
 import com.example.lwj_common.common.ui.controll.tools.ktx.isUseful
 import com.jude.easyrecyclerview.adapter.BaseViewHolder
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter
+import dagger.hilt.android.qualifiers.ActivityContext
+import javax.inject.Inject
 
-class ERvPreguntasAdapter(_context: Context): RecyclerArrayAdapter<ComPsEntity>(_context) {
+class ERvPreguntasAdapter @Inject constructor(
+    @ActivityContext _context: Context
+): RecyclerArrayAdapter<ComPsEntity>(_context) {
     override fun OnCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder<ComPsEntity> {
         val binding = LayoutPreguntasItemBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
         val viewHolder = VH(binding)

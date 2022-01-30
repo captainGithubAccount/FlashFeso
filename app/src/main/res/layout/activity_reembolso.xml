@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F2F2F2"
+    android:orientation="vertical"
+    tools:context=".flashfeso.ui.controll.activity.ReembolsoActivity">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/incl_common_bar" />
+
+
+    <include
+        android:id="@+id/progress"
+        layout="@layout/incl_common_loading"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/empty"
+        layout="@layout/incl_common_empty"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/error"
+        layout="@layout/incl_common_error"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/repay_money_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_120"
+        android:background="@color/color_main_background"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dp_15"
+        android:textColor="@color/color_FFFFFF"
+        android:textSize="@dimen/sp_36" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            android:background="@drawable/bg_white_10"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dp_40">
+
+            <LinearLayout
+                android:id="@+id/loan_amount_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/monto_del_prestamos"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_15" />
+
+                <TextView
+                    android:id="@+id/loan_amount_tv"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_18" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/interest_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/interes"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_15" />
+
+                <TextView
+                    android:id="@+id/interest_tv"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_18" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/repay_money_ll_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/importe_del_reembolso"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_15" />
+
+                <TextView
+                    android:id="@+id/repay_money_tv_two"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_18" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cantidad_devuelta_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cantidad_devuelta"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_15" />
+
+                <TextView
+                    android:id="@+id/cantidad_devuelta_tv"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_18" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/reembolso_pendiente_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reembolso_pendiente"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_15" />
+
+                <TextView
+                    android:id="@+id/reembolso_pendiente_tv"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_18" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/repay_date_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fecha_de_vencimiento"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_15" />
+
+                <TextView
+                    android:id="@+id/repay_date_tv"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_18" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/repay_date_ll_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fecha_de_reembolso"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_15" />
+
+                <TextView
+                    android:id="@+id/repay_date_tv_two"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_18" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/overdue_hand_fee_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cantidad_atrasada"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_15" />
+
+                <TextView
+                    android:id="@+id/overdue_hand_fee_tv"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_18" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/overdue_days_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dias_atrasados"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_15" />
+
+                <TextView
+                    android:id="@+id/overdue_days_tv"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp_18" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:text="@string/eleccion_del_metodo_de_reembolso"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp_15" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="@string/no_se_necesita_comisiones_para_los_pagos_en_linea"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/sp_15" />
+
+            <com.jude.easyrecyclerview.EasyRecyclerView
+                android:id="@+id/deposit_ercv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10" />
+
+            <TextView
+                android:id="@+id/repay_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginLeft="@dimen/dp_35"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_35"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:background="@drawable/bg_confirm"
+                android:gravity="center"
+                android:text="@string/ya_veo"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="@dimen/sp_18" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -24,9 +24,10 @@ data class OrderHistoryDataEntity(
     val repayMoney: String?,
     val serviceMoney: String?,
     val toAccountMoney: String?,
-    val userId: String?
+    val userId: String?,
+    var overdueMoney: String? = null
 ): Parcelable {
-    constructor(parcel: Parcel): this(parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString()) {
+    constructor(parcel: Parcel): this(parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -44,6 +45,7 @@ data class OrderHistoryDataEntity(
         parcel.writeString(serviceMoney)
         parcel.writeString(toAccountMoney)
         parcel.writeString(userId)
+        parcel.writeString(overdueMoney)
     }
 
     override fun describeContents(): Int {

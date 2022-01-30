@@ -117,6 +117,7 @@ class ComentariosActivity: BasePageStyleActivity<ActivityComentariosBinding>() {
                     queryCustomerListFeed()
                 }
             })
+            queryCustomerListFeed()
         }
     }
 

@@ -30,6 +30,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppBaseColorTheme">
         <activity
+            android:name=".flashfeso.ui.controll.activity.ReembolsoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".flashfeso.ui.controll.activity.FracasoDelPrestamoActivity"
+            android:exported="false" />
+        <activity
             android:name=".flashfeso.ui.controll.activity.DetallesDelPrestamoActivity"
             android:exported="false" />
         <activity
@@ -43,8 +49,8 @@
             android:exported="false" />
         <activity
             android:name=".flashfeso.ui.controll.activity.ComentariosActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".flashfeso.ui.controll.activity.ModifyBankCardActivity"
             android:exported="false" />

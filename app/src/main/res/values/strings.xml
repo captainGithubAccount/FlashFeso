@@ -2,6 +2,13 @@
     <string name="app_name">flashfeso_lwj</string>
     <string name="str_sharedpreference_key">App_SharedPreference_Key</string>
 
+    <!--ReembolsoActivity-->
+    <string name="eleccion_del_metodo_de_reembolso" translatable="false">Favor de seleccionar el método de reembolso</string>
+    <string name="cantidad_devuelta" translatable="false">Cantidad devuelta</string>
+    <string name="reembolso_pendiente" translatable="false">Reembolso pendiente</string>
+    <string name="no_se_necesita_comisiones_para_los_pagos_en_linea" translatable="false">(No se necesita comisiones para los pagos en línea, los pagos fuera de línea están sujetos a diferentes tasas de tramitación.)</string>
+
+
 
     <!--ExamenDeLosPrestamosDialog-->
     <string name="examen_de_los_prestamos" translatable="false">Exámen de los préstamos</string>
@@ -14,6 +21,12 @@
 
     <!--ComentariosActivity-->
     <string name="por_favor_introduza_su_retroalimentacion" translatable="false">Por favor introduza su retroalimentación</string>
+
+    <!--FracasoDelPrestamoActivity-->
+    <string name="fracaso_del_prestamo" translatable="false">Fracaso del\npréstamo</string>
+    <string name="importe_de_los_gastos" translatable="false">Importe de los gastos</string>
+    <string name="you_can_reapply_in_15_days" translatable="false">Siento informarle que su solicitud ha fallado.Puede volver a solicitar en 15 días.</string>
+    <string name="you_can_reapply_on" translatable="false">Puede volver a solicitar en</string>
 
     <!--ComentariosActivity-->
     <string name="comentarios" translatable="false">Comentarios/Susgerencias</string>

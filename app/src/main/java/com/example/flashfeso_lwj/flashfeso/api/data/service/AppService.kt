@@ -32,5 +32,14 @@ interface AppService {
     @GET("mexico/orderHistoryData")
     suspend fun getOrderHistoryDataResponse(): BaseResponse<BaseArrayResponse<OrderHistoryDataEntity>>
 
+    @GET("mexico/repayChannels")
+    suspend fun getRepayChannelsResponse(): BaseResponse<ArrayList<String>>
+
+    @POST("mexico/repayment/oxxo")
+    suspend fun getRepaymentOxxoResponse(map: HashMap<String, Any>): BaseResponse<RepaymentOxxoEntity>
+
+    @POST("mexico/repayment/stp")
+    suspend fun getRepaymentSTPResponse(map: HashMap<String, Any>): BaseResponse<RepaymentSTPEntity>
+
 
 }
