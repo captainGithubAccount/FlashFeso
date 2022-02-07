@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class OrderHistoryRepsitory @Inject constructor(
     private val service: AppService
-): BaseRepository<BaseArrayResponse<OrderHistoryDataEntity>>() {
+): BaseRepository<ArrayList<OrderHistoryDataEntity>>() {
     override fun postErrorMessage(e: Exception) {
 
     }

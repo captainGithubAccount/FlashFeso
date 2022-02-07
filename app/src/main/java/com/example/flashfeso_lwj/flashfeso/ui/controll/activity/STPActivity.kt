@@ -55,7 +55,7 @@ class STPActivity: BaseDbActivity<ActivityStpactivityBinding>(){
         binding.numberLl.setOnClickListener {
 
             if(isClickUseful() && binding.numberTv.isUseful()){
-                SystemServiceUtil.copyTextToClipboard(this, binding.numberTv)
+                SystemServiceUtil.copyTextToClipboard(this, binding.numberTv.text.toString())
                 Toast.makeText(this@STPActivity, resources.getString(R.string.copia_exitosa), Toast.LENGTH_LONG).show()
 
             }

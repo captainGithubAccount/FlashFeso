@@ -82,7 +82,7 @@ class ConfiguracionActivity: BasePageStyleActivity<ActivityConfiguracionBinding>
             }
 
             if(isClickUseful()) {
-                composeEmail(binding.emailTv.toTrim()!!)
+                composeEmail(binding.emailTv.toTrim()!!/*, binding.emailTv.toTrim()!!*/)
             }
         }
 
@@ -91,7 +91,8 @@ class ConfiguracionActivity: BasePageStyleActivity<ActivityConfiguracionBinding>
                 return@setOnClickListener
             }
             if(isClickUseful()) {
-                copyTextToClipboard(this, binding.phoneTv)
+                copyTextToClipboard(this, binding.phoneTv.text.toString())
+                Toast.makeText(this@ConfiguracionActivity, resources.getString(R.string.copia_exitosa), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -99,24 +100,25 @@ class ConfiguracionActivity: BasePageStyleActivity<ActivityConfiguracionBinding>
     /**
      * 调用系统粘贴版实现文本复制
      * */
-    private fun copyTextToClipboard(context: Context, textSource: TextView) { //获取ClipboardManager对象
+    private fun copyTextToClipboard(context: Context, textSource: String) { //获取ClipboardManager对象
         val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager //把文本封装到ClipData中
         val clip = ClipData.newPlainText(null, textSource.toTrim()) // Set the clipboard's primary clip.
         clipboard.setPrimaryClip(clip)
+
     }
 
     /**
      * 调用系统邮件软件   发送邮件
      * @param addresses 邮箱集合
      */
-    private fun composeEmail(address: String) {
-        if(BaseConstants.ISLOG){Log.d("---address", address)}
+    private fun composeEmail(vararg address: String) {
+        //if(BaseConstants.ISLOG){Log.d("---address", address)}
 
         try {
             val intent = Intent(Intent.ACTION_SENDTO) //收件人集合如: String[] tos = {"1@abc.com",
             // "2@abc.com"};
             intent.data = Uri.parse("mailto:")
-            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>(address)) //短信收件人, address为varag类型
+            intent.putExtra(Intent.EXTRA_EMAIL, address) //短信收件人, address为varag类型
             intent.putExtra(Intent.EXTRA_SUBJECT, "Account：" + InfoUtil.getAccount()) //设置短信主题
             //intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
             if(intent.resolveActivity(packageManager) != null) { //能正常找到目标Activity

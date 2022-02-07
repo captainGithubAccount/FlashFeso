@@ -31,13 +31,13 @@ class PreguntasFrecuentesActivity: BasePageStyleActivity<ActivityPreguntasFrecue
                 binding.ercv.showError()
             }
             it.whenSuccess {
-                /*mAdapter.clear()
+                mAdapter.clear()
                 if(it.data != null && it.data?.isNullOrEmpty() != true){
                     mAdapter.addAll(it.data)
                     binding.ercv.recyclerView.requestLayout()
                 }else{
                     binding.ercv.showEmpty()
-                }*/
+                }
             }
             it.whenClear {
                 InfoUtil.clear()

@@ -30,7 +30,7 @@ interface AppService {
     suspend fun getProSupportResponse(): BaseResponse<ProSupportEntity>
 
     @GET("mexico/orderHistoryData")
-    suspend fun getOrderHistoryDataResponse(): BaseResponse<BaseArrayResponse<OrderHistoryDataEntity>>
+    suspend fun getOrderHistoryDataResponse(): BaseResponse<ArrayList<OrderHistoryDataEntity>>
 
     @GET("mexico/repayChannels")
     suspend fun getRepayChannelsResponse(): BaseResponse<ArrayList<String>>

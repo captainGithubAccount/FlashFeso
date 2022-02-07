@@ -168,6 +168,7 @@ class MainInicioFragment: BaseRecyclerFragment<FragmentMainInicioBinding>() {
                             }
                         } //startActivity(InformacionDeIdetidadActivity::class.java)
                         //startActivity(AgergarCuentaBancariaActivity::class.java)//todo 测试加的一行代码
+                        //startActivity(InfomationBasicaActivity::class.java)//todo 测试认证
                     } else {
                         if(BaseConstants.ISLOG) Log.d("----", "authAllin为false，有认证未完成")
                         val bankAuth: Boolean = InfoUtil.isBankAuth

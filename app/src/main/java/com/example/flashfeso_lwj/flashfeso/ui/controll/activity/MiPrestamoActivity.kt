@@ -33,8 +33,9 @@ class MiPrestamoActivity: BasePageStyleActivity<ActivityMiPrestamoBinding>() {
                 binding.ercv.showError()
             }
             it.whenSuccess {
+
                 mAdapter.clear()
-                if(it.data?.dataList != null){
+                if(it.data!= null){
                     binding.ercv.recyclerView.requestLayout()
                 }else{
                     binding.ercv.showEmpty()
@@ -85,8 +86,8 @@ class MiPrestamoActivity: BasePageStyleActivity<ActivityMiPrestamoBinding>() {
             override fun onRefresh() {
                 queryOrderHistoryData()
             }
-
         })
+        queryOrderHistoryData()
     }
 
     fun queryOrderHistoryData() {
