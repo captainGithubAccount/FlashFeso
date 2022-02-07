@@ -11,6 +11,8 @@ import com.example.flashfeso_lwj.flashfeso.utils.Constants
 import com.example.flashfeso_lwj.flashfeso.utils.SharedPreferenceUtils
 
 import com.example.lwj_base.common.base.BaseApp2
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.core.ImagePipelineConfig
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -26,6 +28,12 @@ class App: BaseApp2() {
         _context = applicationContext*/
         //InfoUtil
         //SharedPreferenceUtils
+
+        //Fresco
+
+        //Fresco
+        val config = ImagePipelineConfig.newBuilder(this).setDownsampleEnabled(true).build()
+        Fresco.initialize(applicationContext, config)
 
 
         //Adjust start ----------------------------------------------------------------------

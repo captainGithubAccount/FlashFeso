@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import android.view.View
@@ -37,6 +38,7 @@ import com.example.flashfeso_lwj.flashfeso.viewmodel.MainInicioViewModel
 import com.example.lwj_base.common.base.BaseConstants
 import com.example.lwj_common.common.managementUtils.*
 import com.example.lwj_common.common.ui.controll.tools.app_data.AppConstants
+import com.example.lwj_common.common.ui.controll.tools.ktx.isUseful
 import com.example.lwj_common.common.ui.controll.tools.ktx.toJson
 import com.example.lwj_common.common.ui.controll.tools.utils.DoubleUtils
 import com.example.lwj_common.common.ui.controll.tools.utils.LocationUtils
@@ -48,7 +50,7 @@ import java.security.Permission
 import javax.inject.Inject
 
 /*
-* 第七步 申请借款界面
+* 第七步 申请借款界面（也测试订单状态为结单时）
 * */
 
 @AndroidEntryPoint
@@ -61,27 +63,16 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
     @Inject
     @JvmField
     var mSimpleProgressDialogUtil: SimpleProgressDialogUtil? = null
-
     var mIsAgain: Boolean = false
     private val REQUEST_EXTERNAL_STORAGE = 111
-
     val REQUESTCODE = 722
-
     var mIsAuthentication: Boolean = false
-    private var minAmount = "0"
-    private var maxAmount = "0"
-    private val minAmountText: TextView? = null
-
-
+    private var minAmount = "0.0"
+    private var maxAmount = "0.0"
     private var isAgree = true
-    private val viewError: LinearLayout? = null
     private val isAgain = false
     private val isAuthentication = false
-    private val montoDelPrestamosTv: TextView? = null
-    private val subImg: ImageView? = null
-    private val addImg: ImageView? = null
     private var loadAmount = "0"
-    private val btnCambiar: TextView? = null
     private val longitude = 0.0
     private val latitude = 0.0
     private var currDetailsBean: CurrDetailEntity? = null
@@ -93,6 +84,15 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
     override fun onDestroy() {
         super.onDestroy()
         mSimpleProgressDialogUtil = null
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == REQUESTCODE && resultCode == ModifyBankCardActivity.RESULTCODE) {
+            if(data?.getStringExtra("bkCardNumber").isUseful()) {
+                binding.bbvaBanvomerTv.text = data?.getStringExtra("bkCardNumber")
+            }
+        }
     }
 
     override fun observe() {
@@ -114,8 +114,8 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
                 if(it.msg == resources.getString(R.string.success)) {
                     loginViewModel.queryNotifyInicioBeanLiveData()
                     val money = resources.getString(R.string.money_symbol)
-                    val s = NumberUtils.goToZeroString(montoDelPrestamosTv !!.text.toString().trim {it <= ' '})
-                    val dialog: ExamenDeLosPrestamosDialog = ExamenDeLosPrestamosDialog.newInstance(s, currDetailsBean?.repayDate !!)
+                    val s = NumberUtils.goToZeroString(binding.montoDelPrestamosTv.text.toString().trim {it <= ' '})
+                    val dialog: ExamenDeLosPrestamosDialog = ExamenDeLosPrestamosDialog.newInstance(s, currDetailsBean?.repayDate!!)
                     dialog.listener = object: CommonDialogEvent {
                         override fun onCancel() {
 
@@ -145,7 +145,7 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
             it.whenClear {
                 InfoUtil.clear()
                 loginViewModel.queryNotifyUpdateLoginLiveData()
-                addToast(this@DetallesDeLosPrestamosActivity, (it as DataResult.Clear).clearMessage !!)
+                addToast(this@DetallesDeLosPrestamosActivity, (it as DataResult.Clear).clearMessage!!)
                 onBackPressed()
             }
         })
@@ -159,32 +159,32 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
                     val dias = resources.getString(R.string.días)
 
                     //最小申请金额
-                    minAmount = DoubleUtils.divToString(this.minAmount, "100", 2)
-                    binding.minAmountText.setText(suffix + NumberUtils.goToZeroString(minAmount)) //最大申请金额
+                    minAmount = DoubleUtils.divToString(currDetailsBean?.minAmount, "100", 2)
+                    binding.minAmountText.text = suffix + NumberUtils.goToZeroString(minAmount) //最大申请金额
                     //最大申请金额
-                    maxAmount = DoubleUtils.divToString(this.loanAmount, "100", 2)
-                    binding.loanAmountText.setText(suffix + NumberUtils.goToZeroString(maxAmount)) //放款金额
+                    maxAmount = DoubleUtils.divToString(currDetailsBean?.loanAmount, "100", 2)
+                    binding.loanAmountText.text = suffix + NumberUtils.goToZeroString(maxAmount) //放款金额
                     //放款金额
-                    binding.disburalAmount.setText(suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(this.disburalAmount, "100", 2))) //借贷期限
+                    binding.disburalAmount.text = suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(currDetailsBean?.disburalAmount, "100", 2)) //借贷期限
                     //借贷期限
-                    binding.tenure.setText(this.tenure.toString() + " " + dias) //应付金额
+                    binding.tenure.text = currDetailsBean?.tenure.toString() + " " + dias //应付金额
                     //应付金额
-                    binding.montoTv.setText(suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(this.repaymentAmount, "100", 2))) //管理费
+                    binding.montoTv.text = suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(currDetailsBean?.repaymentAmount, "100", 2)) //管理费
                     //管理费
-                    binding.comisionTv.setText(suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(this.processingFee, "100", 2))) //利息
+                    binding.comisionTv.text = suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(currDetailsBean?.processingFee, "100", 2)) //利息
                     //利息
-                    binding.interesTv.setText(suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(this.interest, "100", 2)))
+                    binding.interesTv.text = suffix + NumberUtils.goToZeroString(DoubleUtils.divToString(currDetailsBean?.interest, "100", 2))
 
                     if(loadAmount.toDouble() + 100 <= maxAmount.toDouble()) {
-                        addImg !!.setImageDrawable(resources.getDrawable(R.drawable.icon_add_black))
+                        binding.addImg.setImageDrawable(resources.getDrawable(R.drawable.icon_add_black))
                     } else {
-                        addImg !!.setImageDrawable(resources.getDrawable(R.drawable.icon_add_grey))
+                        binding.addImg.setImageDrawable(resources.getDrawable(R.drawable.icon_add_grey))
                     }
 
                     if(loadAmount.toDouble() - 100 >= minAmount.toDouble()) {
-                        subImg !!.setImageDrawable(resources.getDrawable(R.drawable.icon_sub_black))
+                        binding.subImg.setImageDrawable(resources.getDrawable(R.drawable.icon_sub_black))
                     } else {
-                        subImg !!.setImageDrawable(resources.getDrawable(R.drawable.icon_sub_grey))
+                        binding.subImg.setImageDrawable(resources.getDrawable(R.drawable.icon_sub_grey))
                     }
 
                 }
@@ -193,7 +193,7 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
                 mSimpleProgressDialogUtil?.showHUD(this, false)
                 InfoUtil.clear()
                 loginViewModel.queryNotifyUpdateLoginLiveData()
-                addToast(this, it.msg !!)
+                addToast(this, it.msg!!)
                 onBackPressed()
 
             }
@@ -242,17 +242,18 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
     }
 
     override fun beforeCreateView() {
-        super.beforeCreateView()
-        //todo eee currDetailsBean
+        super.beforeCreateView() //todo eee currDetailsBean
         mCurrDetailEntity = intent.getParcelableExtra("currDetailsBean")
         if(BaseConstants.ISLOG) Log.d("---DetallesDeLosPrestam", mCurrDetailEntity.toString())
         mIsAuthentication = intent.getBooleanExtra("authentication", false)
+        if(BaseConstants.ISLOG) Log.d("---mIsAuthentication", mIsAuthentication.toString())
         mIsAgain = intent.getBooleanExtra("isAgain", false)
+        if(BaseConstants.ISLOG) Log.d("---mIsAgain", mIsAgain.toString())
     }
 
     override fun ActivityDetallesDeLosPrestamosBinding.initView() {
         binding.header.tvCommonBarTitle.text = resources.getString(R.string.detalles_de_los_prestamos)
-        binding.progress.llProgress.visibility = View.GONE
+        binding.progress.llProgress.visibility = View.VISIBLE
         binding.empty.viewEmpty.visibility = View.GONE
         this@DetallesDeLosPrestamosActivity.initView()
     }
@@ -277,7 +278,6 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
 
         binding.btnCambiar.setOnClickListener {
 
-            //todo doing
             if(isClickUseful()) {
                 val intent = Intent(this@DetallesDeLosPrestamosActivity, ModifyBankCardActivity::class.java)
                 startActivityForResult(intent, REQUESTCODE)
@@ -325,7 +325,7 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
             if(isClickUseful()) {
                 if(isAgain) {
                     checkPermissions(this)
-                }else{
+                } else {
                     queryGenerateOrder()
                 }
             }
@@ -336,7 +336,7 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
     //检查权限
     fun checkPermissions(activity: Activity?) {
         try { //检测是否有写的权限
-            val permission = ActivityCompat.checkSelfPermission(activity !!, "android.permission.INTERNET")
+            val permission = ActivityCompat.checkSelfPermission(activity!!, "android.permission.INTERNET")
             val permission2 = ActivityCompat.checkSelfPermission(activity, "android.permission.WRITE_EXTERNAL_STORAGE")
             val permission3 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_EXTERNAL_STORAGE")
             val permission4 = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_CONTACTS")
@@ -386,6 +386,30 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
 
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode) {
+            REQUEST_EXTERNAL_STORAGE -> {
+                var isSucceed = true
+                if(grantResults != null && grantResults.size > 0) {
+                    var i = 0
+                    while(i < grantResults.size) {
+                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                            isSucceed = false
+                        }
+                        i++
+                    }
+                }
+                if(!isSucceed) { //打开本应用信息界面
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                    intent.data = Uri.parse("package:$packageName")
+                    startActivity(intent)
+                }
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+    }
+
     fun getLocationResultFlag(): Int {
         locationUtils.locationCallBack = object: LocationUtils.LocationCallBack {
             override fun gotLocation(location: Location?) {
@@ -403,7 +427,7 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
 
                     try {
 
-                        if(! isRisk) {
+                        if(!isRisk) {
                             isRisk = true
                             val appInfoList: List<AppInfoBean> = ManagementUtils.getAppList(this@DetallesDeLosPrestamosActivity)
                             val devideInfo: DeviceInfoBean = ManagementUtils.getDeviceInfo(this@DetallesDeLosPrestamosActivity)
@@ -466,7 +490,9 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
 
     @SuppressLint("SetTextI18n")
     private fun initView() {
-        if(mCurrDetailEntity != null) {
+        if(mCurrDetailEntity != null) { //主frgm拒绝订单并且时间范围不满足条件时候currDetailsBean不为null
+            //主frgm订单状态为逾期时currDetailBean不为null
+            //orderstatus为-1时可能也不为null
             binding.progress.llProgress.visibility = View.GONE
             binding.empty.viewEmpty.visibility = View.GONE
             binding.error.llError.visibility = View.GONE
@@ -477,27 +503,43 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
 
             //最小申请金额
             minAmount = DoubleUtils.divToString(mCurrDetailEntity?.minAmount, "100", 2)
-            minAmountText?.setText(money + NumberUtils.goToZeroString(minAmount))
+            binding.minAmountText.text = money + NumberUtils.goToZeroString(minAmount)
 
             //最大申请金额
             maxAmount = DoubleUtils.divToString(mCurrDetailEntity?.loanAmount, "100", 2)
             loadAmount = maxAmount
-            binding.loanAmountText.setText(money + NumberUtils.goToZeroString(loadAmount)) //申请金额
-            montoDelPrestamosTv?.setText(money + NumberUtils.goToZeroString(maxAmount)) //放款金额
-            binding.disburalAmount.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.disburalAmount, "100", 2))) //借贷期限
-            binding.tenure.setText(mCurrDetailEntity?.tenure.toString() + " " + dias) //银行卡号
-            binding.bbvaBanvomerTv.setText(mCurrDetailEntity?.bankNo) //应付金额
-            binding.montoTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.repaymentAmount, "100", 2))) //付款截止日期
-            binding.fechaTv.setText(mCurrDetailEntity?.repayDate) //管理费
-            binding.comisionTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.processingFee, "100", 2))) //利息
-            binding.interesTv.setText(money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.interest, "100", 2)))
+            binding.loanAmountText.text = money + NumberUtils.goToZeroString(loadAmount)
 
-            addImg?.setImageDrawable(resources.getDrawable(R.drawable.icon_add_grey))
+            //申请金额
+            binding.montoDelPrestamosTv.text = money + NumberUtils.goToZeroString(maxAmount)
+
+            //放款金额
+            binding.disburalAmount.text = money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.disburalAmount, "100", 2))
+
+            //借贷期限
+            binding.tenure.text = mCurrDetailEntity?.tenure.toString() + " " + dias
+
+            //银行卡号
+            binding.bbvaBanvomerTv.text = mCurrDetailEntity?.bankNo
+
+            //应付金额
+            binding.montoTv.text = money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.repaymentAmount, "100", 2))
+
+            //付款截止日期
+            binding.fechaTv.text = mCurrDetailEntity?.repayDate
+
+            //管理费
+            binding.comisionTv.text = money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.processingFee, "100", 2))
+
+            //利息
+            binding.interesTv.text = money + NumberUtils.goToZeroString(DoubleUtils.divToString(mCurrDetailEntity?.interest, "100", 2))
+
+            binding.addImg.setImageDrawable(resources.getDrawable(R.drawable.icon_add_grey))
 
             if(maxAmount.toDouble() <= minAmount.toDouble()) {
-                subImg?.setImageDrawable(resources.getDrawable(R.drawable.icon_sub_grey))
+                binding.subImg.setImageDrawable(resources.getDrawable(R.drawable.icon_sub_grey))
             } else {
-                subImg?.setImageDrawable(resources.getDrawable(R.drawable.icon_sub_black))
+                binding.subImg.setImageDrawable(resources.getDrawable(R.drawable.icon_sub_black))
             }
         } else if(isAgain) {
             binding.error.llError.visibility = View.GONE

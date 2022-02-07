@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -76,17 +77,17 @@ class ConfiguracionActivity: BasePageStyleActivity<ActivityConfiguracionBinding>
 
 
         binding.emailLl.setOnClickListener {
-            if(! binding.emailTv.isUseful() || binding.emailTv.toTrim() == Constants.EMPTY_STRING) {
+            if(!binding.emailTv.isUseful() || binding.emailTv.toTrim() == Constants.EMPTY_STRING) {
                 return@setOnClickListener
             }
 
             if(isClickUseful()) {
-                composeEmail(binding.emailTv.toTrim() !!)
+                composeEmail(binding.emailTv.toTrim()!!)
             }
         }
 
         binding.phoneLl.setOnClickListener {
-            if(! binding.phoneTv.isUseful() || binding.phoneTv.toTrim() == Constants.EMPTY_STRING) {
+            if(!binding.phoneTv.isUseful() || binding.phoneTv.toTrim() == Constants.EMPTY_STRING) {
                 return@setOnClickListener
             }
             if(isClickUseful()) {
@@ -98,13 +99,9 @@ class ConfiguracionActivity: BasePageStyleActivity<ActivityConfiguracionBinding>
     /**
      * 调用系统粘贴版实现文本复制
      * */
-    private fun copyTextToClipboard(context: Context, textSource: TextView){
-        //获取ClipboardManager对象
-        val clipboard: ClipboardManager = context.getSystemService(Context
-            .CLIPBOARD_SERVICE) as ClipboardManager
-        //把文本封装到ClipData中
-        val clip = ClipData.newPlainText(null, textSource.toTrim())
-        // Set the clipboard's primary clip.
+    private fun copyTextToClipboard(context: Context, textSource: TextView) { //获取ClipboardManager对象
+        val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager //把文本封装到ClipData中
+        val clip = ClipData.newPlainText(null, textSource.toTrim()) // Set the clipboard's primary clip.
         clipboard.setPrimaryClip(clip)
     }
 
@@ -113,17 +110,22 @@ class ConfiguracionActivity: BasePageStyleActivity<ActivityConfiguracionBinding>
      * @param addresses 邮箱集合
      */
     private fun composeEmail(address: String) {
+        if(BaseConstants.ISLOG){Log.d("---address", address)}
 
         try {
-            val intent = Intent(Intent.ACTION_SEND) //收件人集合如: String[] tos = {"1@abc.com", "2@abc.com"};
-            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(address)) //短信收件人, address为varag类型
+            val intent = Intent(Intent.ACTION_SENDTO) //收件人集合如: String[] tos = {"1@abc.com",
+            // "2@abc.com"};
+            intent.data = Uri.parse("mailto:")
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>(address)) //短信收件人, address为varag类型
             intent.putExtra(Intent.EXTRA_SUBJECT, "Account：" + InfoUtil.getAccount()) //设置短信主题
+            //intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
             if(intent.resolveActivity(packageManager) != null) { //能正常找到目标Activity
                 //选择电子邮件客户端
                 startActivity(Intent.createChooser(intent, resources.getString(R.string.seleccionar_cliente_de_correo_electronico)))
             } else {
-                Toast.makeText(this, getResources().getString(R.string.software_relacionado_no_encontrado), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, resources.getString(R.string.software_relacionado_no_encontrado), Toast.LENGTH_SHORT).show()
             }
+
         } catch(e: Exception) {
             e.printStackTrace()
         }

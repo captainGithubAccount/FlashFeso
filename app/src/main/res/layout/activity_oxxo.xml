@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_F2F2F2"
+    android:orientation="vertical"
+    tools:context=".flashfeso.ui.controll.activity.OxxoActivity">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/incl_common_bar" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_main_background"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingRight="@dimen/dp_15"
+        android:paddingTop="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_50"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_15"
+            android:text="@string/favor_de_usar_el_dispositivo_para"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/sp_15" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/escanear_el_siguiente_codigo"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/sp_15" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/erweima_img"
+            android:layout_width="@dimen/dp_160"
+            android:layout_height="@dimen/dp_50"
+            fresco:failureImage="@drawable/icon_img_failed"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_15"
+            fresco:actualImageScaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/barcode_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/sp_15" />
+
+        <TextView
+            android:id="@+id/tasa_de_tramitacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/sp_15" />
+
+    </LinearLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            android:background="@drawable/bg_white_10"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dp_36"
+            android:paddingBottom="@dimen/dp_30">
+
+            <ImageView
+                android:layout_width="@dimen/dp_310"
+                android:layout_height="@dimen/dp_200"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_oxxo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:textColor="@color/color_333333"
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="@string/si_tiene_problemas_con_el_pago_con_codigo_oxxo"
+                android:layout_marginBottom="@dimen/dp_40"
+                android:textSize="@dimen/sp_15"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

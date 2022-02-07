@@ -8,7 +8,34 @@
     <string name="reembolso_pendiente" translatable="false">Reembolso pendiente</string>
     <string name="no_se_necesita_comisiones_para_los_pagos_en_linea" translatable="false">(No se necesita comisiones para los pagos en línea, los pagos fuera de línea están sujetos a diferentes tasas de tramitación.)</string>
 
+    <!--OpenpayActivity-->
+    <string name="si_tiene_problemas_con_el_pago_con_codigo_oxxo" translatable="false">Si tiene problemas con el pago con código, comuníquese con el servicio al cliente de la plataforma o con el personal de servicio al cliente de OXXO.</string>
 
+    <!--OpenpayActivity-->
+    <string name="favor_de_usar_el_dispositivo_para" translatable="false">Favor de usar el dispositivo para</string>
+    <string name="escanear_el_siguiente_codigo" translatable="false">escanear el siguiente código.</string>
+    <string name="si_tiene_problemas_con_el_pago_con_codigo" translatable="false">Si tiene problemas con el pago con código, comuníquese con el servicio al cliente de la plataforma o con el personal de servicio al cliente de Openpay.</string>
+    <string name="pago_online" translatable="false">Pago Online</string>
+    <string name="pago_offline" translatable="false">Pago Offline</string>
+    <string name="servicio_a_pagar" translatable="false">Servicio a pagar</string>
+    <string name="total_a_pagar" translatable="false">Total a pagar</string>
+    <string name="mxn" translatable="false">MXN</string>
+    <string name="tasa_de_tramitacion_requerida" translatable="false">Tasa de tramitación requerida $</string>
+    <string name="la_comision_por_recepcioon_del_pago" translatable="false">La comisión por recepción del pago varía de acuerdo a los términos y condiciones quecada cadena comercial establece.</string>
+    <string name="fecha_limite_de_pago_z" translatable="false">Fecha límite de pago</string>
+    <string name="en_caso_de_que_el_escaner_no_sea" translatable="false">En caso de que el escáner no sea capaz de leer el código de barras, escribir la referencia tal como se muestra.</string>
+
+    <!--STPActivity-->
+    <string name="quiero_pagar" translatable="false">Quiero pagar</string>
+    <string name="clabe" translatable="false">CLABE</string>
+    <string name="banco2" translatable="false">Banco：</string>
+    <string name="beneficlario" translatable="false">Beneficlario：</string>
+    <string name="la_cuenta_es_unica_por_cliente" translatable="false">La cuenta es única por cliente, no requiere referencia numérica. No es necessario enviar el comprobante,guárdalo para cualquier aclaración.</string>
+    <string name="notas_importantes" translatable="false">NOTAS IMPORTANTES:</string>
+    <string name="puedes_realizar_montos" translatable="false">a.Puedes realizar montos parciales a partir de $20 pesos.</string>
+    <string name="solo_deposita_a_cuenta_a_nombre" translatable="false">b.Sólo deposita a cuenta a nombre</string>
+    <string name="no_aceptes_cuentas_a_nombre_de_terceros" translatable="false">,no aceptes cuentas a nombre de terceros.</string>
+    <string name="copia_exitosa" translatable="false">Copia exitosa</string>
 
     <!--ExamenDeLosPrestamosDialog-->
     <string name="examen_de_los_prestamos" translatable="false">Exámen de los préstamos</string>

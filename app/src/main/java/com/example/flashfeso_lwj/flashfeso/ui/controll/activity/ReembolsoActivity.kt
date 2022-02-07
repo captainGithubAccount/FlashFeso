@@ -28,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 /**
- * Description:还款页面
+ * Description:还款页面（待测试），需订单状态为代还款和逾期
  */
 @AndroidEntryPoint
 class ReembolsoActivity: BasePageStyleActivity<ActivityReembolsoBinding>() {

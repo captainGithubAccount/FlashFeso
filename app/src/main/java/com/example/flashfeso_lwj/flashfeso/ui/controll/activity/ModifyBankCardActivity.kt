@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.text.InputFilter
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -38,9 +39,11 @@ import com.example.lwj_common.common.ui.controll.tools.ktx.toBankCardEditText
 import com.example.lwj_common.common.ui.controll.tools.ktx.toJson
 import com.example.lwj_common.common.ui.controll.tools.utils.LocationUtils
 import com.rs.flashpeso.management.ManagementUtils
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ModifyBankCardActivity: BasePageStyleActivity<ActivityModifyBankCardBinding>(), InfomationSelectItemOnClickListener {
     private var tipoDeCuentaPosition = 1
     var tipoDeCuentaDialog: InfomationSelectDialog? = null
@@ -55,10 +58,38 @@ class ModifyBankCardActivity: BasePageStyleActivity<ActivityModifyBankCardBindin
     var locationUtils: LocationUtils = LocationUtils()
     private var isRisk = false
 
+    companion object{
+
+        val RESULTCODE = 1
+    }
+
     @Inject
     @JvmField
     var mSimpleProgressDialogUtil: SimpleProgressDialogUtil? = null
     override fun observe() {
+        agergarCuentaBancariaViewModel.authBankInfoLiveData.observe(this, Observer {
+            it.whenError {
+                mSimpleProgressDialogUtil?.closeHUD()
+            }
+            it.whenSuccessResponse {
+                if((it as DataResult.Success).successMessagle == resources.getString(R.string.success)){
+                    Toast.makeText(this@ModifyBankCardActivity, it.successMessagle, Toast.LENGTH_SHORT)
+                        .show()
+                    val intent = Intent()
+                    intent.putExtra("bkCardNumber", bkCardNumber)
+                    setResult(RESULTCODE, intent)
+                    onBackPressed()
+                }
+            }
+            it.whenClear {
+                InfoUtil.clear()
+                loginViewModel.queryNotifyUpdateLoginLiveData()
+                Toast.makeText(this@ModifyBankCardActivity, (it as DataResult.Clear).clearMessage, Toast
+                    .LENGTH_SHORT).show()
+                onBackPressed()
+            }
+        })
+
         agergarCuentaBancariaViewModel.allBankLiveData.observe(this, Observer {
             it.whenSuccess {
                 binding.error.llError.visibility = View.GONE
@@ -95,6 +126,8 @@ class ModifyBankCardActivity: BasePageStyleActivity<ActivityModifyBankCardBindin
                 onBackPressed()
             }
         })
+
+
     }
 
     private fun queryAuthBankInfo(bkCardNumber: String, bkName: String, bankNo: Int) {
@@ -146,11 +179,11 @@ class ModifyBankCardActivity: BasePageStyleActivity<ActivityModifyBankCardBindin
                 addToast(this, resources.getString(R.string.introduzca_el_banco))
                 return@setOnClickListener
             }
-            val tarjeta: String = binding.tarjetaTt.text.deleteBlank()
-            if(tipoDeCuentaPosition == 0 && (! tarjeta.isUseful() || tarjeta.length != 18)) {
+            bkCardNumber = binding.tarjetaTv.text?.deleteBlank()!!
+            if(tipoDeCuentaPosition == 0 && (! bkCardNumber.isUseful() || bkCardNumber.length != 18)) {
                 addToast(this, getResources().getString(R.string.introduzca_el_numero_correcto_de_tarjeta_de_16_bits))
                 return@setOnClickListener
-            } else if(tipoDeCuentaPosition == 0 && (! tarjeta.isUseful() || tarjeta.length != 16)) {
+            } else if(tipoDeCuentaPosition == 0 && (! bkCardNumber.isUseful() || bkCardNumber.length != 16)) {
                 addToast(this, getResources().getString(R.string.introduzca_el_numero_correcto_de_tarjeta_de_16_bits))
                 return@setOnClickListener
             }
@@ -163,7 +196,7 @@ class ModifyBankCardActivity: BasePageStyleActivity<ActivityModifyBankCardBindin
             }
 
             if(isClickUseful() && bankNo > 0) {
-                queryAuthBankInfo(tarjeta, banco, bankNo)
+                queryAuthBankInfo(bkCardNumber, banco, bankNo)
             }
 
         }

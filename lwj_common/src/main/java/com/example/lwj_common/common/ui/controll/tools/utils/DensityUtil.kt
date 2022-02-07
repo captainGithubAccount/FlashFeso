@@ -16,11 +16,11 @@ object DensityUtil {
         return px / context.applicationContext.resources.displayMetrics?.density!! + .1f
     }
 
-    fun getDisplayWidthDp(context: Context,px: Float): Float{
-        return px2dp(context,getDisplayWidthPixels(context, px).toFloat())
+    fun getDisplayWidthDp(context: Context): Float{
+        return px2dp(context,getDisplayWidthPixels(context).toFloat())
     }
 
-    fun getDisplayWidthPixels(context: Context,px: Float): Int{
+    fun getDisplayWidthPixels(context: Context): Int{
         val displayMetrics =context.applicationContext.resources.displayMetrics
         return displayMetrics?.widthPixels!!
     }

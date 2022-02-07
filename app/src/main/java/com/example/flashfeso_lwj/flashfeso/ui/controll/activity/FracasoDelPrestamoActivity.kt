@@ -11,6 +11,9 @@ import com.example.lwj_common.common.ui.controll.tools.utils.DoubleUtils
 import com.example.lwj_common.common.ui.controll.tools.utils.NumberUtils
 import dagger.hilt.android.AndroidEntryPoint
 
+/*
+* 贷款失败界面 (无法测试, 需订单状态(orderstatus)为1据单，且贷款时间不满足条件才行)
+* */
 @AndroidEntryPoint
 class FracasoDelPrestamoActivity: BasePageStyleActivity<ActivityFracasoDelPrestamoBinding>() {
     var data: CurrDetailEntity? = null

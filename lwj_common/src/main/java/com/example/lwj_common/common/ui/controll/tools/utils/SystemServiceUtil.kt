@@ -9,8 +9,10 @@ import android.net.Uri
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
+import com.example.lwj_common.R
 import com.example.lwj_common.common.ui.controll.tools.ktx.toTrim
 import java.lang.Exception
 
@@ -28,13 +30,9 @@ object SystemServiceUtil {
     /**
      * 调用系统粘贴版实现文本复制
      * */
-    fun copyTextToClipboard(context: Context, textSource: TextView){
-        //获取ClipboardManager对象
-        val clipboard: ClipboardManager = context.getSystemService(Context
-            .CLIPBOARD_SERVICE) as ClipboardManager
-        //把文本封装到ClipData中
-        val clip = ClipData.newPlainText(null, textSource.toTrim())
-        // Set the clipboard's primary clip.
+    fun copyTextToClipboard(context: Context, textSource: TextView) { //获取ClipboardManager对象
+        val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager //把文本封装到ClipData中
+        val clip = ClipData.newPlainText(null, textSource.toTrim()) // Set the clipboard's primary clip.
         clipboard.setPrimaryClip(clip)
     }
 
@@ -48,6 +46,28 @@ object SystemServiceUtil {
             val data = Uri.parse("tel:$phoneNum")
             intent.data = data
             activity.startActivity(intent)
+        } catch(e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+
+    /**
+     * 调用系统邮件软件   发送邮件
+     * @param addresses 邮箱集合
+     */
+    private fun composeEmail(address: String, subjectContent: String, context: Context) {
+
+        try {
+            val intent = Intent(Intent.ACTION_SEND) //收件人集合如: String[] tos = {"1@abc.com", "2@abc.com"};
+            intent.setData(Uri.parse("mailto:"))
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>(address)) //短信收件人, address为varag类型
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Account：" + subjectContent) //设置短信主题
+            if(intent.resolveActivity(context.packageManager) != null) { //能正常找到目标Activity
+                //选择电子邮件客户端
+                context.startActivity(Intent.createChooser(intent, "Seleccionar cliente de correo" + " " + "electrónico"))
+            } else { //Toast.makeText(this, getResources().getString(R.string .software_relacionado_no_encontrado), Toast.LENGTH_SHORT).show()
+            }
         } catch(e: Exception) {
             e.printStackTrace()
         }

@@ -116,6 +116,20 @@ dependencies {
     //swiperefreshlayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
+    //slideTabLayout
+    implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
+
+    //fresco
+    implementation 'com.facebook.fresco:fresco:2.6.0'
+    // For animated GIF support
+    implementation 'com.facebook.fresco:animated-gif:2.6.0'
+    // For WebP support, including animated WebP
+    implementation 'com.facebook.fresco:animated-webp:2.6.0'
+    implementation 'com.facebook.fresco:webpsupport:2.6.0'
+    // Provide the Android support library (you might already have this or a similar dependency)
+    implementation 'com.android.support:support-core-utils:24.2.1'
+
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'

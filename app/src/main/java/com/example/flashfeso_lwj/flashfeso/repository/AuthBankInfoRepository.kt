@@ -12,6 +12,8 @@ class AuthBankInfoRepository @Inject constructor(
         dataResult.whenSuccessResponse {
             it?.run { _dataLiveData.postValue(this) }
         }
+
+
         dataResult.whenClear {
             _dataLiveData.postValue(it)
         }

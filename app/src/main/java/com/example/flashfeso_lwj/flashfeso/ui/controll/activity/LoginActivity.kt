@@ -256,6 +256,7 @@ class LoginActivity : BasePageStyleActivity<ActivityLoginBinding>() {
         binding.inclLoginVerificationCode.llLoginUpdateTime.visibility = View.VISIBLE
         binding.inclLoginVerificationCode.tvLoginYzmSend.visibility = View.GONE
 
+
         mSimpleProgressDialogUtil?.showHUD(this, false)
 
         val map = HashMap<String, Any>()
