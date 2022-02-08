@@ -2,7 +2,6 @@ package com.example.flashfeso_lwj.flashfeso.ui.controll.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -10,16 +9,12 @@ import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import com.example.flashfeso_lwj.R
 import com.example.flashfeso_lwj.base.event.CommonDialogEvent
-import com.example.flashfeso_lwj.base.ui.controll.activity.BaseDbActivity
 import com.example.flashfeso_lwj.base.ui.controll.activity.BasePageStyleActivity
 import com.example.flashfeso_lwj.base.utils.SimpleProgressDialogUtil
 import com.example.flashfeso_lwj.databinding.ActivityDetallesDeLosPrestamosBinding
@@ -46,7 +41,6 @@ import com.example.lwj_common.common.ui.controll.tools.utils.NumberUtils
 import com.rs.flashpeso.management.ManagementUtils
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
-import java.security.Permission
 import javax.inject.Inject
 
 /*
@@ -71,7 +65,7 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
     private var maxAmount = "0.0"
     private var isAgree = true
     private val isAgain = false
-    private val isAuthentication = false
+    private var isAuthentication = false
     private var loadAmount = "0"
     private val longitude = 0.0
     private val latitude = 0.0
@@ -138,8 +132,8 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
 
             it.whenSuccess {
                 whenSuccess()
-                currDetailsBean = it
-                initView()
+                mCurrDetailEntity = it
+                initPageView()
             }
 
             it.whenClear {
@@ -245,7 +239,8 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
         super.beforeCreateView() //todo eee currDetailsBean
         mCurrDetailEntity = intent.getParcelableExtra("currDetailsBean")
         if(BaseConstants.ISLOG) Log.d("---DetallesDeLosPrestam", mCurrDetailEntity.toString())
-        mIsAuthentication = intent.getBooleanExtra("authentication", false)
+
+        isAuthentication = intent.getBooleanExtra("authentication", false)
         if(BaseConstants.ISLOG) Log.d("---mIsAuthentication", mIsAuthentication.toString())
         mIsAgain = intent.getBooleanExtra("isAgain", false)
         if(BaseConstants.ISLOG) Log.d("---mIsAgain", mIsAgain.toString())
@@ -255,7 +250,7 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
         binding.header.tvCommonBarTitle.text = resources.getString(R.string.detalles_de_los_prestamos)
         binding.progress.llProgress.visibility = View.VISIBLE
         binding.empty.viewEmpty.visibility = View.GONE
-        this@DetallesDeLosPrestamosActivity.initView()
+        this@DetallesDeLosPrestamosActivity.initPageView()
     }
 
     override fun afterBindView() {
@@ -263,7 +258,7 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
         binding.header.ivCommonBarBack.back(this)
 
         binding.error.viewErrorUpdate.setOnClickListener {
-            initView()
+            initPageView()
         }
 
         binding.agreeImg.setOnClickListener {
@@ -489,7 +484,7 @@ class DetallesDeLosPrestamosActivity: BasePageStyleActivity<ActivityDetallesDeLo
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initView() {
+    private fun initPageView() {
         if(mCurrDetailEntity != null) { //主frgm拒绝订单并且时间范围不满足条件时候currDetailsBean不为null
             //主frgm订单状态为逾期时currDetailBean不为null
             //orderstatus为-1时可能也不为null

@@ -112,7 +112,7 @@ class SplashPermissionDialog : DialogFragment() {
             }
 
             inclSplashContent1.let { incl ->
-                incl.ivDialogPermissionLogo.setImageResource(R.drawable.ic_app_launcher)
+                incl.ivDialogPermissionLogo.setImageResource(R.mipmap.ic_launcher)
                 incl.tvDialogPermissionInfo.visibility = View.GONE
                 incl.tvDialogPermissionContent.setText(R.string.description_title)
             }

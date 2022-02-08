@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/drawable/bg_pay_channel_un_select.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/bg_splash.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/drawable/bg_white_10.xml" value="0.2046875" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.11979166666666667" />
         <entry key="app/src/main/res/drawable/layer_list_bg_splash.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/layer_list_login_privacy_detail_progress_bar.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/layer_login_privacy_detail_progress_bar.xml" value="0.2675925925925926" />
@@ -81,6 +82,7 @@
         <entry key="app/src/main/res/layout/view_easyrcl_empty.xml" value="0.335" />
         <entry key="app/src/main/res/layout/view_easyrcl_error.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/view_easyrcl_progress.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_app_launcher.xml" value="0.109375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.23796296296296296" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.28229166666666666" />
         <entry key="lwj_base/src/main/res/layout/dialog_simpleprogressdialog.xml" value="0.28229166666666666" />
@@ -99,6 +101,7 @@
         <entry key="lwj_common/src/main/res/drawable/shape_login_line_verification_code.xml" value="0.2675925925925926" />
         <entry key="lwj_common/src/main/res/drawable/shape_main_micuenta_submit.xml" value="0.2675925925925926" />
         <entry key="lwj_common/src/main/res/layout/dialog_common.xml" value="0.28229166666666666" />
+        <entry key="lwj_common/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1546875" />
       </map>
     </option>
   </component>

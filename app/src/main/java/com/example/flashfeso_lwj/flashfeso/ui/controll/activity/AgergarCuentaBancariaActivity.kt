@@ -111,7 +111,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
                     val intent = Intent(this@AgergarCuentaBancariaActivity, DetallesDeLosPrestamosActivity::class.java)
                     startActivity(intent.apply {putExtra("authentication", true)})
                     loginViewModel.queryNotifyInicioBeanLiveData()
-                    //onBackPressed()
+                         onBackPressed()
                 } else {
                     addToast(this, it.successMessagle !!)
                 }
@@ -174,7 +174,7 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
         binding.confirm.setOnClickListener {
             hideKeyboardAll()
             val banco = binding.bancoTv.text.toString().trim()
-            if(! banco.isUseful()) {
+            if(!banco.isUseful()) {
                 //吐司上下文可能需要修改
                 addToast(this, resources.getString(R.string.introduzca_el_banco))
                 return@setOnClickListener
@@ -275,8 +275,11 @@ class AgergarCuentaBancariaActivity : BasePageStyleActivity<ActivityAgergarCuent
 
     private fun clickSubmit() {
         mSimpleProgressDialogUtil?.showHUD(this, false)
+
+        //若成功
         val locationResultFlag: Int = getLocationResultFlag()
 
+        //若失败
         if(locationResultFlag == LocationUtils.GetLocationResult.NO_GPS_OR_INTERNET_PROVIDER.ordinal) {
             //没有打开gps或网络
             mSimpleProgressDialogUtil?.closeHUD()

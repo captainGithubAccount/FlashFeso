@@ -114,7 +114,7 @@ class MainInicioFragment: BaseRecyclerFragment<FragmentMainInicioBinding>() {
                 if(InfoUtil.isLogin) {
                     if(InfoUtil.authAllin) { //todo 注意测试加了个!
                         if(BaseConstants.ISLOG) Log.d("----", "authAllin为false，所有认证完成")
-                        /*if(mCurrDetailEntity != null) {
+                        if(mCurrDetailEntity != null) {
                             when(mCurrDetailEntity?.orderStatus) {
                                 - 1 -> {
                                     val intent = Intent(activity, DetallesDeLosPrestamosActivity::class.java)
@@ -168,10 +168,10 @@ class MainInicioFragment: BaseRecyclerFragment<FragmentMainInicioBinding>() {
 
 
                             }
-                        }*/
+                        }
 
                         //todo 测试认证 取消172行注释，并把115-169注释
-                        startActivity(InfomationBasicaActivity::class.java)
+                        //startActivity(AgergarCuentaBancariaActivity::class.java)
                     } else {
                         if(BaseConstants.ISLOG) Log.d("----", "authAllin为false，有认证未完成")
                         val bankAuth: Boolean = InfoUtil.isBankAuth
@@ -185,7 +185,7 @@ class MainInicioFragment: BaseRecyclerFragment<FragmentMainInicioBinding>() {
                         } else if(! cardAuth && contactsAuth) {
                             startActivity(InformacionDeIdetidadActivity::class.java)
                         } else if(! contactsAuth && loanHisAuth) {
-                            startActivity(HistorialCrediticioActivity::class.java)
+                            startActivity(InformacionDeContactosActivity::class.java)
                         } else if(! loanHisAuth && employAuth) {
                             startActivity(HistorialCrediticioActivity::class.java)
                         } else if(! employAuth && addressAuth) {

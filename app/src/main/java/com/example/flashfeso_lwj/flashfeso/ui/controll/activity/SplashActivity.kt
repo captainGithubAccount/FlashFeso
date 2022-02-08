@@ -55,60 +55,9 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
             return
         }
 
-        //数据带状态的实现
-        mSplashViewModel.dataLiveData.observe(this, Observer { statedata ->
-            statedata.whenSuccessAndDefaultErrorDeal { versionData ->
-                versionData?.let {
-                    if (!StringUtils.isEmpty(versionData.VId)) {
-                        if (versionData.VId.toLong() > BuildConfig.VERSION_CODE) {
-                            if (versionData.isUpdate) {
-                                //这里的isUpdate可以理解为是否必要更新, 若是则点击取消按钮直接退出应用, 若不是必要更新则点击取消按钮直接进入主界面
-                                CommonDialog(resources.getString(R.string.new_version_found)).apply {
-                                        mCommonDialogEvent = object : CommonDialogEvent {
-                                            override fun onCancel() {
-                                                dismiss()
-                                                finish()
-                                            }
-
-                                            override fun onConfirm() {
-                                                openBrowser(requireActivity(), versionData.downloadURl)
-                                            }
-                                        }
-                                    }.show(supportFragmentManager, "CommonDialogFragment")
-                                //commonDialog.show(supportFragmentManager, "CommonDialogFragment")
-                            } else {
-                                CommonDialog(resources.getString(R.string.new_version_found)).apply {
-                                        mCommonDialogEvent = object : CommonDialogEvent {
-                                            override fun onCancel() {
-                                                jumpToMainActivity()
-                                            }
-
-                                            override fun onConfirm() {
-                                                openBrowser(requireActivity(), versionData.downloadURl)
-                                            }
-                                        }
-                                    }.show(supportFragmentManager, "CommonDialogFragment2")
-                            }
-                        } else {
-                            jumpToMainActivity()
-                            //finish()
-                        }
-                    } else {
-                        jumpToMainActivity()
-                    }
-                }
-            }
-            statedata.whenError {
-                jumpToMainActivity()
-            }
-        })
-
     }
 
 
-    private fun whenObserve() {
-
-    }
 
     /**
      * 调用第三方浏览器打开
@@ -152,6 +101,54 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
 
     override fun onResume() {
         super.onResume()
+
+        //数据带状态的实现
+        mSplashViewModel.dataLiveData.observe(this, Observer { statedata ->
+            statedata.whenSuccessAndDefaultErrorDeal { versionData ->
+                versionData?.let {
+                    if (!StringUtils.isEmpty(versionData.VId)) {
+                        if (versionData.VId.toLong() > BuildConfig.VERSION_CODE) {
+                            if (versionData.isUpdate) {
+                                //这里的isUpdate可以理解为是否必要更新, 若是则点击取消按钮直接退出应用, 若不是必要更新则点击取消按钮直接进入主界面
+                                CommonDialog(resources.getString(R.string.new_version_found)).apply {
+                                    mCommonDialogEvent = object : CommonDialogEvent {
+                                        override fun onCancel() {
+                                            dismiss()
+                                            finish()
+                                        }
+
+                                        override fun onConfirm() {
+                                            openBrowser(requireActivity(), versionData.downloadURl)
+                                        }
+                                    }
+                                }.show(supportFragmentManager, "CommonDialogFragment")
+                                //commonDialog.show(supportFragmentManager, "CommonDialogFragment")
+                            } else {
+                                CommonDialog(resources.getString(R.string.new_version_found)).apply {
+                                    mCommonDialogEvent = object : CommonDialogEvent {
+                                        override fun onCancel() {
+                                            jumpToMainActivity()
+                                        }
+
+                                        override fun onConfirm() {
+                                            openBrowser(requireActivity(), versionData.downloadURl)
+                                        }
+                                    }
+                                }.show(supportFragmentManager, "CommonDialogFragment2")
+                            }
+                        } else {
+                            jumpToMainActivity()
+                            //finish()
+                        }
+                    } else {
+                        jumpToMainActivity()
+                    }
+                }
+            }
+            statedata.whenError {
+                jumpToMainActivity()
+            }
+        })
         //initEvent()
         afterInit()
 
@@ -162,7 +159,7 @@ class SplashActivity : AppCompatActivity(), SplashPermissionDialogEvent {
             mSplashPermissionDialog = SplashPermissionDialog()
             mSplashPermissionDialog?.mSplashPermissionDialogEvent = this
             //弹出对话框
-            mSplashPermissionDialog?.show(supportFragmentManager, "SplashPermissionDialo")
+            mSplashPermissionDialog?.show(supportFragmentManager, "mSplashPermissionDialo")
         } else {
             //检查权限
             checkAppPermission(this@SplashActivity)

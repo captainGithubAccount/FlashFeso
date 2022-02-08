@@ -5,6 +5,7 @@ import android.content.Intent
 import android.database.Cursor
 import android.os.Handler
 import android.provider.ContactsContract
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -21,10 +22,12 @@ import com.example.flashfeso_lwj.flashfeso.utils.back
 import com.example.flashfeso_lwj.flashfeso.viewmodel.InformacionDeContactosViewModel
 import com.example.flashfeso_lwj.flashfeso.viewmodel.LoginViewModel
 import com.example.lwj_common.common.ui.controll.tools.utils.StringUtils
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
 import java.util.regex.Pattern
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacionDeContactosBinding>(), InfomationSelectItemOnClickListener {
     var mHandler = Handler()
     private val mViewModel: InformacionDeContactosViewModel by viewModels()
@@ -85,7 +88,7 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
                     override fun run() {
                         //调用本地联系人
                         val intent = Intent(Intent.ACTION_PICK)
-                        intent.type = ContactsContract.Contacts.CONTENT_TYPE
+                        intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
                         startActivityForResult(intent, REQUEST_CODE_ONE)
                     }
                 }, 200)
@@ -108,7 +111,7 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
                 mHandler.postDelayed(object : Runnable {
                     override fun run() {
                         var intent = Intent(Intent.ACTION_PICK)
-                        intent.type = ContactsContract.Contacts.CONTENT_TYPE
+                        intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
                         startActivityForResult(intent, REQUEST_CODE_TWO)
                     }
                 }, 200)
@@ -205,64 +208,68 @@ class InformacionDeContactosActivity : BasePageStyleActivity<ActivityInformacion
     //todo need to study contentReciver
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when (resultCode) {
-            REQUEST_CODE_ONE -> {
-                //回掉, 选择通讯录联系人返回
-                if (data == null) {
-                    return
-                }
-                val projection: Array<String> = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-                try {
-                    val cursor: Cursor? = contentResolver.query(data.data!!, projection, null, null, null)
-                    cursor?.let {
-                        while (it.moveToNext()) {
-                            val number: String = it.getString(0)
-                            val displayName: String = it.getString(1)
-                            binding.personalPhoneOneTv.text = number.apply {
-                                replace(" ", "")
-                                Pattern.compile("[^0-9]]").matcher(this).replaceAll("").trim()
-                            }
-                            binding.personalNameOneEt.setText(displayName)
-
-                        }
-                        it.close()
+        Log.d("---","dd")
+        if(resultCode == RESULT_OK){
+            when (requestCode) {
+                REQUEST_CODE_ONE -> {
+                    //回掉, 选择通讯录联系人返回
+                    if (data == null) {
+                        return@onActivityResult
                     }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                    val projection: Array<String> = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                    try {
+                        val cursor: Cursor? = contentResolver.query(data.data!!, projection, null, null, null)
+                        cursor?.let {
+                            while (it.moveToNext()) {
+                                val number: String = it.getString(0)
+                                val displayName: String = it.getString(1)
+                                binding.personalPhoneOneTv.text = number.apply {
+                                    replace(" ", "")
+                                    Pattern.compile("[^0-9]]").matcher(this).replaceAll("").trim()
+                                }
+                                binding.personalNameOneEt.setText(displayName)
 
-            }
-
-
-            REQUEST_CODE_TWO -> {
-                //回掉, 选择通讯录联系人返回
-                if (data == null) {
-                    return
-                }
-
-                val projections: Array<String> = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-                try {
-                    val cursor: Cursor? = contentResolver.query(data?.data!!, projections, null, null, null)
-                    cursor?.let {
-                        while (cursor.moveToNext()) {
-                            val number: String = it.getString(0)
-                            val displayName: String = it.getString(1)
-                            binding.personalPhoneTwoTv.text = number.apply {
-                                replace(" ", "")
-                                Pattern.compile("[^0-9]").matcher(this).replaceAll("").trim()
                             }
-                            binding.personalNameTwoEt.setText(displayName)
+                            it.close()
                         }
-                        it.close()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
 
-            else -> {
+                }
+
+
+                REQUEST_CODE_TWO -> {
+                    //回掉, 选择通讯录联系人返回
+                    if (data == null) {
+                        return
+                    }
+
+                    val projections: Array<String> = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                    try {
+                        val cursor: Cursor? = contentResolver.query(data?.data!!, projections, null, null, null)
+                        cursor?.let {
+                            while (cursor.moveToNext()) {
+                                val number: String = it.getString(0)
+                                val displayName: String = it.getString(1)
+                                binding.personalPhoneTwoTv.text = number.apply {
+                                    replace(" ", "")
+                                    Pattern.compile("[^0-9]").matcher(this).replaceAll("").trim()
+                                }
+                                binding.personalNameTwoEt.setText(displayName)
+                            }
+                            it.close()
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                else -> {
+                }
             }
         }
+
     }
 
     private fun hideKeyAll() {

@@ -52,6 +52,7 @@ class InfomationBasicaActivity : BasePageStyleActivity<ActivityInformacionBasica
             }
             it.whenError {
                 mSimpleProgressDialogUtil?.closeHUD()
+                Toast.makeText(this, (it as DataResult.Error).errorMessage, Toast.LENGTH_SHORT).show()
             }
             it.whenClear {
                 InfoUtil.clear()
@@ -117,9 +118,9 @@ class InfomationBasicaActivity : BasePageStyleActivity<ActivityInformacionBasica
                 map["state"] = binding.bang.text.toString().trim()
                 map["city"] = binding.city.text.toString().trim()
                 map["area"] = binding.shengHuoQu.text.toString().trim()
-                map["street"] = binding.jieDao.toString().trim()
-                map["outHouseNumber"] = binding.waibuBianhao.toString().trim()
-                map["inHouseNumber"] = binding.neibuBianhao.toString().trim()
+                map["street"] = binding.jieDao.text.toString().trim()
+                map["outHouseNumber"] = binding.waibuBianhao.text.toString().trim()
+                map["inHouseNumber"] = binding.neibuBianhao.text.toString().trim()
                 mViewModel.query(map)
             }
         }
